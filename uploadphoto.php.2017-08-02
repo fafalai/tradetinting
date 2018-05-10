@@ -1,0 +1,31 @@
+<?php
+$rc = "";
+$files = [];
+$lastsync = $_POST["lastsync"];
+$uuid = $_POST["uuid"];
+$jobid = $_POST["jobId"];
+
+foreach ($_FILES as $key => $value)
+{
+  if (is_array($value))
+  {
+    $filename = $value["name"];
+    $filetype = $value["type"];
+    $tmpfilename = $value["tmp_name"];
+    $filesize = $value["size"];
+
+    $ext = pathinfo($filename, PATHINFO_EXTENSION);
+    $newname = tempnam("photos", $jobid);
+    $newnameext = $newname . "." . $ext;
+
+    if (move_uploaded_file($tmpfilename, $newnameext))
+    {
+      $files[] = ["filename" => $filename, "filesize" => $filesize, "filetype" => $filetype];
+    }
+  }
+}
+
+header("Content-Type: application/json");
+$rc = json_encode(["errcode" => 0, "files" => $files]);
+echo $rc;
+?>

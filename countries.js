@@ -499,7 +499,7 @@ states[249]="Kosovo|Montenegro|Serbia|Vojvodina";
 states[250]="Central|Copperbelt|Eastern|Luapula|Lusaka|North-Western|Northern|Southern|Western";
 states[251]="Bulawayo|Harare|ManicalandMashonaland Central|Mashonaland East|Mashonaland West|Masvingo|Matabeleland North|Matabeleland South|Midlands";
 
-function populateStates(countryElementId, stateElementId,fldstate)
+function populateStates(countryElementId, stateElementId)
 {
     var selectedCountryIndex = document.getElementById(countryElementId).selectedIndex;
 
@@ -507,47 +507,61 @@ function populateStates(countryElementId, stateElementId,fldstate)
 
     stateElement.length = 0; // Fixed by Julian Woods
 	stateElement.options[0] = new Option('Select State', '');
-	
+	stateElement.selectedIndex = 0;
 	var state_arr = states[selectedCountryIndex].split("|");
-	if (fldstate == "")
-	{
-		stateElement.selectedIndex = 0;
-	}
-	else
-	{
-		var selectedIndex = state_arr.indexOf(fldstate);
-		stateElement.selectedIndex = selectedIndex;
-	}
-
     for (var i = 0; i < state_arr.length; i++) {
         stateElement.options[stateElement.length] = new Option(state_arr[i], state_arr[i]);
     }
 }
 
-function populateCountries(countryElementId, stateElementId,fldcountry,fldstate)
+function populateCountries(countryElementId, stateElementId,country,state)
 {
-    // given the id of the <select> tag as function argument, it inserts <option> tags
-    var countryElement = document.getElementById(countryElementId);
+	// given the id of the <select> tag as function argument, it inserts <option> tags
+	//console.log(countryElementId);
+	//console.log(stateElementId);
+	//console.log(country);
+	//console.log(state);
+	var countryElement = document.getElementById(countryElementId);
+	var selectedCountryIndex = 0;
+	//console.log(countryElement);
     countryElement.length = 0;
 	countryElement.options[0] = new Option('Select Country', '-1');
-	if(fldcountry == "")
+	for (var i = 1; i < countries.length+1; i++) {
+        countryElement.options[countryElement.length] = new Option(countries[i], countries[i]);
+	}
+	if(country == "")
 	{
-		countryElement.selectedIndex = 0;
+		console.log("0");
+		countryElement.selectedIndex = "0";
 	}
 	else
 	{
-		
+		console.log(country);
+		selectedCountryIndex = countries.indexOf(country);
+		console.log(selectedCountryIndex);
+		countryElement.selectedIndex = selectedCountryIndex.toString();
+
 	}
     
-    for (var i = 1; i < countries.length+1; i++) {
-        countryElement.options[countryElement.length] = new Option(countries[i], countries[i]);
-    }
+
+	if (state != "")
+	{
+		var stateElement = document.getElementById(stateElementId);
+		stateElement.length = 0; // Fixed by Julian Woods
+		stateElement.options[0] = new Option('Select State', '');
+		var state_arr = states[selectedCountryIndex].split("|");
+		for (var i = 0; i < state_arr.length; i++) {
+			stateElement.options[stateElement.length] = new Option(state_arr[i], state_arr[i]);
+		}
+		selectedStateIndex = state_arr.indexOf(state);
+		console.log(selectedStateIndex);
+		stateElement.selectedIndex = (selectedStateIndex+1).toString();
+	}
 
     // Assigned all countries. Now assign event listener for the states.
-
     if (stateElementId) {
         countryElement.onchange = function () {
-            populateStates(countryElementId, stateElementId,fldstate);
+            populateStates(countryElementId, stateElementId);
         };
     }
 }

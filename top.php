@@ -30,6 +30,7 @@
             <li><a href="clients.php">Clients</a></li>
             <li><a href="users.php">Users</a></li>
             <li><a href="profile.php">Company</a></li>
+            <li><a href="resource.php">Resource</a></li>
 
       <?php
           }

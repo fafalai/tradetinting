@@ -12,6 +12,6 @@
 <script type="text/javascript" src="lib/bluff-min.js"></script>
 <link rel="stylesheet" type="text/css" href="lib/jquery-ui.css" />
 <link rel="stylesheet" type="text/css" href="styles.css" />
-<link rel="icon" type="image/ico" href="favicon.ico" />
-<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" type="image/ico" href="icon.png" />
+<link rel="shortcut icon" href="icon.png" />
 

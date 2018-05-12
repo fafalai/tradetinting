@@ -11,6 +11,8 @@
   define('AT_MAXIDENTIFICATIONNO', 50);
   define('AT_MAXCOUNTRY', 50);
   define('AT_MAXCURRENCY', 10);
+  //in remedyshared.php, it defines the AT_MAXSTATE is 3, but we don't only have Australian states, it will exceeds 3 words limit, so use AT_MAXCOUNTRY instead. 
+  
   //
   if (isset($_POST['fldName']) || isset($_POST['fldContact']) || isset($_POST['fldMobile']))
   {
@@ -21,11 +23,13 @@
     $fldphone = SharedCleanString($_POST['fldPhone'], AT_MAXPHONE);
     $fldmobile = SharedCleanString($_POST['fldMobile'], AT_MAXPHONE);
     $fldemail = SharedCleanString($_POST['fldEmail'], AT_MAXEMAIL);
+    $fldcountry = SharedCleanString($_POST['fldCountry'], AT_MAXCOUNTRY);
+    error_log($fldcountry);
     $fldaddress = SharedCleanString($_POST['fldAddress'], AT_MAXADDRESS);
     $fldcity = SharedCleanString($_POST['fldCity'], AT_MAXADDRESS);
-    $fldstate = SharedCleanString($_POST['fldState'], AT_MAXSTATE);
+    $fldstate = SharedCleanString($_POST['fldState'], AT_MAXCOUNTRY);
     $fldpostcode = SharedCleanString($_POST['fldPostcode'], AT_MAXPOSTCODE);
-    $fldcountry = SharedCleanString($_POST['fldcountry'], AT_MAXCOUNTRY);
+   
     $fldunits = SharedCleanString($_POST['fldUnits'], AT_MAXNAME);
     $fldcurrency = SharedCleanString($_POST['fldcurrency'], AT_MAXCURRENCY);
     // Cust record is always already created...
@@ -45,10 +49,11 @@
                 "postcode=" .SharedNullOrQuoted($fldpostcode, $dblink) . "," .
                 "country=" .SharedNullOrQuoted($fldcountry, $dblink) . "," .
                 "units=" .SharedNullOrQuoted($fldunits, $dblink) . "," .
-                "currency=" .SharedNullOrQuoted($fldCurrencys, $dblink) . "," .
+                "currency=" .SharedNullOrQuoted($fldcurrency, $dblink) . "," .
                 "datemodified=CURRENT_TIMESTAMP " .
                 "where " .
                 "id=" . $_SESSION['custid'];
+    error_log($dbupdate);
     if (mysql_query($dbupdate, $dblink))
       $detailmsg = "Your details have been updated.";
     else
@@ -115,6 +120,7 @@
         $fldcurrency = $dbrow['currency'];
         $flddatecreated = $dbrow['datecreated'];
         $flddatemodified = $dbrow['datemodified'];
+        //populateCountries("fldCountry","fldState",$fldcountry,$fldstate);
       }
     }
   }
@@ -240,7 +246,11 @@
       </div>
     </div>
     <script language="javascript">
-      populateCountries("fldCountry","fldState");
+     $country= "<?php echo SharedPrepareDisplayString($fldcountry); ?>"
+     $state = "<?php echo SharedPrepareDisplayString($fldstate); ?>"
+    //  console.log($country);
+    //  console.log($state);
+      populateCountries("fldCountry","fldState",$country,$state);
     </script>
     <!-- end #content -->
    <?php

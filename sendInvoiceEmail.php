@@ -106,12 +106,13 @@
                 $jobGroupSelect = "select ".
                                   "j1.name roomName, ".
                                   "sum(j1.totalPrice) totalPrice, ".
-                                  "count(j1.id) numOfWindows ".
+                                  "count(j1.id) numOfWindows, ".
+                                  "j1.filmType filmType ".
                                   "from ".
                                   "jobdetails j1 ".
                                   "where ".
                                   "j1.jobs_id = $jobid ".
-                                  "group by name";
+                                  "group by name, filmType";
 
                 $jobGlassTypeSelect = "select ".
                                   "j1.glassType glassType ".
@@ -135,9 +136,10 @@
                                   "where ".
                                   "j1.jobs_id = $jobid ".
                                   "group by j1.filmType";
-                error_log($jobGlassTypeSelect);
-                error_log($jobFrameTypeSelect);
-                error_log($jobFilmTypeSelect);
+                //error_log($jobGlassTypeSelect);
+                //error_log($jobFrameTypeSelect);
+                //error_log($jobFilmTypeSelect);
+                error_log($jobGroupSelect);
 
 
                 if ($clientresult = mysql_query($clientselect, $dblink))
@@ -242,17 +244,18 @@
                 $discountrow = "";
                 if ($discount != 0.00 )
                 {
-                  $discountrow = "<tr style='font-size: 14pt;text-align: center'> 
+                  $discountrow = "<tr style='text-align: center'> 
                                   <td>
                                     Discount
                                   </td>
                                   <td>
-                          
+                                  </td>
+                                  <td>
                                   </td>
                                   <td>".
-                                  $discount.
+                                    "$".$discount.
                                   "</td>
-                                </tr>";
+                                  </tr>";
                 }
                 else
                 {
@@ -279,65 +282,101 @@
                   //error_log($jobDetail['roomName']);
                   //error_log($jobDetail['totalPrice']);
                   //error_log($jobDetail['numOfWindows']);
-                  $row = "<tr style='font-size: 14pt;text-align: center'> <td>" . 
+                  $row = "<tr style='text-align: center'> <td>" . 
                           $jobDetail['roomName']. 
                           "</td>
                           <td>".
                           $jobDetail['numOfWindows'].
                           "</td>
                           <td>".
-                          
+                          $jobDetail['filmType'].
+                          "</td>
+                          <td>".
                           "$".number_format((float)$jobDetail['totalPrice'], 2, '.', '').
                           "</th>
                           </tr>";
-                //error_log($row);
+                error_log($row);
                 $tableReplace = $tableReplace.$row;
                 }
 
                 $glassType = "";
                 error_log(count($jobGlassType));
-                for ($x =0 ; $x<count($jobGlassType); $x = $x + 1)
+                if(count($jobGlassType) == 1)
                 {
-                  error_log($jobGlassType[$x]['glassType']);
-                  if (($jobGlassType[$x]['glassType']) != "" && ($jobGlassType[$x]['glassType']) != null )
+                  $glassType =$jobGlassType[0]['glassType'];
+                }
+                else
+                {
+                  for ($x =0 ; $x<count($jobGlassType); $x = $x + 1)
                   {
-                    if ($x == 0)
+                    error_log($jobGlassType[$x]['glassType']);
+                    if (($jobGlassType[$x]['glassType']) != "" && ($jobGlassType[$x]['glassType']) != null )
                     {
-                      $glassType =$jobGlassType[$x]['glassType'];
+                      if ($x == 0)
+                      {
+                        $glassType =$jobGlassType[$x]['glassType'];
+                      }
+                      else
+                      {
+                        if ($glassType == "")
+                        {
+                          $glassType = $glassType.$jobGlassType[$x]['glassType'];
+                        }
+                        else
+                        {
+                          $glassType = $glassType. ", ".$jobGlassType[$x]['glassType'];
+                        }
+
+                        
+                      }
+                      error_log($glassType);
                     }
                     else
                     {
-                      $glassType = $jobGlassType[$x]['glassType']. ", " .$glassType;
+                      error_log("the glass type is empty");
                     }
-                    error_log($glassType);
-                    
-                  }
-                  else
-                  {
-                    error_log("the glass type is empty");
                   }
                 }
+                
 
                 $frameType = "";
                 for ($x = 0; $x<count($jobFrameType);$x = $x +1)
                 {
-                  
-                  if (!empty($jobFrameType[$x]['frameType']))
+                  if(count($jobFrameType) == 1)
                   {
-                    if ($x == 0)
-                    {
-                      $frameType =$jobFrameType[$x]['frameType'];
-                    }
-                    else
-                    {
-                      $frameType = $jobFrameType[$x]['frameType']. ", ". $frameType;
-                    }
-                    error_log($frameType);
-                    
+                    $frameType =$jobFrameType[0]['frameType'];
                   }
                   else
                   {
-                    error_log("the frame type is empty");
+                    for ($x =0 ; $x<count($jobFrameType); $x = $x + 1)
+                    {
+                      error_log($jobFrameType[$x]['frameType']);
+                      if (($jobFrameType[$x]['frameType']) != "" && ($jobFrameType[$x]['frameType']) != null )
+                      {
+                        if ($x == 0)
+                        {
+                          $frameType =$jobFrameType[$x]['frameType'];
+                        }
+                        else
+                        {
+                          if ($frameType == "")
+                          {
+                            $frameType = $frameType.$jobFrameType[$x]['frameType'];
+                          }
+                          else
+                          {
+                            $frameType = $frameType. ", ".$jobFrameType[$x]['frameType'];
+                          }
+  
+                          
+                        }
+                        error_log($frameType);
+                      }
+                      else
+                      {
+                        error_log("the frame type is empty");
+                      }
+                    }
                   }
                 }
                 
@@ -395,7 +434,7 @@
                 $emailtemplate = str_replace("XXX_DISCOUNTROW",$discountrow,$emailtemplate);
                 $emailtemplate = str_replace("XXX_GLASSTYPE",$glassType,$emailtemplate);
                 $emailtemplate = str_replace("XXX_FRAMETYPE",$frameType,$emailtemplate);
-                $emailtemplate = str_replace("XXX_FILMTYPE",$filmType,$emailtemplate);
+                // $emailtemplate = str_replace("XXX_FILMTYPE",$filmType,$emailtemplate);
                 
                 SharedSendHtmlMail($resultsetCust['email'], "Trade Tinting", $client['email'],$client['name'], "Quote Confirmation", $emailtemplate);
                 error_log("sending email");

@@ -1,4 +1,5 @@
   <div id="sidebar">
+  <!-- <div id="footer"> -->
     <ul>
       <?php
         if (isset($_SESSION['admin']) && ($_SESSION['admin'] != 0))

@@ -48,7 +48,15 @@
                         <li><a href="profile.php">Company</a></li>
                         <li><a href="resource.php">Resource</a></li>
                         <li><a href="contact.php">Contact</a></li>
-                        <li><a href="">Account</a></li>
+                        <!-- <li><a href="">Account</a></li> -->
+                        <div class="dropdown">
+                                <li><button class="dropbtn">Account</button></li>
+                                <div class="dropdown-content">
+                                  <a href="#">Link 1</a>
+                                  <a href="#">Link 2</a>
+                                  <a href="#">Link 3</a>
+                                </div>
+                            </div>
                       <?php
                         }
                       ?>

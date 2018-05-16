@@ -27,7 +27,6 @@
             <p class="meta"><span class="date"><?php echo date("l, F j, Y"); ?></span></p>
             <h2 class="title">Login</h2>
             <div class="entry">
-
               <form action="login.php" method="post" id="frmLogin">
                 <table align="left">
                   <tr>
@@ -60,7 +59,7 @@
     </div>
 
     <?php
-      include("left.php");
+      include("feature.php");
     ?>
 
     <div style="clear: both;">&nbsp;</div>

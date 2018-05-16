@@ -757,6 +757,7 @@ div {
     border: 2px solid #d8dad8;
     margin: 20px;
     padding: 0;
+    overflow: hidden;
 }
 
 #DIV_FContainer a,

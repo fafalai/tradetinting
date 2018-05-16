@@ -752,11 +752,24 @@ div {
     line-height: 40px;
 }
 
-#DIV_FContainer,
+#DIV_FContainer {
+    border: 2px solid #d8dad8;
+    margin: 20px;
+    padding: 0;
+    overflow: hidden;
+    float: left;
+    white-space: nowrap;
+    min-width: 200px;
+}
+
 #DIV_BContainer {
     border: 2px solid #d8dad8;
     margin: 20px;
     padding: 0;
+    overflow: hidden;
+    float: left;
+    white-space: nowrap;
+    min-width: 200px;
 }
 
 #DIV_FContainer a,
@@ -766,8 +779,15 @@ div {
 
 #DIV_FContainer ul,
 #DIV_BContainer ul {
-    position: relative;
-    left: 10%;
+    /*    position: relative;*/
+    /*    padding: 0;*/
+    margin: 0;
+    /*    left: 10%;*/
+}
+
+#DIV_FContainer ul li,
+#DIV_BContainer ul li {
+    /*    padding: 0;*/
 }
 
 #DIV_Message p {

@@ -727,62 +727,55 @@ textarea.validation-passed {
 
 /* Eric */
 
-#DIV_FBContainer {
-    text-align: center;
+div {
+    /*    border: solid;*/
 }
 
-#DIV_FeaturesBanner {
-    margin: 20px 20% 20px 20%;
+#Container {
+    width: 70%;
+    padding: 0px;
+}
+
+#TitleBanner {
     background-color: #3c3c3c;
     color: white;
     font-size: 20px;
     padding: 15px;
 }
 
-#DIV_featureTitle,
-#DIV_benefitTitle {
-    margin: 15px 0 0 0;
-    background-image: url("bg-features-benefits.png");
+#DIV_FTitle,
+#DIV_BTitle {
+    background-image: url(bg-features-benefits.png);
+    background-color: #e5e6e5;
     background-repeat: no-repeat;
-    height: 38px;
-    line-height: 38px;
+    height: 42px;
+    line-height: 40px;
 }
 
-#DIV_featureTitle Strong,
-#DIV_benefitTitle Strong {
-    color: #383839;
-    font-size: 18px;
+#DIV_FContainer,
+#DIV_BContainer {
+    border: 2px solid #d8dad8;
+    margin: 20px;
+    padding: 0;
 }
 
-#DIV_featuresContainer {
-    border: solid;
-    float: left;
-    width: 280px;
-    height: 280px;
-}
-
-#DIV_benefitsContainer {
-    border: solid;
-    float: right;
-    width: 280px;
-    height: 280px;
-}
-
-#FBcenter {
-    margin: 0 20% 0 20%;
-    width: 60%;
-}
-
-#DIV_featuresContainer a,
-#DIV_benefitsContainer a {
-    text-decoration: none;
-}
-
-#DIV_Message {
-    margin-left: 20%;
-    margin-top: 20px;
-    width: 60%;
-    float: left;
+#DIV_FContainer a,
+#DIV_BContainer a {
     color: black;
+}
+
+#DIV_FContainer ul,
+#DIV_BContainer ul {
+    position: relative;
+    left: 10%;
+}
+
+#DIV_Message p {
     text-align: center;
+    font-size: 12px;
+}
+
+#DIV_Message a {
+    color: black;
+    text-decoration: underline;
 }

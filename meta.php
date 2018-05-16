@@ -14,4 +14,8 @@
 <link rel="stylesheet" type="text/css" href="styles.css" />
 <link rel="icon" type="image/ico" href="icon.png" />
 <link rel="shortcut icon" href="icon.png" />
+<link rel="stylesheet" href="easyui/themes/default/easyui.css">
+<link rel="stylesheet" href="easyui/themes/icon.css">
+<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
+
 

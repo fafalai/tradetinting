@@ -826,9 +826,30 @@ div {
     margin: 8px 0;
     display: inline-block;
     border: 1px solid #ccc;
-    
     box-sizing: border-box;
 }
+
+input[type=text], select
+{
+    width: 80%;
+    height: 50px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* inpug[type=password]
+{
+    width: 80%;
+    height: 50px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+} */
 
 input[type="submit"]
 {
@@ -845,4 +866,47 @@ input[type="submit"]
 
 input[type=submit]:hover {
     background-color: #e60000;
+}
+
+.clientTitle
+{
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 20pt;
+    padding: 9pt;
+}
+
+.clientsCreat
+{
+    padding: 20pt;
+}
+
+.clientsIDV
+{
+    margin-bottom: 30px;
+    padding: 25px;
+    background-color: #f0f0f0;
+    width:70%;
+    margin: auto
+}
+
+.clientsEntry
+{
+    padding: 10pt;
+}
+
+.existingClientsDIV
+{
+    margin-bottom: 30px;
+    padding: 25px;
+    width:70%;
+    margin: auto
+}
+
+.clientsTable
+{
+    border:0;
+    align:left;
+
 }

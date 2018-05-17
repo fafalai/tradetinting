@@ -1,4 +1,4 @@
-<div style="background-image: url('images/banner-background.png'); background-size:inherit;width: 100%;">
+<div style="background-image: url('images/banner-background.png'); background-size:inherit;width: 100%;margin-bottom:30px">
     <div style="margin:0 auto;width:700px;text-align: center;padding: 20pt">
     
         <span style="font-size: 24pt;font-weight: bold">

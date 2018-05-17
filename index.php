@@ -22,6 +22,7 @@
   ?>
   <hr />
 
+
    <?php
     include("introducing.php");
   ?>
@@ -49,7 +50,7 @@
     <!-- end #content -->
 
     <?php
-      include("left.php");
+      include("feature.php");
     ?>
 
     <div style="clear: both;">&nbsp;</div>

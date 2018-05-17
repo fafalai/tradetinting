@@ -693,13 +693,7 @@ textarea.validation-passed {
 .dropdown {
     position: relative;
     display: inline-block;
-    }
-
-    .dropdown {
-      position: relative;
-      display: inline-block;
-  }
-
+}
 .dropdown-content {
       display: none;
       margin-top: 30px;
@@ -711,22 +705,23 @@ textarea.validation-passed {
   }
 
 .dropdown-content a {
-      color: black;
-      padding: 12px 16px;
-      text-decoration: none;
-      display: block;
-  }
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
 
-.dropdown-content a:hover {background-color: #ddd}
+.dropdown-content a:hover {
+    background-color: #ddd
+}
 
 .dropdown:hover .dropdown-content {
-      display: block;
-  }
+    display: block;
+}
 
 .dropdown:hover .dropbtn {
-      background-color: #3e8e41;
-  }
-
+    background-color: #3e8e41;
+}
 
 /* Eric */
 
@@ -748,18 +743,31 @@ div {
 
 #DIV_FTitle,
 #DIV_BTitle {
-    background-image: url(images/bg-features-benefits.png);
+    background-image: url(bg-features-benefits.png);
     background-color: #e5e6e5;
     background-repeat: no-repeat;
     height: 42px;
     line-height: 40px;
 }
 
-#DIV_FContainer,
+#DIV_FContainer {
+    border: 2px solid #d8dad8;
+    margin: 20px;
+    padding: 0;
+    overflow: hidden;
+    float: left;
+    white-space: nowrap;
+    min-width: 200px;
+}
+
 #DIV_BContainer {
     border: 2px solid #d8dad8;
     margin: 20px;
     padding: 0;
+    overflow: hidden;
+    float: left;
+    white-space: nowrap;
+    min-width: 200px;
 }
 
 #DIV_FContainer a,
@@ -769,8 +777,15 @@ div {
 
 #DIV_FContainer ul,
 #DIV_BContainer ul {
-    position: relative;
-    left: 10%;
+    /*    position: relative;*/
+    /*    padding: 0;*/
+    margin: 0;
+    /*    left: 10%;*/
+}
+
+#DIV_FContainer ul li,
+#DIV_BContainer ul li {
+    /*    padding: 0;*/
 }
 
 #DIV_Message p {

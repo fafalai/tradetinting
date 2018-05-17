@@ -222,99 +222,15 @@
     include("top.php");
   ?>
   <hr />
-  <div id="page">
-    <div id="content">
-      <div id="content-bgtop">
-        <div id="content-bgbtm">
+  <div >
+    <div >
+      <div >
+        <div style="padding: 50px;margin-top: 30pt">
 
           <div class="post">
             <p class="meta"><span class="date"><?php if ($clientmsg != "") echo $clientmsg; else echo date("l, F j, Y"); ?></span></p>
-            <h2 class="title">Add/Modify Clients</h2>
-            <div class="entry">
-
-              <form action="clients.php" method="post" id="frmClients">
-                <table>
-                  <tr>
-                    <td align="left" valign="top">&nbsp;</td>
-                    <td align="left" valign="top"><a href="clients.php?cmd=<?php echo AT_CMDCREATE; ?>&id=0">Create New</a></td>
-                  </tr>
-                  <tr>
-                    <td align="left" valign="top">&nbsp;</td>
-                    <td align="left" valign="top">&nbsp;</td>
-                  </tr>
-                  <tr>
-                    <td align="left" valign="top">Code:</td>
-                    <td align="left" valign="top"><input id="fldCode" name="fldCode" type="text" size="20" maxlength="<?php echo AT_MAXCODE; ?>" value="<?php echo SharedPrepareDisplayString($fldcode); ?>" /><div id="frmClients_fldCode_errorloc" class="error_strings"></div></td>
-                  </tr>
-                  <tr>
-                    <td align="left" valign="top">Name:</td>
-                    <td align="left" valign="top"><input id="fldName" name="fldName" type="text" size="20" maxlength="<?php echo AT_MAXNAME; ?>" value="<?php echo SharedPrepareDisplayString($fldname); ?>" /></td>
-                  </tr>
-                  <tr>
-                    <td align="left" valign="top">Desc:</td>
-                    <td align="left" valign="top"><input id="fldDesc" name="fldDesc" type="text" size="40" maxlength="<?php echo AT_MAXNOTE; ?>" value="<?php echo SharedPrepareDisplayString($flddesc); ?>" /></td>
-                  </tr>
-                  <tr>
-                    <td align="left" valign="top">Contact:</td>
-                    <td align="left" valign="top"><input id="fldContact" name="fldContact" type="text" size="20" maxlength="<?php echo AT_MAXNAME; ?>" value="<?php echo SharedPrepareDisplayString($fldcontact); ?>" /></td>
-                  </tr>
-                  <tr>
-                    <td align="left" valign="top">Email:</td>
-                    <td align="left" valign="top"><input id="fldEmail1" name="fldEmail1" type="text" size="20" maxlength="<?php echo AT_MAXEMAIL; ?>" value="<?php echo SharedPrepareDisplayString($fldemail1); ?>" /><div id="frmClients_fldEmail1_errorloc" class="error_strings"></div></td>
-                  </tr>
-                  <tr>
-                    <td align="left" valign="top">Mobile:</td>
-                    <td align="left" valign="top"><input id="fldMobile" name="fldMobile" type="text" size="20" maxlength="<?php echo AT_MAXPHONE; ?>" value="<?php echo SharedPrepareDisplayString($fldmobile); ?>" /><div id="frmClients_fldMobile_errorloc" class="error_strings"></div></td>
-                  </tr>
-                  <tr>
-                    <td align="left" valign="top">Address:</td>
-                    <td align="left" valign="top"><input id="fldAddress" name="fldAddress" type="text" size="40" maxlength="<?php echo AT_MAXADDRESS; ?>" value="<?php echo SharedPrepareDisplayString($fldaddress); ?>" onchange="ShowMap();" /></td>
-                  </tr>
-                  <tr>
-                    <td align="left" valign="top">City:</td>
-                    <td align="left" valign="top"><input id="fldCity" name="fldCity" type="text" size="40" maxlength="<?php echo AT_MAXADDRESS; ?>" value="<?php echo SharedPrepareDisplayString($fldcity); ?>" onchange="ShowMap();" /></td>
-                  </tr>
-                  <tr>
-                    <td align="left" valign="top">State:</td>
-                    <td align="left" valign="top">
-                      <select id="fldState" name="fldState" onchange="ShowMap();">
-                        <option value="VIC" <?php if ($fldstate == "VIC" or $fldstate == "") echo "selected=\"selected\""; ?>>VIC</option>
-                        <option value="NSW" <?php if ($fldstate == "NSW") echo "selected=\"selected\""; ?>>NSW</option>
-                        <option value="SA" <?php if ($fldstate == "SA") echo "selected=\"selected\""; ?>>SA</option>
-                        <option value="WA" <?php if ($fldstate == "WA") echo "selected=\"selected\""; ?>>WA</option>
-                        <option value="QLD" <?php if ($fldstate == "QLD") echo "selected=\"selected\""; ?>>QLD</option>
-                        <option value="TAS" <?php if ($fldstate == "TAS") echo "selected=\"selected\""; ?>>TAS</option>
-                        <option value="ACT" <?php if ($fldstate == "ACT") echo "selected=\"selected\""; ?>>ACT</option>
-                        <option value="NT" <?php if ($fldstate == "NT") echo "selected=\"selected\""; ?>>NT</option>
-                      </select>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="left" valign="top">Postcode:</td>
-                    <td align="left" valign="top"><input id="fldPostcode" name="fldPostcode" type="text" size="8" maxlength="4" class="required" value="<?php echo SharedPrepareDisplayString($fldpostcode); ?>" /><div id="frmClients_fldPostcode_errorloc" class="error_strings"></div></td>
-                  </tr>
-                  <tr>
-                    <td align="left" valign="top">&nbsp;</td>
-                    <td align="left" valign="top"><input id="btnSave" type="submit" value="Save" /></td>
-                  </tr>
-                </table>
-                <input name="fldClientId" type="hidden" value="<?php echo $clientid; ?>" />
-              </form>
-              <script type="text/javascript">
-                var frmvalidator  = new Validator("frmClients");
-                frmvalidator.EnableOnPageErrorDisplay();
-                frmvalidator.addValidation("fldCode", "req", "Please enter a unique client code");
-                //frmvalidator.addValidation("fldPostCode", "req", "Please enter your PostCode");
-                //frmvalidator.addValidation("fldPostCode", "regexp=^[0-9]{4}$", "Postcode must be 4 digits");
-                frmvalidator.addValidation("fldMobile", "regexp=^[0-9]{10}$|^\(0[1-9]{1}\)[0-9]{8}$|^[0-9]{8}$|^[0-9]{4}[ ][0-9]{3}[ ][0-9]{3}$|^\(0[1-9]{1}\)[ ][0-9]{4}[ ][0-9]{4}$|^[0-9]{4}[ ][0-9]{4}$", "Must be in 04xxyyyzzz or xxxxyyyy format");
-                frmvalidator.addValidation("fldEmail1", "email", "Invalid email address format");
-              </script>
-            </div>
-          </div>
-
-          <div class="post">
+            <h2 class="clientTitle">Clients</h2>
             <p class="meta"><span class="date">Move mouse over links for tips. Click on table header to sort by that column.</span></p>
-            <h2 class="title">Existing Clients</h2>
             <div class="entry">
 
               <table border="0" align="center" id="tblClients" rules="cols" frame="box" class="sortable">
@@ -376,6 +292,108 @@
                 ?>
               </table>
 
+           
+           
+            </div>
+          </div>
+
+           <div class="clientsIDV">
+            <h2 class="clientTitle">Add/Modify Clients</h2>
+            <a href="clients.php?cmd=<?php echo AT_CMDCREATE; ?>&id=0" class="clientsCreat">Create New</a>
+            <div class="clientsEntry">
+              <form action="clients.php" method="post" id="frmClients">
+                <table style="width:100%">
+                  <!-- <tr>
+                    <td align="left" valign="top">&nbsp;</td>
+                    <td align="left" valign="top"><a href="clients.php?cmd=<?php echo AT_CMDCREATE; ?>&id=0">Create New</a></td>
+                  </tr> -->
+                  <!-- <tr>
+                    <td align="left" valign="top">&nbsp;</td>
+                    <td align="left" valign="top">&nbsp;</td>
+                  </tr> -->
+                  <tr>
+                    <!-- <td align="left" valign="top">Code:</td> -->
+                    <td align="left" valign="top" colspan="4">
+                      <input style="width: 100%" id="fldCode" name="fldCode" type="text" placeholder="Code" size="20" maxlength="<?php echo AT_MAXCODE; ?>" value="<?php echo SharedPrepareDisplayString($fldcode); ?>" />
+                      <div id="frmClients_fldCode_errorloc" class="error_strings"></div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <!-- <td align="left" valign="top">Name:</td> -->
+                    <td align="left" valign="top" colspan="4">
+                      <input style="width: 100%" id="fldName" name="fldName" type="text" placeholder="NAME" size="20" maxlength="<?php echo AT_MAXNAME; ?>" value="<?php echo SharedPrepareDisplayString($fldname); ?>" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <!-- <td align="left" valign="top">Desc:</td> -->
+                    <td align="left" valign="top" colspan="4">
+                      <input style="width: 100%" style="width: 100%" id="fldDesc" name="fldDesc" type="text" placeholder="DESC" size="40" maxlength="<?php echo AT_MAXNOTE; ?>" value="<?php echo SharedPrepareDisplayString($flddesc); ?>" />
+                    </td>
+                  </tr>
+                  <tr>
+                      <!-- <td align="left" valign="top">Address:</td> -->
+                      <td align="left" valign="top" colspan="4">
+                        <input style="width: 100%" style="width: 100%" id="fldAddress" name="fldAddress" type="text" placeholder="ADDRESS" size="40" maxlength="<?php echo AT_MAXADDRESS; ?>" value="<?php echo SharedPrepareDisplayString($fldaddress); ?>" onchange="ShowMap();" />
+                      </td>
+                  </tr>
+                  <tr>
+                      <!-- <td align="left" valign="top">City:</td> -->
+                      <td align="left" valign="top" colspan="2" style="width: 50%">
+                        <input style="width: 100%" id="fldCity" name="fldCity" type="text"  placeholder="CITY" size="40" maxlength="<?php echo AT_MAXADDRESS; ?>" value="<?php echo SharedPrepareDisplayString($fldcity); ?>" onchange="ShowMap();" />
+                      </td>
+                      <td align="left" valign="top" colspan="1" style="width: 25%">
+                          <select style="width: 100%" id="fldState" name="fldState" onchange="ShowMap();">
+                            <option value="VIC" <?php if ($fldstate == "VIC" or $fldstate == "") echo "selected=\"selected\""; ?>>VIC</option>
+                            <option value="NSW" <?php if ($fldstate == "NSW") echo "selected=\"selected\""; ?>>NSW</option>
+                            <option value="SA" <?php if ($fldstate == "SA") echo "selected=\"selected\""; ?>>SA</option>
+                            <option value="WA" <?php if ($fldstate == "WA") echo "selected=\"selected\""; ?>>WA</option>
+                            <option value="QLD" <?php if ($fldstate == "QLD") echo "selected=\"selected\""; ?>>QLD</option>
+                            <option value="TAS" <?php if ($fldstate == "TAS") echo "selected=\"selected\""; ?>>TAS</option>
+                            <option value="ACT" <?php if ($fldstate == "ACT") echo "selected=\"selected\""; ?>>ACT</option>
+                            <option value="NT" <?php if ($fldstate == "NT") echo "selected=\"selected\""; ?>>NT</option>
+                          </select>
+                        </td>
+                        <td align="left" valign="top" colspan="1" style="width:25%">
+                          <input style="width: 100%" id="fldPostcode" name="fldPostcode" type="text" placeholder="POSTCODE" size="8" maxlength="4" class="required" value="<?php echo SharedPrepareDisplayString($fldpostcode); ?>" />
+                          <div id="frmClients_fldPostcode_errorloc" class="error_strings"></div>
+                        </td>
+                  </tr>
+                  <tr>
+                    <!-- <td align="left" valign="top">Contact:</td> -->
+                    <td align="left" valign="top" colspan="2" style="width: 50%">
+                      <input style="width: 100%" style="width: 100%" id="fldContact" name="fldContact" type="text" placeholder="CONTACT" size="20" maxlength="<?php echo AT_MAXNAME; ?>" value="<?php echo SharedPrepareDisplayString($fldcontact); ?>" />
+                    </td>
+                    <td align="left" valign="top" colspan="2" style="width: 50%">
+                      <input style="width: 100%" style="width: 100%" id="fldEmail1" name="fldEmail1" type="text" size="20" placeholder="EMAIL" maxlength="<?php echo AT_MAXEMAIL; ?>" value="<?php echo SharedPrepareDisplayString($fldemail1); ?>" />
+                      <div id="frmClients_fldEmail1_errorloc" class="error_strings"></div>
+                    </td>
+                  </tr>
+                 
+                  <tr>
+                    <!-- <td align="left" valign="top">Mobile:</td> -->
+                    <td align="left" valign="top" colspan="2" style="width: 50%">
+                      <input style="width: 100%" id="fldMobile" name="fldMobile" type="text" placeholder="MOBILE" size="20" maxlength="<?php echo AT_MAXPHONE; ?>" value="<?php echo SharedPrepareDisplayString($fldmobile); ?>" />
+                      <div id="frmClients_fldMobile_errorloc" class="error_strings"></div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <!-- <td align="left" valign="top">&nbsp;</td> -->
+                    <td align="left" valign="top">
+                      <input id="btnSave" type="submit" value="Save" />
+                    </td>
+                  </tr>
+                </table>
+                <input name="fldClientId" type="hidden" value="<?php echo $clientid; ?>" />
+              </form>
+              <script type="text/javascript">
+                var frmvalidator  = new Validator("frmClients");
+                frmvalidator.EnableOnPageErrorDisplay();
+                frmvalidator.addValidation("fldCode", "req", "Please enter a unique client code");
+                //frmvalidator.addValidation("fldPostCode", "req", "Please enter your PostCode");
+                //frmvalidator.addValidation("fldPostCode", "regexp=^[0-9]{4}$", "Postcode must be 4 digits");
+                frmvalidator.addValidation("fldMobile", "regexp=^[0-9]{10}$|^\(0[1-9]{1}\)[0-9]{8}$|^[0-9]{8}$|^[0-9]{4}[ ][0-9]{3}[ ][0-9]{3}$|^\(0[1-9]{1}\)[ ][0-9]{4}[ ][0-9]{4}$|^[0-9]{4}[ ][0-9]{4}$", "Must be in 04xxyyyzzz or xxxxyyyy format");
+                frmvalidator.addValidation("fldEmail1", "email", "Invalid email address format");
+              </script>
             </div>
           </div>
 

@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+     <link rel="stylesheet" type="text/css" href="styles.css">
+
+    <?php
+        include("meta.php");
+    ?>
+  <title>Remedy Test & Tag - Contact</title>
+</head>
+<body>
+  <?php
+    include("top.php");
+  ?>
+  <hr />
+  <div>
+    <div>
+      <div>
+        <div>
+          <label class="contactTimeLable">year <?php if ($clientmsg != "") echo $clientmsg; else echo date("l, F j, Y"); ?></label>
+          <h2 class="contactTitle">Contact Us</h2>
+          <div class="contactsDIV">
+            <!-- <label><?php if ($clientmsg != "") echo $clientmsg; else echo date("l, F j, Y"); ?></label>
+            <h2 class="clientTitle">Contact Us</h2> -->
+            <div class="entry">
+              <form action="contact.php" method="post" id="frmContact">
+                <table style="width: 100%">
+                  <tr>
+                    <!-- <td align="left" valign="top">Name:</td> -->
+                    <td align="left" valign="top" colspan="2">
+                      <input id="fldName" name="fldName" type="text" size="20" style="width: 100%" placeholder="NAME" maxlength="<?php echo AT_MAXNAME; ?>" />
+                      <div id='frmContact_fldName_errorloc' class="error_strings"></div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <!-- <td align="left" valign="top">Mobile:</td> -->
+                    <td align="left" valign="top" style="width: 50%">
+                      <input id="fldPhone" name="fldPhone" type="text" size="20" style="width: 100%" placeholder="PHONE" maxlength="<?php echo AT_MAXPHONE; ?>" />
+                      <div id='frmContact_fldPhone_errorloc' class="error_strings"></div>
+                    </td>
+                    <td align="left" valign="top" style="width: 50%">
+                      <input id="fldEmail" name="fldEmail" type="text" size="40" style="width: 100%" placeholder="EMAIL" maxlength="<?php echo AT_MAXEMAIL; ?>" />
+                    </td>
+                  </tr>
+                  <!-- <tr>
+                    <td align="left" valign="top">Email:</td>
+                    <td align="left" valign="top"><input id="fldEmail" name="fldEmail" type="text" size="40" maxlength="<?php echo AT_MAXEMAIL; ?>" /></td>
+                  </tr> -->
+                  <tr>
+                    <!-- <td align="left" valign="top">Enquiry:</td> -->
+                    <td align="left" valign="top" colspan="2">
+                      <textarea id="fldEnquiry" name="fldEnquiry" style="width: 100%" cols="40" rows="5" resize="none" placeholder="ENQUIRY"></textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    
+                    <td align="left" valign="top" colspan="2">
+                      <input id="btnContact" type="submit" style="width:50%" value="Submit" />
+                    </td>
+                  </tr>
+                </table>
+              </form>
+              <script type="text/javascript">
+                var frmvalidator  = new Validator("frmContact");
+                frmvalidator.EnableOnPageErrorDisplay();
+                frmvalidator.addValidation("fldName", "req", "Please enter your Name");
+                frmvalidator.addValidation("fldName", "alnum_s", "Alpha/numeric and space chars only");
+                frmvalidator.addValidation("fldEmail", "email", "Invalid email address format");
+                frmvalidator.addValidation("fldPhone", "req", "Please enter your Mobile No.");
+                frmvalidator.addValidation("fldPhone", "regexp=^[0-9]{10}$|^\(0[1-9]{1}\)[0-9]{8}$|^[0-9]{8}$|^[0-9]{4}[ ][0-9]{3}[ ][0-9]{3}$|^\(0[1-9]{1}\)[ ][0-9]{4}[ ][0-9]{4}$|^[0-9]{4}[ ][0-9]{4}$", "Must be in 04xxyyyzzz or xxxxyyyy format");
+              </script>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- end #content -->
+
+    <?php
+      include("left.php");
+    ?>
+
+    <div style="clear: both;">&nbsp;</div>
+
+    <?php
+      include("bottom.php");
+    ?>
+    <!-- end #footer -->
+  </div>
+</body>
+</html>

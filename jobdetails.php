@@ -22,17 +22,15 @@
     include ("top.php");
   ?>
   <div style="clear: both;">&nbsp;</div>
-  <div id="page">
-    <div id="widecontent">
-      <div id="widecontent-bgtop">
-        <div id="widecontent-bgbtm">
-
-          <div class="post">
-            <p class="meta"><span class="date"><?php echo date("l, F j, Y"); ?></span></p>
-            <h2 class="title">Job ID <?php echo $jobid; ?></h2>
+  <div>
+    <div>
+      <div>
+        <div>
+          <div class="existingJobDetailsDIV">
+            <label><?php if ($clientmsg != "") echo $clientmsg; else echo date("l, F j, Y"); ?></label>
+            <h2 class="clientTitle">Job ID <?php echo $jobid; ?></h2>
             <div class="entry">
-
-              <table border="0" align="left" id="tblJobs" rules="cols" frame="box" class="sortable" cellpadding="2">
+              <table border="0" align="left" id="tblJobs" rules="cols" frame="box" class="sortable" cellpadding="2" style="margin-bottom: 10px;margin-top:20px">
                 <tr>
                   <th align="left">Room</th>
                   <th align="left">Window</th>
@@ -103,9 +101,7 @@
 
             </div>
           </div>
-
           <div style="clear: both;">&nbsp;</div>
-
         </div>
       </div>
     </div>

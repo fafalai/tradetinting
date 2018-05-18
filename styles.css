@@ -905,3 +905,61 @@ input[type=submit]:hover {
     min-height: 200px;
     overflow: hidden;
 }
+
+.existingJobsDIV
+{
+    margin-bottom: 50px;
+    width:70%;
+    margin: auto;
+    /* height: 450px; */
+    min-height: 200px;
+    overflow: hidden;
+}
+
+.contactsDIV
+{
+    margin-bottom: 30px;
+    padding: 25px;
+    background-color: #f0f0f0;
+    width:70%;
+    margin: auto
+}
+
+.contactTitle
+{
+    margin-bottom: 10px;
+    padding-left: 170px;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 20pt;
+}
+
+.contactTimeLable
+{
+    margin-bottom: 10px;
+    padding-left: 170px;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12pt;
+}
+
+.existingJobDetailsDIV
+{
+    margin-bottom: 50px;
+    width:70%;
+    margin: auto;
+    /* height: 450px; */
+    min-height: 200px;
+    overflow: hidden;
+}
+
+.profileDIV
+{
+    margin-bottom: 50px;
+    width:70%;
+    margin: auto;
+    /* height: 450px; */
+    min-height: 200px;
+    overflow: hidden;
+}

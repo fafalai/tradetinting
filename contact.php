@@ -38,37 +38,50 @@
     include("top.php");
   ?>
   <hr />
-  <div id="page">
-    <div id="content">
-      <div id="content-bgtop">
-        <div id="content-bgbtm">
-
-          <div class="post">
-            <p class="meta"><span class="date"><?php if ($contactmsg != "") echo $contactmsg; else echo date("l, F j, Y"); ?></span></p>
-            <h2 class="title">Contact Us</h2>
+  <div>
+    <div>
+      <div>
+        <div>
+          <label class="contactTimeLable"><?php if ($clientmsg != "") echo $clientmsg; else echo date("l, F j, Y"); ?></label>
+          <h2 class="contactTitle">Contact Us</h2>
+          <div class="contactsDIV">
+            <!-- <label><?php if ($clientmsg != "") echo $clientmsg; else echo date("l, F j, Y"); ?></label>
+            <h2 class="clientTitle">Contact Us</h2> -->
             <div class="entry">
-
               <form action="contact.php" method="post" id="frmContact">
-                <table>
+                <table style="width: 100%">
                   <tr>
-                    <td align="left" valign="top">Name:</td>
-                    <td align="left" valign="top"><input id="fldName" name="fldName" type="text" size="20" maxlength="<?php echo AT_MAXNAME; ?>" /><div id='frmContact_fldName_errorloc' class="error_strings"></div></td>
+                    <!-- <td align="left" valign="top">Name:</td> -->
+                    <td align="left" valign="top" colspan="2">
+                      <input id="fldName" name="fldName" type="text" size="20" style="width: 100%" placeholder="NAME" maxlength="<?php echo AT_MAXNAME; ?>" />
+                      <div id='frmContact_fldName_errorloc' class="error_strings"></div>
+                    </td>
                   </tr>
                   <tr>
-                    <td align="left" valign="top">Mobile:</td>
-                    <td align="left" valign="top"><input id="fldPhone" name="fldPhone" type="text" size="20" maxlength="<?php echo AT_MAXPHONE; ?>" /><div id='frmContact_fldPhone_errorloc' class="error_strings"></div></td>
+                    <!-- <td align="left" valign="top">Mobile:</td> -->
+                    <td align="left" valign="top" style="width: 50%">
+                      <input id="fldPhone" name="fldPhone" type="text" size="20" style="width: 100%" placeholder="PHONE" maxlength="<?php echo AT_MAXPHONE; ?>" />
+                      <div id='frmContact_fldPhone_errorloc' class="error_strings"></div>
+                    </td>
+                    <td align="left" valign="top" style="width: 50%">
+                      <input id="fldEmail" name="fldEmail" type="text" size="40" style="width: 100%" placeholder="EMAIL" maxlength="<?php echo AT_MAXEMAIL; ?>" />
+                    </td>
                   </tr>
-                  <tr>
+                  <!-- <tr>
                     <td align="left" valign="top">Email:</td>
                     <td align="left" valign="top"><input id="fldEmail" name="fldEmail" type="text" size="40" maxlength="<?php echo AT_MAXEMAIL; ?>" /></td>
+                  </tr> -->
+                  <tr>
+                    <!-- <td align="left" valign="top">Enquiry:</td> -->
+                    <td align="left" valign="top" colspan="2">
+                      <textarea id="fldEnquiry" name="fldEnquiry" style="width: 100%" cols="40" rows="5" resize="none" placeholder="ENQUIRY"></textarea>
+                    </td>
                   </tr>
                   <tr>
-                    <td align="left" valign="top">Enquiry:</td>
-                    <td align="left" valign="top"><textarea id="fldEnquiry" name="fldEnquiry" cols="40" rows="5" resize="none"></textarea></td>
-                  </tr>
-                  <tr>
-                    <td align="left" valign="top">&nbsp;</td>
-                    <td align="left" valign="top"><input id="btnContact" type="submit" value="Submit" /></td>
+                    
+                    <td align="left" valign="top" colspan="2">
+                      <input id="btnContact" type="submit" style="width:50%" value="Submit" />
+                    </td>
                   </tr>
                 </table>
               </form>

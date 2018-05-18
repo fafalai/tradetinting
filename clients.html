@@ -7,6 +7,36 @@
 
   <title>Remedy Tinting - Clients</title>
   <link rel="stylesheet" type="text/css" href="styles.css">
+  <script>
+    function searchClients()
+    {
+      var input, filter, table, tr, td, i,searchIndex;
+      input = document.getElementById("searchInputClients");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("tblClients");
+      tr = table.getElementsByTagName("tr");
+      searchIndex = 0;
+      console.log()
+      if (document.getElementById("searchName").checked)
+      {
+        searchIndex = 1;
+      }
+      else if (document.getElementById("searchMobile").checked)
+      {
+        searchIndex = 2;
+      }
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[searchIndex];
+        if (td) {
+          if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }       
+      }
+    }
+  </script>
 </head>
 <body>
   <?php
@@ -16,14 +46,23 @@
   <div >
     <div >
       <div >
-        <div style="padding: 50px;margin-top: 30pt">
+        <div style="margin-top: 30pt">
           <div class="existingClientsDIV">
-            <p class="meta"><span class="date"><?php if ($clientmsg != "") echo $clientmsg; else echo date("l, F j, Y"); ?></span></p>
+            <!-- <p><span><?php if ($clientmsg != "") echo $clientmsg; else echo date("l, F j, Y"); ?></span></p> -->
+            <label><?php if ($clientmsg != "") echo $clientmsg; else echo date("l, F j, Y"); ?></label>
             <h2 class="clientTitle">Clients</h2>
-            <p>Move mouse over links for tips. Click on table header to sort by that column.</p>
-            <p class="meta"><span class="date"></span></p>
+            <label>Move mouse over links for tips. Click on table header to sort by that column.</label>
+            <br/>
+            <label>Select an user to further editng.</label>            
+            <br/>
+
+            <input type="text" id="searchInputClients" onkeyup="searchClients()" placeholder="Search by name or mobile" title="Type in a name or mobile">
+           <form>
+              <input type="radio" name="search" value="Name" id="searchName" checked> Name<br>
+              <input type="radio" name="search" value="Mobile" id="searchMobile"> Mobile<br>
+          </form> 
             <div style="margin-bottom: 30px">
-              <table border="0" align="left" id="tblClients" rules="cols" frame="box" class="sortable" style="margin-bottom: 30px">
+              <table border="0" align="left" id="tblClients" rules="cols" frame="box" class="sortable" style="margin-bottom: 10px;margin-top:20px">
                   <tr>
                     <th align="left">Code</th>
                     <th align="left">Name</th>
@@ -31,6 +70,13 @@
                     <th align="right">Date Modified</th>
                     <th align="center" class="unsortable">Action</th>
                   </tr>
+                  <tr>
+                      <td align="left">Test 1</td>
+                      <td align="left">Test 1</td>
+                      <td align="left">39201920392</td>
+                      <td align="right"></td>
+                      <td align="center"><a href="clients.php?cmd=<?php echo AT_CMDDELETE; ?>&id=<?php echo $dbrow['id']; ?>"><span onmouseover="tooltip.show('<?php echo $deletetip; ?>');" onmouseout="tooltip.hide();"><img src="images/icon-delete.png" width="25" height="17" alt="Delete" /></span></a></td>
+                    </tr>
                   <?php
                     $dbselect = "select " .
                                 "cl1.id," .
@@ -83,9 +129,8 @@
               </table>
             </div>
           </div>
-
+          <div style="margin-top: 20px;margin-bottom: 30px"></div>
           <div class="clientsIDV">
-            
             <h2 class="clientTitle">Add/Modify Clients</h2>
             <a href="clients.php?cmd=<?php echo AT_CMDCREATE; ?>&id=0" class="clientsCreat">Create New</a>
             <div class="clientsEntry">
@@ -130,7 +175,7 @@
                         <input style="width: 100%" id="fldCity" name="fldCity" type="text"  placeholder="CITY" size="40" maxlength="<?php echo AT_MAXADDRESS; ?>" value="<?php echo SharedPrepareDisplayString($fldcity); ?>" onchange="ShowMap();" />
                       </td>
                       <td align="left" valign="top" colspan="1" style="width: 25%">
-                          <select style="width: 100%" id="fldState" name="fldState" onchange="ShowMap();">
+                          <select style="width: 100%;margin-top: 8px" id="fldState" name="fldState" onchange="ShowMap();">
                             <option value="VIC" <?php if ($fldstate == "VIC" or $fldstate == "") echo "selected=\"selected\""; ?>>VIC</option>
                             <option value="NSW" <?php if ($fldstate == "NSW") echo "selected=\"selected\""; ?>>NSW</option>
                             <option value="SA" <?php if ($fldstate == "SA") echo "selected=\"selected\""; ?>>SA</option>

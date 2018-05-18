@@ -214,6 +214,35 @@
       $('#fldGoogleMap').attr('src', googlemapurl);
     }
     onload=OnFormLoad;
+
+
+    function searchClients()
+    {
+      var input, filter, table, tr, td, i,searchIndex;
+      input = document.getElementById("searchInputClients");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("tblClients");
+      tr = table.getElementsByTagName("tr");
+      searchIndex = 0;
+      if (document.getElementById("searchName").checked)
+      {
+        searchIndex = 1;
+      }
+      else if (document.getElementById("searchMobile").checked)
+      {
+        searchIndex = 2;
+      }
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[searchIndex];
+        if (td) {
+          if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }       
+      }
+    }
   </script>
   <title>Remedy Tinting - Clients</title>
 </head>
@@ -225,79 +254,84 @@
   <div >
     <div >
       <div >
-        <div style="padding: 50px;margin-top: 30pt">
-
-          <div class="post">
-            <p class="meta"><span class="date"><?php if ($clientmsg != "") echo $clientmsg; else echo date("l, F j, Y"); ?></span></p>
+        <div style="margin-top: 30pt">
+          <div class="existingClientsDIV">
+            <!-- <p><span><?php if ($clientmsg != "") echo $clientmsg; else echo date("l, F j, Y"); ?></span></p> -->
+            <label><?php if ($clientmsg != "") echo $clientmsg; else echo date("l, F j, Y"); ?></label>
             <h2 class="clientTitle">Clients</h2>
-            <p class="meta"><span class="date">Move mouse over links for tips. Click on table header to sort by that column.</span></p>
-            <div class="entry">
+            <label>Move mouse over links for tips. Click on table header to sort by that column.</label>
+            <br/>
+            <label>Select an user to further editng.</label>            
+            <br/>
 
-              <table border="0" align="center" id="tblClients" rules="cols" frame="box" class="sortable">
-                <tr>
-                  <th align="left">Code</th>
-                  <th align="left">Name</th>
-                  <th align="left">Contact</th>
-                  <th align="right">Date Modified</th>
-                  <th align="center" class="unsortable">Action</th>
-                </tr>
-                <?php
-                  $dbselect = "select " .
-                              "cl1.id," .
-                              "cl1.code," .
-                              "cl1.name," .
-                              "cl1.notes as 'desc'," .
-                              "cl1.contact," .
-                              "cl1.mobile," .
-                              "cl1.address," .
-                              "cl1.city," .
-                              "cl1.state," .
-                              "DATE_FORMAT(cl1.datecreated,\"%Y-%m-%d %H:%i\") datecreated," .
-                              "DATE_FORMAT(cl1.datemodified,\"%Y-%m-%d %H:%i\") datemodified," .
-                              "cl1.gpslat," .
-                              "cl1.gpslon " .
-                              "from " .
-                              "clients cl1 " .
-                              "where " .
-                              "cl1.cust_id=" . $_SESSION['custid'] . " " .
-                              "and " .
-                              "cl1.dateexpired is null";
-                  if ($dbresult = mysql_query($dbselect, $dblink))
-                  {
-                    if ($numrows = mysql_num_rows($dbresult))
+            <input type="text" id="searchInputClients" onkeyup="searchClients()" placeholder="Search by name or mobile" title="Type in a name or mobile">
+           <form>
+            <input type="radio" name="search" value="Name" id="searchName" checked> Name<br>
+            <input type="radio" name="search" value="Mobile" id="searchMobile"> Mobile<br>
+          </form> 
+            <div style="margin-bottom: 30px">
+              <table border="0" align="left" id="tblClients" rules="cols" frame="box" class="sortable" style="margin-bottom: 10px;margin-top:20px">
+                  <tr>
+                    <th align="left">Code</th>
+                    <th align="left">Name</th>
+                    <th align="left">Mobile</th>
+                    <th align="right">Date Modified</th>
+                    <th align="center" class="unsortable">Action</th>
+                  </tr>
+                  <?php
+                    $dbselect = "select " .
+                                "cl1.id," .
+                                "cl1.code," .
+                                "cl1.name," .
+                                "cl1.notes as 'desc'," .
+                                "cl1.contact," .
+                                "cl1.mobile," .
+                                "cl1.address," .
+                                "cl1.city," .
+                                "cl1.state," .
+                                "DATE_FORMAT(cl1.datecreated,\"%Y-%m-%d %H:%i\") datecreated," .
+                                "DATE_FORMAT(cl1.datemodified,\"%Y-%m-%d %H:%i\") datemodified," .
+                                "cl1.gpslat," .
+                                "cl1.gpslon " .
+                                "from " .
+                                "clients cl1 " .
+                                "where " .
+                                "cl1.cust_id=" . $_SESSION['custid'] . " " .
+                                "and " .
+                                "cl1.dateexpired is null";
+                    if ($dbresult = mysql_query($dbselect, $dblink))
                     {
-                      $url = "";
-                      while ($dbrow = mysql_fetch_array($dbresult, MYSQL_ASSOC))
+                      if ($numrows = mysql_num_rows($dbresult))
                       {
-                        $deletetip = "Delete Client: <strong>" . $dbrow['code'] . "</strong>";
-                        $contacttip = "<strong>Name:</strong>" . $dbrow['name'] . "<br />" .
-                                      "<strong>Mobile:</strong>" . $dbrow['mobile'] . "<br />" .
-                                      "<strong>Address:</strong>" . $dbrow['address'] . "<br />" .
-                                      "<strong>City:</strong>" . $dbrow['city'] . ", " . $dbrow['state'] . "<br />" .
-                                      $dbrow['desc'];
-                        $deletetip = SharedPrepareToolTip($deletetip);
-                        $contacttip = SharedPrepareToolTip($contacttip);
-                ?>
-                        <tr>
-                          <td align="left"><a href="clients.php?cmd=<?php echo AT_CMDMODIFY; ?>&id=<?php echo $dbrow['id']; ?>"><?php echo SharedAddEllipsis($dbrow['code'], 20); ?></a></td>
-                          <td align="left"><span class="hotspot" onmouseover="tooltip.show('<?php echo $contacttip; ?>');" onmouseout="tooltip.hide();"><?php echo SharedAddEllipsis($dbrow['name'], 20); ?></span></td>
-                          <td align="left"><?php echo SharedAddEllipsis($dbrow['contact'], 20); ?></td>
-                          <td align="right"><?php if ($dbrow['datemodified'] == "") echo $dbrow['datecreated']; else echo $dbrow['datemodified']; ?></td>
-                          <td align="center"><a href="clients.php?cmd=<?php echo AT_CMDDELETE; ?>&id=<?php echo $dbrow['id']; ?>"><span onmouseover="tooltip.show('<?php echo $deletetip; ?>');" onmouseout="tooltip.hide();"><img src="images/icon-delete.png" width="25" height="17" alt="Delete" /></span></a></td>
-                        </tr>
-                <?php
+                        $url = "";
+                        while ($dbrow = mysql_fetch_array($dbresult, MYSQL_ASSOC))
+                        {
+                          $deletetip = "Delete Client: <strong>" . $dbrow['code'] . "</strong>";
+                          $contacttip = "<strong>Name:</strong>" . $dbrow['name'] . "<br />" .
+                                        "<strong>Mobile:</strong>" . $dbrow['mobile'] . "<br />" .
+                                        "<strong>Address:</strong>" . $dbrow['address'] . "<br />" .
+                                        "<strong>City:</strong>" . $dbrow['city'] . ", " . $dbrow['state'] . "<br />" .
+                                        $dbrow['desc'];
+                          $deletetip = SharedPrepareToolTip($deletetip);
+                          $contacttip = SharedPrepareToolTip($contacttip);
+                  ?>
+                          <tr>
+                            <td align="left"><a href="clients.php?cmd=<?php echo AT_CMDMODIFY; ?>&id=<?php echo $dbrow['id']; ?>"><?php echo SharedAddEllipsis($dbrow['code'], 20); ?></a></td>
+                            <td align="left"><span class="hotspot" onmouseover="tooltip.show('<?php echo $contacttip; ?>');" onmouseout="tooltip.hide();"><?php echo SharedAddEllipsis($dbrow['name'], 20); ?></span></td>
+                            <td align="left"><?php echo SharedAddEllipsis($dbrow['mobile'], 20); ?></td>
+                            <td align="right"><?php if ($dbrow['datemodified'] == "") echo $dbrow['datecreated']; else echo $dbrow['datemodified']; ?></td>
+                            <td align="center"><a href="clients.php?cmd=<?php echo AT_CMDDELETE; ?>&id=<?php echo $dbrow['id']; ?>"><span onmouseover="tooltip.show('<?php echo $deletetip; ?>');" onmouseout="tooltip.hide();"><img src="images/icon-delete.png" width="25" height="17" alt="Delete" /></span></a></td>
+                          </tr>
+                  <?php
+                        }
                       }
                     }
-                  }
-                ?>
+                  ?>
               </table>
-
-           
-           
             </div>
           </div>
-
-           <div class="clientsIDV">
+          <div style="margin-top: 20px;margin-bottom: 30px"></div>
+          <div class="clientsIDV">
             <h2 class="clientTitle">Add/Modify Clients</h2>
             <a href="clients.php?cmd=<?php echo AT_CMDCREATE; ?>&id=0" class="clientsCreat">Create New</a>
             <div class="clientsEntry">
@@ -342,7 +376,7 @@
                         <input style="width: 100%" id="fldCity" name="fldCity" type="text"  placeholder="CITY" size="40" maxlength="<?php echo AT_MAXADDRESS; ?>" value="<?php echo SharedPrepareDisplayString($fldcity); ?>" onchange="ShowMap();" />
                       </td>
                       <td align="left" valign="top" colspan="1" style="width: 25%">
-                          <select style="width: 100%" id="fldState" name="fldState" onchange="ShowMap();">
+                          <select style="width: 100%;margin-top: 8px" id="fldState" name="fldState" onchange="ShowMap();">
                             <option value="VIC" <?php if ($fldstate == "VIC" or $fldstate == "") echo "selected=\"selected\""; ?>>VIC</option>
                             <option value="NSW" <?php if ($fldstate == "NSW") echo "selected=\"selected\""; ?>>NSW</option>
                             <option value="SA" <?php if ($fldstate == "SA") echo "selected=\"selected\""; ?>>SA</option>
@@ -398,7 +432,6 @@
           </div>
 
         </div>
-      </div>
     </div>
     <!-- end #content -->
 

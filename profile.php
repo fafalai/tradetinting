@@ -128,6 +128,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+  <link rel="stylesheet" type="text/css" href="styles.css">
   <script src="countries.js"></script>
   <?php
     include ("meta.php");
@@ -139,98 +140,145 @@
     include("top.php");
   ?>
   <hr />
-  <div id="page">
-    <div id="content">
-      <div id="content-bgtop">
-        <div id="content-bgbtm">
-
-          <div class="post">
-            <p class="meta"><span class="date"><?php if ($detailmsg != "") echo $detailmsg; ?></span></p>
-            <h2 class="title">Customer Details</h2>
-            <div class="entry">
-
+  <div>
+    <div>
+      <div>
+        <div>
+          <div class="profileDIV">
+              <label><?php if ($clientmsg != "") echo $clientmsg; else echo date("l, F j, Y"); ?></label>
+              <h2 class="clientTitle">BUSINESS DETAILS</h2>
+            <div>
               <form action="profile.php" method="post" id="frmDetails">
                 <table>
                   <tr>
-                    <td align="left" valign="top">Company Name:</td>
-                    <td align="left" valign="top"><input id="fldName" name="fldName" type="text" size="20" maxlength="<?php echo AT_MAXNAME; ?>"  value="<?php echo SharedPrepareDisplayString($fldname); ?>" /></td>
-                  </tr>
-                  <tr>
-                    <td align="left" valign="top">Trading Name:</td>
-                    <td align="left" valign="top"><input id="fldDesc" name="fldDesc" type="text" size="40" maxlength="<?php echo AT_MAXNOTE; ?>" value="<?php echo SharedPrepareDisplayString($flddesc); ?>" /></td>
-                  </tr>
-                  <tr>
-                    <td align="left" valign="top">Business Identification Number:</td>
-                    <td align="left" valign="top"><input id="fldidentificationno" name="fldidentificationno" type="text" size="40" maxlength="<?php echo AT_MAXIDENTIFICATIONNO; ?>" value="<?php echo SharedPrepareDisplayString($fldidentificationno); ?>" /></td>
-                  </tr>
-
-                  <tr>
-                    <td align="left" valign="top">Contact:</td>
-                    <td align="left" valign="top"><input id="fldContact" name="fldContact" type="text" size="20" maxlength="<?php echo AT_MAXNAME; ?>" value="<?php echo SharedPrepareDisplayString($fldcontact); ?>" /></td>
-                  </tr>
-                  <tr>
-                    <td align="left" valign="top">Phone:</td>
-                    <td align="left" valign="top"><input id="fldPhone" name="fldPhone" type="text" size="20" maxlength="<?php echo AT_MAXPHONE; ?>" value="<?php echo SharedPrepareDisplayString($fldphone); ?>" /></td>
-                  </tr>
-                  <tr>
-                    <td align="left" valign="top">Mobile:</td>
-                    <td align="left" valign="top"><input id="fldMobile" name="fldMobile" type="text" size="20" maxlength="<?php echo AT_MAXPHONE; ?>" value="<?php echo SharedPrepareDisplayString($fldmobile); ?>" /><div id="frmDetails_fldMobile_errorloc" class="error_strings"></div></td>
-                  </tr>
-                  <tr>
-                    <td align="left" valign="top">Email:</td>
-                    <td align="left" valign="top"><input id="fldEmail" name="fldEmail" type="text" size="20" maxlength="<?php echo AT_MAXEMAIL; ?>" value="<?php echo SharedPrepareDisplayString($fldemail); ?>" /><div id="frmDetails_fldEmail_errorloc" class="error_strings"></div></td>
-                  </tr>
-                  <tr>
-                    <td align="left" valign="top">Country:</td>
-                    <td align="left" valign="top">
-                      <select id="fldCountry" name="fldCountry"> 
-                      </select>
+                    <!-- <td align="left" valign="top">Company Name:</td> -->
+                    <td align="left" valign="top" colspan="4">
+                      <input id="fldName" name="fldName" type="text" size="20" placeholder="COMPANY NAME" maxlength="<?php echo AT_MAXNAME; ?>"  value="<?php echo SharedPrepareDisplayString($fldname); ?>" />
                     </td>
                   </tr>
                   <tr>
-                    <td align="left" valign="top">Address:</td>
-                    <td align="left" valign="top"><input id="fldAddress" name="fldAddress" type="text" size="40" maxlength="<?php echo AT_MAXADDRESS; ?>" value="<?php echo SharedPrepareDisplayString($fldaddress); ?>" /></td>
+                    <!-- <td align="left" valign="top">Trading Name:</td> -->
+                    <td align="left" valign="top" colspan="4">
+                      <input id="fldDesc" name="fldDesc" type="text" size="40" placeholder="TRADING NAME" maxlength="<?php echo AT_MAXNOTE; ?>" value="<?php echo SharedPrepareDisplayString($flddesc); ?>" />
+                    </td>
                   </tr>
                   <tr>
-                    <td align="left" valign="top">City:</td>
-                    <td align="left" valign="top"><input id="fldCity" name="fldCity" type="text" size="40" maxlength="<?php echo AT_MAXADDRESS; ?>" value="<?php echo SharedPrepareDisplayString($fldcity); ?>" /></td>
+                    <!-- <td align="left" valign="top">Business Identification Number:</td> -->
+                    <td align="left" valign="top" colspan="2" style="width: 50%">
+                      <input id="fldidentificationno" name="fldidentificationno" type="text" size="40" placeholder="BUSINESS ID NUMBER(ABN/EIN/VAT)" maxlength="<?php echo AT_MAXIDENTIFICATIONNO; ?>" value="<?php echo SharedPrepareDisplayString($fldidentificationno); ?>" />
+                    </td>
+                    <td align="left" valign="top" colspan="2">
+                      <input id="fldContact" name="fldContact" type="text" size="20" placeholder="CONTACT NAME" maxlength="<?php echo AT_MAXNAME; ?>" value="<?php echo SharedPrepareDisplayString($fldcontact); ?>" />
+                    </td>
+                  </tr>
+<!-- 
+                  <tr>
+                    <td align="left" valign="top">Contact:</td>
+                    <td align="left" valign="top"><input id="fldContact" name="fldContact" type="text" size="20" maxlength="<?php echo AT_MAXNAME; ?>" value="<?php echo SharedPrepareDisplayString($fldcontact); ?>" /></td>
+                  </tr> -->
+                  <tr>
+                    <!-- <td align="left" valign="top">Phone:</td> -->
+                    <td align="left" valign="top" colspan="2">
+                      <input id="fldPhone" name="fldPhone" type="text" size="20" placeholder="PHONE" maxlength="<?php echo AT_MAXPHONE; ?>" value="<?php echo SharedPrepareDisplayString($fldphone); ?>" />
+                    </td>
+                    <td align="left" valign="top" colspan="2">
+                      <input id="fldMobile" name="fldMobile" type="text" size="20" placeholder="MOBILE" maxlength="<?php echo AT_MAXPHONE; ?>" value="<?php echo SharedPrepareDisplayString($fldmobile); ?>" />
+                      <div id="frmDetails_fldMobile_errorloc" class="error_strings"></div>
+                    </td>
+                  </tr>
+                  <!-- <tr>
+                    <td align="left" valign="top">Mobile:</td>
+                    <td align="left" valign="top"><input id="fldMobile" name="fldMobile" type="text" size="20" maxlength="<?php echo AT_MAXPHONE; ?>" value="<?php echo SharedPrepareDisplayString($fldmobile); ?>" /><div id="frmDetails_fldMobile_errorloc" class="error_strings"></div></td>
+                  </tr> -->
+                  <tr>
+                    <!-- <td align="left" valign="top">Email:</td> -->
+                    <td align="left" valign="top" style="width: 25%">
+                      <input id="fldEmail" name="fldEmail" type="text" size="20" placeholder="EMAIL" maxlength="<?php echo AT_MAXEMAIL; ?>" value="<?php echo SharedPrepareDisplayString($fldemail); ?>" />
+                      <div id="frmDetails_fldEmail_errorloc" class="error_strings"></div>
+                    </td>
                   </tr>
                   <tr>
+                    <!-- <td align="left" valign="top">Country:</td> -->
+                    <td align="left" valign="top" colspan="2">
+                      <select id="fldCountry" name="fldCountry" style="width: 100%"> 
+                      </select>
+                    </td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <!-- <td align="left" valign="top">Address:</td> -->
+                    <td align="left" valign="top" colspan="4">
+                      <input id="fldAddress" name="fldAddress" type="text" size="40" placeholder="ADDRESS" maxlength="<?php echo AT_MAXADDRESS; ?>" value="<?php echo SharedPrepareDisplayString($fldaddress); ?>" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <!-- <td align="left" valign="top">City:</td> -->
+                    <td align="left" valign="top" colspan="2">
+                      <input id="fldCity" name="fldCity" type="text" size="40" placeholder="CITY" maxlength="<?php echo AT_MAXADDRESS; ?>" value="<?php echo SharedPrepareDisplayString($fldcity); ?>" />
+                    </td>
+                    <td align="left" valign="top">
+                        <select id="fldState" name="fldState" style="width: 100%;margin-top: 8px">
+                        </select>
+                    </td>
+                    <td align="left" valign="top">
+                        <input id="fldPostcode" name="fldPostcode" type="text" size="8" placeholder="P/CODE" maxlength="<?php echo AT_MAXPOSTCODE; ?>" value="<?php echo SharedPrepareDisplayString($fldpostcode); ?>" />
+                        <div id="frmDetails_fldPostcode_errorloc" class="error_strings"></div>
+                      </td>
+                      </td>
+                  </tr>
+                  <!-- <tr>
                     <td align="left" valign="top">State:</td>
                     <td align="left" valign="top">
                       <select id="fldState" name="fldState">
                       </select>
                     </td>
-                  </tr>
-                  <tr>
+                  </tr> -->
+                  <!-- <tr>
                     <td align="left" valign="top">Postcode:</td>
                     <td align="left" valign="top"><input id="fldPostcode" name="fldPostcode" type="text" size="8" maxlength="<?php echo AT_MAXPOSTCODE; ?>" value="<?php echo SharedPrepareDisplayString($fldpostcode); ?>" /><div id="frmDetails_fldPostcode_errorloc" class="error_strings"></div></td>
-                  </tr>
+                  </tr> -->
                   <tr>
                     <td align="left" valign="top" colspan="2"><span class="myhr"></span></td>
                   </tr>
                   <tr>
-                    <td align="left" valign="top">Units:</td>
-                    <td align="left" valign="top">
+                    <td align="left" valign="top" colspan="1">Units:
+                        <select id="fldUnits" name="fldUnits" style="width: 30%">
+                            <option value="mm" <?php if ($fldunits == "mm" or $fldunits == "") echo "selected=\"selected\""; ?>>mm</option>
+                            <option value="inches" <?php if ($fldunits == "inches") echo "selected=\"selected\""; ?>>inches</option>
+                          </select>
+                    </td>
+                    <td></td>
+                    <!-- <td align="left" valign="top" colspan="1">
                       <select id="fldUnits" name="fldUnits">
                         <option value="mm" <?php if ($fldunits == "mm" or $fldunits == "") echo "selected=\"selected\""; ?>>mm</option>
                         <option value="inches" <?php if ($fldunits == "inches") echo "selected=\"selected\""; ?>>inches</option>
                       </select>
+                    </td> -->
+                    <!-- <td align="left" valign="top" colspan="1">Currency:</td> -->
+                    <td align="left" valign="top" colspan="1">
+                      Currency:
+                      <input id="fldcurrency" name="fldcurrency" type="text" size="40" placeholder="CURRENCY" style="width: 20%" maxlength="<?php echo AT_MAXCURRENCY; ?>" value="<?php echo SharedPrepareDisplayString($fldcurrency); ?>" />
                     </td>
+                    <td></td>
                   </tr>
-                  <tr>
+                  <!-- <tr>
                     <td align="left" valign="top">Currency:</td>
                     <td align="left" valign="top">
                       <input id="fldcurrency" name="fldcurrency" type="text" size="40" maxlength="<?php echo AT_MAXCURRENCY; ?>" value="<?php echo SharedPrepareDisplayString($fldcurrency); ?>" />
                     </td>
-                  </tr>
+                  </tr> -->
                   <tr>
                     <td align="left" valign="top">&nbsp;</td>
                     <td align="left" valign="top">&nbsp;</td>
                   </tr>
                   <tr>
-                    <td align="left" valign="top">&nbsp;</td>
-                    <td align="left" valign="top"><input id="btnSave2" type="submit" value="Save" /></td>
+                    <!-- <td align="left" valign="top">&nbsp;</td> -->
+                    <td align="left" valign="top" colspan="2" style="padding: 10px">
+                      <input id="btnSave2" type="submit" value="Save" style="width: 50%" />
+                    </td>
+                    <td></td>
+                    <td></td>
                   </tr>
                 </table>
               </form>

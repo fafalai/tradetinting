@@ -95,51 +95,49 @@ hr {
     padding-top: 10px;
 }
 
-#menu {
-    float: left;
-    width: 720px;
+.topmenu {
+    float: left; 
+    width: 100%;
 }
 
-#menu ul {
-    margin: 0;
-    padding: 8px 0px 0px 0px;
-    list-style: none;
+.topmenu ul {
+    margin: 0; 
+    padding: 8px 0px 0px 0px; 
+    list-style: none; 
     line-height: normal;
 }
 
-#menu li {
-    display: block;
-    float: left;
+.topmenu li {
+    display: block; 
+    float: left; 
     background: url(images/img02.jpg) no-repeat right 10px;
 }
 
-#menu a {
-    display: block;
-    float: left;
-    margin: 0px 6px;
-    padding: 6px 15px 6px 15px;
-    letter-spacing: -1px;
-    text-decoration: none;
-    text-align: center;
-    text-transform: lowercase;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    font-weight: normal;
-    color: #8E8E8E;
+.topmenu a {
+    display: block; 
+    float: left; 
+    margin: 0px 6px; 
+    padding: 6px 15px 6px 15px; 
+    letter-spacing: -1px; 
+    text-decoration: none; 
+    text-align: center; 
+    font-family: Arial, Helvetica, sans-serif; 
+    font-size: 12px; 
+    font-weight: normal; 
+    color:black;
 }
 
-#menu a:hover {
-    text-decoration: none;
-    background: #6A6A6A;
-    color: #FFFFFF;
+.topmenu a:hover {
+    text-decoration: underline; 
+    color:red;
 }
 
-#menu .current_page_item a {
-    background: #6A6A6A;
-    color: #FFFFFF;
+.topmenu .current_page_item a {
+    text-decoration: underline; 
+    color:red;
 }
 
-#menu .first {}
+.topmenu .first {}
 
 
 #btnlink a {
@@ -164,7 +162,7 @@ hr {
 }
 
 
-input[type="submit"] {
+/* input[type="submit"] {
     -moz-box-shadow: inset 0px 1px 0px 0px #ffffff;
     -webkit-box-shadow: inset 0px 1px 0px 0px #ffffff;
     box-shadow: inset 0px 1px 0px 0px #ffffff;
@@ -189,9 +187,9 @@ input[type="submit"] {
     padding: 3px 10px;
     text-decoration: none;
     text-shadow: 0px 1px 0px #ffffff;
-}
+} */
 
-input[type="submit"]:hover {
+/* input[type="submit"]:hover {
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed));
     background: -moz-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
     background: -webkit-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
@@ -200,7 +198,7 @@ input[type="submit"]:hover {
     background: linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed', GradientType=0);
     background-color: #dfdfdf;
-}
+} */
 
 .myButton {
     -moz-box-shadow: inset 0px 1px 0px 0px #ffffff;
@@ -696,15 +694,15 @@ textarea.validation-passed {
     position: relative;
     display: inline-block;
 }
-
 .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-}
+      display: none;
+      margin-top: 30px;
+      position: absolute;
+      background-color: #f1f1f1;
+      min-width: 60px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+  }
 
 .dropdown-content a {
     color: black;
@@ -745,7 +743,7 @@ div {
 
 #DIV_FTitle,
 #DIV_BTitle {
-    background-image: url(bg-features-benefits.png);
+    background-image: url(images/4-square.png);
     background-color: #e5e6e5;
     background-repeat: no-repeat;
     height: 42px;
@@ -798,4 +796,202 @@ div {
 #DIV_Message a {
     color: black;
     text-decoration: underline;
+}
+
+.loginBackground
+{
+    margin-top: 40pt;
+    margin-bottom: 30px;
+    background-image: url(images/banner-background.png); 
+    background-size:inherit;
+    width: 100%;
+    height: 400px;
+    background-repeat: repeat;
+    border-bottom:solid 2pt  #737373;
+    border-top: solid 2pt  #737373;
+}
+
+.loginTitle
+{
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold
+}
+
+.loginInput
+{
+    width: 100%;
+    height: 50px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+input[type=text], select
+{
+    width: 100%;
+    height: 50px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+input[type=password], select
+{
+    width: 80%;
+    height: 50px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* inpug[type=password]
+{
+    width: 80%;
+    height: 50px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+} */
+
+input[type="submit"]
+{
+    width: 20%;
+    background-color: #ff0000;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #e60000;
+}
+
+.clientTitle
+{
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 20pt;
+    /* padding: 9pt; */
+}
+
+.clientsCreat
+{
+    padding: 20pt;
+}
+
+.clientsIDV
+{
+    margin-bottom: 30px;
+    padding: 25px;
+    background-color: #f0f0f0;
+    width:70%;
+    margin: auto
+}
+
+.clientsEntry
+{
+    padding: 10pt;
+}
+
+.existingClientsDIV
+{
+    margin-bottom: 50px;
+    width:70%;
+    margin: auto;
+    /* height: 450px; */
+    min-height: 200px;
+    overflow: hidden;
+}
+
+.existingJobsDIV
+{
+    margin-bottom: 50px;
+    width:70%;
+    margin: auto;
+    /* height: 450px; */
+    min-height: 200px;
+    overflow: hidden;
+}
+
+.contactsDIV
+{
+    margin-bottom: 30px;
+    padding: 25px;
+    background-color: #f0f0f0;
+    width:70%;
+    margin: auto
+}
+
+.contactTitle
+{
+    margin-bottom: 10px;
+    padding-left: 170px;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 20pt;
+}
+
+.contactTimeLable
+{
+    margin-bottom: 10px;
+    padding-left: 170px;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12pt;
+}
+
+.existingJobDetailsDIV
+{
+    margin-bottom: 50px;
+    width:70%;
+    margin: auto;
+    /* height: 450px; */
+    min-height: 200px;
+    overflow: hidden;
+}
+
+.profileDIV
+{
+    margin-bottom: 50px;
+    width:75%;
+    margin: auto;
+    background-color: #f0f0f0;
+    /* height: 450px; */
+    min-height: 200px;
+    overflow: hidden;
+}
+
+.existingUsersDIV
+{
+    margin-bottom: 50px;
+    width:70%;
+    margin: auto;
+    /* height: 450px; */
+    min-height: 200px;
+    overflow: hidden;
+}
+
+.usersDIV
+{
+    margin-bottom: 30px;
+    padding: 25px;
+    background-color: #f0f0f0;
+    width:70%;
+    margin: auto
+
 }

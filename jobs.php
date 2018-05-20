@@ -13,25 +13,62 @@
   <?php
     include("meta.php");
   ?>
+  <script>
+    function searchJobs()
+    {
+      var input, filter, table, tr, td, i,searchIndex;
+      input = document.getElementById("searchInputJobs");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("tblJobs");
+      tr = table.getElementsByTagName("tr");
+      searchIndex = 0;
+      console.log()
+      if (document.getElementById("searchName").checked)
+      {
+        searchIndex = 2;
+      }
+      else if (document.getElementById("searchMobile").checked)
+      {
+        searchIndex = 4;
+      }
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[searchIndex];
+        if (td) {
+          if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }       
+      }
+    }
+  </script>
   <meta http-equiv="refresh" content="60" />
   <title>Remedy Tint - View Jobs</title>
+
 </head>
 <body>
   <?php
     include ("top.php");
   ?>
   <div style="clear: both;">&nbsp;</div>
-  <div id="page">
-    <div id="widecontent">
-      <div id="widecontent-bgtop">
-        <div id="widecontent-bgbtm">
-
-          <div class="post">
-            <p class="meta"><span class="date"><?php echo date("l, F j, Y"); ?></span></p>
-            <h2 class="title">Jobs</h2>
+  <div>
+    <div>
+      <div>
+        <div>
+          <div class="existingJobsDIV">
+            <label><?php if ($clientmsg != "") echo $clientmsg; else echo date("l, F j, Y"); ?></label>
+            <h2 class="clientTitle">Jobs</h2>
+                  
+            <br/>
+            <input type="text" id="searchInputJobs" onkeyup="searchJobs()" placeholder="Search by client name or mobile" title="Type in a name or mobile">
+            <form>
+              <input type="radio" name="search" value="Name" id="searchName" checked>Client Name<br>
+              <input type="radio" name="search" value="Mobile" id="searchMobile"> Mobile<br>
+            </form> 
             <div class="entry">
-
-              <table border="0" align="left" id="tblJobs" rules="cols" frame="box" class="sortable">
+            <label style="margin-top:30px">Select a Job ID to see job details.</label>      
+              <table border="0" align="left" id="tblJobs" rules="cols" frame="box" class="sortable" style="margin-bottom: 10px;margin-top:5px">
                 <tr>
                   <th align="right">Created</th>
                   <th align="left">Job ID</th>

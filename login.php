@@ -36,7 +36,7 @@
                         <tr>
                           <!-- <td align="left" valign="top">Password:</td> -->
                           <td align="left" valign="top" style="width:100%">
-                            <input id="fldPwd" name="fldPwd" placeholder="PASSWORD" type="password" class="loginInput" maxlength="<?php echo AT_MAXPWD; ?>" />
+                            <input id="fldPwd" name="fldPwd" placeholder="PASSWORD" type="password" class="loginInput" maxlength="<?php echo AT_MAXPWD; ?>" style="width:100%" />
                             <div id="frmLogin_fldPwd_errorloc" class="error_strings"></div>
                           </td>
                         </tr>

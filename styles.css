@@ -744,6 +744,7 @@ div {
 #DIV_FTitle,
 #DIV_BTitle {
     background-image: url(images/4-square.png);
+    background-position: 60px center;
     background-color: #e5e6e5;
     background-repeat: no-repeat;
     height: 42px;
@@ -994,4 +995,39 @@ input[type=submit]:hover {
     width:70%;
     margin: auto
 
+}
+
+.sectionButton
+{
+    background-image: url(images/4-square.png);
+    background-position: 20px center;
+    background-color: #e5e6e5;
+    background-repeat: no-repeat;
+    height: 42px;
+    line-height: 40px;
+    width: 300px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #383839;
+    border:0;
+    margin: 20px;
+    cursor: pointer;
+}
+
+.sectionDIV
+{
+    margin:0 auto;
+    padding:20px;
+    width: 800px;
+}
+
+.introducingDIV
+{
+    background-image: url('images/banner-background.png'); 
+    background-size:inherit;
+    width: 100%;
+    margin-bottom: 30px;
+    color: black;
+    border-top: solid #8e8e8e 2pt;
+    border-bottom: solid #8e8e8e 2pt;
 }

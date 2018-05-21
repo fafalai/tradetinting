@@ -96,45 +96,45 @@ hr {
 }
 
 .topmenu {
-    float: left; 
-    width: 100%;
+    float: left;
+    /*    width: 100%;*/
 }
 
 .topmenu ul {
-    margin: 0; 
-    padding: 8px 0px 0px 0px; 
-    list-style: none; 
+    margin: 0;
+    padding: 8px 0px 0px 0px;
+    list-style: none;
     line-height: normal;
 }
 
 .topmenu li {
-    display: block; 
-    float: left; 
+    display: block;
+    float: left;
     background: url(images/img02.jpg) no-repeat right 10px;
 }
 
 .topmenu a {
-    display: block; 
-    float: left; 
-    margin: 0px 6px; 
-    padding: 6px 15px 6px 15px; 
-    letter-spacing: -1px; 
-    text-decoration: none; 
-    text-align: center; 
-    font-family: Arial, Helvetica, sans-serif; 
-    font-size: 12px; 
-    font-weight: normal; 
-    color:black;
+    display: block;
+    float: left;
+    margin: 0px 6px;
+    padding: 6px 15px 6px 15px;
+    letter-spacing: -1px;
+    text-decoration: none;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    color: black;
 }
 
 .topmenu a:hover {
-    text-decoration: underline; 
-    color:red;
+    text-decoration: underline;
+    color: red;
 }
 
 .topmenu .current_page_item a {
-    text-decoration: underline; 
-    color:red;
+    text-decoration: underline;
+    color: red;
 }
 
 .topmenu .first {}
@@ -694,15 +694,16 @@ textarea.validation-passed {
     position: relative;
     display: inline-block;
 }
+
 .dropdown-content {
-      display: none;
-      margin-top: 30px;
-      position: absolute;
-      background-color: #f1f1f1;
-      min-width: 60px;
-      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-      z-index: 1;
-  }
+    display: none;
+    margin-top: 30px;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 60px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
 
 .dropdown-content a {
     color: black;
@@ -723,7 +724,7 @@ textarea.validation-passed {
     background-color: #3e8e41;
 }
 
-/* Eric */
+/*<----------Eric */
 
 div {
     /*    border: solid;*/
@@ -799,28 +800,56 @@ div {
     text-decoration: underline;
 }
 
-.loginBackground
-{
-    margin-top: 40pt;
+#DIV_headerContainer {
+    width: 70%;
+    margin: 20px 20% 0px 15%;
+    height: 220px;
+/*    overflow: hidden;*/
+}
+
+#DIV_topImage {
+    float: left;
+}
+
+#DIV_topLoginSignUp {
+    /*    height: 100px;*/
+    margin-top: 1%;
+    float: right;
+}
+
+#DIV_topMenu {
+    float: right;
+}
+
+#DIV_topMenu a {
+    font-size: 1.5em;
+}
+
+.clearFloat {
+    float: none;
+}
+
+/*Eric --------->*/
+
+.loginBackground {
+    /*    margin-top: 40pt;*/
     margin-bottom: 30px;
-    background-image: url(images/banner-background.png); 
-    background-size:inherit;
+    background-image: url(images/banner-background.png);
+    background-size: inherit;
     width: 100%;
     height: 400px;
     background-repeat: repeat;
-    border-bottom:solid 2pt  #737373;
-    border-top: solid 2pt  #737373;
+    border-bottom: solid 2pt #737373;
+    border-top: solid 2pt #737373;
 }
 
-.loginTitle
-{
+.loginTitle {
     color: black;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold
 }
 
-.loginInput
-{
+.loginInput {
     width: 100%;
     height: 50px;
     padding: 12px 20px;
@@ -830,8 +859,8 @@ div {
     box-sizing: border-box;
 }
 
-input[type=text], select
-{
+input[type=text],
+select {
     width: 100%;
     height: 50px;
     padding: 12px 20px;
@@ -841,8 +870,8 @@ input[type=text], select
     box-sizing: border-box;
 }
 
-input[type=password], select
-{
+input[type=password],
+select {
     width: 80%;
     height: 50px;
     padding: 12px 20px;
@@ -863,8 +892,7 @@ input[type=password], select
     box-sizing: border-box;
 } */
 
-input[type="submit"]
-{
+input[type="submit"] {
     width: 20%;
     background-color: #ff0000;
     color: white;
@@ -880,8 +908,7 @@ input[type=submit]:hover {
     background-color: #e60000;
 }
 
-.clientTitle
-{
+.clientTitle {
     color: black;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
@@ -889,56 +916,49 @@ input[type=submit]:hover {
     /* padding: 9pt; */
 }
 
-.clientsCreat
-{
+.clientsCreat {
     padding: 20pt;
 }
 
-.clientsIDV
-{
+.clientsIDV {
     margin-bottom: 30px;
     padding: 25px;
     background-color: #f0f0f0;
-    width:70%;
+    width: 70%;
     margin: auto
 }
 
-.clientsEntry
-{
+.clientsEntry {
     padding: 10pt;
 }
 
-.existingClientsDIV
-{
+.existingClientsDIV {
     margin-bottom: 50px;
-    width:70%;
+    width: 70%;
     margin: auto;
     /* height: 450px; */
     min-height: 200px;
     overflow: hidden;
 }
 
-.existingJobsDIV
-{
+.existingJobsDIV {
     margin-bottom: 50px;
-    width:70%;
+    width: 70%;
     margin: auto;
     /* height: 450px; */
     min-height: 200px;
     overflow: hidden;
 }
 
-.contactsDIV
-{
+.contactsDIV {
     margin-bottom: 30px;
     padding: 25px;
     background-color: #f0f0f0;
-    width:70%;
+    width: 70%;
     margin: auto
 }
 
-.contactTitle
-{
+.contactTitle {
     margin-bottom: 10px;
     padding-left: 170px;
     color: black;
@@ -947,8 +967,7 @@ input[type=submit]:hover {
     font-size: 20pt;
 }
 
-.contactTimeLable
-{
+.contactTimeLable {
     margin-bottom: 10px;
     padding-left: 170px;
     color: black;
@@ -956,20 +975,18 @@ input[type=submit]:hover {
     font-size: 12pt;
 }
 
-.existingJobDetailsDIV
-{
+.existingJobDetailsDIV {
     margin-bottom: 50px;
-    width:70%;
+    width: 70%;
     margin: auto;
     /* height: 450px; */
     min-height: 200px;
     overflow: hidden;
 }
 
-.profileDIV
-{
+.profileDIV {
     margin-bottom: 50px;
-    width:75%;
+    width: 75%;
     margin: auto;
     background-color: #f0f0f0;
     /* height: 450px; */
@@ -977,28 +994,24 @@ input[type=submit]:hover {
     overflow: hidden;
 }
 
-.existingUsersDIV
-{
+.existingUsersDIV {
     margin-bottom: 50px;
-    width:70%;
+    width: 70%;
     margin: auto;
     /* height: 450px; */
     min-height: 200px;
     overflow: hidden;
 }
 
-.usersDIV
-{
+.usersDIV {
     margin-bottom: 30px;
     padding: 25px;
     background-color: #f0f0f0;
-    width:70%;
+    width: 70%;
     margin: auto
-
 }
 
-.sectionButton
-{
+.sectionButton {
     background-image: url(images/4-square.png);
     background-position: 20px center;
     background-color: #e5e6e5;
@@ -1009,22 +1022,20 @@ input[type=submit]:hover {
     font-size: 18px;
     font-weight: bold;
     color: #383839;
-    border:0;
+    border: 0;
     margin: 20px;
     cursor: pointer;
 }
 
-.sectionDIV
-{
-    margin:0 auto;
-    padding:20px;
+.sectionDIV {
+    margin: 0 auto;
+    padding: 20px;
     width: 800px;
 }
 
-.introducingDIV
-{
-    background-image: url('images/banner-background.png'); 
-    background-size:inherit;
+.introducingDIV {
+    background-image: url('images/banner-background.png');
+    background-size: inherit;
     width: 100%;
     margin-bottom: 30px;
     color: black;

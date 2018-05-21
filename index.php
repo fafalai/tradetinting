@@ -44,9 +44,9 @@
               <p>The new <strong>Remedy Tinting</strong> app enables the user to capture "REAL TIME" information in the field, manage & GPS track all your tinting work with ease.</p>
             </div>
           </div> -->
-        </div>
-      </div>
-    </div>
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
     <!-- end #content -->
      <?php
         if (!SharedIsLoggedIn())
@@ -65,6 +65,6 @@
       include("bottom.php");
     ?>
     <!-- end #footer -->
-  </div>
+<!--  </div>-->
 </body>
 </html>

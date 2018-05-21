@@ -48,10 +48,16 @@
       </div>
     </div>
     <!-- end #content -->
-
-    <?php
-      include("feature.php");
-    ?>
+     <?php
+        if (!SharedIsLoggedIn())
+        {
+          include("feature.php");
+         }
+        else
+        {
+          include("sections.php");
+        }
+      ?>
 
     <div style="clear: both;">&nbsp;</div>
 

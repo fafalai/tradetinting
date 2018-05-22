@@ -46,6 +46,8 @@ blockquote {}
 
 a {
     color: #3B3B3B;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 a:hover {
@@ -127,12 +129,14 @@ hr {
     color: black;
 }
 
-.topmenu a:hover {
+/*.topmenu a:hover {*/
+
+#DIV_topMenu a:hover {
     text-decoration: underline;
     color: red;
 }
 
-.topmenu .current_page_item a {
+.topmenu .current_page_item {
     text-decoration: underline;
     color: red;
 }
@@ -796,7 +800,7 @@ div {
 }
 
 #DIV_Message a {
-    color: black;
+    /*    color: black;*/
     text-decoration: underline;
 }
 
@@ -804,7 +808,7 @@ div {
     width: 70%;
     margin: 20px 20% 0px 15%;
     height: 220px;
-/*    overflow: hidden;*/
+    /*    overflow: hidden;*/
 }
 
 #DIV_topImage {
@@ -822,7 +826,8 @@ div {
 }
 
 #DIV_topMenu a {
-    font-size: 1.5em;
+    font-size: 18px;
+/*    color: black;*/
 }
 
 .clearFloat {

@@ -8,27 +8,29 @@
   }
   $dblink = SharedConnect();
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-  <?php
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+        <?php
     include("meta.php");
   ?>
-  <title>Tinting</title>
-</head>
-<body>
-  <?php
+            <title>Tinting</title>
+    </head>
+
+    <body>
+        <?php
     include("top.php");
   ?>
-  <hr />
+            <hr />
 
 
-   <?php
+            <?php
     include("introducing.php");
   ?>
-  <hr />
+                <hr />
 
-  <!-- <div id="page">
+                <!-- <div id="page">
     <div id="content">
       <div id="content-bgtop">
         <div id="content-bgbtm">
@@ -44,11 +46,11 @@
               <p>The new <strong>Remedy Tinting</strong> app enables the user to capture "REAL TIME" information in the field, manage & GPS track all your tinting work with ease.</p>
             </div>
           </div> -->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-    <!-- end #content -->
-     <?php
+                <!--        </div>-->
+                <!--      </div>-->
+                <!--    </div>-->
+                <!-- end #content -->
+                <?php
         if (!SharedIsLoggedIn())
         {
           include("feature.php");
@@ -59,12 +61,13 @@
         }
       ?>
 
-    <div style="clear: both;">&nbsp;</div>
+                    <div style="clear: both;">&nbsp;</div>
 
-    <?php
+                    <?php
       include("bottom.php");
     ?>
-    <!-- end #footer -->
-<!--  </div>-->
-</body>
-</html>
+                        <!-- end #footer -->
+                        <!--  </div>-->
+    </body>
+
+    </html>

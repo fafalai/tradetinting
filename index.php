@@ -24,11 +24,17 @@
   ?>
             <hr />
 
+      <?php
+        if (!SharedIsLoggedIn())
+        {
+          include("introducing.php");
+         }
+        else
+        {
+          include("welcome.php");
+        }
+      ?>
 
-            <?php
-    include("introducing.php");
-  ?>
-                <hr />
 
                 <!-- <div id="page">
     <div id="content">
@@ -57,7 +63,7 @@
          }
         else
         {
-          include("sections.php");
+          // include("sections.php");
         }
       ?>
 

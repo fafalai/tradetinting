@@ -66,8 +66,9 @@
               $resultsetCust = null;
               while ($dbrow = mysql_fetch_array($dbresult, MYSQL_ASSOC))
                 $resultsetCust = $dbrow;
-                //error_log("the customer email is ");
-                //error_log($resultsetCust['email']);
+                $custname = $resultsetCust['name'];
+                // error_log("the customer name is ");
+                // error_log($resultsetCust['email']);
 
               if (sizeof($data) > 0)
               {
@@ -246,7 +247,7 @@
                 {
                   $discountrow = "<tr style='text-align: center'> 
                                   <td>
-                                    Discount
+                                    Variance
                                   </td>
                                   <td>
                                   </td>
@@ -436,7 +437,7 @@
                 $emailtemplate = str_replace("XXX_FRAMETYPE",$frameType,$emailtemplate);
                 // $emailtemplate = str_replace("XXX_FILMTYPE",$filmType,$emailtemplate);
                 
-                SharedSendHtmlMail($resultsetCust['email'], "Trade Tinting", $client['email'],$client['name'], "Quote Confirmation", $emailtemplate);
+                SharedSendHtmlMail($resultsetCust['email'], $custname, $client['email'],$client['name'], "Quote Confirmation", $emailtemplate);
                 error_log("sending email");
               }
               else

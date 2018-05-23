@@ -1021,13 +1021,13 @@ input[type=submit]:hover {
 }
 
 .sectionButton {
-    background-image: url(images/4-square.png);
+    background-image: url(images/4-square-wht.png);
     background-position: 10px center;
     background-color: #5b5b5b;
     background-repeat: no-repeat;
     height: 55px;
     line-height: 40px;
-    width: 260px;
+    width: 280px;
     font-size: 18px;
     font-weight: bold;
     color: #ffffff;

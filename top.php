@@ -46,34 +46,28 @@
                         if (SharedIsLoggedIn())
                         {
                       ?>
-                    <div id="DIV_showUser">
-                        <p>
-                            Welcome,
-                            <?php
-        echo $_SESSION['username'];
-                            ?>
-                        </p>
-                    </div>
+                    <div id="DIV_showUser">Welcome,
+                        <?php echo $_SESSION['username'];?> <a href="logout.php" style="color:black;">Logout</a></div>
                     <div style="float:none;"></div>
                     <div class="topmenu" id="DIV_topMenu">
                         <ul>
-                            <li><a href="jobs.php">Jobs</a></li>
+                            <li><a href="index.php">HOME</a></li>
+                            <li><a href="jobs.php">JOBS</a></li>
                             <?php
                         if ($_SESSION['admin'] != 0)
                         {
                       ?>
                                 <!-- <li><a href="tagreps.php">Reports</a></li> -->
-                                <li><a href="index.php">Home</a></li>
-                                <li><a href="clients.php">Clients</a></li>
-                                <li><a href="resource.php">Resource</a></li>
-                                <li><a href="contact.php">Contact</a></li>
+                                <li><a href="clients.php">CLIENTS</a></li>
+                                <li><a href="resource.php">RESOURCES</a></li>
+                                <li><a href="contact.php">CONTACT</a></li>
                                 <div class="dropdown">
-                                    <li><a href="#">Account</a></li>
+                                    <li><a href="#">ACCOUNT</a></li>
                                     <!-- <li><button style="border:none"></button>Account</button></li> -->
                                     <div class="dropdown-content">
-                                        <a href="profile.php">Business Details</a>
-                                        <a href="users.php">Users</a>
-                                        <a href="logout.php">Logout</a>
+                                        <a href="profile.php">BUSINESS DETAILS</a>
+                                        <a href="users.php">USERS</a>
+                                        <!--                                        <a href="logout.php">LOGOUT</a>-->
                                     </div>
                                 </div>
                                 <?php
@@ -89,4 +83,3 @@
                     </div>
 
     </div>
-    <script src="js/general.js"></script>

@@ -192,7 +192,54 @@
   <?php
     include("meta.php");
   ?>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5gJc4nb8MxNZEZ2FwA4frudnV0gLznKA&libraries=places&callback=initAutocomplete" async defer></script>
   <script type="text/javascript">
+    function initAutocomplete() 
+    {
+      // Create the autocomplete object, restricting the search to geographical
+      // location types.
+      autocomplete = new google.maps.places.Autocomplete(/** @type {!HTMLInputElement} */(document.getElementById('fldAddress')),{types: ['geocode']});
+
+      // When the user selects an address from the dropdown, populate the address
+      // fields in the form.
+      google.maps.event.addListener
+      (
+        autocomplete,
+        'place_changed',
+        function()
+        {
+          var place = autocomplete1.getPlace();
+
+          if (!_.isUndefined(place.address_components))
+          {
+            if (place.address_components.length == 8)
+            {
+              console.log("length 8");
+              console.log(place.address_components);
+              //$('#fldNewBookingCustAddress1').textbox('setValue', place.name);
+              document.getElementById('fldAddress').value = place.name
+              //$('#fldCity').textbox('setValue', place.address_components[3].short_name);
+              document.getElementById('fldCity').value = place.address_components[3].short_name
+              //$('#fldNewBookingCustPostcode').textbox('setValue', place.address_components[7].short_name);
+              //$('#fldNewBookingCustState').combobox('setValue', place.address_components[5].short_name);
+              document.getElementById('fldPostcode').value = place.address_components[5].short_name
+            }
+            else
+            {
+              console.log("other");
+              console.log(place.address_components);
+              //$('#fldNewBookingCustAddress1').textbox('setValue', place.name);
+              document.getElementById('fldAddress').value = place.name
+              //$('#fldNewBookingCustCity').textbox('setValue', place.address_components[2].short_name);
+              document.getElementById('fldCity').value = place.address_components[2].short_name
+              //$('#fldNewBookingCustPostcode').textbox('setValue', place.address_components[6].short_name);
+              document.getElementById('fldPostcode').value = place.address_components[6].short_name
+              //$('#fldNewBookingCustState').combobox('setValue', place.address_components[4].short_name);
+            }
+          }
+        }
+      );
+    }
     function OnFormLoad()
     {
       $('#fldCode').focus();

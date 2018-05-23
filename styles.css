@@ -1023,14 +1023,14 @@ input[type=submit]:hover {
 .sectionButton {
     background-image: url(images/4-square.png);
     background-position: 20px center;
-    background-color: #e5e6e5;
+    background-color: #5b5b5b;
     background-repeat: no-repeat;
     height: 42px;
     line-height: 40px;
     width: 300px;
     font-size: 18px;
     font-weight: bold;
-    color: #383839;
+    color: #ffffff;
     border: 0;
     margin: 20px;
     cursor: pointer;
@@ -1040,6 +1040,7 @@ input[type=submit]:hover {
     margin: 0 auto;
     padding: 20px;
     width: 800px;
+    text-align: center;
 }
 
 .introducingDIV {

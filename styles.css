@@ -1022,18 +1022,19 @@ input[type=submit]:hover {
 
 .sectionButton {
     background-image: url(images/4-square.png);
-    background-position: 20px center;
+    background-position: 10px center;
     background-color: #5b5b5b;
     background-repeat: no-repeat;
-    height: 42px;
+    height: 55px;
     line-height: 40px;
-    width: 300px;
+    width: 260px;
     font-size: 18px;
     font-weight: bold;
     color: #ffffff;
     border: 0;
     margin: 20px;
     cursor: pointer;
+
 }
 
 .sectionDIV {

@@ -840,7 +840,7 @@ div {
 
 
 #DIV_SearchJobs input[type=text] {
-    background-image: url('https://static.runoob.com/images/mix/searchicon.png');
+    background-image: url('/images/magnifying-glass.png');
     background-color: #535353;
     background-position: 10px 12px;
 
@@ -1033,14 +1033,29 @@ input[type=submit]:hover {
     overflow: hidden;
 }
 
+/*Business Details Page*/
+
+#table_BusinessDetails {
+    background-color: #f0f0f0;
+}
+
+#table_BusinessDetails td {
+    padding: 5px 18px;
+}
+
 .profileDIV {
     margin-bottom: 50px;
-    width: 75%;
     margin: auto;
-    background-color: #f0f0f0;
-    /* height: 450px; */
-    min-height: 200px;
-    overflow: hidden;
+    width: 80%;
+    /*    width: 80%;*/
+    /*    background-color: #f0f0f0;*/
+    /*     height: 450px; */
+    /*    min-height: 200px;*/
+}
+
+#btnSave2 {
+    font-size: 16px;
+    width: 20%;
 }
 
 .existingUsersDIV {

@@ -42,13 +42,21 @@
             }
           ?>
 
-                <div class="topmenu" id="DIV_topMenu">
-                    <ul>
-                        <?php
+                <?php
                         if (SharedIsLoggedIn())
                         {
                       ?>
-
+                    <div id="DIV_showUser">
+                        <p>
+                            Welcome,
+                            <?php
+        echo $_SESSION['username'];
+                            ?>
+                        </p>
+                    </div>
+                    <div style="float:none;"></div>
+                    <div class="topmenu" id="DIV_topMenu">
+                        <ul>
                             <li><a href="jobs.php">Jobs</a></li>
                             <?php
                         if ($_SESSION['admin'] != 0)
@@ -77,8 +85,8 @@
                         }
                       }
                         ?>
-                    </ul>
-                </div>
+                        </ul>
+                    </div>
 
     </div>
     <script src="js/general.js"></script>

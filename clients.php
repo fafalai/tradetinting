@@ -251,9 +251,9 @@
     include("top.php");
   ?>
   <hr />
-  <div >
-    <div >
-      <div >
+<!--  <div >-->
+<!--    <div >-->
+<!--      <div >-->
         <div style="margin-top: 30pt">
           <div class="existingClientsDIV">
             <!-- <p><span><?php if ($clientmsg != "") echo $clientmsg; else echo date("l, F j, Y"); ?></span></p> -->
@@ -270,7 +270,7 @@
             <input type="radio" name="search" value="Mobile" id="searchMobile"> Mobile<br>
           </form> 
             <div style="margin-bottom: 30px">
-              <table border="0" align="left" id="tblClients" rules="cols" frame="box" class="sortable" style="margin-bottom: 10px;margin-top:20px">
+              <table border="0" id="tblClients" rules="cols" frame="box" class="sortable" style="margin-bottom: 10px;margin-top:20px;width: 100%">
                   <tr>
                     <th align="left">Code</th>
                     <th align="left">Name</th>
@@ -432,7 +432,7 @@
           </div>
 
         </div>
-    </div>
+<!--    </div>-->
     <!-- end #content -->
 
     <?php
@@ -445,6 +445,6 @@
       include("bottom.php");
     ?>
     <!-- end #footer -->
-  </div>
+<!--  </div>-->
 </body>
 </html>

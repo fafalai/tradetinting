@@ -731,7 +731,7 @@ textarea.validation-passed {
 /*<----------Eric */
 
 div {
-    /*    border: solid;*/
+/*        border: solid;*/
 }
 
 #Container {
@@ -811,6 +811,10 @@ div {
     /*    overflow: hidden;*/
 }
 
+#DIV_showUser {
+    float: right;
+}
+
 #DIV_topImage {
     float: left;
 }
@@ -827,7 +831,7 @@ div {
 
 #DIV_topMenu a {
     font-size: 18px;
-/*    color: black;*/
+    /*    color: black;*/
 }
 
 .clearFloat {

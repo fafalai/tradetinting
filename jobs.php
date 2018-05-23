@@ -71,10 +71,11 @@
               <table border="0" align="left" id="tblJobs" rules="cols" frame="box" class="sortable" style="margin-bottom: 10px;margin-top:5px">
                 <tr>
                   <th align="right">Created</th>
-                  <th align="left">Job ID</th>
+<!--                  <th align="left">Job ID</th>-->
+                    <th align="left">Quote</th>
                   <th align="left">Client</th>
-                  <th align="left">Suburb</th>
-                  <th align="left">Mobile</th>
+                  <th align="left">Area</th>
+                  <th align="left">Phone</th>
                   <th align="right">#Rooms</th>
                   <th align="right">Total Price</th>
                   <th align="right">Job Date</th>

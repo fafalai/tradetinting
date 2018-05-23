@@ -61,7 +61,7 @@
       </div>
   </div>
     <?php
-      include("feature.php");
+//      include("feature.php");
     ?>
 
     <div style="clear: both;">&nbsp;</div>

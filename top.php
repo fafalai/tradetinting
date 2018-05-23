@@ -46,14 +46,7 @@
                         if (SharedIsLoggedIn())
                         {
                       ?>
-                    <div id="DIV_showUser">
-                        <p>
-                            Welcome,
-                            <?php
-        echo $_SESSION['username'];
-                            ?>
-                        </p>
-                    </div>
+                    <div id="DIV_showUser">Welcome, <?php echo $_SESSION['username'];?></div>
                     <div style="float:none;"></div>
                     <div class="topmenu" id="DIV_topMenu">
                         <ul>
@@ -89,4 +82,3 @@
                     </div>
 
     </div>
-    <script src="js/general.js"></script>

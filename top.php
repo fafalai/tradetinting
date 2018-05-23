@@ -46,7 +46,8 @@
                         if (SharedIsLoggedIn())
                         {
                       ?>
-                    <div id="DIV_showUser">Welcome, <?php echo $_SESSION['username'];?></div>
+                    <div id="DIV_showUser">Welcome,
+                        <?php echo $_SESSION['username'];?> <a href="logout.php" style="color:black;">Logout</a></div>
                     <div style="float:none;"></div>
                     <div class="topmenu" id="DIV_topMenu">
                         <ul>
@@ -66,7 +67,7 @@
                                     <div class="dropdown-content">
                                         <a href="profile.php">BUSINESS DETAILS</a>
                                         <a href="users.php">USERS</a>
-                                        <a href="logout.php">LOGOUT</a>
+                                        <!--                                        <a href="logout.php">LOGOUT</a>-->
                                     </div>
                                 </div>
                                 <?php

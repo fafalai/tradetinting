@@ -28,7 +28,7 @@
         <div>
           <div class="existingJobDetailsDIV">
             <label><?php if ($clientmsg != "") echo $clientmsg; else echo date("l, F j, Y"); ?></label>
-            <h2 class="clientTitle">Job ID <?php echo $jobid; ?></h2>
+            <h2 class="clientTitle">QUOTE <?php echo $jobid; ?></h2>
             <div class="entry">
               <table border="0" align="left" id="tblJobs" rules="cols" frame="box" class="sortable" cellpadding="2" style="margin-bottom: 10px;margin-top:20px">
                 <tr>

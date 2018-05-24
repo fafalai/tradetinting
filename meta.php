@@ -10,12 +10,13 @@
 <script type="text/javascript" src="lib/js-class.js"></script>
 <script type="text/javascript" src="lib/excanvas.js"></script>
 <script type="text/javascript" src="lib/bluff-min.js"></script>
-<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="js/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 <link rel="stylesheet" type="text/css" href="lib/jquery-ui.css" />
 <link rel="stylesheet" type="text/css" href="styles.css" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="easyui/themes/default/easyui.css">
-<link rel="stylesheet" href="easyui/themes/icon.css">
+<link rel="stylesheet" href="js/easyui/themes/default/easyui.css">
+<link rel="stylesheet" href="js/easyui/themes/icon.css">
 <link rel="icon" type="image/ico" href="icon.png" />
 <link rel="shortcut icon" href="icon.png" />
 

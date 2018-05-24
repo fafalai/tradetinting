@@ -11,7 +11,7 @@
 <script type="text/javascript" src="lib/excanvas.js"></script>
 <script type="text/javascript" src="lib/bluff-min.js"></script>
 <script type="text/javascript" src="js/easyui/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="js/ckeditor/ckeditor.js"></script>
 <link rel="stylesheet" type="text/css" href="lib/jquery-ui.css" />
 <link rel="stylesheet" type="text/css" href="styles.css" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">

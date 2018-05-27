@@ -66,7 +66,8 @@
               $resultsetCust = null;
               while ($dbrow = mysql_fetch_array($dbresult, MYSQL_ASSOC))
                 $resultsetCust = $dbrow;
-                $custname = $resultsetCust['name'];
+                $businessName = $resultsetCust['name'];
+                $custname = $resultsetCust['contact'];
                 // error_log("the customer name is ");
                 // error_log($resultsetCust['email']);
 
@@ -247,7 +248,7 @@
                 {
                   $discountrow = "<tr style='text-align: center'> 
                                   <td>
-                                    Variance
+                                    Discount
                                   </td>
                                   <td>
                                   </td>
@@ -418,6 +419,7 @@
                 $emailtemplate = str_replace("XXX_CLIENTSTREET",$client['address'],$emailtemplate);
                 $emailtemplate = str_replace("XXX_CLIENTCITY",$client['city'],$emailtemplate);
                 $emailtemplate = str_replace("XXX_CUSTNAME",$resultsetCust['contact'],$emailtemplate);
+                $emailtemplate = str_replace("XXX_BUSINESSNAME",$businessName,$emailtemplate);
                 $emailtemplate = str_replace("XXX_CUSTADDRESS",$resultsetCust['address'],$emailtemplate);
                 $emailtemplate = str_replace("XXX_CUSTCITY",$resultsetCust['city'],$emailtemplate);
                 $emailtemplate = str_replace("XXX_CUSTSTATE",$resultsetCust['state'],$emailtemplate);
@@ -437,7 +439,7 @@
                 $emailtemplate = str_replace("XXX_FRAMETYPE",$frameType,$emailtemplate);
                 // $emailtemplate = str_replace("XXX_FILMTYPE",$filmType,$emailtemplate);
                 
-                SharedSendHtmlMail($resultsetCust['email'], $custname, $client['email'],$client['name'], "Quote Confirmation", $emailtemplate);
+                SharedSendHtmlMail($resultsetCust['email'], $businessName, $client['email'],$client['name'], "Quote Confirmation", $emailtemplate);
                 error_log("sending email");
               }
               else

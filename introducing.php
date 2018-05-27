@@ -2,7 +2,7 @@
     <div style="margin:0 auto;width:700px;text-align: center;padding: 20pt">
     
         <span style="font-size: 24pt;font-weight: bold">
-                INTRODUCINT ~ TINT     
+                INTRODUCING ~ TINT     
         </span>
         <span style="font-size: 24pt;color: red;font-weight: bold">
                 APP

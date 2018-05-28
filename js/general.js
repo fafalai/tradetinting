@@ -32,7 +32,7 @@ function changeMenuColor() {
 }
 
 var currencySympol = {
-    '0':'',
+    '0': '',
     'AED': '&#1583;.&#1573;', // ?
     'AFN': '&#65;&#102;',
     'ALL': '&#76;&#101;&#107;',
@@ -501,12 +501,41 @@ function showCurrencySymbol(val) {
     //    $("#span_symbol").attr("innerHTML", currencySympol[val.value]);
 }
 
+var fldcurrency;
 function reloadCurrency() {
-    console.log(fldcurrency);
-    $("#fldcurrency").val(fldcurrency);
-    var symbol = document.getElementById("span_symbol");
-    symbol.innerHTML = currencySympol[fldcurrency];
+
+    if (!empty(fldcurrency)) {
+        console.log(fldcurrency);
+        $("#fldcurrency").val(fldcurrency);
+        var symbol = document.getElementById("span_symbol");
+        symbol.innerHTML = currencySympol[fldcurrency];
+    }
 }
+
+function empty(val) {
+    if (val === undefined)
+        return true;
+
+    if (typeof (val) == 'function' || typeof (val) == 'number' || typeof (val) == 'boolean' || Object.prototype.toString.call(val) === '[object Date]')
+        return false;
+
+    if (val == null || val.length === 0) // null or 0 length array
+        return true;
+
+    if (typeof (val) == "object") {
+        // empty object
+
+        var r = true;
+
+        for (var f in val)
+            r = false;
+
+        return r;
+    }
+
+    return false;
+}
+
 $(document).ready(function () {
     changeMenuColor();
 

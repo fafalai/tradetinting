@@ -32,6 +32,7 @@ function changeMenuColor() {
 }
 
 var currencySympol = {
+    '0':'',
     'AED': '&#1583;.&#1573;', // ?
     'AFN': '&#65;&#102;',
     'ALL': '&#76;&#101;&#107;',

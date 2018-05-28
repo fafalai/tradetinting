@@ -242,10 +242,26 @@
                                 <option value="inches" <?php if ($fldunits == "inches") echo "selected=\"selected\""; ?>>inches</option>
                             </select>
                         </td>
-                        <td colspan="3">
+                        <td>
                             Currency:
-                            <input id="fldcurrency" name="fldcurrency" type="text" size="40" placeholder="CURRENCY" style="width: 20%" maxlength="<?php echo AT_MAXCURRENCY; ?>" value="<?php echo SharedPrepareDisplayString($fldcurrency); ?>" />
+                            <!--                                <input id="fldcurrency" name="fldcurrency" type="text" size="40" placeholder="CURRENCY" style="width: 20%" maxlength="<?php echo AT_MAXCURRENCY; ?>" value="<?php echo SharedPrepareDisplayString($fldcurrency); ?>" />-->
+
+                            <div class="form-row">
+                                <div class="input-group">
+                                    <span id="span_symbol" class="input-group-addon"></span>
+                                    <select name="fldcurrency" id="fldcurrency" class="form-control" onchange="showCurrencySymbol(this);">
+                                        <option value="0">Please select</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div style="display:none;">
+                                <script type="text/javascript">
+                                    var fldcurrency = "<?php echo SharedPrepareDisplayString($fldcurrency); ?>";
+                                </script>
+                            </div>
                         </td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td align="left" valign="top">&nbsp;</td>

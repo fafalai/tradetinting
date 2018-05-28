@@ -26,7 +26,7 @@
   ?>
   <hr />
   <h1 style="font-family:'Times New Roman', Times, serif;margin-top: 45px;padding-left:80px;font-size:40px;color:black"> RESOURCES</h1>
-  <div style="padding: 20px 130px">
+  <div style="padding: 20px 130px" id="DIV_resource">
     <div class="easyui-accordion" style="width:100%;height:420px;align-self: center;">
         <div title="Heat Measurement" style="overflow:auto;padding:10px;">
             <p>
@@ -53,7 +53,7 @@
                 This light band carries 53% of Solar Energy  
             </p>                
         </div>
-        <div title="Total Solar Energy Rejected (TESR)" style="padding:10px;">
+        <div title="Total Solar Energy Rejected (TSER)" style="padding:10px;">
             <p style="padding: 5px"> 
                 TSER is an important measurement of the window films ability to reject solar heat in the form of Visual Light (44% of heat) and Infrared Light (53% of heat). 
                 Clear glass transmits very high levels of both Visual and Infrared Light.  

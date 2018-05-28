@@ -47,8 +47,9 @@
                         {
                       ?>
                     <div id="DIV_showUser">Welcome,
-                        <?php echo $_SESSION['username'];?> <a href="logout.php" style="color:black;">Logout</a></div>
-                    <div style="float:none;"></div>
+                        <?php echo $_SESSION['username'];?><a href="logout.php">Logout</a></div>
+<!--                    <div style="float:none;"></div>-->
+        <br><br>
                     <div class="topmenu" id="DIV_topMenu">
                         <ul>
                             <li><a href="index.php">HOME</a></li>

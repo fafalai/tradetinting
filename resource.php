@@ -27,7 +27,7 @@
   <hr />
   <h1 style="font-family:'Times New Roman', Times, serif;margin-top: 45px;padding-left:80px;font-size:40px;color:black"> RESOURCES</h1>
   <div style="padding: 20px 130px" id="DIV_resource">
-    <div class="easyui-accordion" style="width:100%;height:420px;align-self: center;">
+    <div class="easyui-accordion" style="width:100%;align-self: center;">
         <div title="Heat Measurement" style="overflow:auto;padding:10px;">
             <p>
                 The most accepted method used to measure heat is British Thermal Units (BTU). BTU is the amount heat necessary to raise the Temperature of one pound of water by one degree Fahrenheit.

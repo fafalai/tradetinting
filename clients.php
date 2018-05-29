@@ -192,12 +192,13 @@
   <?php
     include("meta.php");
   ?>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5gJc4nb8MxNZEZ2FwA4frudnV0gLznKA&libraries=places&callback=initAutocomplete" async defer></script>
+  <script src="http://maps.googleapis.com/maps/api/js?AIzaSyBqCHDj475c_6YSc9yqwBH3eN1bYovqtUE&libraries=places&callback=initAutocomplete" async defer></script>
   <script type="text/javascript">
     function initAutocomplete() 
     {
       // Create the autocomplete object, restricting the search to geographical
       // location types.
+      console.log("I am in");
       autocomplete = new google.maps.places.Autocomplete(/** @type {!HTMLInputElement} */(document.getElementById('fldAddress')),{types: ['geocode']});
 
       // When the user selects an address from the dropdown, populate the address

@@ -2,7 +2,7 @@
 <meta name="Copyright" content="Copyright &copy; AdTalk, 2017-2018, All Rights Reserved." />
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="-1">
-<script type="text/javascript" src="lib/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="lib/jquery-ui.js"></script>
 <script type="text/javascript" src="lib/gen_validatorv4.js"></script>
 <script type="text/javascript" src="lib/tt.js"></script>
@@ -10,6 +10,8 @@
 <script type="text/javascript" src="lib/js-class.js"></script>
 <script type="text/javascript" src="lib/excanvas.js"></script>
 <script type="text/javascript" src="lib/bluff-min.js"></script>
+<script type="text/javascript" src="js/underscore.js"></script>
+<script type="text/javascript" src="js/underscore.string.js"></script>
 <script type="text/javascript" src="js/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="js/ckeditor/ckeditor.js"></script>
 <link rel="stylesheet" type="text/css" href="lib/jquery-ui.css" />
@@ -30,7 +32,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <!--
@@ -40,3 +42,7 @@
 -->
 <script src="js/general.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script>
+// Underscore helpers...
+_.mixin(_.str.exports());
+</script>

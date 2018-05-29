@@ -198,6 +198,7 @@
     {
       // Create the autocomplete object, restricting the search to geographical
       // location types.
+      console.log("I am in");
       autocomplete = new google.maps.places.Autocomplete(/** @type {!HTMLInputElement} */(document.getElementById('fldAddress')),{types: ['geocode']});
 
       // When the user selects an address from the dropdown, populate the address

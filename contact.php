@@ -24,6 +24,70 @@
     else
       $contactmsg = "There was a problem sending your request, please try again later...";
   }
+$fldname = "";
+  $flddesc = "";
+  $fldidentificationno = "";
+  $fldcontact = "";
+  $fldphone = "";
+  $fldmobile = "";
+  $fldemail = "";
+  $fldaddress = "";
+  $fldcity = "";
+  $fldstate = "";
+  $fldpostcode = "";
+  $fldcountry = "";
+  $fldunits = "";
+  $fldcurrency = "";
+  $flddatecreated = "";
+  $flddatemodified = "";
+  // Load current values...
+  $dbselect = "select " .
+              "c1.name," .
+              "c1.desc," .
+              "c1.identificationno," .
+              "DATE_FORMAT(c1.datecreated,\"%Y-%m-%d %H:%i\") datecreated," .
+              "DATE_FORMAT(c1.datemodified,\"%Y-%m-%d %H:%i\") datemodified," .
+              "c1.contact," .
+              "c1.phone," .
+              "c1.mobile," .
+              "c1.email," .
+              "c1.address," .
+              "c1.city," .
+              "c1.state," .
+              "c1.postcode," .
+              "c1.country," .
+              "c1.currency," .
+              "c1.units " .
+              "from " .
+              "cust c1 " .
+              "where " .
+              "c1.id=" . $_SESSION['custid'];
+  if ($dbresult = mysql_query($dbselect, $dblink))
+  {
+    if ($numrows = mysql_num_rows($dbresult))
+    {
+      while ($dbrow = mysql_fetch_array($dbresult, MYSQL_ASSOC))
+      {
+//        $fldname = $dbrow['name'];
+//        $flddesc = $dbrow['desc'];
+//        $fldidentificationno = $dbrow['identificationno'];
+        $fldcontact = $dbrow['contact'];
+        $fldphone = $dbrow['phone'];
+//        $fldmobile = $dbrow['mobile'];
+        $fldemail = $dbrow['email'];
+//        $fldaddress = $dbrow['address'];
+//        $fldcity = $dbrow['city'];
+//        $fldstate = $dbrow['state'];
+        $fldcountry = $dbrow['country'];
+//        $fldpostcode = $dbrow['postcode'];
+//        $fldunits= $dbrow['units'];
+//        $fldcurrency = $dbrow['currency'];
+//        $flddatecreated = $dbrow['datecreated'];
+//        $flddatemodified = $dbrow['datemodified'];
+        //populateCountries("fldCountry","fldState",$fldcountry,$fldstate);
+      }
+    }
+  }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -53,24 +117,29 @@
                   <tr>
                     <!-- <td align="left" valign="top">Name:</td> -->
                     <td align="left" valign="top" colspan="2">
-                      <input id="fldName" name="fldName" type="text" size="20" style="width: 100%" placeholder="NAME" maxlength="<?php echo AT_MAXNAME; ?>" />
+                      <input id="fldName" name="fldName" type="text" size="20" style="width: 100%" placeholder="NAME" maxlength="<?php echo AT_MAXNAME; ?>"  value="<?php echo SharedPrepareDisplayString($fldcontact); ?>" />
                       <div id='frmContact_fldName_errorloc' class="error_strings"></div>
                     </td>
                   </tr>
                   <tr>
                     <!-- <td align="left" valign="top">Mobile:</td> -->
                     <td align="left" valign="top" style="width: 50%">
-                      <input id="fldPhone" name="fldPhone" type="text" size="20" style="width: 100%" placeholder="PHONE" maxlength="<?php echo AT_MAXPHONE; ?>" />
+                      <input id="fldPhone" name="fldPhone" type="text" size="20" style="width: 100%" placeholder="PHONE" maxlength="<?php echo AT_MAXPHONE; ?>" value="<?php echo SharedPrepareDisplayString($fldphone); ?>"/>
                       <div id='frmContact_fldPhone_errorloc' class="error_strings"></div>
                     </td>
                     <td align="left" valign="top" style="width: 50%">
-                      <input id="fldEmail" name="fldEmail" type="text" size="40" style="width: 100%" placeholder="EMAIL" maxlength="<?php echo AT_MAXEMAIL; ?>" />
+                      <input id="fldEmail" name="fldEmail" type="text" size="40" style="width: 100%" placeholder="EMAIL" maxlength="<?php echo AT_MAXEMAIL; ?>" value="<?php echo SharedPrepareDisplayString($fldemail); ?>" />
                     </td>
                   </tr>
                   <!-- <tr>
                     <td align="left" valign="top">Email:</td>
                     <td align="left" valign="top"><input id="fldEmail" name="fldEmail" type="text" size="40" maxlength="<?php echo AT_MAXEMAIL; ?>" /></td>
                   </tr> -->
+                  <tr>
+                    <td>
+                      <input id="fldCountry" name="fldCountry" type="text" style="width: 100%" placeholder="Country" value="<?php echo SharedPrepareDisplayString($fldcountry); ?>" />
+                      </td>
+                    </tr>
                   <tr>
                     <!-- <td align="left" valign="top">Enquiry:</td> -->
                     <td align="left" valign="top" colspan="2">

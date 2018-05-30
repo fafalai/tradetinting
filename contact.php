@@ -62,11 +62,11 @@ $fldname = "";
               "cust c1 " .
               "where " .
               "c1.id=" . $_SESSION['custid'];
-  if ($dbresult = mysql_query($dbselect, $dblink))
+  if ($dbresult = SharedQuery($dbselect, $dblink))
   {
-    if ($numrows = mysql_num_rows($dbresult))
+    if ($numrows = SharedNumRows($dbresult))
     {
-      while ($dbrow = mysql_fetch_array($dbresult, MYSQL_ASSOC))
+      while ($dbrow = SharedFetchArray($dbresult))
       {
 //        $fldname = $dbrow['name'];
 //        $flddesc = $dbrow['desc'];

@@ -59,12 +59,12 @@
                       "where " .
                       "c1.id=$custid";
           //error_log($dbselect);
-          if ($dbresult = mysql_query($dbselect, $dblink))
+          if ($dbresult = SharedQuery($dbselect, $dblink))
           {
-            if ($numrows = mysql_num_rows($dbresult))
+            if ($numrows = SharedNumRows($dbresult))
             {
               $resultsetCust = null;
-              while ($dbrow = mysql_fetch_array($dbresult, MYSQL_ASSOC))
+              while ($dbrow = SharedFetchArray($dbresult))
                 $resultsetCust = $dbrow;
                 $businessName = $resultsetCust['name'];
                 $custname = $resultsetCust['contact'];
@@ -144,72 +144,72 @@
                 error_log($jobGroupSelect);
 
 
-                if ($clientresult = mysql_query($clientselect, $dblink))
+                if ($clientresult = SharedQuery($clientselect, $dblink))
                 {
-                  if($numrows = mysql_num_rows($clientresult))
+                  if($numrows = SharedNumRows($clientresult))
                   {
                     $client = null;
-                    while ($dbrow = mysql_fetch_array($clientresult,MYSQL_ASSOC))
+                    while ($dbrow = SharedFetchArray($clientresult))
                     $client = $dbrow;
                     error_log("the client email is ");
                     error_log($client['email']);
                   }
                 }
-                if ($jobTotalResult = mysql_query($jobTotalSelect, $dblink))
+                if ($jobTotalResult = SharedQuery($jobTotalSelect, $dblink))
                 {
-                  if($numrows = mysql_num_rows($jobTotalResult))
+                  if($numrows = SharedNumRows($jobTotalResult))
                   {
                     $jobTotal = null;
-                    while ($dbrow = mysql_fetch_array($jobTotalResult,MYSQL_ASSOC))
+                    while ($dbrow = SharedFetchArray($jobTotalResult))
                     $jobTotal = $dbrow;
                     //error_log("the total price of this job is ");
                     //error_log($jobTotal['totalPrice']);
                   }
                 }
-                if ($jobDetailResult = mysql_query($jobDetailSelect, $dblink))
+                if ($jobDetailResult = SharedQuery($jobDetailSelect, $dblink))
                 {
-                  if($numrows = mysql_num_rows($jobDetailResult))
+                  if($numrows = SharedNumRows($jobDetailResult))
                   {
                     $jobDetail = null;
-                    while ($dbrow = mysql_fetch_array($jobDetailResult,MYSQL_ASSOC))
+                    while ($dbrow = SharedFetchArray($jobDetailResult))
                     $jobDetail = $dbrow;
                     //error_log("the discount of this job is ");
                     //error_log($jobDetail['discount']);
                   }
                 }
-                if ($jobGroupResult = mysql_query($jobGroupSelect, $dblink))
+                if ($jobGroupResult = SharedQuery($jobGroupSelect, $dblink))
                 {
-                  if($numrows = mysql_num_rows($jobGroupResult))
+                  if($numrows = SharedNumRows($jobGroupResult))
                   {
                     //$jobGroupCount 
-                    while ($dbrow = mysql_fetch_array($jobGroupResult,MYSQL_ASSOC))
+                    while ($dbrow = SharedFetchArray($jobGroupResult))
                     $jobGroupDetail[] = $dbrow;
                   }
                 }
-                if ($jobGlassTypeResult = mysql_query($jobGlassTypeSelect, $dblink))
+                if ($jobGlassTypeResult = SharedQuery($jobGlassTypeSelect, $dblink))
                 {
-                  if($numrows = mysql_num_rows($jobGlassTypeResult))
+                  if($numrows = SharedNumRows($jobGlassTypeResult))
                   {
                     //$jobGroupCount 
-                    while ($dbrow = mysql_fetch_array($jobGlassTypeResult,MYSQL_ASSOC))
+                    while ($dbrow = SharedFetchArray($jobGlassTypeResult))
                     $jobGlassType[] = $dbrow;
                   }
                 }
-                if ($jobFrameTypeResult = mysql_query($jobFrameTypeSelect, $dblink))
+                if ($jobFrameTypeResult = SharedQuery($jobFrameTypeSelect, $dblink))
                 {
-                  if($numrows = mysql_num_rows($jobFrameTypeResult))
+                  if($numrows = SharedNumRows($jobFrameTypeResult))
                   {
                     //$jobGroupCount 
-                    while ($dbrow = mysql_fetch_array($jobFrameTypeResult,MYSQL_ASSOC))
+                    while ($dbrow = SharedFetchArray($jobFrameTypeResult))
                     $jobFrameType[] = $dbrow;
                   }
                 }
-                if ($jobFilmTypeResult = mysql_query($jobFilmTypeSelect, $dblink))
+                if ($jobFilmTypeResult = SharedQuery($jobFilmTypeSelect, $dblink))
                 {
-                  if($numrows = mysql_num_rows($jobFilmTypeResult))
+                  if($numrows = SharedNumRows($jobFilmTypeResult))
                   {
                     //$jobGroupCount 
-                    while ($dbrow = mysql_fetch_array($jobFilmTypeResult,MYSQL_ASSOC))
+                    while ($dbrow = SharedFetchArray($jobFilmTypeResult))
                     $jobFilmType[] = $dbrow;
                   }
                 }
@@ -467,7 +467,7 @@
     $errcode = REMEDY_ERR_DBQUERY;
 
     if ($dblink)
-      mysql_query("rollback", $dblink);
+      SharedQuery("rollback", $dblink);
   }
 
   $response = array("errcode" => $errcode, "count" => $count, "clientid" => $clientid, "jobid" => $jobid);

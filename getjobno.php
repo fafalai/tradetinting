@@ -15,9 +15,9 @@
       if ($dblink)
       {
         $dbinsert = "insert into jobs (cust_id,userscreated_id) select $custid,id from users where uuid=\"$uuid\"";
-        if (mysql_query($dbinsert, $dblink))
+        if (SharedQuery($dbinsert, $dblink))
         {
-          $id = mysql_insert_id($dblink);
+          $id = SharedGetInsertId($dblink);
           $rc = REMEDY_ERR_NONE;
         }
       }

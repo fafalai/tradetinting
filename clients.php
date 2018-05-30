@@ -81,9 +81,14 @@
                   "and " .
                   "cust_id=" . $_SESSION['custid'];
       if (SharedQuery($dbupdate, $dblink))
-        $clientmsg = "Client " . $fldcode . " has been deleted.";
+      {
+       // noty({text: msg, type: 'warning', timeout: 3000});
+       $clientmsg = "Client " . $fldcode . " has been deleted.";      
+      }        
+        //alert("Client " . $fldcode . " has been deleted.");
       else
         $clientmsg = "Unable to delete " . $fldcode . ". Please try again or contact support.";
+        //alert("Unable to delete " . $fldcode . ". Please try again or contact support.");
       //
       $cmd = AT_CMDCREATE;
       $clientid = 0;
@@ -115,7 +120,7 @@
                   "cust_id," .
                   "clients.code," .
                   "clients.name," .
-                  "clients.desc," .
+                  "clients.notes," .
                   "contact," .
                   "email1," .
                   "mobile," .
@@ -128,18 +133,20 @@
                   "values " .
                   "(" .
                   $_SESSION['custid'] . "," .
-                  SharedNullOrQuoted($fldcode, $dblink) . "," .
-                  SharedNullOrQuoted($fldname, $dblink) . "," .
-                  SharedNullOrQuoted($flddesc, $dblink) . "," .
-                  SharedNullOrQuoted($fldcontact, $dblink) . "," .
-                  SharedNullOrQuoted($fldemail1, $dblink) . "," .
-                  SharedNullOrQuoted($fldmobile, $dblink) . "," .
-                  SharedNullOrQuoted($fldaddress, $dblink) . "," .
-                  SharedNullOrQuoted($fldcity, $dblink) . "," .
-                  SharedNullOrQuoted($fldstate, $dblink) . "," .
-                  SharedNullOrQuoted($fldpostcode, $dblink) . "," .
+                  SharedNullOrQuoted($fldcode,50, $dblink) . "," .
+                  SharedNullOrQuoted($fldname,50,  $dblink) . "," .
+                  SharedNullOrQuoted($flddesc,1000,  $dblink) . "," .
+                  SharedNullOrQuoted($fldcontact, 50, $dblink) . "," .
+                  SharedNullOrQuoted($fldemail1,50,  $dblink) . "," .
+                  SharedNullOrQuoted($fldmobile,50,  $dblink) . "," .
+                  SharedNullOrQuoted($fldaddress,50,  $dblink) . "," .
+                  SharedNullOrQuoted($fldcity,50,  $dblink) . "," .
+                  SharedNullOrQuoted($fldstate,50,  $dblink) . "," .
+                  SharedNullOrQuoted($fldpostcode, 50, $dblink) . "," .
                   $_SESSION['loggedin'] .
                   ")";
+      // error_log("This is for insert");
+      // error_log($dbinsert);
       if (SharedQuery($dbinsert, $dblink))
       {
         $clientmsg = "Client " . $fldcode . " has been added.";
@@ -156,29 +163,32 @@
         $fldpostcode = "";
       }
       else
-        $clientmsg = "Unable to add " . $fldcode . ". Please try again or contact support.";
+        //$clientmsg = "Unable to add " . $fldcode . ". Please try again or contact support.";
+        alert("Unable to add " . $fldcode . ". Please try again or contact support.");
     }
     else
     {
       $dbupdate = "update " .
                   "clients " .
                   "set " .
-                  "clients.code=" . SharedNullOrQuoted($fldcode, $dblink) . "," .
-                  "clients.name=" . SharedNullOrQuoted($fldname, $dblink) . "," .
-                  "clients.notes=" . SharedNullOrQuoted($flddesc, $dblink) . "," .
-                  "contact=" .SharedNullOrQuoted($fldcontact, $dblink) . "," .
-                  "email1=" .SharedNullOrQuoted($fldemail1, $dblink) . "," .
-                  "mobile=" . SharedNullOrQuoted($fldmobile, $dblink) . "," .
-                  "address=" . SharedNullOrQuoted($fldaddress, $dblink) . "," .
-                  "city=" . SharedNullOrQuoted($fldcity, $dblink) . "," .
-                  "state=" . SharedNullOrQuoted($fldstate, $dblink) . "," .
-                  "postcode=" . SharedNullOrQuoted($fldpostcode, $dblink) . "," .
+                  "clients.code=" . SharedNullOrQuoted($fldcode,50,  $dblink) . "," .
+                  "clients.name=" . SharedNullOrQuoted($fldname,50,  $dblink) . "," .
+                  "clients.notes=" . SharedNullOrQuoted($flddesc, 1000, $dblink) . "," .
+                  "contact=" .SharedNullOrQuoted($fldcontact, 50, $dblink) . "," .
+                  "email1=" .SharedNullOrQuoted($fldemail1, 50, $dblink) . "," .
+                  "mobile=" . SharedNullOrQuoted($fldmobile, 50, $dblink) . "," .
+                  "address=" . SharedNullOrQuoted($fldaddress, 50, $dblink) . "," .
+                  "city=" . SharedNullOrQuoted($fldcity, 50, $dblink) . "," .
+                  "state=" . SharedNullOrQuoted($fldstate, 50, $dblink) . "," .
+                  "postcode=" . SharedNullOrQuoted($fldpostcode,50,  $dblink) . "," .
                   "datemodified=CURRENT_TIMESTAMP," .
                   "usersmodified_id=" . $_SESSION['loggedin'] . " " .
                   "where " .
                   "id=" . $clientid . " " .
                   "and " .
                   "cust_id=" . $_SESSION['custid'];
+      // error_log("This is for update");
+      // error_log($dbupdate);
       if (SharedQuery($dbupdate, $dblink))
         $clientmsg = "Client " . $fldcode . " has been updated.";
       else
@@ -192,7 +202,7 @@
   <?php
     include("meta.php");
   ?>
-  <script src="http://maps.googleapis.com/maps/api/js?AIzaSyBqCHDj475c_6YSc9yqwBH3eN1bYovqtUE&libraries=places&callback=initAutocomplete" async defer></script>
+  <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBqCHDj475c_6YSc9yqwBH3eN1bYovqtUE&libraries=places&callback=initAutocomplete" async defer></script>
   <script type="text/javascript">
     function initAutocomplete() 
     {
@@ -209,7 +219,7 @@
         'place_changed',
         function()
         {
-          var place = autocomplete1.getPlace();
+          var place = autocomplete.getPlace();
 
           if (!_.isUndefined(place.address_components))
           {

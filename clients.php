@@ -48,12 +48,12 @@
                   "cl1.cust_id=" . $_SESSION['custid'] . " " .
                   "and " .
                   "cl1.dateexpired is null";
-      if ($dbresult = mysql_query($dbselect, $dblink))
+      if ($dbresult = SharedQuery($dbselect, $dblink))
       {
-        if ($numrows = mysql_num_rows($dbresult))
+        if ($numrows = SharedNumRows($dbresult))
         {
           $url = "";
-          while ($dbrow = mysql_fetch_array($dbresult, MYSQL_ASSOC))
+          while ($dbrow = SharedFetchArray($dbresult))
           {
             $fldcode = $dbrow['code'];
             $fldname = $dbrow['name'];
@@ -80,7 +80,7 @@
                   "id=" . $clientid . " " .
                   "and " .
                   "cust_id=" . $_SESSION['custid'];
-      if (mysql_query($dbupdate, $dblink))
+      if (SharedQuery($dbupdate, $dblink))
         $clientmsg = "Client " . $fldcode . " has been deleted.";
       else
         $clientmsg = "Unable to delete " . $fldcode . ". Please try again or contact support.";
@@ -140,7 +140,7 @@
                   SharedNullOrQuoted($fldpostcode, $dblink) . "," .
                   $_SESSION['loggedin'] .
                   ")";
-      if (mysql_query($dbinsert, $dblink))
+      if (SharedQuery($dbinsert, $dblink))
       {
         $clientmsg = "Client " . $fldcode . " has been added.";
         // Successful save, clear form...
@@ -179,7 +179,7 @@
                   "id=" . $clientid . " " .
                   "and " .
                   "cust_id=" . $_SESSION['custid'];
-      if (mysql_query($dbupdate, $dblink))
+      if (SharedQuery($dbupdate, $dblink))
         $clientmsg = "Client " . $fldcode . " has been updated.";
       else
         $clientmsg = "Unable to save " . $fldcode . ". Please try again or contact support.";
@@ -347,12 +347,12 @@
                                 "cl1.cust_id=" . $_SESSION['custid'] . " " .
                                 "and " .
                                 "cl1.dateexpired is null";
-                    if ($dbresult = mysql_query($dbselect, $dblink))
+                    if ($dbresult = SharedQuery($dbselect, $dblink))
                     {
-                      if ($numrows = mysql_num_rows($dbresult))
+                      if ($numrows = SharedNumRows($dbresult))
                       {
                         $url = "";
-                        while ($dbrow = mysql_fetch_array($dbresult, MYSQL_ASSOC))
+                        while ($dbrow = SharedFetchArray($dbresult))
                         {
                           $deletetip = "Delete Client: <strong>" . $dbrow['code'] . "</strong>";
                           $contacttip = "<strong>Name:</strong>" . $dbrow['name'] . "<br />" .

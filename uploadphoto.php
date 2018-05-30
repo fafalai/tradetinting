@@ -29,11 +29,11 @@
 
       // Find existing photos...
       $dbselect = "select photo1,photo2,photo3,photo4,photo5,photo6,photo7,photo8,photo9,photo10 from jobs where id=$jobid";
-      if ($dbresult = mysql_query($dbselect, $dblink))
+      if ($dbresult = SharedQuery($dbselect, $dblink))
       {
-        if ($numrows = mysql_num_rows($dbresult))
+        if ($numrows = SharedNumRows($dbresult))
         {
-          while ($dbrow = mysql_fetch_array($dbresult, MYSQL_ASSOC))
+          while ($dbrow = SharedFetchArray($dbresult))
             $photos = $dbrow;
 
           foreach ($_FILES as $key => $value)
@@ -58,7 +58,7 @@
                   {
                     $dbupdate = "update jobs set photo$p = " . SharedNullOrQuoted(pathinfo($newnameext, PATHINFO_BASENAME), $dblink) . " where id=$jobid";
                     error_log($dbupdate);
-                    mysql_query($dbupdate, $dblink);
+                    SharedQuery($dbupdate, $dblink);
                     // Mark this as now used...
                     $photos["photo$p"] = "**";
                     break;

@@ -47,11 +47,11 @@
                       "cust c1 " .
                       "where " .
                       "c1.id=$custid";
-          if ($dbresult = mysql_query($dbselect, $dblink))
+          if ($dbresult = SharedQuery($dbselect, $dblink))
           {
-            if ($numrows = mysql_num_rows($dbresult))
+            if ($numrows = SharedNumRows($dbresult))
             {
-              while ($dbrow = mysql_fetch_array($dbresult, MYSQL_ASSOC))
+              while ($dbrow = SharedFetchArray($dbresult))
                 $resultsetCust[] = $dbrow;
 
               if (sizeof($data) > 0)
@@ -80,8 +80,8 @@
                               ")";
 
                   error_log($dbinsert);
-                  if (mysql_query($dbinsert, $dblink))
-                    $clientid = mysql_insert_id($dblink);
+                  if (SharedQuery($dbinsert, $dblink))
+                    $clientid = SharedGetInsertId($dblink);
                 }
                 else
                   $clientid = $client["id"];
@@ -118,8 +118,8 @@
                                 $userid  .
                                 ")";
                     error_log($dbinsert);
-                    if (mysql_query($dbinsert, $dblink))
-                      $jobid = mysql_insert_id($dblink);
+                    if (SharedQuery($dbinsert, $dblink))
+                      $jobid = SharedGetInsertId($dblink);
                   }
                   else
                   {
@@ -143,14 +143,14 @@
                                 "where " .
                                 "id=" . $jobid;
                     error_log($dbupdate);
-                    mysql_query($dbupdate, $dblink);
+                    SharedQuery($dbupdate, $dblink);
                   }
 
                   if ($jobid !== 0)
                   {
                     $dbdelete = "delete from jobdetails where jobs_id=" . $jobid;
                     error_log($dbdelete);
-                    if (mysql_query($dbdelete, $dblink))
+                    if (SharedQuery($dbdelete, $dblink))
                     {
                       foreach ($data["jobdetails"] as $jd)
                       {
@@ -175,11 +175,11 @@
                                     SharedNullOrQuoted($jd["notes"], $dblink) .
                                     ")";
                         error_log($dbinsert);
-                        if (mysql_query($dbinsert, $dblink))
+                        if (SharedQuery($dbinsert, $dblink))
                           $count++;
                       }
                       //SharedSendHtmlMail("fafa.lai@adtalk.com.au", "Trade Tinting", 'emily92308@126.com', 'Customer Name', 'Invoice', 'This is your invoice');
-                      mysql_query("commit", $dblink);
+                      SharedQuery("commit", $dblink);
                     }
                     else
                       $errcode = REMEDY_ERR_DBDELETE;
@@ -215,7 +215,7 @@
     $errcode = REMEDY_ERR_DBQUERY;
 
     if ($dblink)
-      mysql_query("rollback", $dblink);
+      SharedQuery("rollback", $dblink);
   }
 
   $response = array("errcode" => $errcode, "count" => $count, "clientid" => $clientid, "jobid" => $jobid);

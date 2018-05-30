@@ -42,11 +42,11 @@
                       "cust c1 " .
                       "where " .
                       "c1.id=$custid";
-          if ($dbresult = mysql_query($dbselect, $dblink))
+          if ($dbresult = SharedQuery($dbselect, $dblink))
           {
-            if ($numrows = mysql_num_rows($dbresult))
+            if ($numrows = SharedNumRows($dbresult))
             {
-              while ($dbrow = mysql_fetch_array($dbresult, MYSQL_ASSOC))
+              while ($dbrow = SharedFetchArray($dbresult))
                 $resultsetCust[] = $dbrow;
             }
           }
@@ -84,12 +84,12 @@
                       "cl1.dateexpired is null " .
                       "and " .
                       "cl1.cust_id = $custid";
-          if ($dbresult = mysql_query($dbselect, $dblink))
+          if ($dbresult = SharedQuery($dbselect, $dblink))
           {
-            if ($numrows = mysql_num_rows($dbresult))
+            if ($numrows = SharedNumRows($dbresult))
             {
               $count += $numrows;
-              while ($dbrow = mysql_fetch_array($dbresult, MYSQL_ASSOC))
+              while ($dbrow = SharedFetchArray($dbresult))
                 $resultsetClients[] = $dbrow;
             }
 
@@ -140,12 +140,12 @@
                         "or " .
                         "j1.dateexpired >= '$lastsync'" .
                         ")";
-            if ($dbresult = mysql_query($dbselect, $dblink))
+            if ($dbresult = SharedQuery($dbselect, $dblink))
             {
-              if ($numrows = mysql_num_rows($dbresult))
+              if ($numrows = SharedNumRows($dbresult))
               {
                 $count += $numrows;
-                while ($dbrow = mysql_fetch_array($dbresult, MYSQL_ASSOC))
+                while ($dbrow = SharedFetchArray($dbresult))
                   $resultsetJobs[] = $dbrow;
               }
 
@@ -179,12 +179,12 @@
                           "jd1.dateexpired is null " .
                           "order by " .
                           "jd1.jobs_id";
-              if ($dbresult = mysql_query($dbselect, $dblink))
+              if ($dbresult = SharedQuery($dbselect, $dblink))
               {
-                if ($numrows = mysql_num_rows($dbresult))
+                if ($numrows = SharedNumRows($dbresult))
                 {
                   $count += $numrows;
-                  while ($dbrow = mysql_fetch_array($dbresult, MYSQL_ASSOC))
+                  while ($dbrow = SharedFetchArray($dbresult))
                     $resultsetJobDetails[] = $dbrow;
                 }
               }

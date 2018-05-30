@@ -54,7 +54,7 @@
                 "where " .
                 "id=" . $_SESSION['custid'];
     error_log($dbupdate);
-    if (mysql_query($dbupdate, $dblink))
+    if (SharedQuery($dbupdate, $dblink))
       $detailmsg = "Your details have been updated.";
     else
       $detailmsg = "Unable to save your details. Please try again or contact support.";
@@ -116,11 +116,11 @@
               "cust c1 " .
               "where " .
               "c1.id=" . $_SESSION['custid'];
-  if ($dbresult = mysql_query($dbselect, $dblink))
+  if ($dbresult = SharedQuery($dbselect, $dblink))
   {
-    if ($numrows = mysql_num_rows($dbresult))
+    if ($numrows = SharedNumRows($dbresult))
     {
-      while ($dbrow = mysql_fetch_array($dbresult, MYSQL_ASSOC))
+      while ($dbrow = SharedFetchArray($dbresult))
       {
         $fldname = $dbrow['name'];
         $flddesc = $dbrow['desc'];

@@ -44,11 +44,11 @@
                       "cust c1 " .
                       "where " .
                       "c1.id=$custid";
-          if ($dbresult = mysql_query($dbselect, $dblink))
+          if ($dbresult = SharedQuery($dbselect, $dblink))
           {
-            if ($numrows = mysql_num_rows($dbresult))
+            if ($numrows = SharedNumRows($dbresult))
             {
-              while ($dbrow = mysql_fetch_array($dbresult, MYSQL_ASSOC))
+              while ($dbrow = SharedFetchArray($dbresult))
                 $resultsetCust[] = $dbrow;
 
               // Update new client entry...
@@ -71,7 +71,7 @@
                           "id=" . $data["id"];
 
               error_log($dbupdate);
-              mysql_query($dbupdate, $dblink);
+              SharedQuery($dbupdate, $dblink);
             }
             else
               $errcode = REMEDY_ERR_MISSINGPARAM;
@@ -95,7 +95,7 @@
     $errcode = REMEDY_ERR_DBQUERY;
 
     if ($dblink)
-      mysql_query("rollback", $dblink);
+      SharedQuery("rollback", $dblink);
   }
 
   $response = array("errcode" => $errcode);

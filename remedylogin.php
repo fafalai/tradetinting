@@ -30,13 +30,13 @@
                   "users u1 left join cust c1 on (u1.cust_id=c1.id) " .
                   "where " .
                   "uid='$loginuid'";
-      if ($dbresult = mysql_query($dbselect, $dblink))
+      if ($dbresult = SharedQuery($dbselect, $dblink))
       {
-        if ($numrows = mysql_num_rows($dbresult))
+        if ($numrows = SharedNumRows($dbresult))
         {
           $dbuid = 0;
           $dbpwd = "";
-          while ($dbrow = mysql_fetch_array($dbresult, MYSQL_ASSOC))
+          while ($dbrow = SharedFetchArray($dbresult))
           {
             $dbuid = $dbrow['id'];
             $dbpwd = $dbrow['pwd'];
@@ -58,7 +58,7 @@
                         "uuid='$uuid' " .
                         "where " .
                         "id=$dbuid";
-            mysql_query($dbupdate, $dblink);
+            SharedQuery($dbupdate, $dblink);
           }
           else
             $errcode = REMEDY_ERR_INVALIDLOGIN;

@@ -38,11 +38,11 @@
                 "order by " .
                 "m1.datecreated desc " .
                 "limit 0, 5";
-            if ($dbresult = mysql_query($dbselect, $dblink))
+            if ($dbresult = SharedQuery($dbselect, $dblink))
             {
-                if ($numrows = mysql_num_rows($dbresult))
+                if ($numrows = SharedNumRows($dbresult))
                 {
-                    while ($dbrow = mysql_fetch_array($dbresult, MYSQL_ASSOC))
+                    while ($dbrow = SharedFetchArray($dbresult))
                     {
                         $msg = $dbrow['message'];
                         $dt = $dbrow['datecreated'];

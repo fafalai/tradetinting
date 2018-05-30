@@ -70,11 +70,11 @@
                               "order by " .
                               "jd1.datecreated desc " .
                               "limit 200";
-                  if ($dbresult = mysql_query($dbselect, $dblink))
+                  if ($dbresult = SharedQuery($dbselect, $dblink))
                   {
-                    if ($numrows = mysql_num_rows($dbresult))
+                    if ($numrows = SharedNumRows($dbresult))
                     {
-                      while ($dbrow = mysql_fetch_array($dbresult, MYSQL_ASSOC))
+                      while ($dbrow = SharedFetchArray($dbresult))
                       {
                         $notestip = SharedPrepareToolTip($dbrow['notes']);
                 ?>

@@ -166,7 +166,7 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
             <h2 class="clientTitle">BUSINESS DETAILS</h2>
             <!--                                <div>-->
             <form action="profile.php" method="post" id="frmDetails">
-                <table id="table_BusinessDetails" class="col">
+                <table id="table_BusinessDetails" class="col table table-borderless">
                     <tr>
                         <!-- <td align="left" valign="top">Company Name:</td> -->
                         <td align="left" valign="top" colspan="4">
@@ -238,13 +238,16 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
                     </tr>
                     <tr>
                         <td>Units:
-                            <select id="fldUnits" name="fldUnits" class="custom-select w-100">
-                            <option value="mm" <?php if ($fldunits == "mm" or $fldunits == "") echo "selected=\"selected\""; ?>>mm</option>
-                            <option value="inches" <?php if ($fldunits == "inches") echo "selected=\"selected\""; ?>>inches</option>
-                            </select>
+
+                                <select id="fldUnits" name="fldUnits" class="custom-select mt-0">
+                                    <option value="mm" <?php if ($fldunits == "mm" or $fldunits == "") echo "selected=\"selected\""; ?>>mm</option>
+                                    <option value="inches" <?php if ($fldunits == "inches") echo "selected=\"selected\""; ?>>inches</option>
+                                </select>
+
                         </td>
-                        <td>Currency:
-                            <div class="input-group">
+                        <td>
+                            Currency:
+                            <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span id="span_symbol" class="input-group-text"></span>
                                 </div>

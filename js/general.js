@@ -5,24 +5,24 @@ function redirect(address) {
 function changeMenuColor() {
     var path = window.location.pathname;
     var link = $("#DIV_topMenu a");
-
-    switch (path.substr(1, path.length - 5)) {
-        case "jobs":
+    var pageName = path.split("/");
+    switch (pageName[pageName.length-1]) {
+        case "jobs.php":
             link.eq(1).addClass("current_page_item");
             break;
-        case "jobdetails":
+        case "jobdetails.php":
             link.eq(1).addClass("current_page_item");
             break;
-        case "index":
+        case "index.php":
             link.eq(0).addClass("current_page_item");
             break;
-        case "clients":
+        case "clients.php":
             link.eq(2).addClass("current_page_item");
             break;
-        case "resource":
+        case "resource.php":
             link.eq(3).addClass("current_page_item");
             break;
-        case "contact":
+        case "contact.php":
             link.eq(4).addClass("current_page_item");
             break;
         default:

@@ -37,8 +37,8 @@ if (isset($_POST['fldName']) || isset($_POST['fldContact']) || isset($_POST['fld
         "cust " .
         "set " .
         "cust.name=" .SharedNullOrQuoted($fldname,50, $dblink) . "," .
-        "cust.desc=" .SharedNullOrQuoted($flddesc, 1000,$dblink) . "," .
-        "cust.identificationno=" .SharedNullOrQuoted($fldidentificationno, 50,$dblink) . "," .
+        "cust.desc=" .SharedNullOrQuoted($flddesc,1000, $dblink) . "," .
+        "cust.identificationno=" .SharedNullOrQuoted($fldidentificationno,50, $dblink) . "," .
         "contact=" .SharedNullOrQuoted($fldcontact,50, $dblink) . "," .
         "phone=" .SharedNullOrQuoted($fldphone,50, $dblink) . "," .
         "mobile=" .SharedNullOrQuoted($fldmobile, 50,$dblink) . "," .
@@ -49,7 +49,7 @@ if (isset($_POST['fldName']) || isset($_POST['fldContact']) || isset($_POST['fld
         "postcode=" .SharedNullOrQuoted($fldpostcode,50, $dblink) . "," .
         "country=" .SharedNullOrQuoted($fldcountry,50, $dblink) . "," .
         "units=" .SharedNullOrQuoted($fldunits,50, $dblink) . "," .
-        "currency=" .SharedNullOrQuoted($fldcurrency, 50,$dblink) . "," .
+        "currency=" .SharedNullOrQuoted($fldcurrency,50, $dblink) . "," .
         "datemodified=CURRENT_TIMESTAMP " .
         "where " .
         "id=" . $_SESSION['custid'];
@@ -166,7 +166,7 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
             <h2 class="clientTitle">BUSINESS DETAILS</h2>
             <!--                                <div>-->
             <form action="profile.php" method="post" id="frmDetails">
-                <table id="table_BusinessDetails" class="col">
+                <table id="table_BusinessDetails" class="col table table-borderless">
                     <tr>
                         <!-- <td align="left" valign="top">Company Name:</td> -->
                         <td align="left" valign="top" colspan="4">
@@ -238,13 +238,16 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
                     </tr>
                     <tr>
                         <td>Units:
-                            <select id="fldUnits" name="fldUnits" class="custom-select w-100">
-                            <option value="mm" <?php if ($fldunits == "mm" or $fldunits == "") echo "selected=\"selected\""; ?>>mm</option>
-                            <option value="inches" <?php if ($fldunits == "inches") echo "selected=\"selected\""; ?>>inches</option>
-                            </select>
+
+                                <select id="fldUnits" name="fldUnits" class="custom-select mt-0">
+                                    <option value="mm" <?php if ($fldunits == "mm" or $fldunits == "") echo "selected=\"selected\""; ?>>mm</option>
+                                    <option value="inches" <?php if ($fldunits == "inches") echo "selected=\"selected\""; ?>>inches</option>
+                                </select>
+
                         </td>
-                        <td>Currency:
-                            <div class="input-group">
+                        <td>
+                            Currency:
+                            <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span id="span_symbol" class="input-group-text"></span>
                                 </div>

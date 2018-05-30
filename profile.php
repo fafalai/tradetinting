@@ -36,20 +36,20 @@ if (isset($_POST['fldName']) || isset($_POST['fldContact']) || isset($_POST['fld
     $dbupdate = "update " .
         "cust " .
         "set " .
-        "cust.name=" .SharedNullOrQuoted($fldname, $dblink) . "," .
-        "cust.desc=" .SharedNullOrQuoted($flddesc, $dblink) . "," .
-        "cust.identificationno=" .SharedNullOrQuoted($fldidentificationno, $dblink) . "," .
-        "contact=" .SharedNullOrQuoted($fldcontact, $dblink) . "," .
-        "phone=" .SharedNullOrQuoted($fldphone, $dblink) . "," .
-        "mobile=" .SharedNullOrQuoted($fldmobile, $dblink) . "," .
-        "email=" .SharedNullOrQuoted($fldemail, $dblink) . "," .
-        "address=" .SharedNullOrQuoted($fldaddress, $dblink) . "," .
-        "city=" .SharedNullOrQuoted($fldcity, $dblink) . "," .
-        "state=" .SharedNullOrQuoted($fldstate, $dblink) . "," .
-        "postcode=" .SharedNullOrQuoted($fldpostcode, $dblink) . "," .
-        "country=" .SharedNullOrQuoted($fldcountry, $dblink) . "," .
-        "units=" .SharedNullOrQuoted($fldunits, $dblink) . "," .
-        "currency=" .SharedNullOrQuoted($fldcurrency, $dblink) . "," .
+        "cust.name=" .SharedNullOrQuoted($fldname,50, $dblink) . "," .
+        "cust.desc=" .SharedNullOrQuoted($flddesc,1000, $dblink) . "," .
+        "cust.identificationno=" .SharedNullOrQuoted($fldidentificationno,50, $dblink) . "," .
+        "contact=" .SharedNullOrQuoted($fldcontact,50, $dblink) . "," .
+        "phone=" .SharedNullOrQuoted($fldphone,50, $dblink) . "," .
+        "mobile=" .SharedNullOrQuoted($fldmobile, 50,$dblink) . "," .
+        "email=" .SharedNullOrQuoted($fldemail,50, $dblink) . "," .
+        "address=" .SharedNullOrQuoted($fldaddress,50, $dblink) . "," .
+        "city=" .SharedNullOrQuoted($fldcity,50, $dblink) . "," .
+        "state=" .SharedNullOrQuoted($fldstate,50, $dblink) . "," .
+        "postcode=" .SharedNullOrQuoted($fldpostcode,50, $dblink) . "," .
+        "country=" .SharedNullOrQuoted($fldcountry,50, $dblink) . "," .
+        "units=" .SharedNullOrQuoted($fldunits,50, $dblink) . "," .
+        "currency=" .SharedNullOrQuoted($fldcurrency,50, $dblink) . "," .
         "datemodified=CURRENT_TIMESTAMP " .
         "where " .
         "id=" . $_SESSION['custid'];

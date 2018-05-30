@@ -18,11 +18,11 @@
                   "upper(u1.uid)=upper('$uid') " .
                   "and " .
                   "u1.dateexpired is null";
-      if ($dbresult = mysql_query($dbselect, $dblink))
+      if ($dbresult = SharedQuery($dbselect, $dblink))
       {
-        if ($numrows = mysql_num_rows($dbresult))
+        if ($numrows = SharedNumRows($dbresult))
         {
-          while ($dbrow = mysql_fetch_array($dbresult, MYSQL_ASSOC))
+          while ($dbrow = SharedFetchArray($dbresult, MYSQL_ASSOC))
             $id = $dbrow['id'];
         }
         //

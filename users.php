@@ -27,8 +27,8 @@
               "users u1 " .
               "where " .
               "u1.cust_id='$c_id'";
-  if ($dbresult = mysql_query($dbselect, $dblink))
-    $numrows = mysql_num_rows($dbresult);
+  if ($dbresult = SharedQuery($dbselect, $dblink))
+    $numrows = SharedNumRows($dbresult);
   //
   if (isset($_GET['cmd']))
   {
@@ -50,12 +50,12 @@
                   "u1.id=" . $userid . " " .
                   "and " .
                   "u1.cust_id=" . $_SESSION['custid'];
-      if ($dbresult = mysql_query($dbselect, $dblink))
+      if ($dbresult = SharedQuery($dbselect, $dblink))
       {
-        if ($numrows = mysql_num_rows($dbresult))
+        if ($numrows = SharedNumRows($dbresult))
         {
           $url = "";
-          while ($dbrow = mysql_fetch_array($dbresult, MYSQL_ASSOC))
+          while ($dbrow = SharedFetchArray($dbresult))
           {
             $flduid = $dbrow['uid'];
             $fldname = $dbrow['name'];
@@ -77,7 +77,7 @@
                   "id=" . $userid . " " .
                   "and " .
                   "cust_id=" . $_SESSION['custid'];
-      mysql_query($dbupdate, $dblink);
+        SharedQuery($dbupdate, $dblink);
       //
       $cmd = AT_CMDCREATE;
       $userid = 0;
@@ -105,8 +105,8 @@
                 "users u1 " .
                 "where " .
                 "u1.cust_id='$c_id'";
-    if ($dbresult = mysql_query($dbselect, $dblink))
-      $numrows = mysql_num_rows($dbresult);
+    if ($dbresult = SharedQuery($dbselect, $dblink))
+      $numrows = SharedNumRows($dbresult);
 
     if ($_SESSION['numberUsers'] > $numrows)
     {
@@ -137,7 +137,7 @@
                   "'$dt_expired'" .
                   ")";
 
-      if (mysql_query($dbinsert, $dblink))
+      if (SharedQuery($dbinsert, $dblink))
       {
         // Successful save, clear form...
         $usermsg =  "User " . $fldname . " has been added."  ;
@@ -177,7 +177,7 @@
                 "id=" . $userid . " " .
                 "and " .
                 "cust_id=" . $_SESSION['custid'];
-    if (mysql_query($dbupdate, $dblink))
+    if (SharedQuery($dbupdate, $dblink))
       $usermsg = "User " . $usermsg . " has been updated.";
     else
       $usermsg = "Unable to save " . $fldname . ". Please try again or contact support.";
@@ -203,7 +203,7 @@
                 "id=" . $userid . " " .
                 "and " .
                 "cust_id=" . $_SESSION['custid'];
-    if (mysql_query($dbupdate, $dblink))
+    if (SharedQuery($dbupdate, $dblink))
       $usermsg = "User " . $usermsg . "'s password has been updated.";
     else
       $usermsg = "Unable to save " . $fldname . "'s password. Please try again or contact support.";
@@ -314,11 +314,11 @@
                               "where " .
                               "u1.cust_id=" . $_SESSION['custid'];
 
-                  if ($dbresult = mysql_query($dbselect, $dblink))
+                  if ($dbresult = SharedQuery($dbselect, $dblink))
                   {
-                    if ($numrows = mysql_num_rows($dbresult))
+                    if ($numrows = SharedNumRows($dbresult))
                     {
-                      while ($dbrow = mysql_fetch_array($dbresult, MYSQL_ASSOC))
+                      while ($dbrow = SharedFetchArray($dbresult))
                       {
                         $emailtip = "";
                         $email = $dbrow['email'];

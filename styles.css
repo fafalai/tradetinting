@@ -892,6 +892,11 @@ div {
 #DIV_resource p {
     font-size: 15px;
 }
+
+/*Profile*/
+#fldcurrency{
+    margin: 0px;
+}
 /*Eric --------->*/
 
 .loginBackground {

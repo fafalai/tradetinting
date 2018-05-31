@@ -56,7 +56,7 @@
                 {
                   if ($photos["photo$p"] == "")
                   {
-                    $dbupdate = "update jobs set photo$p = " . SharedNullOrQuoted(pathinfo($newnameext, PATHINFO_BASENAME), $dblink) . " where id=$jobid";
+                    $dbupdate = "update jobs set photo$p = " . SharedNullOrQuoted(pathinfo($newnameext, PATHINFO_BASENAME),1000, $dblink) . " where id=$jobid";
                     error_log($dbupdate);
                     SharedQuery($dbupdate, $dblink);
                     // Mark this as now used...

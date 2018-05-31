@@ -167,10 +167,10 @@
     $dbupdate = "update " .
                 "users " .
                 "set " .
-                "users.name=" . SharedNullOrQuoted($fldname, $dblink) . "," .
-                "users.email=" . SharedNullOrQuoted($fldemail, $dblink) . "," .
-                "users.mobile=" . SharedNullOrQuoted($fldmobile, $dblink) . "," .
-                "users.licenseno=" . SharedNullOrQuoted($fldlicense, $dblink) . "," .
+                "users.name=" . SharedNullOrQuoted($fldname,50, $dblink) . "," .
+                "users.email=" . SharedNullOrQuoted($fldemail, 50,$dblink) . "," .
+                "users.mobile=" . SharedNullOrQuoted($fldmobile,50, $dblink) . "," .
+                "users.licenseno=" . SharedNullOrQuoted($fldlicense,50, $dblink) . "," .
                 "datemodified=CURRENT_TIMESTAMP," .
                 "usersmodified_id=" . $_SESSION['loggedin'] . " "  .
                 "where " .
@@ -196,7 +196,7 @@
     $dbupdate = "update " .
                 "users " .
                 "set " .
-                "pwd=" . SharedNullOrQuoted($fldpwd, $dblink) . "," .
+                "pwd=" . SharedNullOrQuoted($fldpwd,50, $dblink) . "," .
                 "datemodified=CURRENT_TIMESTAMP," .
                 "usersmodified_id=" . $_SESSION['loggedin'] . " "  .
                 "where " .

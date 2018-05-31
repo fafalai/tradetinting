@@ -22,7 +22,7 @@
       {
         if ($numrows = SharedNumRows($dbresult))
         {
-          while ($dbrow = SharedFetchArray($dbresult, MYSQL_ASSOC))
+          while ($dbrow = SharedFetchArray($dbresult))
             $id = $dbrow['id'];
         }
         //

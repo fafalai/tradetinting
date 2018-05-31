@@ -232,8 +232,9 @@
               //$('#fldCity').textbox('setValue', place.address_components[3].short_name);
               document.getElementById('fldCity').value = place.address_components[3].short_name
               //$('#fldNewBookingCustPostcode').textbox('setValue', place.address_components[7].short_name);
-              //$('#fldNewBookingCustState').combobox('setValue', place.address_components[5].short_name);
-              document.getElementById('fldPostcode').value = place.address_components[5].short_name
+              document.getElementById('fldState').value = place.address_components[5].short_name
+              // $('#fldState').combobox('setValue', place.address_components[5].short_name);
+              document.getElementById('fldPostcode').value = place.address_components[7].short_name
             }
             else
             {
@@ -245,11 +246,29 @@
               document.getElementById('fldCity').value = place.address_components[2].short_name
               //$('#fldNewBookingCustPostcode').textbox('setValue', place.address_components[6].short_name);
               document.getElementById('fldPostcode').value = place.address_components[6].short_name
-              //$('#fldNewBookingCustState').combobox('setValue', place.address_components[4].short_name);
+              document.getElementById('fldState').value = place.address_components[4].short_name
             }
           }
         }
       );
+    }
+
+    // Bias the autocomplete object to the user's geographical location,
+    // as supplied by the browser's 'navigator.geolocation' object.
+    function geolocate() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          var geolocation = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+          var circle = new google.maps.Circle({
+            center: geolocation,
+            radius: position.coords.accuracy
+          });
+          autocomplete.setBounds(circle.getBounds());
+        });
+      }
     }
     function OnFormLoad()
     {
@@ -425,7 +444,7 @@
                   <tr>
                       <!-- <td align="left" valign="top">Address:</td> -->
                       <td align="left" valign="top" colspan="4">
-                        <input style="width: 100%" style="width: 100%" id="fldAddress" name="fldAddress" type="text" placeholder="ADDRESS" size="40" maxlength="<?php echo AT_MAXADDRESS; ?>" value="<?php echo SharedPrepareDisplayString($fldaddress); ?>" onchange="ShowMap();" />
+                        <input style="width: 100%" style="width: 100%" id="fldAddress" name="fldAddress" type="text" placeholder="ADDRESS" size="40" maxlength="<?php echo AT_MAXADDRESS; ?>" value="<?php echo SharedPrepareDisplayString($fldaddress); ?>" onchange="ShowMap();" onFocus="geolocate()"/>
                       </td>
                   </tr>
                   <tr>
@@ -434,7 +453,8 @@
                         <input style="width: 100%" id="fldCity" name="fldCity" type="text"  placeholder="CITY" size="40" maxlength="<?php echo AT_MAXADDRESS; ?>" value="<?php echo SharedPrepareDisplayString($fldcity); ?>" onchange="ShowMap();" />
                       </td>
                       <td align="left" valign="top" colspan="1" style="width: 25%">
-                          <select style="width: 100%;margin-top: 8px" id="fldState" name="fldState" onchange="ShowMap();">
+                      <input style="width: 100%" id="fldState" name="fldState" type="text"  placeholder="STATE" size="40"  value="<?php echo SharedPrepareDisplayString($fldstate); ?>" onchange="ShowMap();" />
+                          <!-- <select style="width: 100%;margin-top: 8px" id="fldState" name="fldState" onchange="ShowMap();">
                             <option value="VIC" <?php if ($fldstate == "VIC" or $fldstate == "") echo "selected=\"selected\""; ?>>VIC</option>
                             <option value="NSW" <?php if ($fldstate == "NSW") echo "selected=\"selected\""; ?>>NSW</option>
                             <option value="SA" <?php if ($fldstate == "SA") echo "selected=\"selected\""; ?>>SA</option>
@@ -443,7 +463,7 @@
                             <option value="TAS" <?php if ($fldstate == "TAS") echo "selected=\"selected\""; ?>>TAS</option>
                             <option value="ACT" <?php if ($fldstate == "ACT") echo "selected=\"selected\""; ?>>ACT</option>
                             <option value="NT" <?php if ($fldstate == "NT") echo "selected=\"selected\""; ?>>NT</option>
-                          </select>
+                          </select> -->
                         </td>
                         <td align="left" valign="top" colspan="1" style="width:25%">
                           <input style="width: 100%" id="fldPostcode" name="fldPostcode" type="text" placeholder="POSTCODE" size="8" maxlength="4" class="required" value="<?php echo SharedPrepareDisplayString($fldpostcode); ?>" />

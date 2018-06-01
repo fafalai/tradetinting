@@ -39,7 +39,8 @@
                   "cl1.address," .
                   "cl1.city," .
                   "cl1.state," .
-                  "cl1.postcode " .
+                  "cl1.postcode, " .
+                  "cl1.country " .
                   "from " .
                   "clients cl1 " .
                   "where " .
@@ -65,6 +66,7 @@
             $fldcity = $dbrow['city'];
             $fldstate = $dbrow['state'];
             $fldpostcode = $dbrow['postcode'];
+            $fldcountry = $dbrow['country'];
           }
         }
       }
@@ -82,7 +84,7 @@
                   "cust_id=" . $_SESSION['custid'];
       if (SharedQuery($dbupdate, $dblink))
       {
-       // noty({text: msg, type: 'warning', timeout: 3000});
+        //new Noty({theme: 'themeName',text: 'Some notification text'}).show();
        $clientmsg = "Client " . $fldcode . " has been deleted.";      
       }        
         //alert("Client " . $fldcode . " has been deleted.");
@@ -111,6 +113,7 @@
     $fldcity = SharedCleanString($_POST['fldCity'], AT_MAXADDRESS);
     $fldstate = strtoupper(SharedCleanString($_POST['fldState'], AT_MAXSTATE));
     $fldpostcode = SharedCleanString($_POST['fldPostcode'], AT_MAXPOSTCODE);
+    $fldcountry = SharedCleanString($_POST['fldCountry'], 50);
     //
     if ($clientid == 0)
     {
@@ -128,6 +131,7 @@
                   "city," .
                   "state," .
                   "postcode," .
+                  "country," .
                   "userscreated_id" .
                   ") " .
                   "values " .
@@ -143,10 +147,11 @@
                   SharedNullOrQuoted($fldcity,50,  $dblink) . "," .
                   SharedNullOrQuoted($fldstate,50,  $dblink) . "," .
                   SharedNullOrQuoted($fldpostcode, 50, $dblink) . "," .
+                  SharedNullOrQuoted($fldcountry, 50, $dblink) . "," .
                   $_SESSION['loggedin'] .
                   ")";
-      // error_log("This is for insert");
-      // error_log($dbinsert);
+      error_log("This is for insert");
+      error_log($dbinsert);
       if (SharedQuery($dbinsert, $dblink))
       {
         $clientmsg = "Client " . $fldcode . " has been added.";
@@ -161,6 +166,7 @@
         $fldcity = "";
         $fldstate = "";
         $fldpostcode = "";
+        $fldcountry = "";
       }
       else
         //$clientmsg = "Unable to add " . $fldcode . ". Please try again or contact support.";
@@ -181,6 +187,7 @@
                   "city=" . SharedNullOrQuoted($fldcity, 50, $dblink) . "," .
                   "state=" . SharedNullOrQuoted($fldstate, 50, $dblink) . "," .
                   "postcode=" . SharedNullOrQuoted($fldpostcode,50,  $dblink) . "," .
+                  "country=" . SharedNullOrQuoted($fldcountry,50,  $dblink) . "," .
                   "datemodified=CURRENT_TIMESTAMP," .
                   "usersmodified_id=" . $_SESSION['loggedin'] . " " .
                   "where " .
@@ -230,23 +237,39 @@
               //$('#fldNewBookingCustAddress1').textbox('setValue', place.name);
               document.getElementById('fldAddress').value = place.name
               //$('#fldCity').textbox('setValue', place.address_components[3].short_name);
-              document.getElementById('fldCity').value = place.address_components[3].short_name
+              document.getElementById('fldCity').value = place.address_components[3].short_name;
               //$('#fldNewBookingCustPostcode').textbox('setValue', place.address_components[7].short_name);
-              document.getElementById('fldState').value = place.address_components[5].short_name
+              document.getElementById('fldState').value = place.address_components[5].short_name;
               // $('#fldState').combobox('setValue', place.address_components[5].short_name);
-              document.getElementById('fldPostcode').value = place.address_components[7].short_name
+              document.getElementById('fldCountry').value = place.address_components[6].long_name;
+              document.getElementById('fldPostcode').value = place.address_components[7].short_name;
+            }
+            else if (place.address_components.length == 9)
+            {
+              console.log("length 9");
+              console.log(place.address_components);
+              //$('#fldNewBookingCustAddress1').textbox('setValue', place.name);
+              document.getElementById('fldAddress').value = place.name
+              //$('#fldCity').textbox('setValue', place.address_components[3].short_name);
+              document.getElementById('fldCity').value = place.address_components[3].short_name;
+              //$('#fldNewBookingCustPostcode').textbox('setValue', place.address_components[7].short_name);
+              document.getElementById('fldState').value = place.address_components[5].short_name;
+              // $('#fldState').combobox('setValue', place.address_components[5].short_name);
+              document.getElementById('fldCountry').value = place.address_components[6].long_name;
+              document.getElementById('fldPostcode').value = place.address_components[7].short_name;
             }
             else
             {
               console.log("other");
               console.log(place.address_components);
               //$('#fldNewBookingCustAddress1').textbox('setValue', place.name);
-              document.getElementById('fldAddress').value = place.name
+              document.getElementById('fldAddress').value = place.name;
               //$('#fldNewBookingCustCity').textbox('setValue', place.address_components[2].short_name);
-              document.getElementById('fldCity').value = place.address_components[2].short_name
+              document.getElementById('fldCity').value = place.address_components[2].short_name;
               //$('#fldNewBookingCustPostcode').textbox('setValue', place.address_components[6].short_name);
-              document.getElementById('fldPostcode').value = place.address_components[6].short_name
-              document.getElementById('fldState').value = place.address_components[4].short_name
+              document.getElementById('fldState').value = place.address_components[4].short_name;
+              document.getElementById('fldCountry').value = place.address_components[5].long_name;
+              document.getElementById('fldPostcode').value = place.address_components[6].short_name;
             }
           }
         }
@@ -270,6 +293,7 @@
         });
       }
     }
+
     function OnFormLoad()
     {
       $('#fldCode').focus();
@@ -449,7 +473,7 @@
                   </tr>
                   <tr>
                       <!-- <td align="left" valign="top">City:</td> -->
-                      <td align="left" valign="top" colspan="2" style="width: 50%">
+                      <td align="left" valign="top" style="width: 25%" colspan="1">
                         <input style="width: 100%" id="fldCity" name="fldCity" type="text"  placeholder="CITY" size="40" maxlength="<?php echo AT_MAXADDRESS; ?>" value="<?php echo SharedPrepareDisplayString($fldcity); ?>" onchange="ShowMap();" />
                       </td>
                       <td align="left" valign="top" colspan="1" style="width: 25%">
@@ -468,6 +492,9 @@
                         <td align="left" valign="top" colspan="1" style="width:25%">
                           <input style="width: 100%" id="fldPostcode" name="fldPostcode" type="text" placeholder="POSTCODE" size="8" maxlength="4" class="required" value="<?php echo SharedPrepareDisplayString($fldpostcode); ?>" />
                           <div id="frmClients_fldPostcode_errorloc" class="error_strings"></div>
+                        </td>
+                        <td align="left" valign="top" style="width: 50%" colspan="1">
+                          <input style="width: 100%" id="fldCountry" name="fldCountry" type="text"  placeholder="COUNTRY" size="40" value="<?php echo SharedPrepareDisplayString($fldcountry); ?>" />
                         </td>
                   </tr>
                   <tr>
@@ -503,7 +530,9 @@
                 frmvalidator.addValidation("fldCode", "req", "Please enter a unique client code");
                 //frmvalidator.addValidation("fldPostCode", "req", "Please enter your PostCode");
                 //frmvalidator.addValidation("fldPostCode", "regexp=^[0-9]{4}$", "Postcode must be 4 digits");
-                frmvalidator.addValidation("fldMobile", "regexp=^[0-9]{10}$|^\(0[1-9]{1}\)[0-9]{8}$|^[0-9]{8}$|^[0-9]{4}[ ][0-9]{3}[ ][0-9]{3}$|^\(0[1-9]{1}\)[ ][0-9]{4}[ ][0-9]{4}$|^[0-9]{4}[ ][0-9]{4}$", "Must be in 04xxyyyzzz or xxxxyyyy format");
+                //frmvalidator.addValidation("fldMobile", "regexp=^[0-9]{10}$|^\(0[1-9]{1}\)[0-9]{8}$|^[0-9]{8}$|^[0-9]{4}[ ][0-9]{3}[ ][0-9]{3}$|^\(0[1-9]{1}\)[ ][0-9]{4}[ ][0-9]{4}$|^[0-9]{4}[ ][0-9]{4}$", "Must be in 04xxyyyzzz or xxxxyyyy format");
+                frmvalidator.addValidation("fldMobile", "regex=^(?=\d)\S{6,}", "Invalid Phone number"); //numbers only, at least six digits
+
                 frmvalidator.addValidation("fldEmail1", "email", "Invalid email address format");
               </script>
             </div>

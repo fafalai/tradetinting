@@ -55,14 +55,14 @@
               $dbupdate = "update " .
                           "clients " .
                           "set " .
-                          "name=" . SharedNullOrQuoted($data["name"], $dblink) . "," .
-                          "address=" . SharedNullOrQuoted($data["address"], $dblink) . "," .
-                          "city=" . SharedNullOrQuoted($data["city"], $dblink) . "," .
-                          "state=" . SharedNullOrQuoted($data["state"], $dblink) . "," .
-                          "postcode=" . SharedNullOrQuoted($data["postcode"], $dblink) . "," .
-                          "mobile=" . SharedNullOrQuoted($data["mobile"], $dblink) . "," .
-                          "email1=" . SharedNullOrQuoted($data["email"], $dblink) . "," .
-                          "notes=" . SharedNullOrQuoted($data["descr"], $dblink) . "," .
+                          "name=" . SharedNullOrQuoted($data["name"], 50,$dblink) . "," .
+                          "address=" . SharedNullOrQuoted($data["address"],200, $dblink) . "," .
+                          "city=" . SharedNullOrQuoted($data["city"],50, $dblink) . "," .
+                          "state=" . SharedNullOrQuoted($data["state"], 50,$dblink) . "," .
+                          "postcode=" . SharedNullOrQuoted($data["postcode"],50, $dblink) . "," .
+                          "mobile=" . SharedNullOrQuoted($data["mobile"],50, $dblink) . "," .
+                          "email1=" . SharedNullOrQuoted($data["email"],50, $dblink) . "," .
+                          "notes=" . SharedNullOrQuoted($data["descr"],1000, $dblink) . "," .
                           "datemodified=CURRENT_TIMESTAMP," .
                           "usersmodified_id=$userid " .
                           "where " .

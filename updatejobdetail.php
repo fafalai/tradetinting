@@ -55,13 +55,13 @@
               $dbupdate = "update " .
                           "jobdetails " .
                           "set " .
-                          "name=" . SharedNullOrQuoted($data["name"], $dblink) . "," .
-                          "altname=" . SharedNullOrQuoted($data["altname"], $dblink) . "," .
-                          "filmtype=" . SharedNullOrQuoted($data["filmtype"], $dblink) . "," .
-                          "frametype=" . SharedNullOrQuoted($data["frametype"], $dblink) . "," .
-                          "direction=" . SharedNullOrQuoted($data["direction"], $dblink) . "," .
-                          "glasstype=" . SharedNullOrQuoted($data["glasstype"], $dblink) . "," .
-                          "notes=" . SharedNullOrQuoted($data["notes"], $dblink) . "," .
+                          "name=" . SharedNullOrQuoted($data["name"],50, $dblink) . "," .
+                          "altname=" . SharedNullOrQuoted($data["altname"],50, $dblink) . "," .
+                          "filmtype=" . SharedNullOrQuoted($data["filmtype"], 50,$dblink) . "," .
+                          "frametype=" . SharedNullOrQuoted($data["frametype"],50, $dblink) . "," .
+                          "direction=" . SharedNullOrQuoted($data["direction"],50, $dblink) . "," .
+                          "glasstype=" . SharedNullOrQuoted($data["glasstype"],50, $dblink) . "," .
+                          "notes=" . SharedNullOrQuoted($data["notes"],1000, $dblink) . "," .
                           "width=" . $data["width"] . "," .
                           "height=" . $data["height"] . "," .
                           "salerate=" . $data["salerate"] . "," .

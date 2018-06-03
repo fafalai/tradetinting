@@ -67,15 +67,15 @@
                               "values " .
                               "(" .
                               $custid . "," .
-                              SharedNullOrQuoted($client["name"], $dblink) . "," .
-                              SharedNullOrQuoted($client["name"], $dblink) . "," .
-                              SharedNullOrQuoted($client["address"], $dblink) . "," .
-                              SharedNullOrQuoted($client["city"], $dblink) . "," .
-                              SharedNullOrQuoted($client["state"], $dblink) . "," .
-                              SharedNullOrQuoted($client["postcode"], $dblink) . "," .
-                              SharedNullOrQuoted($client["mobile"], $dblink) . "," .
-                              SharedNullOrQuoted($client["email"], $dblink) . "," .
-                              SharedNullOrQuoted($client["descr"], $dblink) . "," .
+                              SharedNullOrQuoted($client["name"],50, $dblink) . "," .
+                              SharedNullOrQuoted($client["name"], 50,$dblink) . "," .
+                              SharedNullOrQuoted($client["address"], 200,$dblink) . "," .
+                              SharedNullOrQuoted($client["city"], 50,$dblink) . "," .
+                              SharedNullOrQuoted($client["state"],50, $dblink) . "," .
+                              SharedNullOrQuoted($client["postcode"],50, $dblink) . "," .
+                              SharedNullOrQuoted($client["mobile"],50, $dblink) . "," .
+                              SharedNullOrQuoted($client["email"],100, $dblink) . "," .
+                              SharedNullOrQuoted($client["descr"],1000, $dblink) . "," .
                               $userid .
                               ")";
 
@@ -101,18 +101,18 @@
                                 "(" .
                                 $custid . "," .
                                 $clientid . "," .
-                                SharedNullOrQuoted($job["jobname"], $dblink) . "," .
-                                SharedNullOrQuoted($job["contact"], $dblink) . "," .
-                                SharedNullOrQuoted($job["address"], $dblink) . "," .
-                                SharedNullOrQuoted($job["city"], $dblink) . "," .
-                                SharedNullOrQuoted($job["state"], $dblink) . "," .
-                                SharedNullOrQuoted($job["postcode"], $dblink) . "," .
-                                SharedNullOrQuoted($job["mobile"], $dblink) . "," .
+                                SharedNullOrQuoted($job["jobname"],50, $dblink) . "," .
+                                SharedNullOrQuoted($job["contact"],50, $dblink) . "," .
+                                SharedNullOrQuoted($job["address"],200, $dblink) . "," .
+                                SharedNullOrQuoted($job["city"],50, $dblink) . "," .
+                                SharedNullOrQuoted($job["state"],50, $dblink) . "," .
+                                SharedNullOrQuoted($job["postcode"],50, $dblink) . "," .
+                                SharedNullOrQuoted($job["mobile"],50, $dblink) . "," .
                                 $job["gpslat"] . "," .
                                 $job["gpslong"] . "," .
                                 $job["totalprice"] . "," .
-                                SharedNullOrQuoted($job["desc"], $dblink) . "," .
-                                SharedNullOrQuoted($job["datejob"], $dblink) . "," .
+                                SharedNullOrQuoted($job["desc"],1000, $dblink) . "," .
+                                SharedNullOrQuoted($job["datejob"],50, $dblink) . "," .
                                 $job["discount"] . "," .
                                 $job["tax"] . "," .
                                 $userid  .
@@ -127,15 +127,15 @@
                     $dbupdate = "update " .
                                 "jobs " .
                                 "set " .
-                                "jobname=" . SharedNullOrQuoted($job["jobname"], $dblink) . "," .
-                                "contact=" . SharedNullOrQuoted($job["contact"], $dblink) . "," .
-                                "address=" . SharedNullOrQuoted($job["address"], $dblink) . "," .
-                                "city=" . SharedNullOrQuoted($job["city"], $dblink) . "," .
-                                "state=" . SharedNullOrQuoted($job["state"], $dblink) . "," .
-                                "postcode=" . SharedNullOrQuoted($job["postcode"], $dblink) . "," .
-                                "mobile=" . SharedNullOrQuoted($job["mobile"], $dblink) . "," .
+                                "jobname=" . SharedNullOrQuoted($job["jobname"],50, $dblink) . "," .
+                                "contact=" . SharedNullOrQuoted($job["contact"],50, $dblink) . "," .
+                                "address=" . SharedNullOrQuoted($job["address"],50, $dblink) . "," .
+                                "city=" . SharedNullOrQuoted($job["city"],50, $dblink) . "," .
+                                "state=" . SharedNullOrQuoted($job["state"], 50,$dblink) . "," .
+                                "postcode=" . SharedNullOrQuoted($job["postcode"],50, $dblink) . "," .
+                                "mobile=" . SharedNullOrQuoted($job["mobile"],50, $dblink) . "," .
                                 "totalprice=" . $job["totalprice"] . "," .
-                                "notes=" . SharedNullOrQuoted($job["desc"], $dblink) . "," .
+                                "notes=" . SharedNullOrQuoted($job["desc"],1000, $dblink) . "," .
                                 "discount=" . $job["discount"] . "," .
                                 "tax=" . $job["tax"] . "," .
                                 "datemodified=CURRENT_TIMESTAMP," .
@@ -161,18 +161,18 @@
                                     "values " .
                                     "(" .
                                     $jobid . "," .
-                                    SharedNullOrQuoted($jd["name"], $dblink) . "," .
-                                    SharedNullOrQuoted($jd["altname"], $dblink) . "," .
-                                    SharedNullOrQuoted($jd["filmtype"], $dblink) . "," .
-                                    SharedNullOrQuoted($jd["frametype"], $dblink) . "," .
-                                    SharedNullOrQuoted($jd["glasstype"], $dblink) . "," .
+                                    SharedNullOrQuoted($jd["name"], 50,$dblink) . "," .
+                                    SharedNullOrQuoted($jd["altname"], 50,$dblink) . "," .
+                                    SharedNullOrQuoted($jd["filmtype"],50, $dblink) . "," .
+                                    SharedNullOrQuoted($jd["frametype"],50, $dblink) . "," .
+                                    SharedNullOrQuoted($jd["glasstype"],50, $dblink) . "," .
                                     $jd["width"] . "," .
                                     $jd["height"] . "," .
-                                    SharedNullOrQuoted($jd["direction"], $dblink) . "," .
+                                    SharedNullOrQuoted($jd["direction"],50, $dblink) . "," .
                                     $jd["totalarea"] . "," .
                                     $jd["salerate"] . "," .
                                     $jd["totalprice"] . "," .
-                                    SharedNullOrQuoted($jd["notes"], $dblink) .
+                                    SharedNullOrQuoted($jd["notes"],10000, $dblink) .
                                     ")";
                         error_log($dbinsert);
                         if (SharedQuery($dbinsert, $dblink))

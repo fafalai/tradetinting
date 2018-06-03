@@ -39,7 +39,8 @@
                   "cl1.address," .
                   "cl1.city," .
                   "cl1.state," .
-                  "cl1.postcode " .
+                  "cl1.postcode, " .
+                  "cl1.country " .
                   "from " .
                   "clients cl1 " .
                   "where " .
@@ -65,6 +66,7 @@
             $fldcity = $dbrow['city'];
             $fldstate = $dbrow['state'];
             $fldpostcode = $dbrow['postcode'];
+            $fldcountry = $dbrow['country'];
           }
         }
       }
@@ -81,9 +83,14 @@
                   "and " .
                   "cust_id=" . $_SESSION['custid'];
       if (SharedQuery($dbupdate, $dblink))
-        $clientmsg = "Client " . $fldcode . " has been deleted.";
+      {
+        //new Noty({theme: 'themeName',text: 'Some notification text'}).show();
+       $clientmsg = "Client " . $fldcode . " has been deleted.";      
+      }        
+        //alert("Client " . $fldcode . " has been deleted.");
       else
         $clientmsg = "Unable to delete " . $fldcode . ". Please try again or contact support.";
+        //alert("Unable to delete " . $fldcode . ". Please try again or contact support.");
       //
       $cmd = AT_CMDCREATE;
       $clientid = 0;
@@ -106,6 +113,7 @@
     $fldcity = SharedCleanString($_POST['fldCity'], AT_MAXADDRESS);
     $fldstate = strtoupper(SharedCleanString($_POST['fldState'], AT_MAXSTATE));
     $fldpostcode = SharedCleanString($_POST['fldPostcode'], AT_MAXPOSTCODE);
+    $fldcountry = SharedCleanString($_POST['fldCountry'], 50);
     //
     if ($clientid == 0)
     {
@@ -115,7 +123,7 @@
                   "cust_id," .
                   "clients.code," .
                   "clients.name," .
-                  "clients.desc," .
+                  "clients.notes," .
                   "contact," .
                   "email1," .
                   "mobile," .
@@ -123,23 +131,27 @@
                   "city," .
                   "state," .
                   "postcode," .
+                  "country," .
                   "userscreated_id" .
                   ") " .
                   "values " .
                   "(" .
                   $_SESSION['custid'] . "," .
-                  SharedNullOrQuoted($fldcode, $dblink) . "," .
-                  SharedNullOrQuoted($fldname, $dblink) . "," .
-                  SharedNullOrQuoted($flddesc, $dblink) . "," .
-                  SharedNullOrQuoted($fldcontact, $dblink) . "," .
-                  SharedNullOrQuoted($fldemail1, $dblink) . "," .
-                  SharedNullOrQuoted($fldmobile, $dblink) . "," .
-                  SharedNullOrQuoted($fldaddress, $dblink) . "," .
-                  SharedNullOrQuoted($fldcity, $dblink) . "," .
-                  SharedNullOrQuoted($fldstate, $dblink) . "," .
-                  SharedNullOrQuoted($fldpostcode, $dblink) . "," .
+                  SharedNullOrQuoted($fldcode,50, $dblink) . "," .
+                  SharedNullOrQuoted($fldname,50,  $dblink) . "," .
+                  SharedNullOrQuoted($flddesc,1000,  $dblink) . "," .
+                  SharedNullOrQuoted($fldcontact, 50, $dblink) . "," .
+                  SharedNullOrQuoted($fldemail1,50,  $dblink) . "," .
+                  SharedNullOrQuoted($fldmobile,50,  $dblink) . "," .
+                  SharedNullOrQuoted($fldaddress,50,  $dblink) . "," .
+                  SharedNullOrQuoted($fldcity,50,  $dblink) . "," .
+                  SharedNullOrQuoted($fldstate,50,  $dblink) . "," .
+                  SharedNullOrQuoted($fldpostcode, 50, $dblink) . "," .
+                  SharedNullOrQuoted($fldcountry, 50, $dblink) . "," .
                   $_SESSION['loggedin'] .
                   ")";
+      error_log("This is for insert");
+      error_log($dbinsert);
       if (SharedQuery($dbinsert, $dblink))
       {
         $clientmsg = "Client " . $fldcode . " has been added.";
@@ -154,31 +166,36 @@
         $fldcity = "";
         $fldstate = "";
         $fldpostcode = "";
+        $fldcountry = "";
       }
       else
-        $clientmsg = "Unable to add " . $fldcode . ". Please try again or contact support.";
+        //$clientmsg = "Unable to add " . $fldcode . ". Please try again or contact support.";
+        alert("Unable to add " . $fldcode . ". Please try again or contact support.");
     }
     else
     {
       $dbupdate = "update " .
                   "clients " .
                   "set " .
-                  "clients.code=" . SharedNullOrQuoted($fldcode, $dblink) . "," .
-                  "clients.name=" . SharedNullOrQuoted($fldname, $dblink) . "," .
-                  "clients.notes=" . SharedNullOrQuoted($flddesc, $dblink) . "," .
-                  "contact=" .SharedNullOrQuoted($fldcontact, $dblink) . "," .
-                  "email1=" .SharedNullOrQuoted($fldemail1, $dblink) . "," .
-                  "mobile=" . SharedNullOrQuoted($fldmobile, $dblink) . "," .
-                  "address=" . SharedNullOrQuoted($fldaddress, $dblink) . "," .
-                  "city=" . SharedNullOrQuoted($fldcity, $dblink) . "," .
-                  "state=" . SharedNullOrQuoted($fldstate, $dblink) . "," .
-                  "postcode=" . SharedNullOrQuoted($fldpostcode, $dblink) . "," .
+                  "clients.code=" . SharedNullOrQuoted($fldcode,50,  $dblink) . "," .
+                  "clients.name=" . SharedNullOrQuoted($fldname,50,  $dblink) . "," .
+                  "clients.notes=" . SharedNullOrQuoted($flddesc, 1000, $dblink) . "," .
+                  "contact=" .SharedNullOrQuoted($fldcontact, 50, $dblink) . "," .
+                  "email1=" .SharedNullOrQuoted($fldemail1, 50, $dblink) . "," .
+                  "mobile=" . SharedNullOrQuoted($fldmobile, 50, $dblink) . "," .
+                  "address=" . SharedNullOrQuoted($fldaddress, 50, $dblink) . "," .
+                  "city=" . SharedNullOrQuoted($fldcity, 50, $dblink) . "," .
+                  "state=" . SharedNullOrQuoted($fldstate, 50, $dblink) . "," .
+                  "postcode=" . SharedNullOrQuoted($fldpostcode,50,  $dblink) . "," .
+                  "country=" . SharedNullOrQuoted($fldcountry,50,  $dblink) . "," .
                   "datemodified=CURRENT_TIMESTAMP," .
                   "usersmodified_id=" . $_SESSION['loggedin'] . " " .
                   "where " .
                   "id=" . $clientid . " " .
                   "and " .
                   "cust_id=" . $_SESSION['custid'];
+      // error_log("This is for update");
+      // error_log($dbupdate);
       if (SharedQuery($dbupdate, $dblink))
         $clientmsg = "Client " . $fldcode . " has been updated.";
       else
@@ -192,7 +209,7 @@
   <?php
     include("meta.php");
   ?>
-  <script src="http://maps.googleapis.com/maps/api/js?AIzaSyBqCHDj475c_6YSc9yqwBH3eN1bYovqtUE&libraries=places&callback=initAutocomplete" async defer></script>
+  <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBqCHDj475c_6YSc9yqwBH3eN1bYovqtUE&libraries=places&callback=initAutocomplete" async defer></script>
   <script type="text/javascript">
     function initAutocomplete() 
     {
@@ -209,7 +226,7 @@
         'place_changed',
         function()
         {
-          var place = autocomplete1.getPlace();
+          var place = autocomplete.getPlace();
 
           if (!_.isUndefined(place.address_components))
           {
@@ -220,27 +237,63 @@
               //$('#fldNewBookingCustAddress1').textbox('setValue', place.name);
               document.getElementById('fldAddress').value = place.name
               //$('#fldCity').textbox('setValue', place.address_components[3].short_name);
-              document.getElementById('fldCity').value = place.address_components[3].short_name
+              document.getElementById('fldCity').value = place.address_components[3].short_name;
               //$('#fldNewBookingCustPostcode').textbox('setValue', place.address_components[7].short_name);
-              //$('#fldNewBookingCustState').combobox('setValue', place.address_components[5].short_name);
-              document.getElementById('fldPostcode').value = place.address_components[5].short_name
+              document.getElementById('fldState').value = place.address_components[5].short_name;
+              // $('#fldState').combobox('setValue', place.address_components[5].short_name);
+              document.getElementById('fldCountry').value = place.address_components[6].long_name;
+              document.getElementById('fldPostcode').value = place.address_components[7].short_name;
+            }
+            else if (place.address_components.length == 9)
+            {
+              console.log("length 9");
+              console.log(place.address_components);
+              //$('#fldNewBookingCustAddress1').textbox('setValue', place.name);
+              document.getElementById('fldAddress').value = place.name
+              //$('#fldCity').textbox('setValue', place.address_components[3].short_name);
+              document.getElementById('fldCity').value = place.address_components[3].short_name;
+              //$('#fldNewBookingCustPostcode').textbox('setValue', place.address_components[7].short_name);
+              document.getElementById('fldState').value = place.address_components[5].short_name;
+              // $('#fldState').combobox('setValue', place.address_components[5].short_name);
+              document.getElementById('fldCountry').value = place.address_components[6].long_name;
+              document.getElementById('fldPostcode').value = place.address_components[7].short_name;
             }
             else
             {
               console.log("other");
               console.log(place.address_components);
               //$('#fldNewBookingCustAddress1').textbox('setValue', place.name);
-              document.getElementById('fldAddress').value = place.name
+              document.getElementById('fldAddress').value = place.name;
               //$('#fldNewBookingCustCity').textbox('setValue', place.address_components[2].short_name);
-              document.getElementById('fldCity').value = place.address_components[2].short_name
+              document.getElementById('fldCity').value = place.address_components[2].short_name;
               //$('#fldNewBookingCustPostcode').textbox('setValue', place.address_components[6].short_name);
-              document.getElementById('fldPostcode').value = place.address_components[6].short_name
-              //$('#fldNewBookingCustState').combobox('setValue', place.address_components[4].short_name);
+              document.getElementById('fldState').value = place.address_components[4].short_name;
+              document.getElementById('fldCountry').value = place.address_components[5].long_name;
+              document.getElementById('fldPostcode').value = place.address_components[6].short_name;
             }
           }
         }
       );
     }
+
+    // Bias the autocomplete object to the user's geographical location,
+    // as supplied by the browser's 'navigator.geolocation' object.
+    function geolocate() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          var geolocation = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+          var circle = new google.maps.Circle({
+            center: geolocation,
+            radius: position.coords.accuracy
+          });
+          autocomplete.setBounds(circle.getBounds());
+        });
+      }
+    }
+
     function OnFormLoad()
     {
       $('#fldCode').focus();
@@ -415,16 +468,17 @@
                   <tr>
                       <!-- <td align="left" valign="top">Address:</td> -->
                       <td align="left" valign="top" colspan="4">
-                        <input style="width: 100%" style="width: 100%" id="fldAddress" name="fldAddress" type="text" placeholder="ADDRESS" size="40" maxlength="<?php echo AT_MAXADDRESS; ?>" value="<?php echo SharedPrepareDisplayString($fldaddress); ?>" onchange="ShowMap();" />
+                        <input style="width: 100%" style="width: 100%" id="fldAddress" name="fldAddress" type="text" placeholder="ADDRESS" size="40" maxlength="<?php echo AT_MAXADDRESS; ?>" value="<?php echo SharedPrepareDisplayString($fldaddress); ?>" onchange="ShowMap();" onFocus="geolocate()"/>
                       </td>
                   </tr>
                   <tr>
                       <!-- <td align="left" valign="top">City:</td> -->
-                      <td align="left" valign="top" colspan="2" style="width: 50%">
+                      <td align="left" valign="top" style="width: 25%" colspan="1">
                         <input style="width: 100%" id="fldCity" name="fldCity" type="text"  placeholder="CITY" size="40" maxlength="<?php echo AT_MAXADDRESS; ?>" value="<?php echo SharedPrepareDisplayString($fldcity); ?>" onchange="ShowMap();" />
                       </td>
                       <td align="left" valign="top" colspan="1" style="width: 25%">
-                          <select style="width: 100%;margin-top: 8px" id="fldState" name="fldState" onchange="ShowMap();">
+                      <input style="width: 100%" id="fldState" name="fldState" type="text"  placeholder="STATE" size="40"  value="<?php echo SharedPrepareDisplayString($fldstate); ?>" onchange="ShowMap();" />
+                          <!-- <select style="width: 100%;margin-top: 8px" id="fldState" name="fldState" onchange="ShowMap();">
                             <option value="VIC" <?php if ($fldstate == "VIC" or $fldstate == "") echo "selected=\"selected\""; ?>>VIC</option>
                             <option value="NSW" <?php if ($fldstate == "NSW") echo "selected=\"selected\""; ?>>NSW</option>
                             <option value="SA" <?php if ($fldstate == "SA") echo "selected=\"selected\""; ?>>SA</option>
@@ -433,11 +487,14 @@
                             <option value="TAS" <?php if ($fldstate == "TAS") echo "selected=\"selected\""; ?>>TAS</option>
                             <option value="ACT" <?php if ($fldstate == "ACT") echo "selected=\"selected\""; ?>>ACT</option>
                             <option value="NT" <?php if ($fldstate == "NT") echo "selected=\"selected\""; ?>>NT</option>
-                          </select>
+                          </select> -->
                         </td>
                         <td align="left" valign="top" colspan="1" style="width:25%">
                           <input style="width: 100%" id="fldPostcode" name="fldPostcode" type="text" placeholder="POSTCODE" size="8" maxlength="4" class="required" value="<?php echo SharedPrepareDisplayString($fldpostcode); ?>" />
                           <div id="frmClients_fldPostcode_errorloc" class="error_strings"></div>
+                        </td>
+                        <td align="left" valign="top" style="width: 50%" colspan="1">
+                          <input style="width: 100%" id="fldCountry" name="fldCountry" type="text"  placeholder="COUNTRY" size="40" value="<?php echo SharedPrepareDisplayString($fldcountry); ?>" />
                         </td>
                   </tr>
                   <tr>
@@ -473,7 +530,9 @@
                 frmvalidator.addValidation("fldCode", "req", "Please enter a unique client code");
                 //frmvalidator.addValidation("fldPostCode", "req", "Please enter your PostCode");
                 //frmvalidator.addValidation("fldPostCode", "regexp=^[0-9]{4}$", "Postcode must be 4 digits");
-                frmvalidator.addValidation("fldMobile", "regexp=^[0-9]{10}$|^\(0[1-9]{1}\)[0-9]{8}$|^[0-9]{8}$|^[0-9]{4}[ ][0-9]{3}[ ][0-9]{3}$|^\(0[1-9]{1}\)[ ][0-9]{4}[ ][0-9]{4}$|^[0-9]{4}[ ][0-9]{4}$", "Must be in 04xxyyyzzz or xxxxyyyy format");
+                //frmvalidator.addValidation("fldMobile", "regexp=^[0-9]{10}$|^\(0[1-9]{1}\)[0-9]{8}$|^[0-9]{8}$|^[0-9]{4}[ ][0-9]{3}[ ][0-9]{3}$|^\(0[1-9]{1}\)[ ][0-9]{4}[ ][0-9]{4}$|^[0-9]{4}[ ][0-9]{4}$", "Must be in 04xxyyyzzz or xxxxyyyy format");
+                frmvalidator.addValidation("fldMobile", "regex=^(?=\d)\S{6,}", "Invalid Phone number"); //numbers only, at least six digits
+
                 frmvalidator.addValidation("fldEmail1", "email", "Invalid email address format");
               </script>
             </div>

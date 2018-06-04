@@ -601,6 +601,11 @@ hr {
     overflow: hidden
 }
 
+table.sortable {
+    width: 100%;
+    font-size: 16px;
+}
+
 table.sortable a {
     color: #666666;
     text-decoration: underline;
@@ -850,7 +855,7 @@ div {
 
 /*job.php*/
 #DIV_SearchJobs input[type=text] {
-    background-image: url('/images/magnifying-glass.png');
+    background-image: url('images/magnifying-glass.png');
     background-color: #535353;
     background-position: 10px 12px;
 
@@ -879,6 +884,7 @@ div {
     width: 70%;
 }
 
+/*
 #DIV_SearchJobs button {
     padding: 6px 10px;
     margin-top: 8px;
@@ -887,6 +893,7 @@ div {
     border: none;
     cursor: pointer;
 }
+*/
 
 /*Resource*/
 #DIV_resource p {
@@ -896,6 +903,37 @@ div {
 /*Profile*/
 #fldcurrency{
     margin: 0px;
+}
+
+/*Clients*/
+#DIV_SearchClients input[type=text] {
+    background-image: url('images/magnifying-glass.png');
+    background-color: #535353;
+    background-position: 10px 12px;
+
+    background-repeat: no-repeat;
+    color: white;
+    width: 100%;
+    font-size: 16px;
+
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
+}
+
+/* Chrome, Firefox, Opera, Safari 10.1+ */
+
+#DIV_SearchClients input[type=text]::placeholder {
+    color: white;
+    opacity: 1;
+    /* Firefox */
+}
+
+#DIV_SearchClients {
+    text-align: left;
+    padding-left: 0;
+    margin: 0;
+    width: 70%;
 }
 /*Eric --------->*/
 

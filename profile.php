@@ -280,7 +280,7 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
                         <input id="fldPhone" name="fldPhone" type="text" size="20" placeholder="PHONE" maxlength="<?php echo AT_MAXPHONE; ?>" value="<?php echo SharedPrepareDisplayString($fldphone); ?>" class="form-control" />
                     </td>
                     <td align="left" valign="top" colspan="2">
-                        <input id="fldMobile" name="fldMobile" type="text" size="20" placeholder="MOBILE" maxlength="<?php echo AT_MAXPHONE; ?>" value="<?php echo SharedPrepareDisplayString($fldmobile); ?>" class="form-control" />
+                        <input id="fldMobile" name="fldMobile" type="text" size="20" placeholder="MOBILE (Number only and no less than 6 digi)" maxlength="<?php echo AT_MAXPHONE; ?>" value="<?php echo SharedPrepareDisplayString($fldmobile); ?>" class="form-control" required pattern="^[0-9]{6,}$"/>
                         <div id="frmDetails_fldMobile_errorloc" class="error_strings"></div>
                     </td>
                 </tr>
@@ -310,14 +310,14 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
                     </td>
                     <td align="left" style="width:25%">
                         <!-- <select id="fldState" name="fldState" class="form-control"></select> -->
-                        <input style="width: 100%" id="fldState" name="fldState" type="text"  placeholder="STATE" size="40"  value="<?php echo SharedPrepareDisplayString($fldstate); ?>" onchange="ShowMap();" />
+                        <input class="form-control" id="fldState" name="fldState" type="text"  placeholder="STATE" size="40"  value="<?php echo SharedPrepareDisplayString($fldstate); ?>" onchange="ShowMap();" />
                     </td>
                     <td align="left" valign="top" style="width:25%">
                         <input id="fldPostcode" name="fldPostcode" type="text" size="8" placeholder="P/CODE" maxlength="<?php echo AT_MAXPOSTCODE; ?>" value="<?php echo SharedPrepareDisplayString($fldpostcode); ?>" class="form-control" />
                         <div id="frmDetails_fldPostcode_errorloc" class="error_strings"></div>
                     </td>
-                    <td align="left" valign="top" style="width: 25%" colspan="1">
-                        <input style="width: 100%" id="fldCountry" name="fldCountry" type="text"  placeholder="COUNTRY" size="40" value="<?php echo SharedPrepareDisplayString($fldcountry); ?>" />
+                    <td align="left" valign="top" style="width: 25%">
+                        <input class="form-control" id="fldCountry" name="fldCountry" type="text"  placeholder="COUNTRY" size="40" value="<?php echo SharedPrepareDisplayString($fldcountry); ?>" />
                     </td>
                 </tr>
                 <tr>

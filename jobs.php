@@ -71,7 +71,7 @@
                                 </form>
                                 <div class="entry">
                                     <label style="margin-top:30px">Select a Job ID to see job details.</label>
-                                    <table border="0" align="left" id="tblJobs" rules="cols" frame="box" class="sortable" style="margin-bottom: 10px;margin-top:5px; text-align: left;">
+                                    <table border="0" align="left" id="tblJobs" rules="cols" frame="box" class="sortable">
                                         <tr>
                                             <th align="right">Created</th>
                                             <!--                  <th align="left">Job ID</th>-->

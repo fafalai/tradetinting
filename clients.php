@@ -108,7 +108,8 @@ else if (isset($_POST['fldCode']))
     $flddesc = SharedCleanString($_POST['fldDesc'], AT_MAXNOTE);
     $fldcontact = SharedCleanString($_POST['fldContact'], AT_MAXNAME);
     $fldemail1 = SharedCleanString($_POST['fldEmail1'], AT_MAXEMAIL);
-    $fldmobile = SharedNormaliseMobile(SharedCleanString($_POST['fldMobile'], AT_MAXPHONE));
+    $fldmobile = SharedCleanString($_POST['fldMobile'], AT_MAXPHONE);
+//    $fldmobile = SharedNormaliseMobile(SharedCleanString($_POST['fldMobile'], AT_MAXPHONE));
     $fldaddress = SharedCleanString($_POST['fldAddress'], AT_MAXADDRESS);
     $fldcity = SharedCleanString($_POST['fldCity'], AT_MAXADDRESS);
     $fldstate = strtoupper(SharedCleanString($_POST['fldState'], AT_MAXSTATE));
@@ -448,7 +449,7 @@ else if (isset($_POST['fldCode']))
                                 <tr>
                                     <!-- <td align="left" valign="top">Code:</td> -->
                                     <td align="left" valign="top" colspan="4">
-                                        <input style="width: 100%" id="fldCode" name="fldCode" type="text" placeholder="Code" size="20" maxlength="<?php echo AT_MAXCODE; ?>" value="<?php echo SharedPrepareDisplayString($fldcode); ?>" />
+                                        <input style="width: 100%" id="fldCode" name="fldCode" type="text" placeholder="Code" size="20" maxlength="<?php echo AT_MAXCODE; ?>" value="<?php echo SharedPrepareDisplayString($fldcode); ?>" required/>
                                         <div id="frmClients_fldCode_errorloc" class="error_strings"></div>
                                     </td>
                                 </tr>
@@ -502,7 +503,7 @@ else if (isset($_POST['fldCode']))
                                         <input style="width: 100%" style="width: 100%" id="fldContact" name="fldContact" type="text" placeholder="CONTACT" size="20" maxlength="<?php echo AT_MAXNAME; ?>" value="<?php echo SharedPrepareDisplayString($fldcontact); ?>" />
                                     </td>
                                     <td align="left" valign="top" colspan="2" style="width: 50%">
-                                        <input style="width: 100%" style="width: 100%" id="fldEmail1" name="fldEmail1" type="text" size="20" placeholder="EMAIL" maxlength="<?php echo AT_MAXEMAIL; ?>" value="<?php echo SharedPrepareDisplayString($fldemail1); ?>" />
+                                        <input style="width: 100%" id="fldEmail1" name="fldEmail1" type="text" size="20" placeholder="EMAIL" maxlength="<?php echo AT_MAXEMAIL; ?>" value="<?php echo SharedPrepareDisplayString($fldemail1); ?>" required pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" title="Invalid Email address"/>
                                         <div id="frmClients_fldEmail1_errorloc" class="error_strings"></div>
                                     </td>
                                 </tr>
@@ -510,7 +511,7 @@ else if (isset($_POST['fldCode']))
                                 <tr>
                                     <!-- <td align="left" valign="top">Mobile:</td> -->
                                     <td align="left" valign="top" colspan="2" style="width: 50%">
-                                        <input style="width: 100%" id="fldMobile" name="fldMobile" type="text" placeholder="MOBILE (Number only and no less than 6 digi)" size="20" maxlength="<?php echo AT_MAXPHONE; ?>" value="<?php echo SharedPrepareDisplayString($fldmobile); ?>" required pattern="^[0-9]{6,}$"/>
+                                        <input style="width: 100%" id="fldMobile" name="fldMobile" type="text" placeholder="MOBILE (Numbers only)" size="20" maxlength="<?php echo AT_MAXPHONE; ?>" value="<?php echo SharedPrepareDisplayString($fldmobile); ?>" required pattern="^[0-9]{6,}$" title="Invalid Phone number"/>
                                         <div id="frmClients_fldMobile_errorloc" class="error_strings"></div>
                                     </td>
                                 </tr>
@@ -523,6 +524,7 @@ else if (isset($_POST['fldCode']))
                             </table>
                             <input name="fldClientId" type="hidden" value="<?php echo $clientid; ?>" />
                         </form>
+<!--
                         <script type="text/javascript">
                             var frmvalidator = new Validator("frmClients");
                             frmvalidator.EnableOnPageErrorDisplay();
@@ -535,6 +537,7 @@ else if (isset($_POST['fldCode']))
                             frmvalidator.addValidation("fldEmail1", "email", "Invalid email address format");
 
                         </script>
+-->
                     </div>
                 </div>
 

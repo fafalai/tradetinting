@@ -280,14 +280,14 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
                         <input id="fldPhone" name="fldPhone" type="text" size="20" placeholder="PHONE" maxlength="<?php echo AT_MAXPHONE; ?>" value="<?php echo SharedPrepareDisplayString($fldphone); ?>" class="form-control" />
                     </td>
                     <td align="left" valign="top" colspan="2">
-                        <input id="fldMobile" name="fldMobile" type="text" size="20" placeholder="MOBILE (Number only and no less than 6 digi)" maxlength="<?php echo AT_MAXPHONE; ?>" value="<?php echo SharedPrepareDisplayString($fldmobile); ?>" class="form-control" required pattern="^[0-9]{6,}$"/>
+                        <input id="fldMobile" name="fldMobile" type="text" size="20" placeholder="MOBILE (Number only)" maxlength="<?php echo AT_MAXPHONE; ?>" value="<?php echo SharedPrepareDisplayString($fldmobile); ?>" class="form-control" required pattern="^[0-9]{6,}$" title="Invalid Phone number"/>
                         <div id="frmDetails_fldMobile_errorloc" class="error_strings"></div>
                     </td>
                 </tr>
                 <tr>
                     <!-- <td align="left" valign="top">Email:</td> -->
                     <td align="left" valign="top" style="width: 25%">
-                        <input id="fldEmail" name="fldEmail" type="text" size="20" placeholder="EMAIL" maxlength="<?php echo AT_MAXEMAIL; ?>" value="<?php echo SharedPrepareDisplayString($fldemail); ?>" class="form-control" />
+                        <input id="fldEmail" name="fldEmail" type="text" size="20" placeholder="EMAIL" maxlength="<?php echo AT_MAXEMAIL; ?>" value="<?php echo SharedPrepareDisplayString($fldemail); ?>" class="form-control" required pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" title="Invalid Email address" />
                         <div id="frmDetails_fldEmail_errorloc" class="error_strings"></div>
                     </td>
                 </tr>
@@ -367,6 +367,7 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
                 </tr>
             </table>
         </form>
+<!--
         <script type="text/javascript">
             var frmvalidator = new Validator("frmDetails");
             frmvalidator.EnableOnPageErrorDisplay();
@@ -374,6 +375,7 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
             // frmvalidator.addValidation("fldMobile", "regexp=^[0-9]{10}$|^\(0[1-9]{1}\)[0-9]{8}$|^[0-9]{8}$|^[0-9]{4}[ ][0-9]{3}[ ][0-9]{3}$|^\(0[1-9]{1}\)[ ][0-9]{4}[ ][0-9]{4}$|^[0-9]{4}[ ][0-9]{4}$", "Must be in 04xxyyyzzz or xxxxyyyy format");
             frmvalidator.addValidation("fldMobile", "regex=^(?=\d)\S{6,}", "Invalid Phone number"); //numbers only, at least six digits
         </script>
+-->
         <form action="#" method="post">
             <textarea class="ckeditor" name="editor" id="editor">
                 <?php

@@ -6,7 +6,10 @@ function changeMenuColor() {
     var path = window.location.pathname;
     var link = $("#DIV_topMenu a");
     var pageName = path.split("/");
-    switch (pageName[pageName.length-1]) {
+    switch (pageName[pageName.length - 1]) {
+        case "":
+            link.eq(0).addClass("current_page_item");
+            break;
         case "jobs.php":
             link.eq(1).addClass("current_page_item");
             break;
@@ -502,6 +505,7 @@ function showCurrencySymbol(val) {
 }
 
 var fldcurrency;
+
 function reloadCurrency() {
 
     if (!empty(fldcurrency)) {

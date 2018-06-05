@@ -28,6 +28,10 @@
                     } else if (document.getElementById("searchMobile").checked) {
                         searchIndex = 4;
                     }
+                    else if (document.getElementById("searchCreatedDate").checked)
+                    {
+                        searchIndex = 0;
+                    }
                     for (i = 0; i < tr.length; i++) {
                         td = tr[i].getElementsByTagName("td")[searchIndex];
                         if (td) {
@@ -68,6 +72,7 @@
                                 <form>
                                     <input type="radio" name="search" value="Name" id="searchName" checked>Client Name<br>
                                     <input type="radio" name="search" value="Mobile" id="searchMobile"> Mobile<br>
+                                    <input type="radio" name="search" value="CreatedDate" id="searchCreatedDate"> Created Date(YYYY-MM-DD)<br>
                                 </form>
                                 <div class="entry">
                                     <label style="margin-top:30px">Select a Job ID to see job details.</label>

@@ -37,9 +37,10 @@ $jobid = isset($_GET['jid']) ? $_GET['jid'] : '';
                             </h2>
                             <div class="entry">
 
-                                <div class="button-group">
-                                    <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> <span class="caret"></span></button>
-                                    <ul id="ul_dropdownlist" class="dropdown-menu" style="padding:6px;">
+                                <div class="button-group bg-white">
+                                    <button type="button" class="btn btn-default btn-sm dropdown-toggle bg-white mx-1" data-toggle="dropdown">Hide<span class="caret"></span></button>
+                                    <ul id="ul_dropdownlist" class="dropdown-menu px-2">
+                                        <li><a href="#" class="small" data-value="0" tabIndex="-1"><input type="checkbox"/>&nbsp;Select All</a></li>
                                         <li><a href="#" class="small" data-value="1" tabIndex="-1"><input type="checkbox"/>&nbsp;Room</a></li>
                                         <li><a href="#" class="small" data-value="2" tabIndex="-1"><input type="checkbox"/>&nbsp;Window</a></li>
                                         <li><a href="#" class="small" data-value="3" tabIndex="-1"><input type="checkbox"/>&nbsp;Width</a></li>

@@ -67,7 +67,7 @@
                                     <!-- <li><button style="border:none"></button>Account</button></li> -->
                                     <div class="dropdown-content">
                                         <a href="profile.php">BUSINESS DETAILS</a>
-                                        <a href="users.php">USERS</a>
+                                        <a href="users.php" style="width:90%">USERS</a>
                                         <!--                                        <a href="logout.php">LOGOUT</a>-->
                                     </div>
                                 </div>

@@ -174,7 +174,7 @@
                         $clientname = ($dbrow['clientname'] == '') ? $dbrow['contact'] : $dbrow['clientname'];
                         $clientcity = ($dbrow['clientcity'] == '') ? $dbrow['city'] : $dbrow['clientcity'];
                         $clientmobile = ($dbrow['clientmobile'] == '') ? $dbrow['mobile'] : $dbrow['clientmobile'];
-                        $url_jobdetails = "jobdetails.php?jid=" . $dbrow['jobid'];
+                        $url_jobdetails = "jobdetails.php?jid=" . $dbrow['jobid']."&clientid=".$dbrow['clientid'];
                         $p1 = ($dbrow["photo1"] == "") ? '&nbsp;' : '<a href="photos/' . $dbrow["photo1"] . '" target="_blank"><img src="images/camera.png" /></a>';
                         $p2 = ($dbrow["photo2"] == "") ? '&nbsp;' : '<a href="photos/' . $dbrow["photo2"] . '" target="_blank"><img src="images/camera.png" /></a>';
                         $p3 = ($dbrow["photo3"] == "") ? '&nbsp;' : '<a href="photos/' . $dbrow["photo3"] . '" target="_blank"><img src="images/camera.png" /></a>';

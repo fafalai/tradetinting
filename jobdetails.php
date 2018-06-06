@@ -7,6 +7,47 @@ if (!isset($_SERVER['HTTPS']))
 }
 $dblink = SharedConnect();
 $jobid = isset($_GET['jid']) ? $_GET['jid'] : '';
+$clientid = isset($_GET['clientid']) ? $_GET['clientid'] : '';
+
+$dbselect = "select " .
+            "cl1.id," .
+            "cl1.code," .
+            "cl1.name," .
+            "cl1.notes as 'desc'," .
+            "cl1.contact," .
+            "cl1.mobile," .
+            "cl1.address," .
+            "cl1.city," .
+            "cl1.state," .
+            "cl1.postcode,".
+            "DATE_FORMAT(cl1.datecreated,\"%Y-%m-%d %H:%i\") datecreated," .
+            "DATE_FORMAT(cl1.datemodified,\"%Y-%m-%d %H:%i\") datemodified," .
+            "cl1.gpslat," .
+            "cl1.gpslon " .
+            "from " .
+            "clients cl1 " .
+            "where " .
+            "cl1.cust_id=" . $_SESSION['custid'] . " " .
+            "and ".
+            "id=".$clientid. " ".
+            "and " .
+            "cl1.dateexpired is null";
+if ($dbresult = SharedQuery($dbselect, $dblink))
+{
+    if ($numrows = SharedNumRows($dbresult))
+    {
+        while ($dbrow = SharedFetchArray($dbresult))
+        {
+            $clientName = SharedAddEllipsis($dbrow['name'], 20);
+            $mobile = $dbrow['mobile'];
+            $address = $dbrow['address'];
+            $city = $dbrow['city'];
+            $state = $dbrow ['state'];
+            $postcode = $dbrow['postcode'];
+        }
+    }
+}
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -32,9 +73,23 @@ $jobid = isset($_GET['jid']) ? $_GET['jid'] : '';
                     <div>
                         <div class="existingJobDetailsDIV">
                             <label><?php if ($clientmsg != "") echo $clientmsg; else echo date("l, F j, Y"); ?></label>
-                            <h2 class="clientTitle">QUOTE
-                                <?php echo $jobid; ?>
-                            </h2>
+                            <table>
+                                <th style="width:20%">
+                                    <h2 class="clientTitle">QUOTE
+                                        <?php echo $jobid; ?>
+                                    </h2>
+                                </th>
+                                <th style="width:20%">
+                                    <p>client name: <?php echo $clientName; ?>
+                                    <br>
+                                    Mobile: <?php echo $mobile; ?>
+                                    <br>
+                                    Address: <?php echo $address." ". $city. " ". $state.$postcode?>
+                                    </p>
+                                </th>
+                            </table>
+
+                           
                             <div class="entry">
 
                                 <div class="button-group bg-white">

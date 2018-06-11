@@ -447,7 +447,7 @@
                         <td align="left" valign="top"><a href="users.php?cmd=<?php echo AT_CMDCREATE; ?>&id=0" class="myButton">Create New</a></td>
                       </tr>
                       <tr>
-                        <td align="left" valign="top" colspan="2" id-"msgerr" ></td>
+                        <td align="left" valign="top" colspan="2" id="msgerr" ></td>
                       </tr>
                       <tr>
                         <!-- <td align="left" valign="top">User ID:</td> -->

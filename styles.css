@@ -930,6 +930,9 @@ div {
     width: 70%;
 }
 
+#frmSignup input {
+    margin:1em;
+}
 /*Eric --------->*/
 
 .loginBackground {

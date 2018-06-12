@@ -88,7 +88,7 @@ hr {
     margin-right: 0;
 }
 
-#wrapper {}
+/* #wrapper {} */
 
 #header {
     width: 920px;
@@ -97,10 +97,10 @@ hr {
     padding-top: 10px;
 }
 
-.topmenu {
-    float: left;
+ /* .topmenu { */
+    /* float: left; */
     /*    width: 100%;*/
-}
+/* }  */
 
 .topmenu ul {
     margin: 0;
@@ -141,8 +141,7 @@ hr {
     color: red;
 }
 
-.topmenu .first {}
-
+/* .topmenu .first {} */
 
 #btnlink a {
     margin: 0px 6px;
@@ -164,7 +163,6 @@ hr {
     background: #6A6A6A;
     color: #FFFFFF;
 }
-
 
 /* input[type="submit"] {
     -moz-box-shadow: inset 0px 1px 0px 0px #ffffff;
@@ -229,7 +227,6 @@ hr {
     padding: 0px 10px;
     text-decoration: none;
     text-shadow: 0px 1px 0px #ffffff;
-
 }
 
 .myButton:hover {
@@ -247,9 +244,6 @@ hr {
     position: relative;
     top: 1px;
 }
-
-
-
 
 #search {
     float: right;
@@ -698,7 +692,6 @@ textarea.validation-passed {
     border-width: 1px;
 }
 
-
 .dropdown {
     position: relative;
     display: inline-block;
@@ -810,6 +803,7 @@ div {
 }
 
 /*top.php*/
+
 #DIV_headerContainer {
     width: 70%;
     margin: 20px 20% 0px 15%;
@@ -819,7 +813,7 @@ div {
 
 #DIV_showUser {
     margin-top: 20px;
-    float: right;
+    /* float: right; */
 }
 
 #DIV_showUser a {
@@ -840,8 +834,8 @@ div {
 }
 
 #DIV_topMenu {
-    float: right;
-    margin-top: 0.5em;
+    /* float: right; */
+    /* margin-top: 0.5em; */
 }
 
 #DIV_topMenu a {
@@ -854,16 +848,15 @@ div {
 }
 
 /*job.php*/
+
 #DIV_SearchJobs input[type=text] {
     background-image: url('images/magnifying-glass.png');
     background-color: #535353;
     background-position: 10px 12px;
-
     background-repeat: no-repeat;
     color: white;
     width: 100%;
     font-size: 16px;
-
     padding: 12px 20px 12px 40px;
     border: 1px solid #ddd;
     margin-bottom: 12px;
@@ -896,26 +889,27 @@ div {
 */
 
 /*Resource*/
+
 #DIV_resource p {
     font-size: 15px;
 }
 
 /*Profile*/
-#fldcurrency{
+
+#fldcurrency {
     margin: 0px;
 }
 
 /*Clients*/
+
 #DIV_SearchClients input[type=text] {
     background-image: url('images/magnifying-glass.png');
     background-color: #535353;
     background-position: 10px 12px;
-
     background-repeat: no-repeat;
     color: white;
     width: 100%;
     font-size: 16px;
-
     padding: 12px 20px 12px 40px;
     border: 1px solid #ddd;
     margin-bottom: 12px;
@@ -935,6 +929,7 @@ div {
     margin: 0;
     width: 70%;
 }
+
 /*Eric --------->*/
 
 .loginBackground {

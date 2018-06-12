@@ -50,7 +50,21 @@
                 <h2 class="text-dark mt-5">
                     <b>PLAN SELECTION</b>
                 </h2>
-                
+                <div class="form-group text-dark">
+                    <div class="radio">
+                        <h6>
+                            <input type="radio" name="plan_opt" value="opt_1">30 day free trial</h6>
+                    </div>
+                    <div class="radio">
+                        <h6>
+                            <input type="radio" name="plan_opt" value="opt_2">Annual plan - USD $99 per year (save 17% *)</h6>
+                    </div>
+                    <div class="radio">
+                        <h6>
+                            <input type="radio" name="plan_opt" value="opt_3">3 Year plan - USD $250 (save 30% *)</h6>
+                    </div>
+                    <label class="ml-5">* in comparison to purchasing a monthly plan</label>
+                </div>
             </form>
         </div>
         <?php include("bottom.php");?>

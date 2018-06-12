@@ -3,6 +3,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="-1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
 
 <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="js/noty/packaged/jquery.noty.packaged.min.js"></script>
@@ -25,7 +26,7 @@
 <link rel="stylesheet" type="text/css" href="lib/jquery-ui.css" />
 <link rel="stylesheet" type="text/css" href="styles.css" />
 
-<link rel="stylesheet" href="js/easyui/themes/default/easyui.css">
+<link rel="stylesheet" href="js/easyui/themes/Bootstrap/easyui.css">
 <link rel="stylesheet" href="js/easyui/themes/icon.css">
 <link rel="icon" type="image/ico" href="images/icon.png" />
 <link rel="shortcut icon" href="images/icon.png" />

@@ -2,7 +2,6 @@ function redirect(address) {
     location.href = address;
 }
 
-
 function changeMenuColor() {
     var path = window.location.pathname;
     var link = $("#DIV_topMenu a");
@@ -201,7 +200,6 @@ var currencySympol = {
     'ZWL': '&#90;&#36;',
 };
 
-//
 //var cod = new Array();
 //var sym = new Array();
 //cod[0] = 'ALL';
@@ -481,7 +479,6 @@ var currencySympol = {
 //cod[137] = 'ZWD ';
 //sym[137] = '&#90;&#3;';
 
-
 function generalCurrencyOptions() {
     var select = $("#fldcurrency");
 
@@ -611,6 +608,7 @@ function validatePwd_Users() {
         }
     });
 }
+
 $(document).ready(function () {
     var currentPage = changeMenuColor();
 

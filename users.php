@@ -97,8 +97,10 @@
     $active = 1;
     $c_id = $_SESSION['custid'];
     $usr_id = $_SESSION['loggedin'];
-    $dt_expired = $_SESSION['dateexpired'];
+    // $dt_expired = $_SESSION['dateexpired'];
+    $dt_expired = date ('Y-m-d H:i:s', strtotime ( '+1 year' ));
     $numberUsers = $_SESSION['numberUsers'];
+    $monthValue = 1;
     //
 
     $dateday = date("Y-m-d H:i:s");
@@ -131,7 +133,8 @@
                   "licenseno," .
                   "userscreated_id," .
                   "licexpired," .
-                  "numberUsers" .
+                  "numberUsers," .
+                  "monthValue" .
                   ") " .
                   "VALUES " .
                   "(" .
@@ -146,7 +149,8 @@
                   "'$fldlicense'," .
                   "'$usr_id'," .
                   "'$dt_expired'," .
-                  "'$numberUsers'".
+                  "'$numberUsers',".
+                  "'$monthValue'" .
                   ")";
       error_log($dbinsert);
 
@@ -581,15 +585,15 @@
                           <tr>
                             <!-- <td align="left" valign="top">Password:</td> -->
                             <td align="left" valign="top">
-                              <input id="fldPwd" name="fldPwd" type="password" size="20" placeholder="Password" maxlength="50"
-                                class="required validate-password" />
+                              <input id="fldPwd" name="fldPwd" type="password" size="20" placeholder="Password" maxlength="50" class="required validate-password"
+                              />
                             </td>
                           </tr>
                           <tr>
                             <!-- <td align="left" valign="top">Confirm:</td> -->
                             <td align="left" valign="top">
-                              <input id="fldConfirmPwd" name="fldConfirmPwd" type="password" placeholder="Repeat Password"
-                                size="20" maxlength="50" class="required validate-confirm" />
+                              <input id="fldConfirmPwd" name="fldConfirmPwd" type="password" placeholder="Repeat Password" size="20" maxlength="50" class="required validate-confirm"
+                              />
                             </td>
                           </tr>
                           <tr>

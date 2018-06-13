@@ -2,11 +2,13 @@ function redirect(address) {
     location.href = address;
 }
 
+
 function changeMenuColor() {
     var path = window.location.pathname;
     var link = $("#DIV_topMenu a");
     var pageName = path.split("/");
-    switch (pageName[pageName.length - 1]) {
+    var currentPage = pageName[pageName.length - 1];
+    switch (currentPage) {
         case "":
             link.eq(0).addClass("current_page_item");
             break;
@@ -32,6 +34,7 @@ function changeMenuColor() {
             link.eq(5).addClass("current_page_item");
             break;
     }
+    return currentPage;
 }
 
 var currencySympol = {
@@ -546,13 +549,13 @@ function hideJobdetailsColumn() {
             val = $target.attr('data-value'),
             $input = $target.find('input');
         if (val === "0") {
-            $("#ul_dropdownlist input").prop("checked",true);
-            $target.attr("data-value","-1");
+            $("#ul_dropdownlist input").prop("checked", true);
+            $target.attr("data-value", "-1");
             $("#Table_jobdetails tr td").css("display", "none");
             $("#Table_jobdetails th").css("display", "none");
         } else if (val === "-1") {
-            $("#ul_dropdownlist input").prop("checked",false);
-            $target.attr("data-value","0");
+            $("#ul_dropdownlist input").prop("checked", false);
+            $target.attr("data-value", "0");
             $("#Table_jobdetails tr td").css("display", "");
             $("#Table_jobdetails th").css("display", "");
         } else {
@@ -576,14 +579,31 @@ function hideJobdetailsColumn() {
     });
 }
 
+function validatePwd() {
+    $("#sign_secondPwd").keyup(function () {
+        var pwd = $("#sign_password").val();
+        if (pwd !== this.value) {
+            $("#signup_button").attr("disabled", true);
+            $("#error_message").show();
+
+        } else {
+            $("#error_message").hide();
+            $("#signup_button").attr("disabled", false);
+        }
+    });
+}
 $(document).ready(function () {
-    changeMenuColor();
+    var currentPage = changeMenuColor();
 
     //    generalCurrency();
-
-    generalCurrencyOptions();
-
-    reloadCurrency();
-
-    hideJobdetailsColumn();
+    if (currentPage === "profile.php") {
+        generalCurrencyOptions();
+        reloadCurrency();
+    }
+    if (currentPage === "jobdetails.php") {
+        hideJobdetailsColumn();
+    }
+    if (currentPage === "signup.php") {
+        validatePwd();
+    }
 });

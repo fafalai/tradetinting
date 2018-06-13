@@ -11,6 +11,7 @@ $dblink = SharedConnect();
 $clientmsg = "";
 $cmd = AT_CMDCREATE;
 $clientid = 0;
+$notification = "";
 //
 $fldcode = "";
 $fldname = "";
@@ -78,6 +79,7 @@ if (isset($_GET['cmd']))
     }
     else if ($cmd == AT_CMDDELETE)
     {
+        $notification = "REMOVESUCCESS";
         $dbupdate = "update " .
             "clients " .
             "set " .
@@ -89,14 +91,20 @@ if (isset($_GET['cmd']))
             "cust_id=" . $_SESSION['custid'];
         if (SharedQuery($dbupdate, $dblink))
         {
-            
-           // echo "<script type='text/javascript'> new Noty({theme: 'themeName',text: 'Some notification text'}).show()</script>";
-            $clientmsg = "Client " . $fldname . " has been deleted.";
+            //noty({text: response.msg, type: 'success', timeout: 10000});
+        //    echo "
+        //    <script type='text/javascript' src='js/noty/packaged/jquery.noty.packaged.min.js'></script>
+        //    <script type='text/javascript'> noty({theme: 'themeName',text: 'Some notification text'}).show()
+        //    </script>"; 
+            $clientmsg = "Client " . $fldname . " has been deleted."; 
         }
         //alert("Client " . $fldcode . " has been deleted.");
         else
+        {
             $clientmsg = "Unable to delete " . $fldname . ". Please try again or contact support.";
-        //alert("Unable to delete " . $fldcode . ". Please try again or contact support.");
+            $notification = "REMOVEFAIL";
+        }
+            
         //
         $cmd = AT_CMDCREATE;
         $clientid = 0;
@@ -161,6 +169,7 @@ else if (isset($_POST['fldName']))
         error_log($dbinsert);
         if (SharedQuery($dbinsert, $dblink))
         {
+            $notification = "INSERTSUCCESS";
             $clientmsg = "Client " . $fldname . " has been added.";
             // Successful save, clear form...
             $fldcode = "";
@@ -176,7 +185,11 @@ else if (isset($_POST['fldName']))
             $fldcountry = "";
         }
         else
+        {
+            $notification = "INSERTFAIL";
             $clientmsg = "Unable to add " . $fldcode . ". Please try again or contact support.";
+        }
+            
             //alert("Unable to add " . $fldname . ". Please try again or contact support.");
     }
     else
@@ -219,6 +232,24 @@ else if (isset($_POST['fldName']))
     ?>
     <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBqCHDj475c_6YSc9yqwBH3eN1bYovqtUE&libraries=places&callback=initAutocomplete" async defer></script>
     <script type="text/javascript">
+        $( document ).ready(function() {
+            var message = "";
+            var notification = "";
+            message = "<?php if ($clientmsg != "") echo $clientmsg; else echo 123;?>";
+            notification = "<?php if ($notification != "") echo $notification; else echo 123;?>";
+            console.log( message );
+            console.log(notification);
+            if (notification == "REMOVESUCCESS")
+            {
+               // console.log(document.g)
+                //document.getElementById('savingPDFAlert').style.display = 'block';
+                noty({text: message, type: 'success', timeout: 40000});
+            }
+            else if (notification === "REMOVEFAIL")
+            {
+                noty({text: message, type: 'error', timeout: 40000});
+            }
+        });
         function initAutocomplete() {
             // Create the autocomplete object, restricting the search to geographical
             // location types.
@@ -358,9 +389,12 @@ else if (isset($_POST['fldName']))
         <!--    <div >-->
         <!--      <div >-->
         <div style="margin-top: 30pt">
+        <div id="savingPDFAlert" class="myAlert-top alert alert-info collapse">
+        <strong>Saving PDF. Please don't close this page. It will take a while</strong>
+    </div>
             <div class="existingClientsDIV">
-                <!-- <p><span><?php if ($clientmsg != "") echo $clientmsg; else echo date("l, F j, Y"); ?></span></p> -->
-                <label><?php if ($clientmsg != "") echo $clientmsg; else echo date("l, F j, Y"); ?></label>
+                <!-- <label><?php if ($clientmsg != "") echo $clientmsg; else echo date("l, F j, Y"); ?></label> -->
+                <label><?php echo date("l, F j, Y"); ?></label>
                 <h2 class="clientTitle">Clients</h2>
                 <label>Move mouse over links for tips. Click on table header to sort by that column.</label>
                 <br/>

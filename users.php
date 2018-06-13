@@ -1,5 +1,6 @@
 <?php
   include("logincheck.php");
+  include ("remedyuuid.php");
   if (!isset($_SERVER['HTTPS']))
   {
     //header('location: https://www.adtalk.services/testtag/users.php');
@@ -89,7 +90,7 @@
   {
     error_log("I AM IN");
     $flduid = SharedCleanString($_POST['fldUid'], AT_MAXNAME);
-    // $fldname = SharedCleanString($_POST['fldName'], AT_MAXNAME);
+    $fldname = $flduid;
     $fldpwd = SharedCleanString($_POST['fldPwd'], AT_MAXPWD);
     $fldemail = SharedCleanString(isset($_POST['fldEmail']) ? $_POST['fldEmail'] : "", AT_MAXEMAIL);
     $fldmobile = SharedCleanString(isset($_POST['fldMobile']) ? $_POST['fldMobile'] : "", AT_MAXPHONE);
@@ -114,12 +115,15 @@
     error_log($numrows);
     if ($numberUsers > $numrows)
     {
+      $uuid = RemedyUuid();
       error_log("can create");
+      
       $dbinsert = "INSERT INTO users " .
                   "(" .
                   "cust_id," .
                   "uid," .
                   "pwd," .
+                  "uuid," .
                   "name," .
                   "email," .
                   "mobile," .
@@ -134,7 +138,8 @@
                   "'$c_id'," .
                   "'$flduid'," .
                   "'$fldpwd'," .
-                  "'$flduid'," .
+                  "'$uuid'," .
+                  "'$fldname'," .
                   "'$fldemail'," .
                   "'$fldmobile'," .
                   "'$active'," .
@@ -308,7 +313,14 @@
                   <th align="left">User ID</th>
                   <th align="left">Name</th>
                   <th align="right">Date Modified</th>
-                  <th align="center" class="unsortable">Action</th>
+                  <?php
+                    if ($_SESSION['admin'] == 1)
+                    {
+                  ?>
+                      <th align="center" class="unsortable">Action</th>
+                  <?php
+                    }
+                  ?>
                 </tr>
                 <?php
                   $dateday= date("Y-m-d H:i:s");
@@ -347,7 +359,7 @@
                   <td align="right"><?php if ($dbrow['datemodified'] == "") echo $dbrow['datecreated']; else echo $dbrow['datemodified']; ?></td>
                   <td align="center">
                     <?php
-                      if ($admin == 1)
+                      if ($_SESSION['admin'] == 1)
                       {
                     ?>
                         <a href="javascript:void(0);" onclick="DeleteUser(<?php echo $dbrow['id'] . ",'" . $name . "'"; ?>);"><span onmouseover="tooltip.show('<?php echo $deletetip; ?>');" onmouseout="tooltip.hide();"><img src="images/icon-delete.png" width="25" height="17" alt="Delete" /></span></a>

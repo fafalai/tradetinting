@@ -145,15 +145,26 @@
                     </div>
                     <div class="radio">
                         <h6>
-                            <input type="radio" name="plan_opt" value="opt_2">Annual plan - USD $99 per year (save 17% *)</h6>
+                            <input type="radio" name="plan_opt" value="opt_2">Annual plan - USD $99 per year
+                            <span class="text-danger">(save 17% *)</span>
+                        </h6>
                     </div>
                     <div class="radio">
                         <h6>
-                            <input type="radio" name="plan_opt" value="opt_3">3 Year plan - USD $250 (save 30% *)</h6>
+                            <input type="radio" name="plan_opt" value="opt_3">3 Year plan - USD $250
+                            <span class="text-danger">(save 30% *)</span>
+                        </h6>
                     </div>
                     <label class="ml-5">* in comparison to purchasing a monthly plan</label>
                 </div>
+                <div>
+                    <button type="button" class="btn-danger btn-lg">SIGN UP</button>
+                </div>
             </form>
+            <div id="DIV_Message">
+                <p>Want to get in touch?
+                    <a href="contact.php">Click here</a> to message us.</p>
+            </div>
         </div>
         <?php include("bottom.php");?>
     </body>

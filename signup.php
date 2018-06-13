@@ -12,6 +12,93 @@
     <html>
 
     <head>
+        <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBqCHDj475c_6YSc9yqwBH3eN1bYovqtUE&libraries=places&callback=initAutocomplete" async defer></script>
+        <script type="text/javascript">
+        function initAutocomplete() 
+        {
+            // Create the autocomplete object, restricting the search to geographical
+            // location types.
+            console.log("I am in");
+            autocomplete = new google.maps.places.Autocomplete(/** @type {!HTMLInputElement} */(document.getElementById('sign_address')),{types: ['geocode']});
+
+            // When the user selects an address from the dropdown, populate the address
+            // fields in the form.
+            google.maps.event.addListener
+            (
+                autocomplete,
+                'place_changed',
+                function()
+                {
+                    var place = autocomplete.getPlace();
+
+                    if (!_.isUndefined(place.address_components))
+                    {
+                        if (place.address_components.length == 8)
+                        {
+                            console.log("length 8");
+                            console.log(place.address_components);
+                            //$('#fldNewBookingCustAddress1').textbox('setValue', place.name);
+                            document.getElementById('sign_address').value = place.name
+                            //$('#fldCity').textbox('setValue', place.address_components[3].short_name);
+                            document.getElementById('sign_city').value = place.address_components[3].short_name;
+                            //$('#fldNewBookingCustPostcode').textbox('setValue', place.address_components[7].short_name);
+                            document.getElementById('sign_state').value = place.address_components[5].short_name;
+                            // $('#fldState').combobox('setValue', place.address_components[5].short_name);
+                            document.getElementById('sign_country').value = place.address_components[6].long_name;
+                            document.getElementById('sign_pcode').value = place.address_components[7].short_name;  
+                        }
+                        else if (place.address_components.length == 9)
+                        {
+                            console.log("length 9");
+                            console.log(place.address_components);
+                            //$('#fldNewBookingCustAddress1').textbox('setValue', place.name);
+                            document.getElementById('sign_address').value = place.name
+                            //$('#fldCity').textbox('setValue', place.address_components[3].short_name);
+                            document.getElementById('sign_city').value = place.address_components[3].short_name;
+                            //$('#fldNewBookingCustPostcode').textbox('setValue', place.address_components[7].short_name);
+                            document.getElementById('sign_state').value = place.address_components[5].short_name;
+                            // $('#fldState').combobox('setValue', place.address_components[5].short_name);
+                            document.getElementById('sign_country').value = place.address_components[6].long_name;
+                            document.getElementById('sign_pcode').value = place.address_components[7].short_name;
+                        }
+                        else
+                        {
+                            console.log("other");
+                            console.log(place.address_components);
+                            //$('#fldNewBookingCustAddress1').textbox('setValue', place.name);
+                            document.getElementById('sign_address').value = place.name;
+                            //$('#fldNewBookingCustCity').textbox('setValue', place.address_components[2].short_name);
+                            document.getElementById('sign_city').value = place.address_components[2].short_name;
+                            //$('#fldNewBookingCustPostcode').textbox('setValue', place.address_components[6].short_name);
+                            document.getElementById('sign_state').value = place.address_components[4].short_name;
+                            document.getElementById('sign_country').value = place.address_components[5].long_name;
+                            document.getElementById('sign_pcode').value = place.address_components[6].short_name;
+                        }
+                    }
+                }
+            );
+        }
+
+        // Bias the autocomplete object to the user's geographical location,
+        // as supplied by the browser's 'navigator.geolocation' object.
+        function geolocate() 
+        {
+            if (navigator.geolocation) 
+            {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                var geolocation = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                var circle = new google.maps.Circle({
+                    center: geolocation,
+                    radius: position.coords.accuracy
+                });
+                autocomplete.setBounds(circle.getBounds());
+                });
+            }
+        }   
+        </script>
         <?php include("meta.php");?>
         <title>Sign Up</title>
     </head>
@@ -29,16 +116,17 @@
                     <input id="sign_phone" class="form-control col-sm-5" type="text" placeholder="PHONE">
                     <input id="sign_email" class="form-control col" type="text" placeholder="EMAIL">
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                     <input id="sign_country" class="form-control" type="text" placeholder="COUNTRY">
+                </div> -->
+                <div class="row">
+                    <input id="sign_address" class="form-control" type="text" placeholder="ADDRESS" onFocus="geolocate()">
                 </div>
                 <div class="row">
-                    <input id="sign_address" class="form-control" type="text" placeholder="ADDRESS">
-                </div>
-                <div class="row">
-                    <input id="sign_city" class="form-control col-sm-5" type="text" placeholder="CITY">
+                    <input id="sign_city" class="form-control col-sm" type="text" placeholder="CITY">
                     <input id="sign_state" class="form-control col-sm" type="text" placeholder="STATE">
                     <input id="sign_pcode" class="form-control col-sm" type="text" placeholder="P/CODE">
+                    <input id="sign_country" class="form-control col-sm" type="text" placeholder="COUNTRY">
                 </div>
                 <span class="myhr"></span>
                 <div class="row">

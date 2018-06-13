@@ -87,8 +87,9 @@
   }
   else if (isset($_POST['fldUid']))
   {
+    error_log("I AM IN");
     $flduid = SharedCleanString($_POST['fldUid'], AT_MAXNAME);
-    $fldname = SharedCleanString($_POST['fldName'], AT_MAXNAME);
+    // $fldname = SharedCleanString($_POST['fldName'], AT_MAXNAME);
     $fldpwd = SharedCleanString($_POST['fldPwd'], AT_MAXPWD);
     $fldemail = SharedCleanString(isset($_POST['fldEmail']) ? $_POST['fldEmail'] : "", AT_MAXEMAIL);
     $fldmobile = SharedCleanString(isset($_POST['fldMobile']) ? $_POST['fldMobile'] : "", AT_MAXPHONE);
@@ -96,6 +97,7 @@
     $c_id = $_SESSION['custid'];
     $usr_id = $_SESSION['loggedin'];
     $dt_expired = $_SESSION['dateexpired'];
+    $numberUsers = $_SESSION['numberUsers'];
     //
 
     $dateday = date("Y-m-d H:i:s");
@@ -105,11 +107,14 @@
                 "users u1 " .
                 "where " .
                 "u1.cust_id='$c_id'";
+    error_log($dbselect);
     if ($dbresult = SharedQuery($dbselect, $dblink))
       $numrows = SharedNumRows($dbresult);
-
-    if ($_SESSION['numberUsers'] > $numrows)
+    error_log($numberUsers);
+    error_log($numrows);
+    if ($numberUsers > $numrows)
     {
+      error_log("can create");
       $dbinsert = "INSERT INTO users " .
                   "(" .
                   "cust_id," .
@@ -121,21 +126,24 @@
                   "active," .
                   "licenseno," .
                   "userscreated_id," .
-                  "licexpired" .
+                  "licexpired," .
+                  "numberUsers" .
                   ") " .
                   "VALUES " .
                   "(" .
                   "'$c_id'," .
                   "'$flduid'," .
                   "'$fldpwd'," .
-                  "'$fldname'," .
+                  "'$flduid'," .
                   "'$fldemail'," .
                   "'$fldmobile'," .
                   "'$active'," .
                   "'$fldlicense'," .
                   "'$usr_id'," .
-                  "'$dt_expired'" .
+                  "'$dt_expired'," .
+                  "'$numberUsers'".
                   ")";
+      error_log($dbinsert);
 
       if (SharedQuery($dbinsert, $dblink))
       {
@@ -151,7 +159,10 @@
         $usermsg = "Unable to add " . $fldname . ". Please try again or contact support.";
     }
     else
+    {
       $usermsg = "Unable to add " . $fldname . ". Numbers of users exceded. Click  <a  href='profile.php#myplan' class='myButton'>here</a> to upgrade users";
+      error_log("numbers of users exceded");
+    }
   }
   else if (isset($_POST['fldModName']))
   {
@@ -177,6 +188,7 @@
                 "id=" . $userid . " " .
                 "and " .
                 "cust_id=" . $_SESSION['custid'];
+    error_log($dbupdate);
     if (SharedQuery($dbupdate, $dblink))
       $usermsg = "User " . $usermsg . " has been updated.";
     else
@@ -371,10 +383,10 @@
                       </tr>
                       <tr>
                         <!-- <td align="left" valign="top">Name:</td> -->
-                        <td align="left" valign="top">
+                        <!-- <td align="left" valign="top">
                           <input id="fldName" name="fldName" type="text" size="20" placeholder="Name" maxlength="<?php echo AT_MAXNAME; ?>" value="<?php echo SharedPrepareDisplayString($fldname); ?>"  />
                           <div id="frmUsers_fldName_errorloc" class="error_strings"></div>
-                        </td>
+                        </td> -->
                       </tr>
                       <tr>
                         <!-- <td align="left" valign="top">User ID:</td> -->

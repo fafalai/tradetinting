@@ -125,8 +125,8 @@
                 </div>
                 <span class="myhr"></span>
                 <div class="row">
-                    <input id="sign_password" class="form-control col-sm-5" type="text" placeholder="PASSWORD" required>
-                    <input id="sign_secondPwd" class="form-control col" type="text" placeholder="RE-ENTER PASSWORD" required onchange="validatePwd()">
+                    <input id="sign_password" class="form-control col-sm-5" type="password" placeholder="PASSWORD" required>
+                    <input id="sign_secondPwd" class="form-control col" type="password" placeholder="RE-ENTER PASSWORD" required onchange="validatePwd()">
                 </div>
                 <div class="row">
                     <span id="error_message" class="text-danger col" style="display:none">Two passwords are different</span>

@@ -65,6 +65,9 @@
                     </div>
                     <label class="ml-5">* in comparison to purchasing a monthly plan</label>
                 </div>
+                <div>
+                <button class="btn-danger btn-lg">SIGN UP</button>
+                </div>
             </form>
         </div>
         <?php include("bottom.php");?>

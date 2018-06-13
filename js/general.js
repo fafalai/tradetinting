@@ -579,16 +579,35 @@ function hideJobdetailsColumn() {
     });
 }
 
-function validatePwd() {
+function validatePwd_Signup() {
     $("#sign_secondPwd").keyup(function () {
         var pwd = $("#sign_password").val();
         if (pwd !== this.value) {
             $("#signup_button").attr("disabled", true);
+            $("#signup_button").css("background-color", "gray");
             $("#error_message").show();
 
         } else {
             $("#error_message").hide();
             $("#signup_button").attr("disabled", false);
+            $("#signup_button").css("background-color", "red");
+        }
+    });
+}
+
+function validatePwd_Users() {
+    $("#fldConfirmPwd").keyup(function () {
+        var pwd = $("#fldPwd").val();
+        if (pwd !== this.value) {
+            $("#btnSave").attr("disabled", true);
+            $("#btnSave").css("background-color", "gray");
+            $("#error_message").show();
+
+
+        } else {
+            $("#error_message").hide();
+            $("#btnSave").attr("disabled", false);
+            $("#btnSave").css("background-color", "red");
         }
     });
 }
@@ -603,7 +622,8 @@ $(document).ready(function () {
     if (currentPage === "jobdetails.php") {
         hideJobdetailsColumn();
     }
-    if (currentPage === "signup.php") {
-        validatePwd();
+    if (currentPage === "signup.php" || currentPage === "users.php") {
+        validatePwd_Signup();
+        validatePwd_Users();
     }
 });

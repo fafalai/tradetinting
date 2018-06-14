@@ -103,9 +103,9 @@
   }
   else if (isset($_POST['fldUid']))
   {
-    error_log("I AM IN");
+    //error_log("I AM IN");
     $flduid = SharedCleanString($_POST['fldUid'], AT_MAXNAME);
-    $fldname = $flduid;
+    $fldname = SharedCleanString($_POST['fldUid'], AT_MAXNAME);
     $fldpwd = SharedCleanString($_POST['fldPwd'], AT_MAXPWD);
     $fldemail = SharedCleanString(isset($_POST['fldEmail']) ? $_POST['fldEmail'] : "", AT_MAXEMAIL);
     $fldmobile = SharedCleanString(isset($_POST['fldMobile']) ? $_POST['fldMobile'] : "", AT_MAXPHONE);
@@ -344,7 +344,7 @@
               var response = JSON.parse(rc);
               if (response.rc == <?php echo REMEDY_ERR_NONE; ?>) {
                 if (response.id != 0) {
-                  alert('That User ID is not available, please choose another');
+                  alert('This User ID has been taken, please use another one');
                   $('#fldUid').val('');
                   $('#fldUid').focus();
                 }
@@ -481,13 +481,7 @@
                             <a href="users.php?cmd=<?php echo AT_CMDCREATE; ?>&id=0" class="myButton">Create New</a>
                           </td>
                         </tr>
-                        <tr>
-                          <!-- <td align="left" valign="top">Name:</td> -->
-                          <!-- <td align="left" valign="top">
-                          <input id="fldName" name="fldName" type="text" size="20" placeholder="Name" maxlength="<?php echo AT_MAXNAME; ?>" value="<?php echo SharedPrepareDisplayString($fldname); ?>"  />
-                          <div id="frmUsers_fldName_errorloc" class="error_strings"></div>
-                        </td> -->
-                        </tr>
+                        
                         <tr>
                           <!-- <td align="left" valign="top">User ID:</td> -->
                           <td align="left" valign="top">
@@ -497,6 +491,13 @@
                           </td>
                         </tr>
                         <tr>
+                        <tr>
+                          <!-- <td align="left" valign="top">Name:</td> -->
+                          <td align="left" valign="top">
+                            <input id="fldName" name="fldName" type="text" size="20" placeholder="Name" maxlength="<?php echo AT_MAXNAME; ?>" value="<?php echo SharedPrepareDisplayString($fldname); ?>"  />
+                            <div id="frmUsers_fldName_errorloc" class="error_strings"></div>
+                          </td>
+                        </tr>
                           <!-- <td align="left" valign="top">Password:</td> -->
                           <td align="left" valign="top">
                             <input required id="fldPwd" name="fldPwd" type="password" size="20" placeholder="password" maxlength="<?php echo AT_MAXPWD; ?>"
@@ -507,8 +508,9 @@
                         <tr>
                           <!-- <td align="left" valign="top">Confirm:</td> -->
                           <td align="left" valign="top">
-                            <input required id="fldConfirmPwd" name="fldConfirmPwd" type="password" size="20" placeholder="Repeat Password" maxlength="<?php echo AT_MAXPWD; ?>"
-                            />
+                            <input required id="fldConfirmPwd" name="fldConfirmPwd" type="password" size="20" placeholder="Repeat Password" maxlength="<?php echo AT_MAXPWD; ?>"/>
+                            <span id="error_message" class="text-danger col" style="display:none">* Two passwords are different</span>
+                           
                             <div id="frmUsers_fldConfirmPwd_errorloc" class="error_strings"></div>
                           </td>
                         </tr>

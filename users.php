@@ -1,3 +1,8 @@
+<!-- 
+     1 ===  Successfull
+     2 ===  Fail 
+    
+-->
 <?php
   include("logincheck.php");
   include ("remedyuuid.php");
@@ -9,6 +14,7 @@
   require_once("remedyerrcodes.php");
   $dblink = SharedConnect();
   $usermsg = "";
+  $notification = 0;
   $cmd = AT_CMDCREATE;
   $userid = 0;
   //
@@ -78,7 +84,16 @@
                   "id=" . $userid . " " .
                   "and " .
                   "cust_id=" . $_SESSION['custid'];
-        SharedQuery($dbupdate, $dblink);
+        if (SharedQuery($dbupdate, $dblink))
+        {
+          $notification = 1;
+          $usermsg = "Client " . $fldname . " has been deleted."; 
+        }
+        else
+        {
+            $notification = 2;
+            $usermsg = "Unable to delete " . $fldname . ". Please try again or contact support.";
+        }
       //
       $cmd = AT_CMDCREATE;
       $userid = 0;
@@ -157,6 +172,7 @@
       if (SharedQuery($dbinsert, $dblink))
       {
         // Successful save, clear form...
+        $notification = 1;
         $usermsg =  "User " . $fldname . " has been added."  ;
         $flduid = "";
         $fldname = "";
@@ -165,10 +181,14 @@
         $fldlicense = "";
       }
       else
+      {
+        $notification = 2;
         $usermsg = "Unable to add " . $fldname . ". Please try again or contact support.";
+      }
     }
     else
     {
+      $notification = 2;
       $usermsg = "Unable to add " . $fldname . ". Numbers of users exceded. Click  <a  href='profile.php#myplan' class='myButton'>here</a> to upgrade users";
       error_log("numbers of users exceded");
     }
@@ -199,9 +219,17 @@
                 "cust_id=" . $_SESSION['custid'];
     error_log($dbupdate);
     if (SharedQuery($dbupdate, $dblink))
+    {
+      $notification = 1;
       $usermsg = "User " . $usermsg . " has been updated.";
+    }
+      
     else
-      $usermsg = "Unable to save " . $fldname . ". Please try again or contact support.";
+    {
+      $notification = 2;
+      $usermsg = "Unable to update " . $fldname . ". Please try again or contact support.";
+    }
+     
     // Stay in modify mode...
     $cmd = AT_CMDMODIFY;
   }
@@ -225,9 +253,15 @@
                 "and " .
                 "cust_id=" . $_SESSION['custid'];
     if (SharedQuery($dbupdate, $dblink))
+    {
+      $notification = 1;
       $usermsg = "User " . $usermsg . "'s password has been updated.";
+    }
     else
+    {
+      $notification = 2;
       $usermsg = "Unable to save " . $fldname . "'s password. Please try again or contact support.";
+    }
     // Stay in modify mode...
     $cmd = AT_CMDMODIFY;
   }
@@ -240,6 +274,38 @@
     include ("meta.php");
   ?>
       <script type="text/javascript">
+       $( document ).ready(function() {
+            var message = "";
+            var notification = "";
+            message = "<?php if ($usermsg != "") echo $usermsg; else echo 123;?>";
+            notification = "<?php if ($notification != "") echo $notification; else echo 123;?>";
+            console.log( message );
+            console.log(notification);
+            if (notification == 1)
+            {
+                noty({text: message, type: 'success', timeout: 3000});
+            }
+            else if (notification == 2)
+            {
+                noty({text: message, type: 'error', timeout: 3000});
+            }
+            // else if (notification == 3)
+            // {
+            //     noty({text: message, type: 'success', timeout: 3000});
+            // }
+            // else if (notification == 4)
+            // {
+            //     noty({text: message, type: 'error', timeout: 3000});
+            // }
+            // else if (notification == 5)
+            // {
+            //     noty({text: message, type: 'success', timeout: 3000});
+            // }
+            // else if (notification == 6)
+            // {
+            //     noty({text: message, type: 'error', timeout: 3000});
+            // }
+        });
         function OnFormLoad() {
           <?php
         if ($cmd == AT_CMDCREATE)
@@ -336,7 +402,9 @@
                               "from " .
                               "users u1 " .
                               "where " .
-                              "u1.cust_id=" . $_SESSION['custid'];
+                              "u1.cust_id=" . $_SESSION['custid'] . " " .
+                              "and " .
+                              "u1.dateexpired is null";
 
                   if ($dbresult = SharedQuery($dbselect, $dblink))
                   {
@@ -478,9 +546,9 @@
                     <script type="text/javascript">
                       var frmvalidator = new Validator("frmUsers");
                       frmvalidator.EnableOnPageErrorDisplay();
-                      frmvalidator.addValidation("fldName", "req", "Please enter your real Name");
-                      frmvalidator.addValidation("fldName", "maxlen=<?php echo AT_MAXNAME; ?>",
-                        "Max length is <?php echo AT_MAXNAME; ?>");
+                      // frmvalidator.addValidation("fldName", "req", "Please enter your real Name");
+                      // frmvalidator.addValidation("fldName", "maxlen=<?php echo AT_MAXNAME; ?>",
+                      //   "Max length is <?php echo AT_MAXNAME; ?>");
                       frmvalidator.addValidation("fldUid", "req", "Please enter your preferred User ID");
                       frmvalidator.addValidation("fldUid", "maxlen=<?php echo AT_MAXNAME; ?>",
                         "Max length is <?php echo AT_MAXNAME; ?>");
@@ -560,7 +628,7 @@
                         <input name="fldModUid" type="hidden" value="<?php echo SharedPrepareDisplayString($flduid); ?>" />
                       </form>
 
-                      <script type="text/javascript">
+                      <!-- <script type="text/javascript">
                         var frmvalidator = new Validator("frmUsers");
                         frmvalidator.EnableOnPageErrorDisplay();
                         frmvalidator.addValidation("fldModName", "req", "Please enter your real Name");
@@ -574,7 +642,7 @@
                         frmvalidator.addValidation("fldModMobile",
                           "regexp=^[0-9]{10}$|^\(0[1-9]{1}\)[0-9]{8}$|^[0-9]{8}$|^[0-9]{4}[ ][0-9]{3}[ ][0-9]{3}$|^\(0[1-9]{1}\)[ ][0-9]{4}[ ][0-9]{4}$|^[0-9]{4}[ ][0-9]{4}$",
                           "Must be in 04xxyyyzzz or xxxxyyyy format");
-                      </script>
+                      </script> -->
 
                       <form action="users.php" method="post" id="frmPwd">
                         <table style="width: 100%">

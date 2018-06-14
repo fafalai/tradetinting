@@ -1,4 +1,9 @@
 <!-- this table does not need the 'Code' column, and the 'Code' input. so remove them on the page. when insert/update the table, use the fldName for the code field as well -->
+<!-- 
+     1 ===  Successfull
+     2 ===  Fail 
+    
+-->
 <?php
 include("logincheck.php");
 // include("meta.php");
@@ -11,7 +16,7 @@ $dblink = SharedConnect();
 $clientmsg = "";
 $cmd = AT_CMDCREATE;
 $clientid = 0;
-$notification = "";
+$notification = 0;
 //
 $fldcode = "";
 $fldname = "";
@@ -79,7 +84,7 @@ if (isset($_GET['cmd']))
     }
     else if ($cmd == AT_CMDDELETE)
     {
-        $notification = "REMOVESUCCESS";
+        
         $dbupdate = "update " .
             "clients " .
             "set " .
@@ -91,18 +96,13 @@ if (isset($_GET['cmd']))
             "cust_id=" . $_SESSION['custid'];
         if (SharedQuery($dbupdate, $dblink))
         {
-            //noty({text: response.msg, type: 'success', timeout: 10000});
-        //    echo "
-        //    <script type='text/javascript' src='js/noty/packaged/jquery.noty.packaged.min.js'></script>
-        //    <script type='text/javascript'> noty({theme: 'themeName',text: 'Some notification text'}).show()
-        //    </script>"; 
+            $notification = 1;
             $clientmsg = "Client " . $fldname . " has been deleted."; 
         }
-        //alert("Client " . $fldcode . " has been deleted.");
         else
         {
+            $notification = 2;
             $clientmsg = "Unable to delete " . $fldname . ". Please try again or contact support.";
-            $notification = "REMOVEFAIL";
         }
             
         //
@@ -169,7 +169,7 @@ else if (isset($_POST['fldName']))
         error_log($dbinsert);
         if (SharedQuery($dbinsert, $dblink))
         {
-            $notification = "INSERTSUCCESS";
+            $notification = 1;
             $clientmsg = "Client " . $fldname . " has been added.";
             // Successful save, clear form...
             $fldcode = "";
@@ -186,7 +186,7 @@ else if (isset($_POST['fldName']))
         }
         else
         {
-            $notification = "INSERTFAIL";
+            $notification = 2;
             $clientmsg = "Unable to add " . $fldcode . ". Please try again or contact support.";
         }
             
@@ -217,9 +217,18 @@ else if (isset($_POST['fldName']))
         error_log("This is for update");
         error_log($dbupdate);
         if (SharedQuery($dbupdate, $dblink))
+        {
+            $notification = 1;
             $clientmsg = "Client " . $fldname . " has been updated.";
+
+        }
         else
+        {            
+            $notification = 2;
             $clientmsg = "Unable to save " . $fldname . ". Please try again or contact support.";
+
+
+        }
     }
 }
 ?>
@@ -239,16 +248,32 @@ else if (isset($_POST['fldName']))
             notification = "<?php if ($notification != "") echo $notification; else echo 123;?>";
             console.log( message );
             console.log(notification);
-            if (notification == "REMOVESUCCESS")
+            if (notification == 1)
             {
                // console.log(document.g)
                 //document.getElementById('savingPDFAlert').style.display = 'block';
-                noty({text: message, type: 'success', timeout: 40000});
+                noty({text: message, type: 'success', timeout: 3000});
             }
-            else if (notification === "REMOVEFAIL")
+            else if (notification == 2)
             {
-                noty({text: message, type: 'error', timeout: 40000});
+                noty({text: message, type: 'error', timeout: 3000});
             }
+            // else if (notification == 3)
+            // {
+            //     noty({text: message, type: 'success', timeout: 3000});
+            // }
+            // else if (notification == 4)
+            // {
+            //     noty({text: message, type: 'error', timeout: 3000});
+            // }
+            // else if (notification == 5)
+            // {
+            //     noty({text: message, type: 'success', timeout: 3000});
+            // }
+            // else if (notification == 6)
+            // {
+            //     noty({text: message, type: 'error', timeout: 3000});
+            // }
         });
         function initAutocomplete() {
             // Create the autocomplete object, restricting the search to geographical
@@ -393,7 +418,6 @@ else if (isset($_POST['fldName']))
         <strong>Saving PDF. Please don't close this page. It will take a while</strong>
     </div>
             <div class="existingClientsDIV">
-                <!-- <label><?php if ($clientmsg != "") echo $clientmsg; else echo date("l, F j, Y"); ?></label> -->
                 <label><?php echo date("l, F j, Y"); ?></label>
                 <h2 class="clientTitle">Clients</h2>
                 <label>Move mouse over links for tips. Click on table header to sort by that column.</label>

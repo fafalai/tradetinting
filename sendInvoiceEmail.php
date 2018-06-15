@@ -4,6 +4,10 @@
   require_once("remedyerrcodes.php");
   require_once("remedyutils.php");
   require_once("class.phpmailer.php");
+  require_once("js/dompdf/autoload.inc.php");
+
+   // reference the Dompdf namespace
+   use Dompdf\Dompdf;
 
   $errcode = REMEDY_ERR_NONE;
   $count = 0;
@@ -11,6 +15,7 @@
   $clientid = 0;
   $jobid = 0;
   error_log("I am in");
+  $emailTemplate;
   try
   {
     error_log($_POST['uuid']);
@@ -438,8 +443,24 @@
                 $emailtemplate = str_replace("XXX_GLASSTYPE",$glassType,$emailtemplate);
                 $emailtemplate = str_replace("XXX_FRAMETYPE",$frameType,$emailtemplate);
                 // $emailtemplate = str_replace("XXX_FILMTYPE",$filmType,$emailtemplate);
-                
+                //save this inovice 
+                file_put_contents("quoteEmailTemplate/$clientid.html",$emailtemplate);
                 SharedSendHtmlMail($resultsetCust['email'], $businessName, $client['email'],$client['name'], "Quote Confirmation", $emailtemplate);
+
+
+                //Convert the html to pdf
+                error_log("convering html to pdf");
+                $dompdf = new Dompdf();
+                $dompdf->loadHtml(file_get_contents("quoteEmailTemplate/$clientid.html"));
+                // (Optional) Setup the paper size and orientation
+                $dompdf->setPaper('A4', 'portrait');
+                // Render the HTML as PDF
+                $dompdf->render();
+                //Output the pdf
+                $emailPDF = $dompdf -> output();
+                file_put_contents("quoteEmailTemplate/$clientid.pdf",$emailPDF);
+
+                // SharedSendHtmlMail($resultsetCust['email'], $businessName, $client['email'],$client['name'], "Quote Confirmation", $emailtemplate,"","",$emailPDF);
                 error_log("sending email");
               }
               else

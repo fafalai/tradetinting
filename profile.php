@@ -444,6 +444,16 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
             </textarea>
             <input type="submit" value="save Template" name="saveTemplate">
         </form>
+        <script>
+             CKEDITOR.replace( 'editor', {
+                    filebrowserBrowseUrl: 'js/ckfinder/ckfinder.html',
+                    filebrowserImageBrowseUrl: 'js/ckfinder/ckfinder.html?type=Images',
+                    filebrowserFlashBrowseUrl: 'js/ckfinder/ckfinder.html?type=Flash',
+                    filebrowserUploadUrl: 'js/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+                    filebrowserImageUploadUrl: 'js/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+                    filebrowserFlashUploadUrl: 'js/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
+                } );
+        </script>
 
     </div>
     <!-- <script language="javascript">

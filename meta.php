@@ -26,7 +26,7 @@
 <link rel="stylesheet" type="text/css" href="lib/jquery-ui.css" />
 <link rel="stylesheet" type="text/css" href="styles.css" />
 
-<link rel="stylesheet" href="js/easyui/themes/Bootstrap/easyui.css">
+<link rel="stylesheet" href="js/easyui/themes/bootstrap/easyui.css">
 <link rel="stylesheet" href="js/easyui/themes/icon.css">
 <link rel="icon" type="image/ico" href="images/icon.png" />
 <link rel="shortcut icon" href="images/icon.png" />

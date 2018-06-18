@@ -267,6 +267,7 @@ if ($dbresult = SharedQuery($dbselect, $dblink)) {
 
             <?php include "bottom.php";?>
         </div>
+        <script src="js/jobdetails.js"></script>
     </body>
 
     </html>

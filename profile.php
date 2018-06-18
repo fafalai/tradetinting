@@ -463,5 +463,6 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
     <?php
     include("bottom.php");
     ?>
+<script src="js/profile.js"></script>
 </body>
 </html>

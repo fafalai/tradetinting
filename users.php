@@ -274,38 +274,46 @@
     include ("meta.php");
   ?>
       <script type="text/javascript">
-       $( document ).ready(function() {
-            var message = "";
-            var notification = "";
-            message = "<?php if ($usermsg != "") echo $usermsg; else echo 123;?>";
-            notification = "<?php if ($notification != "") echo $notification; else echo 123;?>";
-            console.log( message );
-            console.log(notification);
-            if (notification == 1)
-            {
-                noty({text: message, type: 'success', timeout: 3000});
-            }
-            else if (notification == 2)
-            {
-                noty({text: message, type: 'error', timeout: 3000});
-            }
-            // else if (notification == 3)
-            // {
-            //     noty({text: message, type: 'success', timeout: 3000});
-            // }
-            // else if (notification == 4)
-            // {
-            //     noty({text: message, type: 'error', timeout: 3000});
-            // }
-            // else if (notification == 5)
-            // {
-            //     noty({text: message, type: 'success', timeout: 3000});
-            // }
-            // else if (notification == 6)
-            // {
-            //     noty({text: message, type: 'error', timeout: 3000});
-            // }
+        $(document).ready(function () {
+          var message = "";
+          var notification = "";
+          message = "<?php if ($usermsg != "
+          ") echo $usermsg; else echo 123;?>";
+          notification = "<?php if ($notification != "
+          ") echo $notification; else echo 123;?>";
+          console.log(message);
+          console.log(notification);
+          if (notification == 1) {
+            noty({
+              text: message,
+              type: 'success',
+              timeout: 3000
+            });
+          } else if (notification == 2) {
+            noty({
+              text: message,
+              type: 'error',
+              timeout: 3000
+            });
+          }
+          // else if (notification == 3)
+          // {
+          //     noty({text: message, type: 'success', timeout: 3000});
+          // }
+          // else if (notification == 4)
+          // {
+          //     noty({text: message, type: 'error', timeout: 3000});
+          // }
+          // else if (notification == 5)
+          // {
+          //     noty({text: message, type: 'success', timeout: 3000});
+          // }
+          // else if (notification == 6)
+          // {
+          //     noty({text: message, type: 'error', timeout: 3000});
+          // }
         });
+
         function OnFormLoad() {
           <?php
         if ($cmd == AT_CMDCREATE)
@@ -468,7 +476,7 @@
                 if ($cmd == AT_CMDCREATE)
                 {
               ?>
-                    <form action="users.php" method="post" id="frmUsers">
+                    <form action="users.php?cmd=<?php echo AT_CMDCREATE; ?>&id=0" method="post" id="frmUsers">
                       <table style="width: 100%">
                         <tr>
                           <td colspan="2">
@@ -478,10 +486,10 @@
                         <tr>
                           <!-- <td align="left" valign="top">&nbsp;</td> -->
                           <td align="left" valign="top">
-                            <a href="users.php?cmd=<?php echo AT_CMDCREATE; ?>&id=0" class="myButton">Create New</a>
+                            <a href="users.php?cmd=<?php echo AT_CMDCREATE; ?>&id=0" class="myButton">Clear fields</a>
                           </td>
                         </tr>
-                        
+
                         <tr>
                           <!-- <td align="left" valign="top">User ID:</td> -->
                           <td align="left" valign="top">
@@ -491,16 +499,17 @@
                           </td>
                         </tr>
                         <tr>
-                        <tr>
-                          <!-- <td align="left" valign="top">Name:</td> -->
-                          <td align="left" valign="top">
-                            <input id="fldName" name="fldName" type="text" size="20" placeholder="Name" maxlength="<?php echo AT_MAXNAME; ?>" value="<?php echo SharedPrepareDisplayString($fldname); ?>"  />
-                            <div id="frmUsers_fldName_errorloc" class="error_strings"></div>
-                          </td>
-                        </tr>
+                          <tr>
+                            <!-- <td align="left" valign="top">Name:</td> -->
+                            <td align="left" valign="top">
+                              <input required id="fldName" name="fldName" type="text" size="20" placeholder="Name" maxlength="<?php echo AT_MAXNAME; ?>"
+                                value="<?php echo SharedPrepareDisplayString($fldname); ?>" />
+                              <div id="frmUsers_fldName_errorloc" class="error_strings"></div>
+                            </td>
+                          </tr>
                           <!-- <td align="left" valign="top">Password:</td> -->
                           <td align="left" valign="top">
-                            <input required id="fldPwd" name="fldPwd" type="password" size="20" placeholder="password" maxlength="<?php echo AT_MAXPWD; ?>"
+                            <input required pattern="^(\w|\W){5,}$" id="fldPwd" name="fldPwd" type="password" size="20" placeholder="Password (Must be at least 5 characters and not too simple)" maxlength="<?php echo AT_MAXPWD; ?>"
                             />
                             <div id="frmUsers_fldPwd_errorloc" class="error_strings"></div>
                           </td>
@@ -508,9 +517,8 @@
                         <tr>
                           <!-- <td align="left" valign="top">Confirm:</td> -->
                           <td align="left" valign="top">
-                            <input required id="fldConfirmPwd" name="fldConfirmPwd" type="password" size="20" placeholder="Repeat Password" maxlength="<?php echo AT_MAXPWD; ?>"/>
-                            <span id="error_message" class="text-danger col" style="display:none">* Two passwords are different</span>
-                           
+                            <input required pattern="^(\w|\W){5,}$" id="fldConfirmPwd" name="fldConfirmPwd" type="password" size="20" placeholder="Repeat Password"
+                              maxlength="<?php echo AT_MAXPWD; ?>" />
                             <div id="frmUsers_fldConfirmPwd_errorloc" class="error_strings"></div>
                           </td>
                         </tr>
@@ -526,21 +534,18 @@
                         <tr>
                           <!-- <td align="left" valign="top">Mobile:</td> -->
                           <td align="left" valign="top">
-                            <input required pattern="^[0-9]{6,}$" title="Invalid Phone number" id="fldMobile" name="fldMobile" type="text" size="20"
-                              placeholder="Mobile" maxlength="<?php echo AT_MAXPHONE; ?>" value="<?php echo SharedPrepareDisplayString($fldmobile); ?>"
+                            <input required pattern="^\d{5,}$" title="Invalid Phone number" id="fldMobile" name="fldMobile" type="text" size="20" placeholder="Mobile (Must be at least 5 digits)"
+                              maxlength="<?php echo AT_MAXPHONE; ?>" value="<?php echo SharedPrepareDisplayString($fldmobile); ?>"
                             />
                             <div id="frmUsers_fldMobile_errorloc" class="error_strings"></div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <span id="error_message" class="text-danger col" style="display:none">* Two passwords are different</span>
                           </td>
                         </tr>
                         <tr>
                           <!-- <td align="left" valign="top">&nbsp;</td> -->
                           <td align="left" valign="top">
                             <input id="btnSave" type="submit" value="Save" />
+                            <br>
+                            <span id="error_message" class="text-danger col" style="display:none">* Two passwords are different</span>
                           </td>
                         </tr>
                       </table>
@@ -569,21 +574,22 @@
                       frmvalidator.addValidation("fldEmail", "email", "Please enter a valid email address");
                       frmvalidator.addValidation("fldMobile", "maxlen=<?php echo AT_MAXPHONE;?>",
                         "Max length is <?php echo AT_MAXPHONE;?>");
-                      frmvalidator.addValidation("fldMobile",
-                        "regexp=^[0-9]{10}$|^\(0[1-9]{1}\)[0-9]{8}$|^[0-9]{8}$|^[0-9]{4}[ ][0-9]{3}[ ][0-9]{3}$|^\(0[1-9]{1}\)[ ][0-9]{4}[ ][0-9]{4}$|^[0-9]{4}[ ][0-9]{4}$",
-                        "Must be in 04xxyyyzzz or xxxxyyyy format");
+                      // frmvalidator.addValidation("fldMobile",
+                      //   "regexp=^[0-9]{10}$|^\(0[1-9]{1}\)[0-9]{8}$|^[0-9]{8}$|^[0-9]{4}[ ][0-9]{3}[ ][0-9]{3}$|^\(0[1-9]{1}\)[ ][0-9]{4}[ ][0-9]{4}$|^[0-9]{4}[ ][0-9]{4}$",
+                      //   "Must be in 04xxyyyzzz or xxxxyyyy format");
                     </script>
+
                     <?php
                 }
                 else if ($cmd == AT_CMDMODIFY)
                 {
               ?>
-                      <form action="users.php" method="post" id="frmUsers">
+                      <form action="users.php?cmd=<?php echo AT_CMDCREATE; ?>&id=0" method="post" id="frmUsers">
                         <table style="width: 100%">
                           <tr>
                             <!-- <td align="left" valign="top">&nbsp;</td> -->
                             <td align="left" valign="top">
-                              <a href="users.php?cmd=<?php echo AT_CMDCREATE; ?>&id=0" class="myButton">Create New</a>
+                              <a href="users.php?cmd=<?php echo AT_CMDCREATE; ?>&id=0" class="myButton">Return</a>
                             </td>
                           </tr>
                           <tr>
@@ -598,24 +604,26 @@
                           <tr>
                             <!-- <td align="left" valign="top">Name:</td> -->
                             <td align="left" valign="top">
-                              <input id="fldModName" name="fldModName" type="text" size="20" placeholder="Name" maxlength="50" class="required" value="<?php echo SharedPrepareDisplayString($fldname); ?>"
-                              />
+                              <input required id="fldModName" name="fldModName" type="text" size="20" placeholder="Name" maxlength="50" class="required"
+                                value="<?php echo SharedPrepareDisplayString($fldname); ?>" />
                               <div id="frmUsers_fldModName_errorloc" class="error_strings"></div>
                             </td>
                           </tr>
                           <tr>
                             <!-- <td align="left" valign="top">Email:</td> -->
                             <td align="left" valign="top">
-                              <input id="fldModEmail" name="fldModEmail" type="text" size="20" placeholder="Email" maxlength="<?php echo AT_MAXEMAIL; ?>"
-                                value="<?php echo SharedPrepareDisplayString($fldemail); ?>" />
+                              <input required pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" id="fldModEmail" name="fldModEmail"
+                                type="text" size="20" placeholder="Email" maxlength="<?php echo AT_MAXEMAIL; ?>" value="<?php echo SharedPrepareDisplayString($fldemail); ?>"
+                              />
                               <div id="frmUsers_fldModEmail_errorloc" class="error_strings"></div>
                             </td>
                           </tr>
                           <tr>
                             <!-- <td align="left" valign="top">Mobile:</td> -->
                             <td align="left" valign="top">
-                              <input id="fldModMobile" name="fldModMobile" type="text" size="20" placeholder="Mobile" maxlength="<?php echo AT_MAXPHONE; ?>"
-                                value="<?php echo SharedPrepareDisplayString($fldmobile); ?>" />
+                              <input required pattern="^\d{6,}$" id="fldModMobile" name="fldModMobile" type="text" size="20" placeholder="Mobile (Must be at least 5 digits)"
+                                maxlength="<?php echo AT_MAXPHONE; ?>" value="<?php echo SharedPrepareDisplayString($fldmobile); ?>"
+                              />
                               <div id="frmUsers_fldModMobile_errorloc" class="error_strings"></div>
                             </td>
                           </tr>
@@ -646,7 +654,7 @@
                           "Must be in 04xxyyyzzz or xxxxyyyy format");
                       </script> -->
 
-                      <form action="users.php" method="post" id="frmPwd">
+                      <form action="users.php?cmd=<?php echo AT_CMDCREATE; ?>&id=0" method="post" id="frmPwd">
                         <table style="width: 100%">
                           <tr>
                             <!-- <td align="left" valign="top" width="80px">&nbsp;</td> -->
@@ -655,21 +663,23 @@
                           <tr>
                             <!-- <td align="left" valign="top">Password:</td> -->
                             <td align="left" valign="top">
-                              <input id="fldPwd" name="fldPwd" type="password" size="20" placeholder="Password" maxlength="50" class="required validate-password"
-                              />
+                              <input id="fldPwd" pattern="^(\w|\W){5,}$" name="fldPwd" type="password" size="20" placeholder="Password (Must be at least 5 characters and not too simple)"
+                                maxlength="50" class="required validate-password" />
                             </td>
                           </tr>
                           <tr>
                             <!-- <td align="left" valign="top">Confirm:</td> -->
                             <td align="left" valign="top">
-                              <input id="fldConfirmPwd" name="fldConfirmPwd" type="password" placeholder="Repeat Password" size="20" maxlength="50" class="required validate-confirm"
-                              />
+                              <input id="fldConfirmPwd" pattern="^(\w|\W){5,}$" name="fldConfirmPwd" type="password" placeholder="Repeat Password" size="20"
+                                maxlength="50" class="required validate-confirm" />
                             </td>
                           </tr>
                           <tr>
                             <!-- <td align="left" valign="top">&nbsp;</td> -->
                             <td align="left" valign="top">
-                              <input id="btnSavePwd" type="submit" value="Save" />
+                              <input id="btnSavePwd" type="submit" value="Save" style="background-color:gray;" disabled/>
+                              <br>
+                              <span id="error_message" class="text-danger col" style="display:none">* Two passwords are different</span>
                             </td>
                           </tr>
                         </table>
@@ -702,6 +712,7 @@
     ?>
             <!-- end #footer -->
       </div>
+      <script src="js/users.js"></script>
   </body>
 
   </html>

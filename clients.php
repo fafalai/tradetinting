@@ -586,7 +586,7 @@ else if (isset($_POST['fldName']))
                             <tr>
                                 <!-- <td align="left" valign="top">Mobile:</td> -->
                                 <td align="left" valign="top" colspan="2" style="width: 50%">
-                                    <input style="width: 100%" id="fldMobile" name="fldMobile" type="text" placeholder="MOBILE (Numbers only)" size="20" maxlength="<?php echo AT_MAXPHONE; ?>" value="<?php echo SharedPrepareDisplayString($fldmobile); ?>" required pattern="^[0-9]{6,}$" title="Invalid Phone number"/>
+                                    <input style="width: 100%" id="fldMobile" name="fldMobile" type="text" placeholder="Mobile (Must be at least 5 digits)" size="20" maxlength="<?php echo AT_MAXPHONE; ?>" value="<?php echo SharedPrepareDisplayString($fldmobile); ?>" required pattern="^[0-9]{5,}$" title="Invalid Phone number"/>
                                     <div id="frmClients_fldMobile_errorloc" class="error_strings"></div>
                                 </td>
                             </tr>

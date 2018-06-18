@@ -1,3 +1,8 @@
+<!-- 
+     1 ===  Successfull
+     2 ===  Fail 
+    
+-->
 <?php
 include("logincheck.php");
 if (!isset($_SERVER['HTTPS']))
@@ -8,6 +13,7 @@ if (!isset($_SERVER['HTTPS']))
 $dblink = SharedConnect();
 $profilemsg = "";
 $detailmsg = "";
+$notification = 0;
 define('AT_MAXIDENTIFICATIONNO', 50);
 define('AT_MAXCOUNTRY', 50);
 define('AT_MAXCURRENCY', 10);
@@ -55,9 +61,17 @@ if (isset($_POST['fldName']) || isset($_POST['fldContact']) || isset($_POST['fld
         "id=" . $_SESSION['custid'];
     error_log($dbupdate);
     if (SharedQuery($dbupdate, $dblink))
-        $detailmsg = "Your details have been updated.";
+    {
+        $detailmsg = "Your business details have been updated.";
+        $notification = 1;
+    }
+       
     else
+    {
+        $notification = 2;
         $detailmsg = "Unable to save your details. Please try again or contact support.";
+    }
+        
 }
 if($_POST['saveTemplate'])
 {
@@ -65,13 +79,23 @@ if($_POST['saveTemplate'])
     {
         $text = $_POST['editor'];
         $custid = $_SESSION['custid'];
-        echo "$text";
-        if (file_exists("quoteEmailTemplate/$custid.html") == true)
-        {
-            echo "quoteEmailTemplate/$custid.html exits";
-        }
+        //echo "$text";
+        // if (file_exists("quoteEmailTemplate/$custid.html") == true)
+        // {
+        //     echo "quoteEmailTemplate/$custid.html exits";
+        // }
         $myfile = fopen("quoteEmailTemplate/$custid.html", "w") or die("Unable to open file!");
-        fwrite($myfile, $text);
+        $result = fwrite($myfile, $text);
+        if ($result == 0)
+        {
+            $notification = 2;
+            $detailmsg = "Unable to update your template. Please try again or contact support.";
+        }
+        else
+        {
+            $notification = 1;
+            $detailmsg = "Your template has been saved";
+        }
         // $txt = "Jane Doe\n";
         // fwrite($myfile, $txt);
         fclose($myfile);
@@ -146,98 +170,125 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    <!-- <script src="countries.js"></script> -->
-    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBqCHDj475c_6YSc9yqwBH3eN1bYovqtUE&libraries=places&callback=initAutocomplete" async defer></script>
-    <script type="text/javascript">
-    function initAutocomplete() 
-    {
-        // Create the autocomplete object, restricting the search to geographical
-        // location types.
-        console.log("I am in");
-        autocomplete = new google.maps.places.Autocomplete(/** @type {!HTMLInputElement} */(document.getElementById('fldAddress')),{types: ['geocode']});
-
-        // When the user selects an address from the dropdown, populate the address
-        // fields in the form.
-        google.maps.event.addListener
-        (
-            autocomplete,
-            'place_changed',
-            function()
-            {
-                var place = autocomplete.getPlace();
-
-                if (!_.isUndefined(place.address_components))
-                {
-                    if (place.address_components.length == 8)
-                    {
-                        console.log("length 8");
-                        console.log(place.address_components);
-                        //$('#fldNewBookingCustAddress1').textbox('setValue', place.name);
-                        document.getElementById('fldAddress').value = place.name
-                        //$('#fldCity').textbox('setValue', place.address_components[3].short_name);
-                        document.getElementById('fldCity').value = place.address_components[3].short_name;
-                        //$('#fldNewBookingCustPostcode').textbox('setValue', place.address_components[7].short_name);
-                        document.getElementById('fldState').value = place.address_components[5].short_name;
-                        // $('#fldState').combobox('setValue', place.address_components[5].short_name);
-                        document.getElementById('fldCountry').value = place.address_components[6].long_name;
-                        document.getElementById('fldPostcode').value = place.address_components[7].short_name;  
-                    }
-                    else if (place.address_components.length == 9)
-                    {
-                        console.log("length 9");
-                        console.log(place.address_components);
-                        //$('#fldNewBookingCustAddress1').textbox('setValue', place.name);
-                        document.getElementById('fldAddress').value = place.name
-                        //$('#fldCity').textbox('setValue', place.address_components[3].short_name);
-                        document.getElementById('fldCity').value = place.address_components[3].short_name;
-                        //$('#fldNewBookingCustPostcode').textbox('setValue', place.address_components[7].short_name);
-                        document.getElementById('fldState').value = place.address_components[5].short_name;
-                        // $('#fldState').combobox('setValue', place.address_components[5].short_name);
-                        document.getElementById('fldCountry').value = place.address_components[6].long_name;
-                        document.getElementById('fldPostcode').value = place.address_components[7].short_name;
-                    }
-                    else
-                    {
-                        console.log("other");
-                        console.log(place.address_components);
-                        //$('#fldNewBookingCustAddress1').textbox('setValue', place.name);
-                        document.getElementById('fldAddress').value = place.name;
-                        //$('#fldNewBookingCustCity').textbox('setValue', place.address_components[2].short_name);
-                        document.getElementById('fldCity').value = place.address_components[2].short_name;
-                        //$('#fldNewBookingCustPostcode').textbox('setValue', place.address_components[6].short_name);
-                        document.getElementById('fldState').value = place.address_components[4].short_name;
-                        document.getElementById('fldCountry').value = place.address_components[5].long_name;
-                        document.getElementById('fldPostcode').value = place.address_components[6].short_name;
-                    }
-                }
-            }
-        );
-    }
-
-    // Bias the autocomplete object to the user's geographical location,
-    // as supplied by the browser's 'navigator.geolocation' object.
-    function geolocate() 
-    {
-        if (navigator.geolocation) 
-        {
-            navigator.geolocation.getCurrentPosition(function(position) {
-            var geolocation = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            };
-            var circle = new google.maps.Circle({
-                center: geolocation,
-                radius: position.coords.accuracy
-            });
-            autocomplete.setBounds(circle.getBounds());
-            });
-        }
-    }   
-    </script>
     <?php
         include ("meta.php");
     ?>
+    <!-- <link rel="stylesheet" type="text/css" href="styles.css"> -->
+    <!-- <script src="countries.js"></script> -->
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBqCHDj475c_6YSc9yqwBH3eN1bYovqtUE&libraries=places&callback=initAutocomplete" async defer></script>
+    <script type="text/javascript">
+        $( document ).ready(function() {
+                var message = "";
+                var notification = "";
+                message = "<?php if ($detailmsg != "") echo $detailmsg; else echo 123;?>";
+                notification = "<?php if ($notification != "") echo $notification; else echo 123;?>";
+                console.log( message );
+                console.log(notification);
+                if (notification == 1)
+                {
+                    noty({text: message, type: 'success', timeout: 3000});
+                }
+                else if (notification == 2)
+                {
+                    noty({text: message, type: 'error', timeout: 3000});
+                }
+                // else if (notification == 7)
+                // {
+                    
+                //     noty({text: message, type: 'success', timeout: 3000});
+                // }
+                // else if (notification == 8)
+                // {
+                    
+                //     noty({text: message, type: 'error', timeout: 3000});
+                // }
+            });
+        
+        function initAutocomplete() 
+        {
+            // Create the autocomplete object, restricting the search to geographical
+            // location types.
+            console.log("I am in");
+            autocomplete = new google.maps.places.Autocomplete(/** @type {!HTMLInputElement} */(document.getElementById('fldAddress')),{types: ['geocode']});
+
+            // When the user selects an address from the dropdown, populate the address
+            // fields in the form.
+            google.maps.event.addListener
+            (
+                autocomplete,
+                'place_changed',
+                function()
+                {
+                    var place = autocomplete.getPlace();
+
+                    if (!_.isUndefined(place.address_components))
+                    {
+                        if (place.address_components.length == 8)
+                        {
+                            console.log("length 8");
+                            console.log(place.address_components);
+                            //$('#fldNewBookingCustAddress1').textbox('setValue', place.name);
+                            document.getElementById('fldAddress').value = place.name
+                            //$('#fldCity').textbox('setValue', place.address_components[3].short_name);
+                            document.getElementById('fldCity').value = place.address_components[3].short_name;
+                            //$('#fldNewBookingCustPostcode').textbox('setValue', place.address_components[7].short_name);
+                            document.getElementById('fldState').value = place.address_components[5].short_name;
+                            // $('#fldState').combobox('setValue', place.address_components[5].short_name);
+                            document.getElementById('fldCountry').value = place.address_components[6].long_name;
+                            document.getElementById('fldPostcode').value = place.address_components[7].short_name;  
+                        }
+                        else if (place.address_components.length == 9)
+                        {
+                            console.log("length 9");
+                            console.log(place.address_components);
+                            //$('#fldNewBookingCustAddress1').textbox('setValue', place.name);
+                            document.getElementById('fldAddress').value = place.name
+                            //$('#fldCity').textbox('setValue', place.address_components[3].short_name);
+                            document.getElementById('fldCity').value = place.address_components[3].short_name;
+                            //$('#fldNewBookingCustPostcode').textbox('setValue', place.address_components[7].short_name);
+                            document.getElementById('fldState').value = place.address_components[5].short_name;
+                            // $('#fldState').combobox('setValue', place.address_components[5].short_name);
+                            document.getElementById('fldCountry').value = place.address_components[6].long_name;
+                            document.getElementById('fldPostcode').value = place.address_components[7].short_name;
+                        }
+                        else
+                        {
+                            console.log("other");
+                            console.log(place.address_components);
+                            //$('#fldNewBookingCustAddress1').textbox('setValue', place.name);
+                            document.getElementById('fldAddress').value = place.name;
+                            //$('#fldNewBookingCustCity').textbox('setValue', place.address_components[2].short_name);
+                            document.getElementById('fldCity').value = place.address_components[2].short_name;
+                            //$('#fldNewBookingCustPostcode').textbox('setValue', place.address_components[6].short_name);
+                            document.getElementById('fldState').value = place.address_components[4].short_name;
+                            document.getElementById('fldCountry').value = place.address_components[5].long_name;
+                            document.getElementById('fldPostcode').value = place.address_components[6].short_name;
+                        }
+                    }
+                }
+            );
+        }
+
+        // Bias the autocomplete object to the user's geographical location,
+        // as supplied by the browser's 'navigator.geolocation' object.
+        function geolocate() 
+        {
+            if (navigator.geolocation) 
+            {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                var geolocation = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                var circle = new google.maps.Circle({
+                    center: geolocation,
+                    radius: position.coords.accuracy
+                });
+                autocomplete.setBounds(circle.getBounds());
+                });
+            }
+        }   
+    </script>
     <title>Remedy Test & Tag - Company</title>
 </head>
 <body>
@@ -393,6 +444,16 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
             </textarea>
             <input type="submit" value="save Template" name="saveTemplate">
         </form>
+        <script>
+             CKEDITOR.replace( 'editor', {
+                    filebrowserBrowseUrl: 'js/ckfinder/ckfinder.html',
+                    filebrowserImageBrowseUrl: 'js/ckfinder/ckfinder.html?type=Images',
+                    filebrowserFlashBrowseUrl: 'js/ckfinder/ckfinder.html?type=Flash',
+                    filebrowserUploadUrl: 'js/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+                    filebrowserImageUploadUrl: 'js/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+                    filebrowserFlashUploadUrl: 'js/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
+                } );
+        </script>
 
     </div>
     <!-- <script language="javascript">
@@ -412,5 +473,6 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
     <?php
     include("bottom.php");
     ?>
+<script src="js/profile.js"></script>
 </body>
 </html>

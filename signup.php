@@ -12,6 +12,7 @@
     <html>
 
     <head>
+        <?php include("meta.php");?>
         <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBqCHDj475c_6YSc9yqwBH3eN1bYovqtUE&libraries=places&callback=initAutocomplete"
             async defer></script>
         <script type="text/javascript">
@@ -92,7 +93,6 @@
                 }
             }
         </script>
-        <?php include("meta.php");?>
         <title>Sign Up</title>
     </head>
 
@@ -106,14 +106,14 @@
                     <input id="sign_id" class="form-control" type="text" placeholder="NAME" required>
                 </div>
                 <div class="row">
-                    <input id="sign_phone" class="form-control col-sm-5" type="text" placeholder="MOBILE (Number only)" required pattern="^[0-9]{6,}$"
+                    <input id="sign_phone" class="form-control col-sm-5" type="text" placeholder="Mobile (Must be at least 5 digits)" required pattern="^[0-9]{5,}$"
                         title="Invalid Phone number">
                     <input id="sign_email" class="form-control col" type="text" placeholder="EMAIL" required pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
                         title="Invalid Email address">
                 </div>
                 <!-- <div class="row">
-                    <input id="sign_country" class="form-control" type="text" placeholder="COUNTRY">
-                </div> -->
+                <input id="sign_country" class="form-control" type="text" placeholder="COUNTRY">
+            </div> -->
                 <div class="row">
                     <input id="sign_address" class="form-control" type="text" placeholder="ADDRESS" onFocus="geolocate()">
                 </div>
@@ -125,11 +125,11 @@
                 </div>
                 <span class="myhr"></span>
                 <div class="row">
-                    <input id="sign_password" class="form-control col-sm-5" type="password" placeholder="PASSWORD" required>
-                    <input id="sign_secondPwd" class="form-control col" type="password" placeholder="RE-ENTER PASSWORD" required onchange="validatePwd()">
+                    <input id="sign_password" class="form-control col-sm-5" type="password" placeholder="Password (Must be at least 5 characters and not too simple)" required pattern="^(\w|\W){5,}$">
+                    <input id="sign_secondPwd" class="form-control col" type="password" placeholder="RE-ENTER PASSWORD" required pattern="^(\w|\W){5,}$">
                 </div>
                 <div class="row">
-                    <span id="error_message" class="text-danger col" style="display:none">Two passwords are different</span>
+                    <span id="error_message" class="text-danger col" style="display:none">* Two passwords are different</span>
                 </div>
 
                 <span class="myhr"></span>
@@ -166,7 +166,7 @@
             </div>
         </div>
         <?php include("bottom.php");?>
-        
+        <script src="js/signup.js"></script>
     </body>
 
     </html>

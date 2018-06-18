@@ -8,12 +8,12 @@ CKEDITOR.editorConfig = function( config ) {
 	// config.language = 'fr';
 	// config.uiColor = '#AADC6E';
 	//Configure with kcfinder, so user could upload image from local computer. 
-	config.filebrowserBrowseUrl = 'js/ckeditor/kcfinder/browse.php?opener=ckeditor&type=files';
-	config.filebrowserImageBrowseUrl = 'js/ckeditor/kcfinder/browse.php?opener=ckeditor&type=images';
-	config.filebrowserFlashBrowseUrl = 'js/ckeditor/kcfinder/browse.php?opener=ckeditor&type=flash';
-	config.filebrowserUploadUrl = 'js/ckeditor/kcfinder/upload.php?opener=ckeditor&type=files';
-	config.filebrowserImageUploadUrl = 'js/ckeditor/kcfinder/upload.php?opener=ckeditor&type=images';
-	config.filebrowserFlashUploadUrl = 'js/ckeditor/kcfinder/upload.php?opener=ckeditor&type=flash';
+	// config.filebrowserBrowseUrl = 'js/ckeditor/kcfinder/browse.php?opener=ckeditor&type=files';
+	// config.filebrowserImageBrowseUrl = 'js/ckeditor/kcfinder/browse.php?opener=ckeditor&type=images';
+	// config.filebrowserFlashBrowseUrl = 'js/ckeditor/kcfinder/browse.php?opener=ckeditor&type=flash';
+	// config.filebrowserUploadUrl = 'js/ckeditor/kcfinder/upload.php?opener=ckeditor&type=files';
+	// config.filebrowserImageUploadUrl = 'js/ckeditor/kcfinder/upload.php?opener=ckeditor&type=images';
+	// config.filebrowserFlashUploadUrl = 'js/ckeditor/kcfinder/upload.php?opener=ckeditor&type=flash';
 	config.height = 500;
 	config.toolbarCanCollapse = true;
 	config.removeButtons = 'Save,About';

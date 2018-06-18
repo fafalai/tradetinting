@@ -446,12 +446,14 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
         </form>
         <script>
              CKEDITOR.replace( 'editor', {
-                    filebrowserBrowseUrl: 'js/ckfinder/ckfinder.html',
-                    filebrowserImageBrowseUrl: 'js/ckfinder/ckfinder.html?type=Images',
-                    filebrowserFlashBrowseUrl: 'js/ckfinder/ckfinder.html?type=Flash',
-                    filebrowserUploadUrl: 'js/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
-                    filebrowserImageUploadUrl: 'js/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
-                    filebrowserFlashUploadUrl: 'js/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
+                    // filebrowserBrowseUrl: 'ckeditor/ckfinder/ckfinder.html',
+                        // filebrowserUploadUrl: 'ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files'
+                        filebrowserBrowseUrl: 'js/ckfinder/ckfinder.html',
+                        filebrowserImageBrowseUrl: 'js/ckfinder/ckfinder.html?type=Images',
+                        // filebrowserFlashBrowseUrl: './ckfinder/ckfinder.html?type=Flash',
+                        filebrowserUploadUrl: 'js/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+                        filebrowserImageUploadUrl: 'js/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+                        // filebrowserFlashUploadUrl: './ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
                 } );
         </script>
 

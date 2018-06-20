@@ -75,7 +75,7 @@
                                     <input type="radio" name="search" value="CreatedDate" id="searchCreatedDate"> Created Date(YYYY-MM-DD)<br>
                                 </form>
                                 <div class="entry">
-                                    <label style="margin-top:30px">Select a Job ID to see job details.</label>
+                                    <label style="margin-top:30px">Select a Quote to see job details.</label>
                                     <table border="0" align="left" id="tblJobs" rules="cols" frame="box" class="sortable">
                                         <tr>
                                             <th align="right">Created</th>

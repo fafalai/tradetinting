@@ -17,7 +17,7 @@
 <script type="text/javascript" src="js/underscore.js"></script>
 <script type="text/javascript" src="js/underscore.string.js"></script>
 <script type="text/javascript" src="js/easyui/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="js/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>

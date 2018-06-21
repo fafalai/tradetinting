@@ -289,7 +289,8 @@
                   //error_log($jobDetail['roomName']);
                   //error_log($jobDetail['totalPrice']);
                   //error_log($jobDetail['numOfWindows']);
-                  $row = "<tr style='text-align: center'> <td>" . 
+                  $row = "<tr style='text-align: center'>".
+                          "<td>" . 
                           $jobDetail['roomName']. 
                           "</td>
                           <td>".
@@ -300,9 +301,9 @@
                           "</td>
                           <td>".
                           "$".number_format((float)$jobDetail['totalPrice'], 2, '.', '').
-                          "</th>
+                          "</td>
                           </tr>";
-                error_log($row);
+                //error_log($row);
                 $tableReplace = $tableReplace.$row;
                 }
 
@@ -336,7 +337,7 @@
 
                         
                       }
-                      error_log($glassType);
+                      //error_log($glassType);
                     }
                     else
                     {
@@ -400,7 +401,7 @@
                     {
                       $filmType = $jobFilmType[$x]['filmType']. ", ".$filmType;
                     }
-                    error_log($filmType);
+                    //error_log($filmType);
                   }
                   else
                   {
@@ -408,9 +409,9 @@
                   }
                 }
 
-                error_log($glassType);
-                error_log($frameType);
-                error_log($filmType);
+                //error_log($glassType);
+                //error_log($frameType);
+                //error_log($filmType);
                 //error_log($tableReplace);
 
                 //error_log("Prints the day, date, month, year, time, AM or PM");
@@ -442,16 +443,15 @@
                 $emailtemplate = str_replace("XXX_DISCOUNTROW",$discountrow,$emailtemplate);
                 $emailtemplate = str_replace("XXX_GLASSTYPE",$glassType,$emailtemplate);
                 $emailtemplate = str_replace("XXX_FRAMETYPE",$frameType,$emailtemplate);
-                // $emailtemplate = str_replace("XXX_FILMTYPE",$filmType,$emailtemplate);
-                //save this inovice 
-                file_put_contents("quoteEmailTemplate/$clientid.html",$emailtemplate);
+                $emailtemplate = str_replace("XXX_FILMTYPE",$filmType,$emailtemplate);
                 SharedSendHtmlMail($resultsetCust['email'], $businessName, $client['email'],$client['name'], "Quote Confirmation", $emailtemplate);
 
 
                 //Convert the html to pdf
                 error_log("convering html to pdf");
                 $dompdf = new Dompdf();
-                $dompdf->loadHtml(file_get_contents("quoteEmailTemplate/$clientid.html"));
+                // $dompdf->loadHtml(file_get_contents("quoteEmailTemplate/$clientid.html"));
+                $dompdf->loadHtml($emailtemplate);
                 // (Optional) Setup the paper size and orientation
                 $dompdf->setPaper('A4', 'portrait');
                 // Render the HTML as PDF
@@ -459,8 +459,10 @@
                 //Output the pdf
                 $emailPDF = $dompdf -> output();
                 file_put_contents("quoteEmailTemplate/$clientid.pdf",$emailPDF);
+                $attachmentPath = "quoteEmailTemplate/$clientid.pdf";
+                error_log($attachmentPath);
 
-                // SharedSendHtmlMail($resultsetCust['email'], $businessName, $client['email'],$client['name'], "Quote Confirmation", $emailtemplate,"","",$emailPDF);
+                //SharedSendHtmlMail($resultsetCust['email'], $businessName, $client['email'],$client['name'], "Quote Confirmation", $emailtemplate,"","",$attachmentPath);
                 error_log("sending email");
               }
               else

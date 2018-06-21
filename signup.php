@@ -35,107 +35,110 @@
     $state = SharedCleanString($_POST['sign_state'],AT_MAXADDRESS);
     $city = SharedCleanString($_POST['sign_city'],AT_MAXADDRESS);
     $country = SharedCleanString($_POST['sign_country'],AT_MAXADDRESS);
+    $plan = SharedCleanString($_POST['plan_opt'],AT_MAXADDRESS);//This is for knowing how many users this customer could create, the numberUsers column in user table
+    error_log("selected plan:");
+    error_log($plan);
 
-    $dbinsertcust = "INSERT INTO cust ".
-                "(" .
-                "uuid,".
-                "address,".
-                "city,".
-                "state,".
-                "postcode,".
-                "country".
-                ") ".
-                "VALUES ".
-                "(" .
-                "'$custuuid',".
-                "'$address',".
-                "'$city',".
-                "'$state',".
-                "'$city',".
-                "'$country'".
-                ")";
-    // error_log($dbinsert);
-    error_log("creating a new cust");
-    error_log($dbinsertcust);
-    if (SharedQuery($dbinsertcust, $dblink))
-    {
-      //2nd Successful create the cust, use the uuid to get the id. 
-      $dbcustselect = "select ".
-                "c1.id ".
-                "from ".
-                "cust c1 ".
-                "where ".
-                "c1.uuid='$custuuid'";
-        error_log($dbcustselect);
-        if ($dbcustresult = SharedQuery($dbcustselect,$dblink))
-        {
-            if ($numrows = SharedNumRows($dbcustresult))
-            {
-                while($dbcustrow = SharedFetchArray($dbcustresult))
-                {
-                    //3rd, use the cust id to create the user
-                    $custid = $dbcustrow['id'];
-                    error_log("the new customer id is ");
-                    error_log($custid);
-                    $useruuid = RemedyUuid();
-                    error_log("the new user uuid");
-                    error_log($useruuid);
-                    $signuid = SharedCleanString($_POST['sign_id'],AT_MAXNAME);
-                    $signname = SharedCleanString($_POST['sign_name'],AT_MAXNAME);
-                    $signpwd = SharedCleanString($_POST['sign_password'],AT_MAXPWD);
-                    $signmobile = SharedCleanString($_POST['sign_phone'],AT_MAXPHONE);
-                    $signemail = SharedCleanString($_POST['sign_email'],AT_MAXEMAIL);
+    // $dbinsertcust = "INSERT INTO cust ".
+    //             "(" .
+    //             "uuid,".
+    //             "address,".
+    //             "city,".
+    //             "state,".
+    //             "postcode,".
+    //             "country".
+    //             ") ".
+    //             "VALUES ".
+    //             "(" .
+    //             "'$custuuid',".
+    //             "'$address',".
+    //             "'$city',".
+    //             "'$state',".
+    //             "'$city',".
+    //             "'$country'".
+    //             ")";
+    // // error_log($dbinsert);
+    // error_log("creating a new cust");
+    // error_log($dbinsertcust);
+    // if (SharedQuery($dbinsertcust, $dblink))
+    // {
+    //   //2nd Successful create the cust, use the uuid to get the id. 
+    //   $dbcustselect = "select ".
+    //             "c1.id ".
+    //             "from ".
+    //             "cust c1 ".
+    //             "where ".
+    //             "c1.uuid='$custuuid'";
+    //     error_log($dbcustselect);
+    //     if ($dbcustresult = SharedQuery($dbcustselect,$dblink))
+    //     {
+    //         if ($numrows = SharedNumRows($dbcustresult))
+    //         {
+    //             while($dbcustrow = SharedFetchArray($dbcustresult))
+    //             {
+    //                 //3rd, use the cust id to create the user
+    //                 $custid = $dbcustrow['id'];
+    //                 error_log("the new customer id is ");
+    //                 error_log($custid);
+    //                 $useruuid = RemedyUuid();
+    //                 error_log("the new user uuid");
+    //                 error_log($useruuid);
+    //                 $signuid = SharedCleanString($_POST['sign_id'],AT_MAXNAME);
+    //                 $signname = SharedCleanString($_POST['sign_name'],AT_MAXNAME);
+    //                 $signpwd = SharedCleanString($_POST['sign_password'],AT_MAXPWD);
+    //                 $signmobile = SharedCleanString($_POST['sign_phone'],AT_MAXPHONE);
+    //                 $signemail = SharedCleanString($_POST['sign_email'],AT_MAXEMAIL);
 
-                    $dbuserinset = "INSERT INTO users ".
-                                    "(" .
-                                    "cust_id," .
-                                    "uid," .
-                                    "pwd," .
-                                    "uuid," .
-                                    "name," .
-                                    "email," .
-                                    "mobile," .
-                                    "admin," .
-                                    "active" .
-                                    ") " .
-                                    "VALUES " .
-                                    "(" .
-                                    "'$custid'," .
-                                    "'$signuid'," .
-                                    "'$signpwd'," .
-                                    "'$useruuid'," .
-                                    "'$signname'," .
-                                    "'$signemail'," .
-                                    "'$signmobile'," .
-                                    "1,".
-                                    "1".
-                                    ")";
-                        error_log($dbuserinset);
-                        if (SharedQuery($dbuserinset, $dblink))
-                        {
-                          // Successful save, clear form...
-                          $notification = 1;
-                          $signupmsg =  "You have signed up successfully. Don't forget to complete your business details after log in";
-                        }
-                        else
-                        {
-                          $notification = 2;
-                          $signupmsg = "Unable to sign up Please try again or contact support.";
-                        }
-                }
-            }
-        }
-        else
-        {
-            $notification = 2;
-            $signupmsg = "Unable to sign up. Please try again or contact support.";
-        }
-    }
-    else
-    {
-      $notification = 2;
-      $signupmsg = "Unable to sign up. Please try again or contact support.";
-    }
+    //                 $dbuserinset = "INSERT INTO users ".
+    //                                 "(" .
+    //                                 "cust_id," .
+    //                                 "uid," .
+    //                                 "pwd," .
+    //                                 "uuid," .
+    //                                 "name," .
+    //                                 "email," .
+    //                                 "mobile," .
+    //                                 "admin," .
+    //                                 "active" .
+    //                                 ") " .
+    //                                 "VALUES " .
+    //                                 "(" .
+    //                                 "'$custid'," .
+    //                                 "'$signuid'," .
+    //                                 "'$signpwd'," .
+    //                                 "'$useruuid'," .
+    //                                 "'$signname'," .
+    //                                 "'$signemail'," .
+    //                                 "'$signmobile'," .
+    //                                 "1,".
+    //                                 "1".
+    //                                 ")";
+    //                     error_log($dbuserinset);
+    //                     if (SharedQuery($dbuserinset, $dblink))
+    //                     {
+    //                       // Successful save, clear form...
+    //                       $notification = 1;
+    //                       $signupmsg =  "You have signed up successfully. Don't forget to complete your business details after log in";
+    //                     }
+    //                     else
+    //                     {
+    //                       $notification = 2;
+    //                       $signupmsg = "Unable to sign up Please try again or contact support.";
+    //                     }
+    //             }
+    //         }
+    //     }
+    //     else
+    //     {
+    //         $notification = 2;
+    //         $signupmsg = "Unable to sign up. Please try again or contact support.";
+    //     }
+    // }
+    // else
+    // {
+    //   $notification = 2;
+    //   $signupmsg = "Unable to sign up. Please try again or contact support.";
+    // }
   }
 ?>
     <!DOCTYPE html>
@@ -318,17 +321,17 @@
                 <div class="form-group text-dark">
                     <div class="radio">
                         <h6>
-                            <input type="radio" name="plan_opt" value="opt_1">30 day free trial</h6>
+                            <input type="radio" name="plan_opt" value="10">30 day free trial</h6>
                     </div>
                     <div class="radio">
                         <h6>
-                            <input type="radio" name="plan_opt" value="opt_2">Annual plan - USD $99 per year
+                            <input type="radio" name="plan_opt" value="20">Annual plan - USD $99 per year
                             <span class="text-danger">(save 17% *)</span>
                         </h6>
                     </div>
                     <div class="radio">
                         <h6>
-                            <input type="radio" name="plan_opt" value="opt_3">3 Year plan - USD $250
+                            <input type="radio" name="plan_opt" value="30">3 Year plan - USD $250
                             <span class="text-danger">(save 30% *)</span>
                         </h6>
                     </div>

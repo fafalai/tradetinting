@@ -458,8 +458,8 @@
                 $dompdf->render();
                 //Output the pdf
                 $emailPDF = $dompdf -> output();
-                file_put_contents("quoteEmailTemplate/$clientid.pdf",$emailPDF);
-                $attachmentPath = "quoteEmailTemplate/$clientid.pdf";
+                file_put_contents("quotes/$clientid.pdf",$emailPDF);
+                $attachmentPath = "quotes/$clientid.pdf";
                 error_log($attachmentPath);
 
                 //SharedSendHtmlMail($resultsetCust['email'], $businessName, $client['email'],$client['name'], "Quote Confirmation", $emailtemplate,"","",$attachmentPath);

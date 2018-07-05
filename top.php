@@ -52,7 +52,9 @@
                         <a href="logout.php">Logout</a>
                     </div>
                     <!-- <div class="float-none"></div> -->
-                    <br><br><br>
+                    <br>
+                    <br>
+                    <br>
                     <div class="topmenu pull-right" id="DIV_topMenu">
                         <ul>
                             <li>
@@ -76,9 +78,9 @@
                                     <a href="contact.php">CONTACT</a>
                                 </li>
                                 <div class="dropdown">
-                                    <li>
-                                        <a href="#">ACCOUNT</a>
-                                    </li>
+                                    <!-- <li> -->
+                                    <a href="#">ACCOUNT</a>
+                                    <!-- </li> -->
                                     <!-- <li><button style="border:none"></button>Account</button></li> -->
                                     <div class="dropdown-content">
                                         <a href="profile.php">BUSINESS DETAILS</a>
@@ -97,5 +99,5 @@
                         ?>
                         </ul>
                     </div>
-
     </div>
+    <div class="clearfix"></div>

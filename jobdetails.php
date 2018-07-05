@@ -92,7 +92,7 @@ if ($dbresult = SharedQuery($dbselect, $dblink)) {
                             <!-- <th style="width:20%"> -->
                             <div style="background-color:#d8dad8" class="my-2 py-3 text-dark col-4">
                                 <b>
-                                    client name:
+                                    Client name:
                                     <?php echo $clientName; ?>
                                     </p>
                                     <p>Mobile:

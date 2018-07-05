@@ -24,7 +24,10 @@
         <?php include("top.php");?>
         <hr />
         <div class="container" style="width:70%">
-            <h2 class="clientTitle my-2">RESOURCES</h2>
+            <label>
+                <?php echo date("l, F j, Y"); ?>
+            </label>
+            <h2 class="clientTitle mb-2">RESOURCES</h2>
             <div id="DIV_resource">
                 <div class="easyui-accordion" style="width:100%;align-self: center;">
                     <div title="Heat Measurement" style="padding:10px">

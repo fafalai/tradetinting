@@ -297,12 +297,12 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
     ?>
     <hr />
 
-    <div class="profileDIV form-group container">
+    <div class="profileDIV container">
         <label><?php if ($clientmsg != "") echo $clientmsg; else echo date("l, F j, Y"); ?></label>
-        <h2 class="clientTitle">BUSINESS DETAILS</h2>
+        <h2 class="clientTitle mb-2">BUSINESS DETAILS</h2>
         <!--                                <div>-->
         <form action="profile.php" method="post" id="frmDetails">
-            <table id="table_BusinessDetails" class="col table table-borderless">
+            <table id="table_BusinessDetails" class="table table-borderless form-group">
                 <tr>
                     <!-- <td align="left" valign="top">Company Name:</td> -->
                     <td align="left" valign="top" colspan="4">

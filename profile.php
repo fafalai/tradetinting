@@ -343,7 +343,7 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
                     </td>
                 </tr>
                 <!-- <tr>
-                    <!-- <td align="left" valign="top">Country:</td> -->
+                    <!<td align="left" valign="top">Country:</td> -->
                     <!-- <td align="left" valign="top" colspan="2">
                         <select id="fldCountry" name="fldCountry" class="form-control"></select>
                     </td> -->
@@ -427,6 +427,13 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
             frmvalidator.addValidation("fldMobile", "regex=^(?=\d)\S{6,}", "Invalid Phone number"); //numbers only, at least six digits
         </script>
 -->
+        <p>
+            Please edit your quotation template. 
+            <br/>
+            You could add, delete, edit, or relocate all the contents.
+            <br/> 
+            <strong>Except</strong> the words start with 'XXX_'. you could only delete or relocate them. These words will be replaced by the actual quotation data when the email sent. 
+        </p>
         <form action="#" method="post">
             <textarea class="ckeditor" name="editor" id="editor">
                 <?php
@@ -444,17 +451,6 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
             </textarea>
             <input type="submit" value="save Template" name="saveTemplate">
         </form>
-        <script>
-             CKEDITOR.replace( 'editor', {
-                    filebrowserBrowseUrl: 'js/ckfinder/ckfinder.html',
-                    filebrowserImageBrowseUrl: 'js/ckfinder/ckfinder.html?type=Images',
-                    filebrowserFlashBrowseUrl: 'js/ckfinder/ckfinder.html?type=Flash',
-                    filebrowserUploadUrl: 'js/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
-                    filebrowserImageUploadUrl: 'js/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
-                    filebrowserFlashUploadUrl: 'js/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
-                } );
-        </script>
-
     </div>
     <!-- <script language="javascript">
         $country = "<?php echo SharedPrepareDisplayString($fldcountry); ?>"

@@ -160,18 +160,19 @@
                 console.log(notification);
                 if (notification == 1) {
                     noty({
-                    text: message,
-                    type: 'success',
-                    timeout: 6000
+                        text: message,
+                        type: 'success',
+                        timeout: 6000
                     });
                 } else if (notification == 2) {
                     noty({
-                    text: message,
-                    type: 'error',
-                    timeout: 3000
+                        text: message,
+                        type: 'error',
+                        timeout: 3000
                     });
-            }
-        });
+                }
+            });
+
             function initAutocomplete() {
                 // Create the autocomplete object, restricting the search to geographical
                 // location types.
@@ -248,6 +249,7 @@
                     });
                 }
             }
+
             function CheckUserId() {
                 var uid = $('#sign_id').val();
                 var data = {
@@ -259,14 +261,14 @@
                     data: data,
                     cache: false,
                     success: function (rc) {
-                    var response = JSON.parse(rc);
-                    if (response.rc == <?php echo REMEDY_ERR_NONE; ?>) {
-                        if (response.id != 0) {
-                        alert('This User ID has been taken, please use another one');
-                        //$('#fldUid').val('');
-                        //$('#fldUid').focus();
+                        var response = JSON.parse(rc);
+                        if (response.rc == <?php echo REMEDY_ERR_NONE; ?>) {
+                            if (response.id != 0) {
+                                alert('This User ID has been taken, please use another one');
+                                //$('#fldUid').val('');
+                                //$('#fldUid').focus();
+                            }
                         }
-                    }
                     }
                 });
             }
@@ -277,18 +279,18 @@
     <body>
         <?php include("top.php");?>
 
-        <div class="m-auto container" style="width:60%">
-            <h1 class="text-dark">Sign Up</h1>
-            <form style="background-color:#f0f0f0;" action="#" method="post" id="frmSignup" class="p-4">
+        <div class="container" style="width:70%">
+            <h2 class="text-dark mb-2" style="font-family: Arial, Helvetica, sans-serif;font-weight: bold;font-size: 20pt;">Sign Up</h2>
+            <form style="background-color:#f0f0f0;" action="#" method="post" id="frmSignup" class="p-4 form-group">
                 <div class="row">
-                    <input required id="sign_id" name="sign_id" class="form-control" type="text" placeholder="User ID"  onchange="CheckUserId();">
+                    <input required id="sign_id" name="sign_id" class="form-control" type="text" placeholder="User ID" onchange="CheckUserId();">
                 </div>
                 <div class="row">
                     <input required id="sign_name" name="sign_name" class="form-control" type="text" placeholder="User Name">
                 </div>
                 <div class="row">
-                    <input id="sign_phone" name="sign_phone" class="form-control col-sm-5" type="text" placeholder="Mobile (Must be at least 5 digits)" required pattern="^[0-9]{5,}$"
-                        title="Invalid Phone number">
+                    <input id="sign_phone" name="sign_phone" class="form-control col-sm-5" type="text" placeholder="Mobile (Must be at least 5 digits)"
+                        required pattern="^[0-9]{5,}$" title="Invalid Phone number">
                     <input id="sign_email" name="sign_email" class="form-control col" type="text" placeholder="EMAIL" required pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
                         title="Invalid Email address">
                 </div>
@@ -306,7 +308,8 @@
                 </div>
                 <span class="myhr"></span>
                 <div class="row">
-                    <input id="sign_password" name="sign_password" class="form-control col-sm-5" type="password" placeholder="Password (Must be at least 5 characters and not too simple)" required pattern="^(\w|\W){5,}$">
+                    <input id="sign_password" name="sign_password" class="form-control col-sm-5" type="password" placeholder="Password (Must be at least 5 characters and not too simple)"
+                        required pattern="^(\w|\W){5,}$">
                     <input id="sign_secondPwd" class="form-control col" type="password" placeholder="RE-ENTER PASSWORD" required pattern="^(\w|\W){5,}$">
                 </div>
                 <div class="row">
@@ -339,7 +342,7 @@
                 </div>
                 <div>
                     <!-- <button id="signup_button" type="submit" class="btn-danger btn-lg" name="signup_button">SIGN UP</button> -->
-                    <input type="submit" value = "SIGN UP" name="signup_button" id="signup_button" class="btn-danger btn-lg">
+                    <input type="submit" value="SIGN UP" name="signup_button" id="signup_button" class="btn-danger btn-lg">
                 </div>
             </form>
             <div id="DIV_Message">

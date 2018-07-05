@@ -542,10 +542,11 @@ hr {
 }
 
 #footer {
-    width: 920px;
+    width: 70%;
+    /* width: 920px; */
     height: 100px;
-    margin: 0 auto;
-    padding: 0;
+    margin: auto;
+    /* padding: 0; */
     border-top: 1px solid #E0E0E0;
 }
 
@@ -1065,16 +1066,16 @@ input[type=submit]:hover {
 }
 
 .contactsDIV {
-    margin-bottom: 30px;
-    padding: 25px;
+    /* margin-bottom: 30px; */
+    padding: 20px;
     background-color: #f0f0f0;
-    width: 70%;
-    margin: auto
+    /* width: 70%; */
+    /* margin: auto */
 }
 
 .contactTitle {
-    margin-bottom: 10px;
-    padding-left: 170px;
+    /* margin-bottom: 10px; */
+    /* padding-left: 170px; */
     color: black;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
@@ -1082,11 +1083,15 @@ input[type=submit]:hover {
 }
 
 .contactTimeLable {
-    margin-bottom: 10px;
-    padding-left: 170px;
-    color: black;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12pt;
+    /* margin-bottom: 10px; */
+    /* padding-left: 170px; */
+    /* color: black; */
+    /* font-family: Arial, Helvetica, sans-serif; */
+    /* font-size: 12pt; */
+}
+
+#frmContact input {
+    /* margin : 20px; */
 }
 
 .existingJobDetailsDIV {
@@ -1110,8 +1115,7 @@ input[type=submit]:hover {
 
 .profileDIV {
     margin-bottom: 50px;
-    margin: auto;
-    width: 80%;
+    width: 70%;
     /*    width: 80%;*/
     /*    background-color: #f0f0f0;*/
     /*     height: 450px; */
@@ -1124,9 +1128,9 @@ input[type=submit]:hover {
 }
 
 .existingUsersDIV {
-    margin-bottom: 50px;
-    width: 70%;
-    margin: auto;
+    /* margin-bottom: 50px; */
+    /* width: 70%; */
+    /* margin: auto; */
     /* height: 450px; */
     min-height: 200px;
     overflow: hidden;
@@ -1134,10 +1138,10 @@ input[type=submit]:hover {
 
 .usersDIV {
     margin-bottom: 30px;
-    padding: 25px;
+    padding: 20px;
     background-color: #f0f0f0;
-    width: 70%;
-    margin: auto
+    /* width: 70%; */
+    /* margin: auto */
 }
 
 .sectionButton {

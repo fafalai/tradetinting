@@ -97,9 +97,12 @@ hr {
     padding-top: 10px;
 }
 
- /* .topmenu { */
-    /* float: left; */
-    /*    width: 100%;*/
+/* .topmenu { */
+
+/* float: left; */
+
+/*    width: 100%;*/
+
 /* }  */
 
 .topmenu ul {
@@ -596,8 +599,8 @@ hr {
 }
 
 table.sortable {
-    width: 100%;
-    font-size: 16px;
+    /* width: 100%; */
+    /* font-size: 16px; */
 }
 
 table.sortable a {
@@ -612,14 +615,20 @@ table.sortable a:hover {
 
 table.sortable tr.odd td {
     background-color: #eee;
+    white-space: nowrap;
+    text-align: left;
 }
 
 table.sortable tr.even td {
     background-color: #fff;
+    white-space: nowrap;
+    text-align: left;
 }
 
 table.sortable th {
     background-color: #ddd;
+    white-space: nowrap;
+    text-align: left;
 }
 
 .lightgrey {
@@ -699,7 +708,7 @@ textarea.validation-passed {
 
 .dropdown-content {
     display: none;
-    margin-top: 30px;
+    margin-top: 22px;
     position: absolute;
     background-color: #f1f1f1;
     min-width: 60px;
@@ -813,6 +822,7 @@ div {
 
 #DIV_showUser {
     margin-top: 20px;
+    margin-right: 25px;
     /* float: right; */
 }
 
@@ -839,7 +849,7 @@ div {
 }
 
 #DIV_topMenu a {
-    font-size: 18px;
+    font-size: 14px;
     /*    color: black;*/
 }
 
@@ -872,7 +882,6 @@ div {
 
 #DIV_SearchJobs {
     text-align: left;
-    padding-left: 0;
     margin: 0;
     width: 70%;
 }
@@ -920,19 +929,20 @@ div {
 #DIV_SearchClients input[type=text]::placeholder {
     color: white;
     opacity: 1;
+    width: 70%;
     /* Firefox */
 }
 
 #DIV_SearchClients {
     text-align: left;
-    padding-left: 0;
     margin: 0;
     width: 70%;
 }
 
 #frmSignup input {
-    margin:1em;
+    margin: 1em;
 }
+
 /*Eric --------->*/
 
 .loginBackground {
@@ -1025,11 +1035,11 @@ input[type=submit]:hover {
 }
 
 .clientsIDV {
-    margin-bottom: 30px;
-    padding: 25px;
+    /* margin-bottom: 30px; */
+    padding: 20px;
     background-color: #f0f0f0;
-    width: 70%;
-    margin: auto
+    /* width: 70%; */
+    /* margin: auto */
 }
 
 .clientsEntry {

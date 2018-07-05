@@ -27,9 +27,7 @@
                         searchIndex = 2;
                     } else if (document.getElementById("searchMobile").checked) {
                         searchIndex = 4;
-                    }
-                    else if (document.getElementById("searchCreatedDate").checked)
-                    {
+                    } else if (document.getElementById("searchCreatedDate").checked) {
                         searchIndex = 0;
                     }
                     for (i = 0; i < tr.length; i++) {
@@ -43,7 +41,6 @@
                         }
                     }
                 }
-
             </script>
             <meta http-equiv="refresh" content="60" />
             <title>Remedy Tint - View Jobs</title>
@@ -54,52 +51,56 @@
         <?php
     include ("top.php");
   ?>
-            <div style="clear: both;">&nbsp;</div>
-            <div>
-                <div>
-                    <div>
-                        <div>
-                            <div class="existingJobsDIV">
-                                <label><?php if ($clientmsg != "") echo $clientmsg; else echo date("l, F j, Y"); ?></label>
-                                <h2 class="clientTitle">Jobs</h2>
 
-                                <br/>
 
-                                <div id="DIV_SearchJobs" class="container">
-                                    <input id="searchInputJobs" class="form-control col-11" type="text" onkeyup="searchJobs()" placeholder="Search by client name or mobile" title="Type in a name or mobile">
-<!--                                    <button type="button"><i class="fa fa-search"></i></button>-->
-                                </div>
-                                <form>
-                                    <input type="radio" name="search" value="Name" id="searchName" checked>Client Name<br>
-                                    <input type="radio" name="search" value="Mobile" id="searchMobile"> Mobile<br>
-                                    <input type="radio" name="search" value="CreatedDate" id="searchCreatedDate"> Created Date(YYYY-MM-DD)<br>
-                                </form>
-                                <div class="entry">
-                                    <label style="margin-top:30px">Select a Quote to see job details.</label>
-                                    <table border="0" align="left" id="tblJobs" rules="cols" frame="box" class="sortable">
-                                        <tr>
-                                            <th align="right">Created</th>
-                                            <!--                  <th align="left">Job ID</th>-->
-                                            <th align="left">Quote</th>
-                                            <th align="left">Client</th>
-                                            <th align="left">Area</th>
-                                            <th align="left">Phone</th>
-                                            <th align="right">#Rooms</th>
-                                            <th align="right">Total Price</th>
-                                            <th align="right">Job Date</th>
-                                            <th align="center">P1</th>
-                                            <th align="center">P2</th>
-                                            <th align="center">P3</th>
-                                            <th align="center">P4</th>
-                                            <th align="center">P5</th>
-                                            <th align="center">P6</th>
-                                            <th align="center">P7</th>
-                                            <th align="center">P8</th>
-                                            <th align="center">P9</th>
-                                            <th align="center">P10</th>
-                                            <th align="center" class="unsortable">Map</th>
-                                        </tr>
-                                        <?php
+            <div class="existingJobsDIV">
+                <div class="container ml-0">
+                    <label>
+                        <?php if ($clientmsg != "") echo $clientmsg; else echo date("l, F j, Y"); ?>
+                    </label>
+                    <h2 class="clientTitle">Jobs</h2>
+                </div>
+
+
+                <div id="DIV_SearchJobs" class="container">
+                    <input id="searchInputJobs" class="form-control col-11" type="text" onkeyup="searchJobs()" placeholder="Search by client name or mobile"
+                        title="Type in a name or mobile">
+                    <!--                                    <button type="button"><i class="fa fa-search"></i></button>-->
+                </div>
+                <div class="container">
+                    <input type="radio" name="search" value="Name" id="searchName" checked> Client Name
+                    <br>
+                    <input type="radio" name="search" value="Mobile" id="searchMobile"> Mobile
+                    <br>
+                    <input type="radio" name="search" value="CreatedDate" id="searchCreatedDate"> Created Date (YYYY-MM-DD)
+                    <br>
+                </div>
+                <div class="entry container">
+                    <label style="margin-top:30px">Select a Quote to see job details.</label>
+                    <table id="tblJobs" rules="cols" frame="box" class="table table-bordered sortable">
+                        <tr>
+                            <th align="right">Created</th>
+                            <!--                  <th align="left">Job ID</th>-->
+                            <th>Quote</th>
+                            <th>Client</th>
+                            <th>Area</th>
+                            <th>Phone</th>
+                            <th>#Rooms</th>
+                            <th>Total Price</th>
+                            <th>Job Date</th>
+                            <th>P1</th>
+                            <th>P2</th>
+                            <th>P3</th>
+                            <th>P4</th>
+                            <th>P5</th>
+                            <th>P6</th>
+                            <th>P7</th>
+                            <th>P8</th>
+                            <th>P9</th>
+                            <th>P10</th>
+                            <th class="unsortable">Map</th>
+                        </tr>
+                        <?php
                   $where = "";
                   if ($_SESSION['admin'] != 0)
                   {
@@ -186,80 +187,83 @@
                         $p9 = ($dbrow["photo9"] == "") ? '&nbsp;' : '<a href="photos/' . $dbrow["photo9"] . '" target="_blank"><img src="images/camera.png" /></a>';
                         $p10 = ($dbrow["photo10"] == "") ? '&nbsp;' : '<a href="photos/' . $dbrow["photo10"] . '" target="_blank"><img src="images/camera.png" /></a>';
                 ?>
-                                            <tr>
-                                                <td align="right">
-                                                    <?php echo $dbrow['datecreated']; ?>
-                                                </td>
-                                                <td align="right">
-                                                    <a href="<?php echo $url_jobdetails;?>">
-                                                        <?php echo $dbrow['jobid']; ?>
-                                                    </a>
-                                                </td>
-                                                <td align="left">
-                                                    <?php echo $clientname; ?>
-                                                </td>
-                                                <!-- <td align="left"><span class="hotspot" onmouseover="tooltip.show('<?php //echo $notestip; ?>');" onmouseout="tooltip.hide();"><?php //echo SharedPrepareDisplayString($dbrow['windowname']); ?></span></td> -->
-                                                <td align="right">
-                                                    <?php echo $clientcity; ?>
-                                                </td>
-                                                <td align="right">
-                                                    <?php echo $clientmobile; ?>
-                                                </td>
-                                                <td align="right">
-                                                    <?php echo $dbrow['numrooms']; ?>
-                                                </td>
-                                                <td align="right">
-                                                    <?php echo $dbrow['totalprice']; ?>
-                                                </td>
-                                                <td align="left">
-                                                    <?php echo $dbrow['jobdate']; ?>
-                                                </td>
-                                                <td align="center">
-                                                    <?php echo $p1; ?>
-                                                </td>
-                                                <td align="center">
-                                                    <?php echo $p2; ?>
-                                                </td>
-                                                <td align="center">
-                                                    <?php echo $p3; ?>
-                                                </td>
-                                                <td align="center">
-                                                    <?php echo $p4; ?>
-                                                </td>
-                                                <td align="center">
-                                                    <?php echo $p5; ?>
-                                                </td>
-                                                <td align="center">
-                                                    <?php echo $p6; ?>
-                                                </td>
-                                                <td align="center">
-                                                    <?php echo $p7; ?>
-                                                </td>
-                                                <td align="center">
-                                                    <?php echo $p8; ?>
-                                                </td>
-                                                <td align="center">
-                                                    <?php echo $p9; ?>
-                                                </td>
-                                                <td align="center">
-                                                    <?php echo $p10; ?>
-                                                </td>
-                                                <td align="center"><a href="<?php echo $mapurl; ?>" target="_blank"><img src="images/map2.png" /></a></td>
-                                            </tr>
-                                            <?php
+                            <tr>
+                                <td align="right">
+                                    <?php echo $dbrow['datecreated']; ?>
+                                </td>
+                                <td align="right">
+                                    <a href="<?php echo $url_jobdetails;?>">
+                                        <?php echo $dbrow['jobid']; ?>
+                                    </a>
+                                </td>
+                                <td align="left">
+                                    <?php echo $clientname; ?>
+                                </td>
+                                <!-- <td align="left"><span class="hotspot" onmouseover="tooltip.show('<?php //echo $notestip; ?>');" onmouseout="tooltip.hide();"><?php //echo SharedPrepareDisplayString($dbrow['windowname']); ?></span></td> -->
+                                <td align="right">
+                                    <?php echo $clientcity; ?>
+                                </td>
+                                <td align="right">
+                                    <?php echo $clientmobile; ?>
+                                </td>
+                                <td align="right">
+                                    <?php echo $dbrow['numrooms']; ?>
+                                </td>
+                                <td align="right">
+                                    $
+                                    <?php echo round($dbrow['totalprice'],2); ?>
+                                </td>
+                                <td align="left">
+                                    <?php echo $dbrow['jobdate']; ?>
+                                </td>
+                                <td align="center">
+                                    <?php echo $p1; ?>
+                                </td>
+                                <td align="center">
+                                    <?php echo $p2; ?>
+                                </td>
+                                <td align="center">
+                                    <?php echo $p3; ?>
+                                </td>
+                                <td align="center">
+                                    <?php echo $p4; ?>
+                                </td>
+                                <td align="center">
+                                    <?php echo $p5; ?>
+                                </td>
+                                <td align="center">
+                                    <?php echo $p6; ?>
+                                </td>
+                                <td align="center">
+                                    <?php echo $p7; ?>
+                                </td>
+                                <td align="center">
+                                    <?php echo $p8; ?>
+                                </td>
+                                <td align="center">
+                                    <?php echo $p9; ?>
+                                </td>
+                                <td align="center">
+                                    <?php echo $p10; ?>
+                                </td>
+                                <td align="center">
+                                    <a href="<?php echo $mapurl; ?>" target="_blank">
+                                        <img src="images/map2.png" />
+                                    </a>
+                                </td>
+                            </tr>
+                            <?php
                       }
                     }
                   }
                 ?>
-                                    </table>
+                    </table>
 
-                                </div>
-                            </div>
 
-                            <div style="clear: both;">&nbsp;</div>
 
-                        </div>
-                    </div>
+                    <div style="clear: both;">&nbsp;</div>
+
+
                 </div>
 
                 <div style="clear: both;">&nbsp;</div>

@@ -434,13 +434,13 @@ else if (isset($_POST['fldName']))
                         <label>Select an user to further editng.</label>
                     </div>
                     <div id="DIV_SearchClients" class="container">
-                        <input type="text" id="searchInputClients" onkeyup="searchClients()" placeholder="Search by name or mobile" title="Type in a name or mobile"
-                            class="form-control col-11">
+                        <input type="text" id="searchInputClients" onkeyup="searchClients()" placeholder="Search by name or phone" title="Type in a name or phone"
+                            class="form-control col-xl-4">
                     </div>
-                    <div class="container mb-3">
-                        <input type="radio" name="search" value="Name" id="searchName" checked> Name
+                    <div class="container mb-4">
+                        <input class="radio mb-2" type="radio" name="search" value="Name" id="searchName" checked> Name
                         <br>
-                        <input type="radio" name="search" value="Mobile" id="searchMobile"> Mobile
+                        <input class="radio" type="radio" name="search" value="Mobile" id="searchMobile"> Phone
                         <br>
                     </div>
                     <div class="container">
@@ -448,7 +448,7 @@ else if (isset($_POST['fldName']))
                             <tr>
                                 <!-- <th align="left">Code</th> -->
                                 <th style="width:30%">Name</th>
-                                <th style="width:30%">Mobile</th>
+                                <th style="width:30%">Phone</th>
                                 <th style="width:30%">Date Modified</th>
                                 <th class="unsortable" style="width:10%">Action</th>
                             </tr>
@@ -618,7 +618,7 @@ else if (isset($_POST['fldName']))
                                     <tr>
                                         <!-- <td align="left" valign="top">Mobile:</td> -->
                                         <td align="left" valign="top" colspan="2" style="width: 50%">
-                                            <input style="width: 100%" id="fldMobile" name="fldMobile" type="text" placeholder="MOBILE (Must be at least 5 digits)" size="20"
+                                            <input style="width: 100%" id="fldMobile" name="fldMobile" type="text" placeholder="Phone (Must be at least 5 digits)" size="20"
                                                 maxlength="<?php echo AT_MAXPHONE; ?>" value="<?php echo SharedPrepareDisplayString($fldmobile); ?>"
                                                 required pattern="^[0-9]{5,}$" title="Invalid Phone number" />
                                             <div id="frmClients_fldMobile_errorloc" class="error_strings"></div>

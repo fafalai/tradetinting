@@ -63,7 +63,7 @@
 
 
                 <div id="DIV_SearchJobs" class="container">
-                    <input id="searchInputJobs" class="form-control col-11" type="text" onkeyup="searchJobs()" placeholder="Search by client name or mobile"
+                    <input id="searchInputJobs" class="form-control col-xl-4" type="text" onkeyup="searchJobs()" placeholder="Search by client name or mobile"
                         title="Type in a name or mobile">
                     <div class="radio mb-2">
                         <input type="radio" name="search" value="Name" id="searchName" checked> Client Name

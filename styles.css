@@ -883,8 +883,8 @@ div {
 
 #DIV_SearchJobs {
     text-align: left;
-    margin: 0;
-    width: 70%;
+    /* margin: 0; */
+    /* width: 70%; */
 }
 
 /*
@@ -936,8 +936,8 @@ div {
 
 #DIV_SearchClients {
     text-align: left;
-    margin: 0;
-    width: 70%;
+    /* margin: 0; */
+    /* width: 70%; */
 }
 
 #frmSignup input {

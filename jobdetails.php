@@ -58,7 +58,7 @@ if ($dbresult = SharedQuery($dbselect, $dblink)) {
 
     <body>
         <?php include "top.php";?>
-        <div style="clear: both;">&nbsp;</div>
+        <!-- <div style="clear: both;">&nbsp;</div> -->
         <div>
             <div>
                 <div>
@@ -165,7 +165,7 @@ if ($dbresult = SharedQuery($dbselect, $dblink)) {
                                         </li>
                                     </ul>
                                 </div>
-                                <table id="Table_jobdetails" align="left" id="tblJobs" rules="cols" frame="box" class="sortable" cellpadding="2">
+                                <table align="left" id="tblJobs" rules="cols" frame="box" class="sortable table table-bordered">
                                     <tr>
                                         <th align="left">Room</th>
                                         <th align="left">Window</th>
@@ -220,10 +220,10 @@ if ($dbresult = SharedQuery($dbselect, $dblink)) {
                                                 <?php echo $dbrow['window']; ?>
                                             </td>
                                             <td align="right">
-                                                <?php echo $dbrow['width']; ?>
+                                                <?php echo number_format($dbrow['width'],2); ?>
                                             </td>
                                             <td align="right">
-                                                <?php echo $dbrow['height']; ?>
+                                                <?php echo number_format($dbrow['height'],2); ?>
                                             </td>
                                             <td align="right">
                                                 <?php echo $dbrow['direction']; ?>
@@ -238,13 +238,14 @@ if ($dbresult = SharedQuery($dbselect, $dblink)) {
                                                 <?php echo $dbrow['filmtype']; ?>
                                             </td>
                                             <td align="right">
-                                                <?php echo $dbrow['totalarea']; ?>
+                                                <?php echo number_format($dbrow['totalarea'],2); ?>
                                             </td>
                                             <td align="right">
-                                                <?php echo $dbrow['salerate']; ?>
+                                                <?php echo number_format($dbrow['salerate'],2); ?>
                                             </td>
                                             <td align="right">
-                                                <?php echo $dbrow['totalprice']; ?>
+                                                $
+                                                <?php echo number_format($dbrow['totalprice'],2); ?>
                                             </td>
                                             <td align="left">
                                                 <?php echo $dbrow['datecreated']; ?>
@@ -263,7 +264,7 @@ if ($dbresult = SharedQuery($dbselect, $dblink)) {
                     </div>
                 </div>
             </div>
-            <div style="clear: both;">&nbsp;</div>
+
 
             <?php include "bottom.php";?>
         </div>

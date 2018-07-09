@@ -30,7 +30,7 @@
             <h2 class="clientTitle mb-2">RESOURCES</h2>
             <div id="DIV_resource">
                 <div class="easyui-accordion" style="width:100%;align-self: center;">
-                    <div title="Heat Measurement" style="padding:10px">
+                    <div title="Heat Measurement" style="padding:10px;overflow:auto;" selected>
                         <p style="line-height:1.15;">
                             The most accepted method used to measure heat is British Thermal Units (BTU). BTU is the amount heat necessary to raise the
                             Temperature of one pound of water by one degree Fahrenheit. The BTU method can used to calculate

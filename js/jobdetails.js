@@ -6,25 +6,25 @@ function hideJobdetailsColumn() {
         if (val === "0") {
             $("#ul_dropdownlist input").prop("checked", true);
             $target.attr("data-value", "-1");
-            $("#Table_jobdetails tr td").css("display", "none");
-            $("#Table_jobdetails th").css("display", "none");
+            $("#tblJobs tr td").css("display", "none");
+            $("#tblJobs th").css("display", "none");
         } else if (val === "-1") {
             $("#ul_dropdownlist input").prop("checked", false);
             $target.attr("data-value", "0");
-            $("#Table_jobdetails tr td").css("display", "");
-            $("#Table_jobdetails th").css("display", "");
+            $("#tblJobs tr td").css("display", "");
+            $("#tblJobs th").css("display", "");
         } else {
             if ($input.prop("checked")) {
                 setTimeout(function () {
                     $input.prop('checked', false);
-                    $("#Table_jobdetails tr td:nth-child(" + val + ")").css("display", "");
-                    $("#Table_jobdetails th:nth-child(" + val + ")").css("display", "");
+                    $("#tblJobs tr td:nth-child(" + val + ")").css("display", "");
+                    $("#tblJobs th:nth-child(" + val + ")").css("display", "");
                 }, 0);
             } else {
                 setTimeout(function () {
                     $input.prop('checked', true);
-                    $("#Table_jobdetails tr td:nth-child(" + val + ")").css("display", "none");
-                    $("#Table_jobdetails th:nth-child(" + val + ")").css("display", "none");
+                    $("#tblJobs tr td:nth-child(" + val + ")").css("display", "none");
+                    $("#tblJobs th:nth-child(" + val + ")").css("display", "none");
                 }, 0);
             }
         }

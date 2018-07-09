@@ -117,7 +117,7 @@ $fldname = "";
                 <tr>
                   <!-- <td align="left" valign="top">Name:</td> -->
                   <td colspan="2">
-                    <input id="fldName" name="fldName" type="text" size="20" placeholder="NAME" maxlength="<?php echo AT_MAXNAME; ?>"
+                    <input required id="fldName" name="fldName" type="text" size="20" placeholder="NAME" maxlength="<?php echo AT_MAXNAME; ?>"
                       value="<?php echo SharedPrepareDisplayString($fldcontact); ?>" />
                     <div id='frmContact_fldName_errorloc' class="error_strings"></div>
                   </td>
@@ -125,12 +125,12 @@ $fldname = "";
                 <tr>
                   <!-- <td align="left" valign="top">Mobile:</td> -->
                   <td align="left" valign="top" style="width: 50%">
-                    <input id="fldPhone" name="fldPhone" type="text" size="20" style="width: 100%" placeholder="PHONE" maxlength="<?php echo AT_MAXPHONE; ?>"
+                    <input required title="Invalid Phone number" pattern="^[0-9]{5,}$" id="fldPhone" name="fldPhone" type="text" size="20" style="width: 100%" placeholder="PHONE (Must be at least 5 digits)" maxlength="<?php echo AT_MAXPHONE; ?>"
                       value="<?php echo SharedPrepareDisplayString($fldphone); ?>" />
                     <div id='frmContact_fldPhone_errorloc' class="error_strings"></div>
                   </td>
                   <td align="left" valign="top" style="width: 50%">
-                    <input id="fldEmail" name="fldEmail" type="text" size="40" style="width: 100%" placeholder="EMAIL" maxlength="<?php echo AT_MAXEMAIL; ?>"
+                    <input required title="Invalid Email address" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" id="fldEmail" name="fldEmail" type="text" size="40" style="width: 100%" placeholder="EMAIL" maxlength="<?php echo AT_MAXEMAIL; ?>"
                       value="<?php echo SharedPrepareDisplayString($fldemail); ?>" />
                   </td>
                 </tr>
@@ -158,7 +158,7 @@ $fldname = "";
                 </tr>
               </table>
             </form>
-            <script type="text/javascript">
+            <!-- <script type="text/javascript">
               var frmvalidator = new Validator("frmContact");
               frmvalidator.EnableOnPageErrorDisplay();
               frmvalidator.addValidation("fldName", "req", "Please enter your Name");
@@ -168,7 +168,7 @@ $fldname = "";
               frmvalidator.addValidation("fldPhone",
                 "regexp=^[0-9]{10}$|^\(0[1-9]{1}\)[0-9]{8}$|^[0-9]{8}$|^[0-9]{4}[ ][0-9]{3}[ ][0-9]{3}$|^\(0[1-9]{1}\)[ ][0-9]{4}[ ][0-9]{4}$|^[0-9]{4}[ ][0-9]{4}$",
                 "Must be in 04xxyyyzzz or xxxxyyyy format");
-            </script>
+            </script> -->
           </div>
           <!-- end #content -->
 

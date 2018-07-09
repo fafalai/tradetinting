@@ -54,7 +54,7 @@
 
 
             <div class="existingJobsDIV">
-                <div class="container ml-0">
+                <div class="container">
                     <label>
                         <?php if ($clientmsg != "") echo $clientmsg; else echo date("l, F j, Y"); ?>
                     </label>
@@ -65,15 +65,15 @@
                 <div id="DIV_SearchJobs" class="container">
                     <input id="searchInputJobs" class="form-control col-11" type="text" onkeyup="searchJobs()" placeholder="Search by client name or mobile"
                         title="Type in a name or mobile">
-                    <!--                                    <button type="button"><i class="fa fa-search"></i></button>-->
-                </div>
-                <div class="container">
-                    <input type="radio" name="search" value="Name" id="searchName" checked> Client Name
-                    <br>
-                    <input type="radio" name="search" value="Mobile" id="searchMobile"> Mobile
-                    <br>
-                    <input type="radio" name="search" value="CreatedDate" id="searchCreatedDate"> Created Date (YYYY-MM-DD)
-                    <br>
+                    <div class="radio mb-2">
+                        <input type="radio" name="search" value="Name" id="searchName" checked> Client Name
+                    </div>
+                    <div class="radio mb-2">
+                        <input type="radio" name="search" value="Mobile" id="searchMobile"> Mobile
+                    </div>
+                    <div class="radio">
+                        <input type="radio" name="search" value="CreatedDate" id="searchCreatedDate"> Created Date (YYYY-MM-DD)
+                    </div>
                 </div>
                 <div class="entry container">
                     <label style="margin-top:30px">Select a Quote to see job details.</label>

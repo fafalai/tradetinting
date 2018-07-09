@@ -378,7 +378,7 @@
           <h2 class="clientTitle mb-2">Existing Users</h2>
           <label>Move mouse over links for tips. Click on table header to sort by that column.</label>
           <div style="margin-bottom: 30px">
-            <table id="tblUsers" rules="cols" frame="box" class="sortable table table-borderless">
+            <table id="tblUsers" rules="cols" frame="box" class="sortable table table-bordered">
               <tr>
                 <th align="left">User ID</th>
                 <th align="left">Name</th>

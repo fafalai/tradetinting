@@ -210,8 +210,7 @@
                                     <?php echo $dbrow['numrooms']; ?>
                                 </td>
                                 <td align="right">
-                                    $
-                                    <?php echo round($dbrow['totalprice'],2); ?>
+                                    $<?php echo round($dbrow['totalprice'],2); ?>
                                 </td>
                                 <td align="left">
                                     <?php echo $dbrow['jobdate']; ?>

@@ -289,7 +289,7 @@
                     <input required id="sign_name" name="sign_name" class="form-control" type="text" placeholder="User Name">
                 </div>
                 <div class="row">
-                    <input id="sign_phone" name="sign_phone" class="form-control col-sm-5" type="text" placeholder="Mobile (Must be at least 5 digits)"
+                    <input id="sign_phone" name="sign_phone" class="form-control col-sm-5" type="text" placeholder="Phone (Must be at least 5 digits)"
                         required pattern="^[0-9]{5,}$" title="Invalid Phone number">
                     <input id="sign_email" name="sign_email" class="form-control col" type="text" placeholder="EMAIL" required pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
                         title="Invalid Email address">

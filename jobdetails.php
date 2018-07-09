@@ -244,8 +244,7 @@ if ($dbresult = SharedQuery($dbselect, $dblink)) {
                                                 <?php echo number_format($dbrow['salerate'],2); ?>
                                             </td>
                                             <td align="right">
-                                                $
-                                                <?php echo number_format($dbrow['totalprice'],2); ?>
+                                                $<?php echo number_format($dbrow['totalprice'],2); ?>
                                             </td>
                                             <td align="left">
                                                 <?php echo $dbrow['datecreated']; ?>

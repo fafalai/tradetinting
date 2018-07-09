@@ -58,7 +58,7 @@ if ($dbresult = SharedQuery($dbselect, $dblink)) {
 
     <body>
         <?php include "top.php";?>
-        <div style="clear: both;">&nbsp;</div>
+        <!-- <div style="clear: both;">&nbsp;</div> -->
         <div>
             <div>
                 <div>
@@ -244,7 +244,8 @@ if ($dbresult = SharedQuery($dbselect, $dblink)) {
                                                 <?php echo number_format($dbrow['salerate'],2); ?>
                                             </td>
                                             <td align="right">
-                                                $<?php echo number_format($dbrow['totalprice'],2); ?>
+                                                $
+                                                <?php echo number_format($dbrow['totalprice'],2); ?>
                                             </td>
                                             <td align="left">
                                                 <?php echo $dbrow['datecreated']; ?>
@@ -263,7 +264,7 @@ if ($dbresult = SharedQuery($dbselect, $dblink)) {
                     </div>
                 </div>
             </div>
-            <div style="clear: both;">&nbsp;</div>
+
 
             <?php include "bottom.php";?>
         </div>

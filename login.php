@@ -21,7 +21,7 @@
   <div>
      <div class="loginBackground">
         <div style="margin:0 auto;width:700px;padding-top: 30pt">
-            <p class="meta"><span class="date"><?php echo date("l, F j, Y"); ?></span></p>
+            <p class="meta"><span class="date"><?php echo date("l, F j, Y");?></span></p>
             <h1 class="loginTitle">LOGIN</h1>
             <div class="entry">
                     <form action="login.php" method="post" id="frmLogin" style="margin-top: 20px;">

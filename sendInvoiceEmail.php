@@ -444,7 +444,7 @@
                 $emailtemplate = str_replace("XXX_GLASSTYPE",$glassType,$emailtemplate);
                 $emailtemplate = str_replace("XXX_FRAMETYPE",$frameType,$emailtemplate);
                 $emailtemplate = str_replace("XXX_FILMTYPE",$filmType,$emailtemplate);
-                SharedSendHtmlMail($resultsetCust['email'], $businessName, $client['email'],$client['name'], "Quote Confirmation", $emailtemplate);
+                //SharedSendHtmlMail($resultsetCust['email'], $businessName, $client['email'],$client['name'], "Quote Confirmation", $emailtemplate);
 
 
                 //Convert the html to pdf
@@ -462,7 +462,15 @@
                 $attachmentPath = "quotes/$clientid.pdf";
                 error_log($attachmentPath);
 
-                //SharedSendHtmlMail($resultsetCust['email'], $businessName, $client['email'],$client['name'], "Quote Confirmation", $emailtemplate,"","",$attachmentPath);
+
+
+                //Get the email body
+                $emailbodytemplate = file_get_contents("./quoteEmailTemplate/emailBodyTemplate.html");
+                $emailbodytemplate = str_replace("XXX_CLIENTFIRSTNAME",$client['name'],$emailbodytemplate);
+                $emailbodytemplate = str_replace("XXX_BUSINESSNAME",$businessName,$emailbodytemplate);
+
+
+                SharedSendHtmlMail($resultsetCust['email'], $businessName, $client['email'],$client['name'], "Quote Confirmation", $emailbodytemplate,"","",$attachmentPath);
                 error_log("sending email");
               }
               else

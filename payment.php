@@ -5,7 +5,8 @@
     require_once("remedyerrcodes.php");
     SharedInit();
 
-	\Stripe\Stripe::setVerifySslCerts(false);
+    \Stripe\Stripe::setVerifySslCerts(false);
+    \Stripe\Stripe::setApiKey("sk_test_V0oPAcqML1GLnB6WnRKSwWHV");
 
 	// Token is created using Checkout or Elements!
 	// Get the payment token ID submitted by the form:
@@ -50,115 +51,126 @@
     error_log("selected plan: " . $plan);
     error_log($token);
     error_log($email);
+    //1. create the customer in Stripe first
+    $customer = \Stripe\Customer::create(array(
+        'card' => $token,
+        'email' => $email
+        )
+    );
+    $stripe_customer_id = $customer->id;
+    error_log($stripe_customer_id);
     // // Charge the user's card:
 	$charge = \Stripe\Charge::create(array(
 		"amount" =>($plan*100),
 		"currency" => "usd",
 		"description" => "test",
-		"source" => $token,
+        "customer" => $customer->id
+        //"source" => $token
     ));
+    //error_log($charge);
+    
     //1st, create a new cust with the uuid
-    $custuuid = RemedyUuid();
-    $dbinsertcust = "INSERT INTO cust ".
-                "(" .
-                "uuid,".
-                "address,".
-                "city,".
-                "state,".
-                "postcode,".
-                "country".
-                ") ".
-                "VALUES ".
-                "(" .
-                "'$custuuid',".
-                "'$address',".
-                "'$city',".
-                "'$state',".
-                "'$city',".
-                "'$country'".
-                ")";
-    // error_log($dbinsert);
-    error_log("creating a new cust");
-    error_log($dbinsertcust);
-    if (SharedQuery($dbinsertcust, $dblink))
-    {
-      //2nd Successful create the cust, use the uuid to get the id. 
-      $dbcustselect = "select ".
-                "c1.id ".
-                "from ".
-                "cust c1 ".
-                "where ".
-                "c1.uuid='$custuuid'";
-        error_log($dbcustselect);
-        if ($dbcustresult = SharedQuery($dbcustselect,$dblink))
-        {
-            if ($numrows = SharedNumRows($dbcustresult))
-            {
-                while($dbcustrow = SharedFetchArray($dbcustresult))
-                {
-                    //3rd, use the cust id to create the user
-                    $custid = $dbcustrow['id'];
-                    error_log("the new customer id is ");
-                    error_log($custid);
-                    $useruuid = RemedyUuid();
-                    error_log("the new user uuid");
-                    error_log($useruuid);
-                    $signuid = SharedCleanString($_POST['sign_id'],AT_MAXNAME);
-                    $signname = SharedCleanString($_POST['sign_name'],AT_MAXNAME);
-                    $signpwd = SharedCleanString($_POST['sign_password'],AT_MAXPWD);
-                    $signmobile = SharedCleanString($_POST['sign_phone'],AT_MAXPHONE);
-                    $signemail = SharedCleanString($_POST['sign_email'],AT_MAXEMAIL);
+    // $custuuid = RemedyUuid();
+    // $dbinsertcust = "INSERT INTO cust ".
+    //             "(" .
+    //             "uuid,".
+    //             "address,".
+    //             "city,".
+    //             "state,".
+    //             "postcode,".
+    //             "country".
+    //             ") ".
+    //             "VALUES ".
+    //             "(" .
+    //             "'$custuuid',".
+    //             "'$address',".
+    //             "'$city',".
+    //             "'$state',".
+    //             "'$city',".
+    //             "'$country'".
+    //             ")";
+    // // error_log($dbinsert);
+    // error_log("creating a new cust");
+    // error_log($dbinsertcust);
+    // if (SharedQuery($dbinsertcust, $dblink))
+    // {
+    //   //2nd Successful create the cust, use the uuid to get the id. 
+    //   $dbcustselect = "select ".
+    //             "c1.id ".
+    //             "from ".
+    //             "cust c1 ".
+    //             "where ".
+    //             "c1.uuid='$custuuid'";
+    //     error_log($dbcustselect);
+    //     if ($dbcustresult = SharedQuery($dbcustselect,$dblink))
+    //     {
+    //         if ($numrows = SharedNumRows($dbcustresult))
+    //         {
+    //             while($dbcustrow = SharedFetchArray($dbcustresult))
+    //             {
+    //                 //3rd, use the cust id to create the user
+    //                 $custid = $dbcustrow['id'];
+    //                 error_log("the new customer id is ");
+    //                 error_log($custid);
+    //                 $useruuid = RemedyUuid();
+    //                 error_log("the new user uuid");
+    //                 error_log($useruuid);
+    //                 $signuid = SharedCleanString($_POST['sign_id'],AT_MAXNAME);
+    //                 $signname = SharedCleanString($_POST['sign_name'],AT_MAXNAME);
+    //                 $signpwd = SharedCleanString($_POST['sign_password'],AT_MAXPWD);
+    //                 $signmobile = SharedCleanString($_POST['sign_phone'],AT_MAXPHONE);
+    //                 $signemail = SharedCleanString($_POST['sign_email'],AT_MAXEMAIL);
 
-                    $dbuserinset = "INSERT INTO users ".
-                                    "(" .
-                                    "cust_id," .
-                                    "uid," .
-                                    "pwd," .
-                                    "uuid," .
-                                    "name," .
-                                    "email," .
-                                    "mobile," .
-                                    "admin," .
-                                    "active" .
-                                    ") " .
-                                    "VALUES " .
-                                    "(" .
-                                    "'$custid'," .
-                                    "'$signuid'," .
-                                    "'$signpwd'," .
-                                    "'$useruuid'," .
-                                    "'$signname'," .
-                                    "'$signemail'," .
-                                    "'$signmobile'," .
-                                    "1,".
-                                    "1".
-                                    ")";
-                        error_log($dbuserinset);
-                        if (SharedQuery($dbuserinset, $dblink))
-                        {
-                          // Successful save, clear form...
-                          $notification = 1;
-                          $signupmsg =  "You have signed up successfully.Directing you to home page. Don't forget to complete your business details after log in";
-                        }
-                        else
-                        {
-                          $notification = 2;
-                          $signupmsg = "Unable to sign up Please try again or contact support.";
-                        }
-                }
-            }
-        }
-        else
-        {
-            $notification = 2;
-            $signupmsg = "Unable to sign up. Please try again or contact support.";
-        }
-    }
-    else
-    {
-      $notification = 2;
-      $signupmsg = "Unable to sign up. Please try again or contact support.";
-    }
+    //                 $dbuserinset = "INSERT INTO users ".
+    //                                 "(" .
+    //                                 "cust_id," .
+    //                                 "uid," .
+    //                                 "pwd," .
+    //                                 "uuid," .
+    //                                 "name," .
+    //                                 "email," .
+    //                                 "mobile," .
+    //                                 "admin," .
+    //                                 "active" .
+    //                                 ") " .
+    //                                 "VALUES " .
+    //                                 "(" .
+    //                                 "'$custid'," .
+    //                                 "'$signuid'," .
+    //                                 "'$signpwd'," .
+    //                                 "'$useruuid'," .
+    //                                 "'$signname'," .
+    //                                 "'$signemail'," .
+    //                                 "'$signmobile'," .
+    //                                 "1,".
+    //                                 "1".
+    //                                 ")";
+    //                     error_log($dbuserinset);
+    //                     if (SharedQuery($dbuserinset, $dblink))
+    //                     {
+    //                       // Successful save, clear form...
+    //                       $notification = 1;
+    //                       $signupmsg =  "You have signed up successfully.Directing you to home page. Don't forget to complete your business details after log in";
+    //                     }
+    //                     else
+    //                     {
+    //                       $notification = 2;
+    //                       $signupmsg = "Unable to sign up Please try again or contact support.";
+    //                     }
+    //             }
+    //         }
+    //     }
+    //     else
+    //     {
+    //         $notification = 2;
+    //         $signupmsg = "Unable to sign up. Please try again or contact support.";
+    //     }
+    // }
+    // else
+    // {
+    //   $notification = 2;
+    //   $signupmsg = "Unable to sign up. Please try again or contact support.";
+    // }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">

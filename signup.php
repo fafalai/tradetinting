@@ -164,7 +164,7 @@
 
 <body>
     <?php include("top.php");?>
-    
+
     <div class="container" style="width:70%">
         <h2 class="text-dark mb-2" style="font-family: Arial, Helvetica, sans-serif;font-weight: bold;font-size: 20pt;">Sign Up</h2>
         <form style="background-color:#f0f0f0;" action="payment.php" method="post" id="frmSignup" class="p-4 form-group">
@@ -246,6 +246,15 @@
                                 if (radios[i].checked) {
                                     // do whatever you want with the checked radio
                                     // alert(radios[i].value);
+                                   
+                                    if(i == 1)
+                                    {
+                                        description = "Annual Plan";
+                                    }
+                                    else if (i == 2)
+                                    {
+                                        description = "3 Years Plan";
+                                    }
                                     amount = radios[i].value
                                     console.log(amount);
 
@@ -282,7 +291,7 @@
                                     inputEmail.setAttribute('value', token.email);
                                     form.appendChild(inputEmail);
 
-                                    // Artificial 5 second delay for testing
+                                    //Artificial 5 second delay for testing
                                     setTimeout(function() {
                                         window.onbeforeunload = null;
                                         document.forms["frmSignup"].submit()

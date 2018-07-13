@@ -165,22 +165,23 @@ if ($dbresult = SharedQuery($dbselect, $dblink)) {
                                         </li>
                                     </ul>
                                 </div>
-                                <table align="left" id="tblJobs" rules="cols" frame="box" class="sortable table table-bordered">
-                                    <tr>
-                                        <th align="left">Room</th>
-                                        <th align="left">Window</th>
-                                        <th align="right">Width</th>
-                                        <th align="right">Height</th>
-                                        <th align="left">Direction</th>
-                                        <th align="left">Frame</th>
-                                        <th align="left">Glass</th>
-                                        <th align="left">Film</th>
-                                        <th align="right">Area</th>
-                                        <th align="right">Rate</th>
-                                        <th align="right">Price</th>
-                                        <th align="right">Created</th>
-                                    </tr>
-                                    <?php
+                                <div class="table-responsive">
+                                    <table align="left" id="tblJobs" rules="cols" frame="box" class="sortable table table-bordered">
+                                        <tr>
+                                            <th align="left">Room</th>
+                                            <th align="left">Window</th>
+                                            <th align="right">Width</th>
+                                            <th align="right">Height</th>
+                                            <th align="left">Direction</th>
+                                            <th align="left">Frame</th>
+                                            <th align="left">Glass</th>
+                                            <th align="left">Film</th>
+                                            <th align="right">Area</th>
+                                            <th align="right">Rate</th>
+                                            <th align="right">Price</th>
+                                            <th align="right">Created</th>
+                                        </tr>
+                                        <?php
 $dbselect = "select " .
     "jd1.id jobdetailid," .
     "jd1.name room," .
@@ -210,54 +211,54 @@ if ($dbresult = SharedQuery($dbselect, $dblink)) {
         while ($dbrow = SharedFetchArray($dbresult)) {
             $notestip = SharedPrepareToolTip($dbrow['notes']);
             ?>
-                                        <tr>
-                                            <td align="left">
-                                                <span class="title_room">
-                                                    <?php echo $dbrow['room']; ?>
-                                                </span>
-                                            </td>
-                                            <td align="left">
-                                                <?php echo $dbrow['window']; ?>
-                                            </td>
-                                            <td align="right">
-                                                <?php echo number_format($dbrow['width'],2); ?>
-                                            </td>
-                                            <td align="right">
-                                                <?php echo number_format($dbrow['height'],2); ?>
-                                            </td>
-                                            <td align="right">
-                                                <?php echo $dbrow['direction']; ?>
-                                            </td>
-                                            <td align="left">
-                                                <?php echo $dbrow['frametype']; ?>
-                                            </td>
-                                            <td align="left">
-                                                <?php echo $dbrow['glasstype']; ?>
-                                            </td>
-                                            <td align="left">
-                                                <?php echo $dbrow['filmtype']; ?>
-                                            </td>
-                                            <td align="right">
-                                                <?php echo number_format($dbrow['totalarea'],2); ?>
-                                            </td>
-                                            <td align="right">
-                                                <?php echo number_format($dbrow['salerate'],2); ?>
-                                            </td>
-                                            <td align="right">
-                                                $
-                                                <?php echo number_format($dbrow['totalprice'],2); ?>
-                                            </td>
-                                            <td align="left">
-                                                <?php echo $dbrow['datecreated']; ?>
-                                            </td>
-                                        </tr>
-                                        <?php
+                                            <tr>
+                                                <td align="left">
+                                                    <span class="title_room">
+                                                        <?php echo $dbrow['room']; ?>
+                                                    </span>
+                                                </td>
+                                                <td align="left">
+                                                    <?php echo $dbrow['window']; ?>
+                                                </td>
+                                                <td align="right">
+                                                    <?php echo number_format($dbrow['width'],2); ?>
+                                                </td>
+                                                <td align="right">
+                                                    <?php echo number_format($dbrow['height'],2); ?>
+                                                </td>
+                                                <td align="right">
+                                                    <?php echo $dbrow['direction']; ?>
+                                                </td>
+                                                <td align="left">
+                                                    <?php echo $dbrow['frametype']; ?>
+                                                </td>
+                                                <td align="left">
+                                                    <?php echo $dbrow['glasstype']; ?>
+                                                </td>
+                                                <td align="left">
+                                                    <?php echo $dbrow['filmtype']; ?>
+                                                </td>
+                                                <td align="right">
+                                                    <?php echo number_format($dbrow['totalarea'],2); ?>
+                                                </td>
+                                                <td align="right">
+                                                    <?php echo number_format($dbrow['salerate'],2); ?>
+                                                </td>
+                                                <td align="right">
+                                                    $
+                                                    <?php echo number_format($dbrow['totalprice'],2); ?>
+                                                </td>
+                                                <td align="left">
+                                                    <?php echo $dbrow['datecreated']; ?>
+                                                </td>
+                                            </tr>
+                                            <?php
 }
     }
 }
 ?>
-                                </table>
-
+                                    </table>
+                                </div>
                             </div>
                         </div>
                         <div style="clear: both;">&nbsp;</div>

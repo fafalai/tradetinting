@@ -77,30 +77,31 @@
                 </div>
                 <div class="entry container">
                     <label style="margin-top:30px">Select a Quote to see job details.</label>
-                    <table id="tblJobs" rules="cols" frame="box" class="table table-bordered sortable">
-                        <tr>
-                            <th align="right">Created</th>
-                            <!--                  <th align="left">Job ID</th>-->
-                            <th>Quote</th>
-                            <th>Client</th>
-                            <th>Area</th>
-                            <th>Phone</th>
-                            <th>#Rooms</th>
-                            <th>Total Price</th>
-                            <th>Job Date</th>
-                            <th>P1</th>
-                            <th>P2</th>
-                            <th>P3</th>
-                            <th>P4</th>
-                            <th>P5</th>
-                            <th>P6</th>
-                            <th>P7</th>
-                            <th>P8</th>
-                            <th>P9</th>
-                            <th>P10</th>
-                            <th class="unsortable">Map</th>
-                        </tr>
-                        <?php
+                    <div class="table-responsive">
+                        <table id="tblJobs" rules="cols" frame="box" class="table table-bordered sortable">
+                            <tr>
+                                <th align="right">Created</th>
+                                <!--                  <th align="left">Job ID</th>-->
+                                <th>Quote</th>
+                                <th>Client</th>
+                                <th>Area</th>
+                                <th>Phone</th>
+                                <th>#Rooms</th>
+                                <th>Total Price</th>
+                                <th>Job Date</th>
+                                <th>P1</th>
+                                <th>P2</th>
+                                <th>P3</th>
+                                <th>P4</th>
+                                <th>P5</th>
+                                <th>P6</th>
+                                <th>P7</th>
+                                <th>P8</th>
+                                <th>P9</th>
+                                <th>P10</th>
+                                <th class="unsortable">Map</th>
+                            </tr>
+                            <?php
                   $where = "";
                   if ($_SESSION['admin'] != 0)
                   {
@@ -187,77 +188,78 @@
                         $p9 = ($dbrow["photo9"] == "") ? '&nbsp;' : '<a href="photos/' . $dbrow["photo9"] . '" target="_blank"><img src="images/camera.png" /></a>';
                         $p10 = ($dbrow["photo10"] == "") ? '&nbsp;' : '<a href="photos/' . $dbrow["photo10"] . '" target="_blank"><img src="images/camera.png" /></a>';
                 ?>
-                            <tr>
-                                <td align="right">
-                                    <?php echo $dbrow['datecreated']; ?>
-                                </td>
-                                <td align="right">
-                                    <a href="<?php echo $url_jobdetails;?>">
-                                        <?php echo $dbrow['jobid']; ?>
-                                    </a>
-                                </td>
-                                <td align="left">
-                                    <?php echo $clientname; ?>
-                                </td>
-                                <!-- <td align="left"><span class="hotspot" onmouseover="tooltip.show('<?php //echo $notestip; ?>');" onmouseout="tooltip.hide();"><?php //echo SharedPrepareDisplayString($dbrow['windowname']); ?></span></td> -->
-                                <td align="right">
-                                    <?php echo $clientcity; ?>
-                                </td>
-                                <td align="right">
-                                    <?php echo $clientmobile; ?>
-                                </td>
-                                <td align="right">
-                                    <?php echo $dbrow['numrooms']; ?>
-                                </td>
-                                <td align="right">
-                                    $<?php echo round($dbrow['totalprice'],2); ?>
-                                </td>
-                                <td align="left">
-                                    <?php echo $dbrow['jobdate']; ?>
-                                </td>
-                                <td align="center">
-                                    <?php echo $p1; ?>
-                                </td>
-                                <td align="center">
-                                    <?php echo $p2; ?>
-                                </td>
-                                <td align="center">
-                                    <?php echo $p3; ?>
-                                </td>
-                                <td align="center">
-                                    <?php echo $p4; ?>
-                                </td>
-                                <td align="center">
-                                    <?php echo $p5; ?>
-                                </td>
-                                <td align="center">
-                                    <?php echo $p6; ?>
-                                </td>
-                                <td align="center">
-                                    <?php echo $p7; ?>
-                                </td>
-                                <td align="center">
-                                    <?php echo $p8; ?>
-                                </td>
-                                <td align="center">
-                                    <?php echo $p9; ?>
-                                </td>
-                                <td align="center">
-                                    <?php echo $p10; ?>
-                                </td>
-                                <td align="center">
-                                    <a href="<?php echo $mapurl; ?>" target="_blank">
-                                        <img src="images/map2.png" />
-                                    </a>
-                                </td>
-                            </tr>
-                            <?php
+                                <tr>
+                                    <td align="right">
+                                        <?php echo $dbrow['datecreated']; ?>
+                                    </td>
+                                    <td align="right">
+                                        <a href="<?php echo $url_jobdetails;?>">
+                                            <?php echo $dbrow['jobid']; ?>
+                                        </a>
+                                    </td>
+                                    <td align="left">
+                                        <?php echo $clientname; ?>
+                                    </td>
+                                    <!-- <td align="left"><span class="hotspot" onmouseover="tooltip.show('<?php //echo $notestip; ?>');" onmouseout="tooltip.hide();"><?php //echo SharedPrepareDisplayString($dbrow['windowname']); ?></span></td> -->
+                                    <td align="right">
+                                        <?php echo $clientcity; ?>
+                                    </td>
+                                    <td align="right">
+                                        <?php echo $clientmobile; ?>
+                                    </td>
+                                    <td align="right">
+                                        <?php echo $dbrow['numrooms']; ?>
+                                    </td>
+                                    <td align="right">
+                                        $
+                                        <?php echo round($dbrow['totalprice'],2); ?>
+                                    </td>
+                                    <td align="left">
+                                        <?php echo $dbrow['jobdate']; ?>
+                                    </td>
+                                    <td align="center">
+                                        <?php echo $p1; ?>
+                                    </td>
+                                    <td align="center">
+                                        <?php echo $p2; ?>
+                                    </td>
+                                    <td align="center">
+                                        <?php echo $p3; ?>
+                                    </td>
+                                    <td align="center">
+                                        <?php echo $p4; ?>
+                                    </td>
+                                    <td align="center">
+                                        <?php echo $p5; ?>
+                                    </td>
+                                    <td align="center">
+                                        <?php echo $p6; ?>
+                                    </td>
+                                    <td align="center">
+                                        <?php echo $p7; ?>
+                                    </td>
+                                    <td align="center">
+                                        <?php echo $p8; ?>
+                                    </td>
+                                    <td align="center">
+                                        <?php echo $p9; ?>
+                                    </td>
+                                    <td align="center">
+                                        <?php echo $p10; ?>
+                                    </td>
+                                    <td align="center">
+                                        <a href="<?php echo $mapurl; ?>" target="_blank">
+                                            <img src="images/map2.png" />
+                                        </a>
+                                    </td>
+                                </tr>
+                                <?php
                       }
                     }
                   }
                 ?>
-                    </table>
-
+                        </table>
+                    </div>
 
 
                     <div style="clear: both;">&nbsp;</div>

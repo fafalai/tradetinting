@@ -32,7 +32,7 @@ function validatePwd_Signup() {
 function planOption_Select()
 {
     $('#plan_options input[type=radio]').change(function(){
-        console.log ( $(this).val() ) 
+        //console.log ( $(this).val() ) 
         var plan = $(this).val();
         if (plan == 0)
         {

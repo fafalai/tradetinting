@@ -257,6 +257,7 @@
                                     }
                                     amount = radios[i].value
                                     console.log(amount);
+                                    console.log(description);
 
                                     // only one radio can be logically checked, don't check the rest
                                     break;
@@ -265,6 +266,7 @@
                             var handler = StripeCheckout.configure({
                                 key: 'pk_test_iGsAvPJtLoZmJPd1cwFZ2wES',
                                 image: 'images/icon.png',
+                                name:'Tinting',
                                 locale: 'auto',
                                 token: function(token) {
                                     // You can access the token ID with `token.id`.
@@ -291,6 +293,13 @@
                                     inputEmail.setAttribute('value', token.email);
                                     form.appendChild(inputEmail);
 
+                                    // Add the description as a hidden field to the form
+                                    var inputDescription = document.createElement("input");
+                                    inputDescription.setAttribute('type', "hidden");
+                                    inputDescription.setAttribute('name', "description");
+                                    inputDescription.setAttribute('value', description);
+                                    form.appendChild(inputDescription);
+
                                     //Artificial 5 second delay for testing
                                     setTimeout(function() {
                                         window.onbeforeunload = null;
@@ -300,9 +309,14 @@
                             });
                             handler.open({
                                 name: 'Tinting',
-                                description: '2 widgets',
-                                currency: 'aud',
-                                amount: amount*100
+                                description: description,
+                                currency: 'usd',
+                                amount: amount*100,
+                                //email:document.getElementById('sign_email').value,
+                                locale:'auto',
+                                //zipCode:true,
+                                //billingAddress:true
+                                
                             });
                             //alert("hello");
                             // setTimeout(() => {

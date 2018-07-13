@@ -1,5 +1,5 @@
-<div class="introducingDIV">
-    <div style="margin:0 auto;width:700px;text-align: center;padding: 20pt">
+<div class="introducingDIV col-12">
+    <div style="margin:auto;width:700px;text-align: center;padding: 20pt" class="col">
     
         <span style="font-size: 24pt;font-weight: bold">
                 INTRODUCING ~ TINT     

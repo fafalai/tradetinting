@@ -444,15 +444,16 @@ else if (isset($_POST['fldName']))
                         <br>
                     </div>
                     <div class="container">
-                        <table id="tblClients" rules="cols" frame="box" class="table table-bordered sortable">
-                            <tr>
-                                <!-- <th align="left">Code</th> -->
-                                <th style="width:30%">Name</th>
-                                <th style="width:30%">Phone</th>
-                                <th style="width:30%">Date Modified</th>
-                                <th class="unsortable" style="width:10%">Action</th>
-                            </tr>
-                            <?php
+                        <div class="table-responsive">
+                            <table id="tblClients" rules="cols" frame="box" class="table table-bordered sortable">
+                                <tr>
+                                    <!-- <th align="left">Code</th> -->
+                                    <th style="width:30%">Name</th>
+                                    <th style="width:30%">Phone</th>
+                                    <th style="width:30%">Date Modified</th>
+                                    <th class="unsortable" style="width:10%">Action</th>
+                                </tr>
+                                <?php
                     $dbselect = "select " .
                         "cl1.id," .
                         "cl1.code," .
@@ -489,39 +490,40 @@ else if (isset($_POST['fldName']))
                                 $deletetip = SharedPrepareToolTip($deletetip);
                                 $contacttip = SharedPrepareToolTip($contacttip);
                     ?>
-                                <tr>
-                                    <!-- <td align="left">
+                                    <tr>
+                                        <!-- <td align="left">
                                     <a href="clients.php?cmd=<?php echo AT_CMDMODIFY; ?>&id=<?php echo $dbrow['id']; ?>">
                                         <?php echo SharedAddEllipsis($dbrow['code'], 20); ?>
                                     </a>
                                 </td> -->
-                                    <td align="left">
-                                        <span class="hotspot" onmouseover="tooltip.show('<?php echo $contacttip; ?>');" onmouseout="tooltip.hide();">
-                                            <a href="clients.php?cmd=<?php echo AT_CMDMODIFY; ?>&id=<?php echo $dbrow['id']; ?>">
-                                                <?php echo SharedAddEllipsis($dbrow['name'], 20); ?>
-                                            </a>
-                                        </span>
-                                    </td>
-                                    <td align="left">
-                                        <?php echo SharedAddEllipsis($dbrow['mobile'], 20); ?>
-                                    </td>
-                                    <td align="right">
-                                        <?php if ($dbrow['datemodified'] == "") echo $dbrow['datecreated']; else echo $dbrow['datemodified']; ?>
-                                    </td>
-                                    <td align="center">
-                                        <a href="clients.php?cmd=<?php echo AT_CMDDELETE; ?>&id=<?php echo $dbrow['id']; ?>">
-                                            <span onmouseover="tooltip.show('<?php echo $deletetip; ?>');" onmouseout="tooltip.hide();">
-                                                <img src="images/icon-delete.png" width="25" height="17" alt="Delete" />
+                                        <td align="left">
+                                            <span class="hotspot" onmouseover="tooltip.show('<?php echo $contacttip; ?>');" onmouseout="tooltip.hide();">
+                                                <a href="clients.php?cmd=<?php echo AT_CMDMODIFY; ?>&id=<?php echo $dbrow['id']; ?>">
+                                                    <?php echo SharedAddEllipsis($dbrow['name'], 20); ?>
+                                                </a>
                                             </span>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <?php
+                                        </td>
+                                        <td align="left">
+                                            <?php echo SharedAddEllipsis($dbrow['mobile'], 20); ?>
+                                        </td>
+                                        <td align="right">
+                                            <?php if ($dbrow['datemodified'] == "") echo $dbrow['datecreated']; else echo $dbrow['datemodified']; ?>
+                                        </td>
+                                        <td align="center">
+                                            <a href="clients.php?cmd=<?php echo AT_CMDDELETE; ?>&id=<?php echo $dbrow['id']; ?>">
+                                                <span onmouseover="tooltip.show('<?php echo $deletetip; ?>');" onmouseout="tooltip.hide();">
+                                                    <img src="images/icon-delete.png" width="25" height="17" alt="Delete" />
+                                                </span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <?php
                             }
                         }
                     }
                     ?>
-                        </table>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 <div class="container" style="width:70%">

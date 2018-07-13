@@ -378,21 +378,22 @@
           <h2 class="clientTitle mb-2">Existing Users</h2>
           <label>Move mouse over links for tips. Click on table header to sort by that column.</label>
           <div style="margin-bottom: 30px">
-            <table id="tblUsers" rules="cols" frame="box" class="sortable table table-bordered">
-              <tr>
-                <th align="left">User ID</th>
-                <th align="left">Name</th>
-                <th align="right">Date Modified</th>
-                <?php
+            <div class="table-responsive">
+              <table id="tblUsers" rules="cols" frame="box" class="sortable table table-bordered">
+                <tr>
+                  <th align="left">User ID</th>
+                  <th align="left">Name</th>
+                  <th align="right">Date Modified</th>
+                  <?php
                     if ($_SESSION['admin'] == 1)
                     {
                   ?>
-                  <th align="center" class="unsortable">Action</th>
-                  <?php
+                    <th align="center" class="unsortable">Action</th>
+                    <?php
                     }
                   ?>
-              </tr>
-              <?php
+                </tr>
+                <?php
                   $dateday= date("Y-m-d H:i:s");
                   $dbselect = "select " .
                               "u1.id," .
@@ -425,44 +426,44 @@
                           $emailtip = SharedPrepareToolTip("<ul><li>Email: $email</li><li>Mobile: $mobile</li></ul>");
                         $deletetip = SharedPrepareToolTip("Delete user: <strong>" . $dbrow['name'] . "</strong>");
                 ?>
-                <tr>
-                  <td align="left">
-                    <a href="users.php?cmd=<?php echo AT_CMDMODIFY; ?>&id=<?php echo $dbrow['id']; ?>">
-                      <?php echo SharedPrepareDisplayString($dbrow['uid']); ?>
-                    </a>
-                  </td>
-                  <td align="left">
-                    <a href="users.php?cmd=<?php echo AT_CMDMODIFY; ?>&id=<?php echo $dbrow['id']; ?>">
-                      <span onmouseover="tooltip.show('<?php echo $emailtip; ?>');" onmouseout="tooltip.hide();">
-                        <?php echo SharedAddEllipsis($name, 30); ?>
-                      </span>
-                    </a>
-                  </td>
-                  <td align="right">
-                    <?php if ($dbrow['datemodified'] == "") echo $dbrow['datecreated']; else echo $dbrow['datemodified']; ?>
-                  </td>
-                  <td align="center">
-                    <?php
+                  <tr>
+                    <td align="left">
+                      <a href="users.php?cmd=<?php echo AT_CMDMODIFY; ?>&id=<?php echo $dbrow['id']; ?>">
+                        <?php echo SharedPrepareDisplayString($dbrow['uid']); ?>
+                      </a>
+                    </td>
+                    <td align="left">
+                      <a href="users.php?cmd=<?php echo AT_CMDMODIFY; ?>&id=<?php echo $dbrow['id']; ?>">
+                        <span onmouseover="tooltip.show('<?php echo $emailtip; ?>');" onmouseout="tooltip.hide();">
+                          <?php echo SharedAddEllipsis($name, 30); ?>
+                        </span>
+                      </a>
+                    </td>
+                    <td align="right">
+                      <?php if ($dbrow['datemodified'] == "") echo $dbrow['datecreated']; else echo $dbrow['datemodified']; ?>
+                    </td>
+                    <td align="center">
+                      <?php
                       if ($_SESSION['admin'] == 1)
                       {
                     ?>
-                      <a href="javascript:void(0);" onclick="DeleteUser(<?php echo $dbrow['id'] . " , '" . $name . "' "; ?>);">
-                        <span onmouseover="tooltip.show('<?php echo $deletetip; ?>');" onmouseout="tooltip.hide();">
-                          <img src="images/icon-delete.png" width="25" height="17" alt="Delete" />
-                        </span>
-                      </a>
-                      <?php
+                        <a href="javascript:void(0);" onclick="DeleteUser(<?php echo $dbrow['id'] . " , '" . $name . "' "; ?>);">
+                          <span onmouseover="tooltip.show('<?php echo $deletetip; ?>');" onmouseout="tooltip.hide();">
+                            <img src="images/icon-delete.png" width="25" height="17" alt="Delete" />
+                          </span>
+                        </a>
+                        <?php
                       }
                     ?>
-                  </td>
-                </tr>
-                <?php
+                    </td>
+                  </tr>
+                  <?php
                         }
                       }
                     }
                   ?>
-            </table>
-
+              </table>
+            </div>
           </div>
         </div>
         <div class="usersDIV">

@@ -28,6 +28,35 @@ function validatePwd_Signup() {
     });
 }
 
+
+function planOption_Select()
+{
+    $('#plan_options input[type=radio]').change(function(){
+        //console.log ( $(this).val() ) 
+        var plan = $(this).val();
+        if (plan == 0)
+        {
+            document.getElementById('signup_noplan_button').style.display = 'block';
+            document.getElementById('signup_plan_button').style.display = 'none';
+
+
+        }
+        else if (plan == 99)
+        {
+            document.getElementById('signup_noplan_button').style.display = 'none';
+            document.getElementById('signup_plan_button').style.display = 'block';
+            document.getElementById('signup_plan_button').innerText = "SIGN UP FOR ANNUAL PLAN"
+        }
+        else
+        {
+            document.getElementById('signup_noplan_button').style.display = 'none';
+            document.getElementById('signup_plan_button').style.display = 'block';
+            document.getElementById('signup_plan_button').innerText = "SIGN UP FOR 3 YEAR PLAN"
+        }
+    })
+}
+
 $(document).ready(function () {
     validatePwd_Signup();
+    planOption_Select();
 });

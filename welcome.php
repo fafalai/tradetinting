@@ -8,8 +8,8 @@
 </script>
 </head>
 <body>
-    <div class="introducingDIV">
-            <div class="sectionDIV">
+    <div class="introducingDIV col-12">
+            <div class="sectionDIV col">
                 <span style="font-size: 24pt;font-weight: bold;">
                             WELCOME  <?php echo $_SESSION['username'];?> ! 
                 </span>

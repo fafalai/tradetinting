@@ -175,13 +175,14 @@
                                         "pwd," .
                                         "uuid," .
                                         "stripe_id," .
-                                        "name," .
+                                        "users.name," .
                                         "email," .
                                         "mobile," .
                                         "numberUsers," .
                                         "period," .
-                                        "admin," .
-                                        "active" .
+                                        "users.admin," .
+                                        "active," . 
+                                        "monthValue".
                                         ") " .
                                         "VALUES " .
                                         "(" .
@@ -195,6 +196,7 @@
                                         "'$signmobile'," .
                                         "'$numberUsers'," .
                                         "'$period'," .
+                                        "1,".
                                         "1,".
                                         "1".
                                         ")";
@@ -345,7 +347,7 @@
                     timeout: 6000
                 });
                 setTimeout(() => {
-                    window.location.replace("/tint/index.php");
+                    window.location.replace("/Tinting/index.php");
                 }, 3000);
             } else if (notification == 2) {
                 noty({
@@ -354,7 +356,7 @@
                     timeout: 3000
                 });
                 setTimeout(() => {
-                    window.location.replace("/tint/signup.php");
+                    window.location.replace("/Tinting/signup.php");
                 }, 2000);
             }
         });

@@ -1208,7 +1208,7 @@ input[type=submit]:hover {
     margin-top: -50px;
 }
 
-/* .signup_noplan_button :disabled{
+.signup_noplan_button :disabled{
     background-color: gray;
     border-color: grey;
 }
@@ -1216,4 +1216,4 @@ input[type=submit]:hover {
 .signup_plan_button :disabled{
     background-color: gray;
     border-color: grey;
-} */
+}

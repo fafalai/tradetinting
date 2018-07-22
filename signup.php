@@ -150,9 +150,15 @@
                         var response = JSON.parse(rc);
                         if (response.rc == <?php echo REMEDY_ERR_NONE; ?>) {
                             if (response.id != 0) {
-                                alert('This User ID has been taken, please use another one');
-                                //$('#fldUid').val('');
-                                //$('#fldUid').focus();
+                                //alert('This User ID has been taken, please use another one');
+                                noty
+                                ({
+                                    text: "This User ID has been taken, please use another one",
+                                    type: 'error',
+                                    timeout: 2000
+                                });
+                                $('#sign_id').val('');
+                                $('#sign_id').focus();
                             }
                         }
                     }
@@ -169,7 +175,7 @@
 
         <div class="container" style="width:70%">
             <h2 class="text-dark mb-2" style="font-family: Arial, Helvetica, sans-serif;font-weight: bold;font-size: 20pt;">Sign Up</h2>
-            <form style="background-color:#f0f0f0;" action="payment.php" method="post" id="frmSignup" class="p-4 form-group">
+            <form style="background-color:#f0f0f0;" action="payment.php" method="post" id="frmSignup" name="signupForm" class="p-4 form-group">
                 <div class="row">
                     <input required id="sign_id" name="sign_id" class="form-control" type="text" placeholder="User ID" onchange="CheckUserId();">
                 </div>
@@ -228,98 +234,144 @@
                     <label class="ml-5">* in comparison to purchasing a monthly plan</label>
                 </div>
                 <div>
-                    <button id="signup_noplan_button" type="submit" class="btn-danger btn-lg" name="signup_button">SIGN UP FOR FREE TRIAL</button>
+                    <button id="signup_noplan_button" type="submit" class="btn-danger btn-lg" name="signup_button" style="cursor: pointer;">SIGN UP FOR FREE TRIAL</button>
                     <!-- <input type="submit" value="SIGN UP" name="signup_button" id="signup_button" class="btn-danger btn-lg"> -->
-                    <button id="signup_plan_button" type="submit" class="btn-danger btn-lg" name="signup_button" style="display:none" disabled></button>
+                    <button id="signup_plan_button" type="submit" class="btn-danger btn-lg" name="signup_button" style="display:none;cursor: pointer;" disabled></button>
 
                     <script>
-                        var condition = true;
-                        var submitNo = 0;
-                        var handler = StripeCheckout.configure({
-                            key: 'pk_test_iGsAvPJtLoZmJPd1cwFZ2wES',
-                            image: 'images/icon.png',
-                            name: 'Tinting',
-                            locale: 'auto',
-                            currency: 'usd',
-                            token: function (token) {
-                                // You can access the token ID with `token.id`.
-                                // Get the token ID to your server-side code for use.
-                                window.onbeforeunload = function () {
-                                    return "";
-                                }
 
-                                // Dynamically create a form element to submit the results
-                                // to your backend server
-                                var form = document.getElementById("frmSignup");
-
-                                // Add the token ID as a hidden field to the form payment-form
-                                var inputToken = document.createElement("input");
-                                inputToken.setAttribute('type', "hidden");
-                                inputToken.setAttribute('name', "stripeToken");
-                                inputDescription.setAttribute('id', "stripeToken");
-                                inputToken.setAttribute('value', token.id);
-                                console.log(token.id);
-                                form.appendChild(inputToken);
-
-                                // Add the email as a hidden field to the form
-                                var inputEmail = document.createElement("input");
-                                inputEmail.setAttribute('type', "hidden");
-                                inputEmail.setAttribute('name', "stripeEmail");
-                                inputDescription.setAttribute('id', "stripeEmail");
-                                inputEmail.setAttribute('value', token.email);
-                                form.appendChild(inputEmail);
-
-                                // Add the description as a hidden field to the form
-                                var inputDescription = document.createElement("input");
-                                inputDescription.setAttribute('type', "hidden");
-                                inputDescription.setAttribute('name', "description");
-                                inputDescription.setAttribute('id', "description");
-                                inputDescription.setAttribute('value', description);
-                                form.appendChild(inputDescription);
-
-                                //Artificial 3 second delay for testing
-                                setTimeout(function () {
-                                    window.onbeforeunload = null;
-                                    //document.getElementById('loading-overlay').style.display = 'none';
-                                // $("#loading-overlay").hide();
-                                    document.forms["frmSignup"].submit()
-                                }, 3000);
+                        function validateForm()
+                        {
+                            var id = document.forms["signupForm"]["sign_id"];  
+                            var name = document.forms["signupForm"]["sign_name"]; 
+                            var phone = document.forms["signupForm"]["sign_phone"];  
+                            var email = document.forms["signupForm"]["sign_email"];   
+                            var password = document.forms["signupForm"]["sign_password"];  
+                            var phoneReg = /^[0-9]{5,}$/g;
+                            var emailReg = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/g;
+                            var pwReg = /^(\w|\W){5,}$/g;
+                            if (id.value == "") 
+                            {
+                                //alert("User id cannot be empty");
+                                noty
+                                ({
+                                    text: "User id cannot be empty",
+                                    type: 'error',
+                                    timeout: 1300
+                                });
+                                id.focus();
+                                //console.log("User id cannot be empty");
+                                return false;
+                            } 
+                            if(name.value == "")
+                            {
+                                // alert("User name cannot be empty");
+                                // console.log("User name cannot be empty");
+                                noty
+                                ({
+                                    text: "User name cannot be empty",
+                                    type: 'error',
+                                    timeout: 1300
+                                });
+                                name.focus();
+                                return false;
                             }
-                        });
+                            if(phone.value == "")
+                            {
+                                // alert("Please enter your phone");
+                                // console.log("Phone cannot be empty");
+                                noty
+                                ({
+                                    text: "Please enter your phone",
+                                    type: 'error',
+                                    timeout: 1300
+                                });
+                                phone.focus();
+                                return false;
+                            }
+                            if (phoneReg.test(phone.value) == false)
+                            {
+                                // alert("Invalid Phone number,please check");
+                                // console.log("Phone number cannot be less than 5 digits");
+                                noty
+                                ({
+                                    text: "Invalid Phone number,please check",
+                                    type: 'error',
+                                    timeout: 1300
+                                });
+                                phone.focus();
+                                return false;
+                            }
+                            if(email.value == "")
+                            {
+                                // alert("Please enter your email");
+                                // console.log("Phone cannot be empty");
+                                noty
+                                ({
+                                    text: "Please enter your email",
+                                    type: 'error',
+                                    timeout: 1300
+                                });
+                                email.focus();
+                                return false;
+                            }
+                            if(emailReg.test(email.value) == false)
+                            {
+                                // alert("Invalid email address, please check");
+                                // console.log("invalid email");
+                                noty
+                                ({
+                                    text: "Invalid email address, please check",
+                                    type: 'error',
+                                    timeout: 1300
+                                });
+                                email.focus();
+                                return false;
+                            }
+                            if(password.value == "")
+                            {
+                                // alert("Password cannot be empty");
+                                // console.log("password cannot be empty");
+                                noty
+                                ({
+                                    text: "Password cannot be empty",
+                                    type: 'error',
+                                    timeout: 1300
+                                });
+                                password.focus();
+                                return false;
+                            }
+
+                            return true;
+                        }
+                        
 
                         document.getElementById("signup_noplan_button").addEventListener("click", function(event){
                             event.preventDefault()
                             console.log("free trial");
-                            document.forms["frmSignup"].submit()
-                        });
-                        document.getElementById("signup_plan_button").addEventListener("click", function(event){
-                            event.preventDefault()
-                            console.log("payment plan");
-                            console.log("submit the form");
-                            document.getElementById('signup_plan_button').disabled = true;
-                            var originalText = document.getElementById('signup_plan_button').innerText;
-                            document.getElementById('signup_plan_button').innerText = "please wait....";
-                                
-                            // $(this).submit(function() {
-                            //     // $('#frmSignup').disabled = true;
-                            //     console.log("submit twice");
-                            //     condition = false;
-                            //     submitNo = submitNo + 1;
-                            //     console.log("the submit number now is " + submitNo);
-                            //     console.log("the condition now is " + condition);
-
-                            //     //break;
-                            //     return;
-                            // });
+                            if(validateForm() == true)
+                            {
+                                $("#loading-overlay").show();
+                                document.getElementById('signup_noplan_button').disabled = true;
+                                var originalText = document.getElementById('signup_noplan_button').innerText;
+                                document.getElementById('signup_noplan_button').innerText = "please wait....";
+                                // $("#signup_noplan_button").css("background-color", "gray");
+                                document.forms["frmSignup"].submit()
+                            }
                             
-
-                            // console.log("the submit number now is " + submitNo);
-                            // console.log("the condition now is " + condition);
-
-
-                            //if(condition != false);
-                            //{
-                                console.log("first time submit");
+                        });
+                        document.getElementById("signup_plan_button").addEventListener("click", function(event)
+                        {                           
+                            event.preventDefault()
+                            //validateForm();
+                            //console.log(validateForm());
+                            if (validateForm() == true)
+                            {
+                                console.log("payment plan");
+                                // console.log("submit the form");
+                                document.getElementById('signup_plan_button').disabled = true;
+                                var originalText = document.getElementById('signup_plan_button').innerText;
+                                document.getElementById('signup_plan_button').innerText = "please wait....";
                                 // console.log("the condition now is " + condition);
                                 // console.log("the submit number now is " + submitNo);
                                 $("#loading-overlay").show();
@@ -347,15 +399,69 @@
                                         // only one radio can be logically checked, don't check the rest
                                         break;
                                     }
-                                //}
+                                }
+
+                                var handler = StripeCheckout.configure({
+                                    key: 'pk_test_iGsAvPJtLoZmJPd1cwFZ2wES',
+                                    image: 'images/icon.png',
+                                    name: 'Tinting',
+                                    locale: 'auto',
+                                    currency: 'usd',
+                                    token: function (token) {
+                                        // You can access the token ID with `token.id`.
+                                        // Get the token ID to your server-side code for use.
+                                        // window.onbeforeunload = function () {
+                                        //     return "";
+                                        // }
+
+                                        // Dynamically create a form element to submit the results
+                                        // to your backend server
+                                        var form = document.getElementById("frmSignup");
+                                        // $("#loading-overlay").show();
+
+
+                                        // Add the token ID as a hidden field to the form payment-form
+                                        var inputToken = document.createElement("input");
+                                        inputToken.setAttribute('type', "hidden");
+                                        inputToken.setAttribute('name', "stripeToken");
+                                        // inputDescription.setAttribute('id', "stripeToken");
+                                        inputToken.setAttribute('value', token.id);
+                                        // console.log(token.id);
+                                        form.appendChild(inputToken);
+
+                                        // Add the email as a hidden field to the form
+                                        var inputEmail = document.createElement("input");
+                                        inputEmail.setAttribute('type', "hidden");
+                                        inputEmail.setAttribute('name', "stripeEmail");
+                                        // inputDescription.setAttribute('id', "stripeEmail");
+                                        inputEmail.setAttribute('value', token.email);
+                                        form.appendChild(inputEmail);
+
+                                        // Add the description as a hidden field to the form
+                                        var inputDescription = document.createElement("input");
+                                        inputDescription.setAttribute('type', "hidden");
+                                        inputDescription.setAttribute('name', "description");
+                                        // inputDescription.setAttribute('id', "description");
+                                        inputDescription.setAttribute('value', description);
+                                        form.appendChild(inputDescription);
+
+                                        //Artificial 3 second delay for testing
+                                        setTimeout(function () {
+                                            window.onbeforeunload = null;
+                                            document.forms["frmSignup"].submit()
+                                        }, 500);
+                                    }
+                                });
                                 
+                                    
                                 handler.open({
                                     //name: 'Tinting',
                                     description: description,
-                                    
                                     amount: amount * 100,
                                     //email:document.getElementById('sign_email').value,
                                     // locale: 'auto',
+                                    //zipCode:true,
+                                    //billingAddress:true
                                     
                                     // Close Checkout on page navigation:
                                     closed: function(){
@@ -363,79 +469,22 @@
                                         $("#loading-overlay").hide();
                                         document.getElementById('signup_plan_button').disabled = false;
                                         document.getElementById('signup_plan_button').innerText = originalText;
-                                        //handler.close();
                                     }
-                                    //zipCode:true,
-                                    //billingAddress:true
+                                
                                 });
-                                //alert("hello");
-                                // setTimeout(() => {
-                                //     this.submit();
-                                // }, timeout);
-                                //this.submit();
-                                return true;
                             }
+                            else
+                            {
+                                console.log("cannot run");
+                            }
+     
                         });
+                       
 
                         window.addEventListener('popstate', function() {
                             handler.close();
                         });
 
-                        // function openPayment() 
-                        // {
-                        //     submitNo = submitNo + 1;
-                        //     //e.preventDefault(); // don't submit multiple times
-                           
-                        //     $("#frmSignup").submit(function (e) {
-
-                        //         e.preventDefault(); // don't submit multiple times
-                                
-                                
-                        //         // else
-                        //         // {
-                        //         //     return false;
-                        //         // }
- 
-                        //     });
-
-                        // }
-
-                        // document.getElementById('signup_plan_button').addEventListener('click', function(e) {
-                        //     var radios = document.getElementsByName('plan_opt');
-                        //     var amount = 0;
-                        //     var description = "";
-
-                        //     for (var i = 0, length = radios.length; i < length; i++) {
-                        //         if (radios[i].checked) {
-                        //             // do whatever you want with the checked radio
-                        //             // alert(radios[i].value);
-                        //             amount = radios[i].value
-                        //             console.log(amount);
-
-                        //             // only one radio can be logically checked, don't check the rest
-                        //             break;
-                        //         }
-                        //     }
-
-                        //     // $("#frmSignup").submit(function(){
-                        //     //     handler.open({
-                        //     //         name: 'Tinting',
-                        //     //         description: '2 widgets',
-                        //     //         currency: 'aud',
-                        //     //         amount: amount*100
-                        //     //     });
-                        //     // e.preventDefault();
-                        //     // })
-                        //     //document.getElementById('signup_plan_button').click();
-                        //     //Open Checkout with further options:
-                        //     handler.open({
-                        //         name: 'Tinting',
-                        //         description: '2 widgets',
-                        //         currency: 'aud',
-                        //         amount: amount*100
-                        //     });
-                        //     e.preventDefault();
-                        // });
                     </script>
                 </div>
             </form>

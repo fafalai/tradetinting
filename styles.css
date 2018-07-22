@@ -1186,3 +1186,43 @@ input[type="button"],
 input[type="submit"] {
     cursor: pointer;
 }
+
+#loading-overlay {
+    display: none;
+    position: absolute;
+    height: 1500px;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99;
+    background-color: #000;
+    opacity: 0.7;
+}
+
+#loading-message {
+    display: none;
+    position: absolute;
+    width: 400px;
+    height: 100px;
+    line-height: 100px;
+    background-color: #fff;
+    text-align: center;
+    font-size: 1.2em;
+    left: 50%;
+    z-index: 100;
+    top: 50%;
+    margin-left: -200px;
+    margin-top: -50px;
+}
+
+.signup_noplan_button :disabled{
+    background-color: gray;
+    border-color: grey;
+}
+
+.signup_plan_button :disabled{
+    background-color: gray;
+    border-color: grey;
+}

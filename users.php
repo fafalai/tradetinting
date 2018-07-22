@@ -352,7 +352,13 @@
               var response = JSON.parse(rc);
               if (response.rc == <?php echo REMEDY_ERR_NONE; ?>) {
                 if (response.id != 0) {
-                  alert('This User ID has been taken, please use another one');
+                  // alert('This User ID has been taken, please use another one');
+                  noty
+                  ({
+                      text: "This User ID has been taken, please use another one",
+                      type: 'error',
+                      timeout: 2000
+                  });
                   $('#fldUid').val('');
                   $('#fldUid').focus();
                 }

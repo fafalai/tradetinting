@@ -1177,3 +1177,12 @@ input[type=submit]:hover {
     border-top: solid #8e8e8e 2pt;
     border-bottom: solid #8e8e8e 2pt;
 }
+
+button {
+    cursor: pointer;
+}
+
+input[type="button"],
+input[type="submit"] {
+    cursor: pointer;
+}

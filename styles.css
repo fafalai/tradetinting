@@ -1207,3 +1207,13 @@ input[type=submit]:hover {
     margin-left: -200px;
     margin-top: -50px;
 }
+
+/* .signup_noplan_button :disabled{
+    background-color: gray;
+    border-color: grey;
+}
+
+.signup_plan_button :disabled{
+    background-color: gray;
+    border-color: grey;
+} */

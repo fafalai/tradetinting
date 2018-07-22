@@ -230,26 +230,114 @@
                 <div>
                     <button id="signup_noplan_button" type="submit" class="btn-danger btn-lg" name="signup_button">SIGN UP FOR FREE TRIAL</button>
                     <!-- <input type="submit" value="SIGN UP" name="signup_button" id="signup_button" class="btn-danger btn-lg"> -->
-                    <button id="signup_plan_button" type="submit" class="btn-danger btn-lg" name="signup_button" style="display:none" onclick="openPayment()"></button>
+                    <button id="signup_plan_button" type="submit" class="btn-danger btn-lg" name="signup_button" style="display:none" disabled></button>
 
                     <script>
-                        function openPayment() {
-                            $("#loading-overlay").show();
-                            $("#frmSignup").submit(function (e) {
-                                e.preventDefault(); // don't submit multiple times
+                        var condition = true;
+                        var submitNo = 0;
+                        var handler = StripeCheckout.configure({
+                            key: 'pk_test_iGsAvPJtLoZmJPd1cwFZ2wES',
+                            image: 'images/icon.png',
+                            name: 'Tinting',
+                            locale: 'auto',
+                            currency: 'usd',
+                            token: function (token) {
+                                // You can access the token ID with `token.id`.
+                                // Get the token ID to your server-side code for use.
+                                window.onbeforeunload = function () {
+                                    return "";
+                                }
+
+                                // Dynamically create a form element to submit the results
+                                // to your backend server
+                                var form = document.getElementById("frmSignup");
+
+                                // Add the token ID as a hidden field to the form payment-form
+                                var inputToken = document.createElement("input");
+                                inputToken.setAttribute('type', "hidden");
+                                inputToken.setAttribute('name', "stripeToken");
+                                inputDescription.setAttribute('id', "stripeToken");
+                                inputToken.setAttribute('value', token.id);
+                                console.log(token.id);
+                                form.appendChild(inputToken);
+
+                                // Add the email as a hidden field to the form
+                                var inputEmail = document.createElement("input");
+                                inputEmail.setAttribute('type', "hidden");
+                                inputEmail.setAttribute('name', "stripeEmail");
+                                inputDescription.setAttribute('id', "stripeEmail");
+                                inputEmail.setAttribute('value', token.email);
+                                form.appendChild(inputEmail);
+
+                                // Add the description as a hidden field to the form
+                                var inputDescription = document.createElement("input");
+                                inputDescription.setAttribute('type', "hidden");
+                                inputDescription.setAttribute('name', "description");
+                                inputDescription.setAttribute('id', "description");
+                                inputDescription.setAttribute('value', description);
+                                form.appendChild(inputDescription);
+
+                                //Artificial 3 second delay for testing
+                                setTimeout(function () {
+                                    window.onbeforeunload = null;
+                                    //document.getElementById('loading-overlay').style.display = 'none';
+                                // $("#loading-overlay").hide();
+                                    document.forms["frmSignup"].submit()
+                                }, 3000);
+                            }
+                        });
+
+                        document.getElementById("signup_noplan_button").addEventListener("click", function(event){
+                            event.preventDefault()
+                            console.log("free trial");
+                            document.forms["frmSignup"].submit()
+                        });
+                        document.getElementById("signup_plan_button").addEventListener("click", function(event){
+                            event.preventDefault()
+                            console.log("payment plan");
+                            console.log("submit the form");
+                            document.getElementById('signup_plan_button').disabled = true;
+                            var originalText = document.getElementById('signup_plan_button').innerText;
+                            document.getElementById('signup_plan_button').innerText = "please wait....";
+                                
+                            // $(this).submit(function() {
+                            //     // $('#frmSignup').disabled = true;
+                            //     console.log("submit twice");
+                            //     condition = false;
+                            //     submitNo = submitNo + 1;
+                            //     console.log("the submit number now is " + submitNo);
+                            //     console.log("the condition now is " + condition);
+
+                            //     //break;
+                            //     return;
+                            // });
+                            
+
+                            // console.log("the submit number now is " + submitNo);
+                            // console.log("the condition now is " + condition);
+
+
+                            //if(condition != false);
+                            //{
+                                console.log("first time submit");
+                                // console.log("the condition now is " + condition);
+                                // console.log("the submit number now is " + submitNo);
+                                $("#loading-overlay").show();
                                 //this.submit(); // use the native submit method of the form element
                                 var radios = document.getElementsByName('plan_opt');
                                 var amount = 0;
                                 var description = "";
 
                                 for (var i = 0, length = radios.length; i < length; i++) {
+                                    // console.log(i);
                                     if (radios[i].checked) {
                                         // do whatever you want with the checked radio
-                                        // alert(radios[i].value);
-
-                                        if (i == 1) {
+                                        if (i == 1) 
+                                        {
                                             description = "Annual Plan";
-                                        } else if (i == 2) {
+                                        } 
+                                        else if (i == 2) 
+                                        {
                                             description = "3 Years Plan";
                                         }
                                         amount = radios[i].value
@@ -259,87 +347,58 @@
                                         // only one radio can be logically checked, don't check the rest
                                         break;
                                     }
-                                }
-                                var handler = StripeCheckout.configure({
-                                    key: 'pk_test_iGsAvPJtLoZmJPd1cwFZ2wES',
-                                    image: 'images/icon.png',
-                                    name: 'Tinting',
-                                    locale: 'auto',
-                                    token: function (token) {
-                                        // You can access the token ID with `token.id`.
-                                        // Get the token ID to your server-side code for use.
-                                        window.onbeforeunload = function () {
-                                            return "";
-                                        }
-
-                                        // Dynamically create a form element to submit the results
-                                        // to your backend server
-                                        var form = document.getElementById("frmSignup");
-
-                                        // Add the token ID as a hidden field to the form payment-form
-                                        var inputToken = document.createElement("input");
-                                        inputToken.setAttribute('type', "hidden");
-                                        inputToken.setAttribute('name', "stripeToken");
-                                        inputToken.setAttribute('value', token.id);
-                                        form.appendChild(inputToken);
-
-                                        // Add the email as a hidden field to the form
-                                        var inputEmail = document.createElement("input");
-                                        inputEmail.setAttribute('type', "hidden");
-                                        inputEmail.setAttribute('name', "stripeEmail");
-                                        inputEmail.setAttribute('value', token.email);
-                                        form.appendChild(inputEmail);
-
-                                        // Add the description as a hidden field to the form
-                                        var inputDescription = document.createElement("input");
-                                        inputDescription.setAttribute('type', "hidden");
-                                        inputDescription.setAttribute('name', "description");
-                                        inputDescription.setAttribute('value', description);
-                                        form.appendChild(inputDescription);
-
-                                        //Artificial 5 second delay for testing
-                                        setTimeout(function () {
-                                            window.onbeforeunload = null;
-                                            document.forms["frmSignup"].submit()
-                                        }, 5000);
-                                    }
-                                });
+                                //}
+                                
                                 handler.open({
-                                    name: 'Tinting',
+                                    //name: 'Tinting',
                                     description: description,
-                                    currency: 'usd',
+                                    
                                     amount: amount * 100,
                                     //email:document.getElementById('sign_email').value,
-                                    locale: 'auto',
+                                    // locale: 'auto',
+                                    
+                                    // Close Checkout on page navigation:
+                                    closed: function(){
+                                        console.log("close the checkout");
+                                        $("#loading-overlay").hide();
+                                        document.getElementById('signup_plan_button').disabled = false;
+                                        document.getElementById('signup_plan_button').innerText = originalText;
+                                        //handler.close();
+                                    }
                                     //zipCode:true,
                                     //billingAddress:true
-
                                 });
                                 //alert("hello");
                                 // setTimeout(() => {
                                 //     this.submit();
                                 // }, timeout);
                                 //this.submit();
-                            })
-                            //document.getElementById('signup_plan_button').click();
-                            //Open Checkout with further options:
-                            // handler.open({
-                            //     name: 'Tinting',
-                            //     description: '2 widgets',
-                            //     currency: 'aud',
-                            //     amount: amount*100
-                            // });
-                            //e.preventDefault();
+                                return true;
+                            }
+                        });
 
-                            // Close Checkout on page navigation:
-                            $(".Header-navClose").click(() => {
-                                $("#loading-overlay").hide();
-                                handler.close();
-                            })
-                            // window.addEventListener('popstate', function () {
-                            //     handler.close();
-                            // });
-                        }
+                        window.addEventListener('popstate', function() {
+                            handler.close();
+                        });
+
+                        // function openPayment() 
+                        // {
+                        //     submitNo = submitNo + 1;
+                        //     //e.preventDefault(); // don't submit multiple times
+                           
+                        //     $("#frmSignup").submit(function (e) {
+
+                        //         e.preventDefault(); // don't submit multiple times
+                                
+                                
+                        //         // else
+                        //         // {
+                        //         //     return false;
+                        //         // }
+ 
+                        //     });
+
+                        // }
 
                         // document.getElementById('signup_plan_button').addEventListener('click', function(e) {
                         //     var radios = document.getElementsByName('plan_opt');

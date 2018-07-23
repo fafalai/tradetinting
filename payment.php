@@ -411,7 +411,7 @@
                             // used the $useruuid to get the user id from users table
                             error_log("no payment, ends");
                             $notification = 1;
-                            $signupmsg =  "You have signed up successfully.Directing you to home page. Don't forget to complete your business details after log in";
+                            $signupmsg =  "You have signed up successfully.Directing you to login page. Don't forget to complete your business details after log in";
                         }
                         else
                         {

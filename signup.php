@@ -347,7 +347,13 @@
                                 var originalText = document.getElementById('signup_noplan_button').innerText;
                                 document.getElementById('signup_noplan_button').innerText = "please wait....";
                                 // $("#signup_noplan_button").css("background-color", "gray");
-                                document.forms["frmSignup"].submit()
+                                setTimeout(function () {
+                                    console.log("Artificial 0.5 second.......");
+                                    window.onbeforeunload = null;
+                                    document.forms["frmSignup"].submit();
+                                    $("#loading-overlay").show();
+                                    $("#loading-message").show('fade');
+                                }, 500);
                             }
 
                         });
@@ -432,9 +438,9 @@
                                         inputDescription.setAttribute('value', description);
                                         form.appendChild(inputDescription);
 
-                                        //Artificial 3 second delay for testing
+                                        //Artificial 0.5 second delay for testing
                                         setTimeout(function () {
-                                            console.log("Artificial 3second.......");
+                                            console.log("Artificial 0.5 second.......");
                                             window.onbeforeunload = null;
                                             document.forms["frmSignup"].submit();
                                             $("#loading-overlay").show();

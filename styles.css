@@ -1190,7 +1190,7 @@ input[type="submit"] {
 #loading-overlay {
     display: none;
     position: absolute;
-    height: 1500px;
+    height: 1400px;
     width: 100%;
     top: 0;
     left: 0;
@@ -1202,6 +1202,7 @@ input[type="submit"] {
 }
 
 #loading-message {
+    opacity: 0.9;
     display: none;
     position: absolute;
     width: 400px;

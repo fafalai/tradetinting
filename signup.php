@@ -152,11 +152,11 @@
                             if (response.id != 0) {
                                 //alert('This User ID has been taken, please use another one');
                                 noty
-                                ({
-                                    text: "This User ID has been taken, please use another one",
-                                    type: 'error',
-                                    timeout: 2000
-                                });
+                                    ({
+                                        text: "This User ID has been taken, please use another one",
+                                        type: 'error',
+                                        timeout: 2000
+                                    });
                                 $('#sign_id').val('');
                                 $('#sign_id').focus();
                             }
@@ -236,121 +236,112 @@
                 <div>
                     <button id="signup_noplan_button" type="submit" class="btn-danger btn-lg" name="signup_button" style="cursor: pointer;">SIGN UP FOR FREE TRIAL</button>
                     <!-- <input type="submit" value="SIGN UP" name="signup_button" id="signup_button" class="btn-danger btn-lg"> -->
-                    <button id="signup_plan_button" type="submit" class="btn-danger btn-lg" name="signup_button" style="display:none;cursor: pointer;" disabled></button>
+                    <button id="signup_plan_button" type="submit" class="btn-danger btn-lg" name="signup_button" style="display:none;cursor: pointer;"
+                        disabled></button>
 
                     <script>
-
-                        function validateForm()
-                        {
-                            var id = document.forms["signupForm"]["sign_id"];  
-                            var name = document.forms["signupForm"]["sign_name"]; 
-                            var phone = document.forms["signupForm"]["sign_phone"];  
-                            var email = document.forms["signupForm"]["sign_email"];   
-                            var password = document.forms["signupForm"]["sign_password"];  
+                        function validateForm() {
+                            var id = document.forms["signupForm"]["sign_id"];
+                            var name = document.forms["signupForm"]["sign_name"];
+                            var phone = document.forms["signupForm"]["sign_phone"];
+                            var email = document.forms["signupForm"]["sign_email"];
+                            var password = document.forms["signupForm"]["sign_password"];
                             var phoneReg = /^[0-9]{5,}$/g;
                             var emailReg = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/g;
                             var pwReg = /^(\w|\W){5,}$/g;
-                            if (id.value == "") 
-                            {
+                            if (id.value == "") {
                                 //alert("User id cannot be empty");
                                 noty
-                                ({
-                                    text: "User id cannot be empty",
-                                    type: 'error',
-                                    timeout: 1300
-                                });
+                                    ({
+                                        text: "User id cannot be empty",
+                                        type: 'error',
+                                        timeout: 1300
+                                    });
                                 id.focus();
                                 //console.log("User id cannot be empty");
                                 return false;
-                            } 
-                            if(name.value == "")
-                            {
+                            }
+                            if (name.value == "") {
                                 // alert("User name cannot be empty");
                                 // console.log("User name cannot be empty");
                                 noty
-                                ({
-                                    text: "User name cannot be empty",
-                                    type: 'error',
-                                    timeout: 1300
-                                });
+                                    ({
+                                        text: "User name cannot be empty",
+                                        type: 'error',
+                                        timeout: 1300
+                                    });
                                 name.focus();
                                 return false;
                             }
-                            if(phone.value == "")
-                            {
+                            if (phone.value == "") {
                                 // alert("Please enter your phone");
                                 // console.log("Phone cannot be empty");
                                 noty
-                                ({
-                                    text: "Please enter your phone",
-                                    type: 'error',
-                                    timeout: 1300
-                                });
+                                    ({
+                                        text: "Please enter your phone",
+                                        type: 'error',
+                                        timeout: 1300
+                                    });
                                 phone.focus();
                                 return false;
                             }
-                            if (phoneReg.test(phone.value) == false)
-                            {
+                            if (phoneReg.test(phone.value) == false) {
                                 // alert("Invalid Phone number,please check");
                                 // console.log("Phone number cannot be less than 5 digits");
                                 noty
-                                ({
-                                    text: "Invalid Phone number,please check",
-                                    type: 'error',
-                                    timeout: 1300
-                                });
+                                    ({
+                                        text: "Invalid Phone number,please check",
+                                        type: 'error',
+                                        timeout: 1300
+                                    });
                                 phone.focus();
                                 return false;
                             }
-                            if(email.value == "")
-                            {
+                            if (email.value == "") {
                                 // alert("Please enter your email");
                                 // console.log("Phone cannot be empty");
                                 noty
-                                ({
-                                    text: "Please enter your email",
-                                    type: 'error',
-                                    timeout: 1300
-                                });
+                                    ({
+                                        text: "Please enter your email",
+                                        type: 'error',
+                                        timeout: 1300
+                                    });
                                 email.focus();
                                 return false;
                             }
-                            if(emailReg.test(email.value) == false)
-                            {
+                            if (emailReg.test(email.value) == false) {
                                 // alert("Invalid email address, please check");
                                 // console.log("invalid email");
                                 noty
-                                ({
-                                    text: "Invalid email address, please check",
-                                    type: 'error',
-                                    timeout: 1300
-                                });
+                                    ({
+                                        text: "Invalid email address, please check",
+                                        type: 'error',
+                                        timeout: 1300
+                                    });
                                 email.focus();
                                 return false;
                             }
-                            if(password.value == "")
-                            {
+                            if (password.value == "") {
                                 // alert("Password cannot be empty");
                                 // console.log("password cannot be empty");
                                 noty
-                                ({
-                                    text: "Password cannot be empty",
-                                    type: 'error',
-                                    timeout: 1300
-                                });
+                                    ({
+                                        text: "Password cannot be empty",
+                                        type: 'error',
+                                        timeout: 1300
+                                    });
                                 password.focus();
                                 return false;
                             }
 
                             return true;
                         }
-                        
 
-                        document.getElementById("signup_noplan_button").addEventListener("click", function(event){
+
+                        document.getElementById("signup_noplan_button").addEventListener("click", function (event) {
                             event.preventDefault()
                             console.log("free trial");
-                            if(validateForm() == true)
-                            {
+                            if (validateForm() == true) {
                                 $("#loading-overlay").show();
                                 document.getElementById('signup_noplan_button').disabled = true;
                                 var originalText = document.getElementById('signup_noplan_button').innerText;
@@ -358,15 +349,14 @@
                                 // $("#signup_noplan_button").css("background-color", "gray");
                                 document.forms["frmSignup"].submit()
                             }
-                            
+
                         });
-                        document.getElementById("signup_plan_button").addEventListener("click", function(event)
-                        {                           
+                        document.getElementById("signup_plan_button").addEventListener("click", function (event) {
                             event.preventDefault()
                             //validateForm();
                             //console.log(validateForm());
-                            if (validateForm() == true)
-                            {
+                            if (validateForm() == true) {
+                                $("#loading-overlay").show();
                                 console.log("payment plan");
                                 // console.log("submit the form");
                                 document.getElementById('signup_plan_button').disabled = true;
@@ -384,12 +374,9 @@
                                     // console.log(i);
                                     if (radios[i].checked) {
                                         // do whatever you want with the checked radio
-                                        if (i == 1) 
-                                        {
+                                        if (i == 1) {
                                             description = "Annual Plan";
-                                        } 
-                                        else if (i == 2) 
-                                        {
+                                        } else if (i == 2) {
                                             description = "3 Years Plan";
                                         }
                                         amount = radios[i].value
@@ -447,13 +434,16 @@
 
                                         //Artificial 3 second delay for testing
                                         setTimeout(function () {
+                                            console.log("Artificial 3second.......");
                                             window.onbeforeunload = null;
-                                            document.forms["frmSignup"].submit()
+                                            document.forms["frmSignup"].submit();
+                                            $("#loading-overlay").show();
+                                            $("#loading-message").show('fade');
                                         }, 500);
                                     }
                                 });
-                                
-                                    
+
+
                                 handler.open({
                                     //name: 'Tinting',
                                     description: description,
@@ -462,29 +452,29 @@
                                     // locale: 'auto',
                                     //zipCode:true,
                                     //billingAddress:true
-                                    
+
                                     // Close Checkout on page navigation:
-                                    closed: function(){
+                                    closed: function () {
                                         console.log("close the checkout");
-                                        $("#loading-overlay").hide();
-                                        document.getElementById('signup_plan_button').disabled = false;
-                                        document.getElementById('signup_plan_button').innerText = originalText;
+                                        $("#loading-overlay").hide('fade');
+                                        // $("#loading-message").show('fade');
+                                        document.getElementById('signup_plan_button').disabled =
+                                            false;
+                                        document.getElementById('signup_plan_button').innerText =
+                                            originalText;
                                     }
-                                
+
                                 });
-                            }
-                            else
-                            {
+                            } else {
                                 console.log("cannot run");
                             }
-     
-                        });
-                       
 
-                        window.addEventListener('popstate', function() {
+                        });
+
+
+                        window.addEventListener('popstate', function () {
                             handler.close();
                         });
-
                     </script>
                 </div>
             </form>

@@ -448,7 +448,7 @@
 
 
                 //Convert the html to pdf
-                error_log("convering html to pdf");
+                error_log("converting html to pdf");
                 $dompdf = new Dompdf();
                 // $dompdf->loadHtml(file_get_contents("quoteEmailTemplate/$clientid.html"));
                 $dompdf->loadHtml($emailtemplate);

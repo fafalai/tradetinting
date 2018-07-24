@@ -239,7 +239,7 @@ else if (isset($_POST['fldName']))
         <?php
         include("meta.php");
     ?>
-            <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBqCHDj475c_6YSc9yqwBH3eN1bYovqtUE&libraries=places&callback=initAutocomplete"
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqCHDj475c_6YSc9yqwBH3eN1bYovqtUE&libraries=places&callback=initAutocomplete"
                 async defer></script>
             <script type="text/javascript">
                 $(document).ready(function () {
@@ -388,14 +388,16 @@ else if (isset($_POST['fldName']))
                     var input, filter, table, tr, td, i, searchIndex;
                     input = document.getElementById("searchInputClients");
                     filter = input.value.toUpperCase();
+                    // console.log(filter);
                     table = document.getElementById("tblClients");
                     tr = table.getElementsByTagName("tr");
                     searchIndex = 0;
-                    if (document.getElementById("searchName").checked) {
+                    if (document.getElementById("searchMobile").checked) {
                         searchIndex = 1;
-                    } else if (document.getElementById("searchMobile").checked) {
-                        searchIndex = 2;
+                    } else if (document.getElementById("searchName").checked) {
+                        searchIndex = 0;
                     }
+                    // console.log(searchIndex);
                     for (i = 0; i < tr.length; i++) {
                         td = tr[i].getElementsByTagName("td")[searchIndex];
                         if (td) {
@@ -454,26 +456,26 @@ else if (isset($_POST['fldName']))
                                     <th class="unsortable" style="width:10%">Action</th>
                                 </tr>
                                 <?php
-                    $dbselect = "select " .
-                        "cl1.id," .
-                        "cl1.code," .
-                        "cl1.name," .
-                        "cl1.notes as 'desc'," .
-                        "cl1.contact," .
-                        "cl1.mobile," .
-                        "cl1.address," .
-                        "cl1.city," .
-                        "cl1.state," .
-                        "DATE_FORMAT(cl1.datecreated,\"%Y-%m-%d %H:%i\") datecreated," .
-                        "DATE_FORMAT(cl1.datemodified,\"%Y-%m-%d %H:%i\") datemodified," .
-                        "cl1.gpslat," .
-                        "cl1.gpslon " .
-                        "from " .
-                        "clients cl1 " .
-                        "where " .
-                        "cl1.cust_id=" . $_SESSION['custid'] . " " .
-                        "and " .
-                        "cl1.dateexpired is null";
+                                    $dbselect = "select " .
+                                        "cl1.id," .
+                                        "cl1.code," .
+                                        "cl1.name," .
+                                        "cl1.notes as 'desc'," .
+                                        "cl1.contact," .
+                                        "cl1.mobile," .
+                                        "cl1.address," .
+                                        "cl1.city," .
+                                        "cl1.state," .
+                                        "DATE_FORMAT(cl1.datecreated,\"%Y-%m-%d %H:%i\") datecreated," .
+                                        "DATE_FORMAT(cl1.datemodified,\"%Y-%m-%d %H:%i\") datemodified," .
+                                        "cl1.gpslat," .
+                                        "cl1.gpslon " .
+                                        "from " .
+                                        "clients cl1 " .
+                                        "where " .
+                                        "cl1.cust_id=" . $_SESSION['custid'] . " " .
+                                        "and " .
+                                        "cl1.dateexpired is null";
                     if ($dbresult = SharedQuery($dbselect, $dblink))
                     {
                         if ($numrows = SharedNumRows($dbresult))
@@ -558,7 +560,7 @@ else if (isset($_POST['fldName']))
                                     <tr>
                                         <!-- <td align="left" valign="top">Desc:</td> -->
                                         <td align="left" valign="top" colspan="4">
-                                            <input style="width: 100%" style="width: 100%" id="fldDesc" name="fldDesc" type="text" placeholder="DESC" size="40" maxlength="<?php echo AT_MAXNOTE; ?>"
+                                            <input style="width: 100%" style="width: 100%" id="fldDesc" name="fldDesc" type="text" placeholder="NOTES" size="40" maxlength="<?php echo AT_MAXNOTE; ?>"
                                                 value="<?php echo SharedPrepareDisplayString($flddesc); ?>" />
                                         </td>
                                     </tr>

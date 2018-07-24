@@ -457,7 +457,8 @@
                         timeout: 6000
                     });
                     setTimeout(() => {
-                        window.location.replace("/tint/login.php");
+                        // window.location.replace("/tint/login.php");// for local path
+                        window.location.replace("/login.php"); // for production path
                     }, 3000);
                 } else if (notification == 2) {
                     noty({
@@ -466,7 +467,8 @@
                         timeout: 3000
                     });
                     setTimeout(() => {
-                        window.location.replace("/tint/signup.php");
+                        // window.location.replace("/tint/signup.php");// for local path
+                        window.location.replace("/signup.php");// for production path
                     }, 2000);
                 }
             });

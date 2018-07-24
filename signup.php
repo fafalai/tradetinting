@@ -32,7 +32,7 @@
 
     <head>
         <?php include("meta.php");?>
-        <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBqCHDj475c_6YSc9yqwBH3eN1bYovqtUE&libraries=places&callback=initAutocomplete"
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqCHDj475c_6YSc9yqwBH3eN1bYovqtUE&libraries=places&callback=initAutocomplete"
             async defer></script>
         <script type="text/javascript">
             $(document).ready(function () {
@@ -333,6 +333,17 @@
                                 password.focus();
                                 return false;
                             }
+                            if(pwReg.test(password.value) == false)
+                            {
+                                noty
+                                    ({
+                                        text: "Password Must be at least 5 characters",
+                                        type: 'error',
+                                        timeout: 1300
+                                    });
+                                password.focus();
+                                return false;
+                            }
 
                             return true;
                         }
@@ -350,9 +361,11 @@
                                 setTimeout(function () {
                                     console.log("Artificial 0.5 second.......");
                                     window.onbeforeunload = null;
-                                    document.forms["frmSignup"].submit();
+                                    // document.getElementById('loading-overlay').style.display = "block";
                                     $("#loading-overlay").show();
+                                    // document.getElementById('loading-message').style.display = "block";
                                     $("#loading-message").show('fade');
+                                    document.forms["frmSignup"].submit();
                                 }, 500);
                             }
 
@@ -442,9 +455,12 @@
                                         setTimeout(function () {
                                             console.log("Artificial 0.5 second.......");
                                             window.onbeforeunload = null;
-                                            document.forms["frmSignup"].submit();
+                                            
+                                            // document.getElementById('loading-overlay').style.display = "block";
                                             $("#loading-overlay").show();
+                                            // document.getElementById('loading-message').style.display = "block";
                                             $("#loading-message").show('fade');
+                                            document.forms["frmSignup"].submit();
                                         }, 500);
                                     }
                                 });

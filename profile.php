@@ -175,7 +175,7 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
     ?>
     <!-- <link rel="stylesheet" type="text/css" href="styles.css"> -->
     <!-- <script src="countries.js"></script> -->
-    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBqCHDj475c_6YSc9yqwBH3eN1bYovqtUE&libraries=places&callback=initAutocomplete" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqCHDj475c_6YSc9yqwBH3eN1bYovqtUE&libraries=places&callback=initAutocomplete" async defer></script>
     <script type="text/javascript">
         $( document ).ready(function() {
                 var message = "";
@@ -432,7 +432,7 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
             <br/>
             You could add, delete, edit, or relocate all the contents.
             <br/> 
-            <strong>Except</strong> the words start with 'XXX_'. you could only delete or relocate them. These words will be replaced by the actual quotation data when the email sent. 
+            <strong style="color:red">Except</strong> <span style="color:red">the words start with 'XXX_'. you could only delete or relocate them. These words will be replaced by the actual quotation data when the email sent.</span>
         </p>
         <form action="#" method="post">
             <textarea class="ckeditor" name="editor" id="editor">

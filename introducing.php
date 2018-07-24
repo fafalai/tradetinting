@@ -25,7 +25,7 @@
             <span style="color: red">
                 App
             </span> 
-            is a cost effective and time Saving app that will have you completing and submitting Professional Quotations in minutes that can be sent immediately to your customer while on site. 
+            is an effective and time Saving app that will have you completing and submitting Professional Quotations in minutes that can be sent immediately to your customer while on site. 
         </p>
     </div>
 </div>

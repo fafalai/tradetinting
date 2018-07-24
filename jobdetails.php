@@ -93,13 +93,13 @@ if ($dbresult = SharedQuery($dbselect, $dblink)) {
                             <div style="background-color:#d8dad8" class="my-2 py-3 text-dark col-4">
                                 <b>
                                     Client name:
-                                    <?php echo $clientName; ?>
+                                    <?php echo ucwords(strtolower($clientName)); ?>
                                     </p>
-                                    <p>Mobile:
+                                    <p>Phone:
                                         <?php echo $mobile; ?>
                                     </p>
                                     <label>Address:
-                                        <?php echo $address . " " . $city . " " . $state . $postcode ?>
+                                        <?php echo $address . " " . $city . " " . $state ." ". $postcode ?>
                                     </label>
                                 </b>
                             </div>
@@ -109,7 +109,10 @@ if ($dbresult = SharedQuery($dbselect, $dblink)) {
                                 <div class="button-group bg-white">
                                     <button type="button" class="btn btn-default btn-sm dropdown-toggle bg-white mx-1" data-toggle="dropdown">Hide
                                         <span class="caret"></span>
+                                       
                                     </button>
+                                    <span>(Hide specific fields for Cutting List)</span>
+                                    
                                     <ul id="ul_dropdownlist" class="dropdown-menu px-2">
                                         <li>
                                             <a href="#" class="small" data-value="0" tabIndex="-1">
@@ -170,47 +173,47 @@ if ($dbresult = SharedQuery($dbselect, $dblink)) {
                                         <tr>
                                             <th align="left">Room</th>
                                             <th align="left">Window</th>
-                                            <th align="right">Width</th>
-                                            <th align="right">Height</th>
+                                            <th align="right">Width(mm)</th>
+                                            <th align="right">Height(mm)</th>
                                             <th align="left">Direction</th>
                                             <th align="left">Frame</th>
                                             <th align="left">Glass</th>
                                             <th align="left">Film</th>
-                                            <th align="right">Area</th>
+                                            <th align="right">Area(m<sup>2</sup>)</th>
                                             <th align="right">Rate</th>
                                             <th align="right">Price</th>
                                             <th align="right">Created</th>
                                         </tr>
                                         <?php
-$dbselect = "select " .
-    "jd1.id jobdetailid," .
-    "jd1.name room," .
-    "jd1.altname window," .
-    "jd1.width," .
-    "jd1.height," .
-    "jd1.notes," .
-    "jd1.glasstype," .
-    "jd1.frametype," .
-    "jd1.filmtype," .
-    "jd1.direction," .
-    "jd1.salerate," .
-    "jd1.totalarea," .
-    "jd1.totalprice," .
-    "DATE_FORMAT(jd1.datecreated,\"%Y-%m-%d %H:%i\") datecreated " .
-    "from " .
-    "jobdetails jd1 " .
-    "where " .
-    "jd1.dateexpired is null " .
-    "and  " .
-    "jd1.jobs_id=$jobid " .
-    "order by " .
-    "jd1.datecreated desc " .
-    "limit 200";
-if ($dbresult = SharedQuery($dbselect, $dblink)) {
-    if ($numrows = SharedNumRows($dbresult)) {
-        while ($dbrow = SharedFetchArray($dbresult)) {
-            $notestip = SharedPrepareToolTip($dbrow['notes']);
-            ?>
+                                                $dbselect = "select " .
+                                                    "jd1.id jobdetailid," .
+                                                    "jd1.name room," .
+                                                    "jd1.altname window," .
+                                                    "jd1.width," .
+                                                    "jd1.height," .
+                                                    "jd1.notes," .
+                                                    "jd1.glasstype," .
+                                                    "jd1.frametype," .
+                                                    "jd1.filmtype," .
+                                                    "jd1.direction," .
+                                                    "jd1.salerate," .
+                                                    "jd1.totalarea," .
+                                                    "jd1.totalprice," .
+                                                    "DATE_FORMAT(jd1.datecreated,\"%Y-%m-%d %H:%i\") datecreated " .
+                                                    "from " .
+                                                    "jobdetails jd1 " .
+                                                    "where " .
+                                                    "jd1.dateexpired is null " .
+                                                    "and  " .
+                                                    "jd1.jobs_id=$jobid " .
+                                                    "order by " .
+                                                    "jd1.datecreated desc " .
+                                                    "limit 200";
+                                                if ($dbresult = SharedQuery($dbselect, $dblink)) {
+                                                    if ($numrows = SharedNumRows($dbresult)) {
+                                                        while ($dbrow = SharedFetchArray($dbresult)) {
+                                                            $notestip = SharedPrepareToolTip($dbrow['notes']);
+                                        ?>
                                             <tr>
                                                 <td align="left">
                                                     <span class="title_room">
@@ -239,7 +242,7 @@ if ($dbresult = SharedQuery($dbselect, $dblink)) {
                                                     <?php echo $dbrow['filmtype']; ?>
                                                 </td>
                                                 <td align="right">
-                                                    <?php echo number_format($dbrow['totalarea'],2); ?>
+                                                    <?php echo number_format($dbrow['totalarea'],3); ?>
                                                 </td>
                                                 <td align="right">
                                                     <?php echo number_format($dbrow['salerate'],2); ?>

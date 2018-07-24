@@ -69,7 +69,7 @@
                         <input type="radio" name="search" value="Name" id="searchName" checked> Client Name
                     </div>
                     <div class="radio mb-2">
-                        <input type="radio" name="search" value="Mobile" id="searchMobile"> Mobile
+                        <input type="radio" name="search" value="Mobile" id="searchMobile"> Phone
                     </div>
                     <div class="radio">
                         <input type="radio" name="search" value="CreatedDate" id="searchCreatedDate"> Created Date (YYYY-MM-DD)
@@ -88,7 +88,7 @@
                                 <th>Phone</th>
                                 <th>#Rooms</th>
                                 <th>Total Price</th>
-                                <th>Job Date</th>
+                                <!-- <th>Job Date</th> -->
                                 <th>P1</th>
                                 <th>P2</th>
                                 <th>P3</th>
@@ -214,9 +214,11 @@
                                         $
                                         <?php echo round($dbrow['totalprice'],2); ?>
                                     </td>
-                                    <td align="left">
+                                    <!-- <td align="left">
+                                   
                                         <?php echo $dbrow['jobdate']; ?>
-                                    </td>
+                                       
+                                    </td> -->
                                     <td align="center">
                                         <?php echo $p1; ?>
                                     </td>

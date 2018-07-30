@@ -143,6 +143,7 @@
       //     noty({text: message, type: 'error', timeout: 3000});
       // }
     });
+    // document.getElementById('DIV_Message').style.display = 'none';
   </script>
   <title>Remedy Test & Tag - Contact</title>
 </head>
@@ -223,6 +224,9 @@
       <?php
         include("feature.php");
       ?>
+      <script>
+        document.getElementById('DIV_Message').style.display = 'none';
+      </script>
 
       <div style="clear: both;">&nbsp;</div>
 

@@ -80,12 +80,12 @@
                     <div class="table-responsive">
                         <table id="tblJobs" rules="cols" frame="box" class="table table-bordered sortable">
                             <tr>
-                                <th align="right">Created</th>
-                                <!--                  <th align="left">Job ID</th>-->
                                 <th>Quote</th>
                                 <th>Name</th>
-                                <th>Area</th>
                                 <th>Phone</th>
+                                <th>Area</th>
+                                <th align="right">Date</th>
+                                <!--                  <th align="left">Job ID</th>-->
                                 <th>#Rooms</th>
                                 <th>Total Price</th>
                                 <!-- <th>Job Date</th> -->
@@ -190,9 +190,6 @@
                 ?>
                                 <tr>
                                     <td align="right">
-                                        <?php echo $dbrow['datecreated']; ?>
-                                    </td>
-                                    <td align="right">
                                         <a href="<?php echo $url_jobdetails;?>">
                                             <?php echo $dbrow['jobid']; ?>
                                         </a>
@@ -200,13 +197,18 @@
                                     <td align="left">
                                         <?php echo $clientname; ?>
                                     </td>
+                                    <td align="right">
+                                        <?php echo $clientmobile; ?>
+                                    </td>
                                     <!-- <td align="left"><span class="hotspot" onmouseover="tooltip.show('<?php //echo $notestip; ?>');" onmouseout="tooltip.hide();"><?php //echo SharedPrepareDisplayString($dbrow['windowname']); ?></span></td> -->
                                     <td align="right">
                                         <?php echo $clientcity; ?>
                                     </td>
+                                   
                                     <td align="right">
-                                        <?php echo $clientmobile; ?>
+                                        <?php echo $dbrow['datecreated']; ?>
                                     </td>
+                                   
                                     <td align="right">
                                         <?php echo $dbrow['numrooms']; ?>
                                     </td>

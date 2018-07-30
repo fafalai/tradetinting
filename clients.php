@@ -484,10 +484,10 @@ else if (isset($_POST['fldName']))
                             while ($dbrow = SharedFetchArray($dbresult))
                             {
                                 $deletetip = "Delete Client: <strong>" . $dbrow['name'] . "</strong>";
-                                $contacttip = "<strong>Name:</strong>" . $dbrow['name'] . "<br />" .
-                                    "<strong>Mobile:</strong>" . $dbrow['mobile'] . "<br />" .
-                                    "<strong>Address:</strong>" . $dbrow['address'] . "<br />" .
-                                    "<strong>City:</strong>" . $dbrow['city'] . ", " . $dbrow['state'] . "<br />";
+                                $contacttip = "<strong>Name: </strong>" . $dbrow['name'] . "<br />" .
+                                    "<strong>Phone: </strong>" . $dbrow['mobile'] . "<br />" .
+                                    "<strong>Address: </strong>" . $dbrow['address'] . "<br />" .
+                                    "<strong>City: </strong>" . $dbrow['city'] . ", " . $dbrow['state'] . "<br />";
                                     //$dbrow['desc'];
                                 $deletetip = SharedPrepareToolTip($deletetip);
                                 $contacttip = SharedPrepareToolTip($contacttip);

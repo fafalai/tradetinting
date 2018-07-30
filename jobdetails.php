@@ -54,6 +54,11 @@ if ($dbresult = SharedQuery($dbselect, $dblink)) {
         <title>Remedy Tint - Job
             <?php echo $jobid; ?>
         </title>
+        <style type="text/css" media="print">
+            @page {
+                size: A4 landscape;
+            }
+        </style>
     </head>
 
     <body>

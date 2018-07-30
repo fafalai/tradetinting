@@ -83,7 +83,7 @@
                                 <th align="right">Created</th>
                                 <!--                  <th align="left">Job ID</th>-->
                                 <th>Quote</th>
-                                <th>Client</th>
+                                <th>Name</th>
                                 <th>Area</th>
                                 <th>Phone</th>
                                 <th>#Rooms</th>

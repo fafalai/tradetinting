@@ -39,11 +39,13 @@
   //
   if (isset($_GET['cmd']))
   {
+   
     $cmd = intval(SharedCleanString($_GET['cmd'], AT_MAXBIGINT));
     $userid = isset($_GET['id']) ? intval(SharedCleanString($_GET['id'], AT_MAXBIGINT)) : 0;
-
+    error_log($cmd);
     if ($cmd == AT_CMDMODIFY)
     {
+      error_log("I am in modify");
       // Double check licexpired is null and this belongs to this customer...
       $dateday = date("Y-m-d H:i:s");
       $dbselect = "select " .
@@ -74,6 +76,7 @@
     }
     else if ($cmd == AT_CMDDELETE)
     {
+      error_log("I am in delete");
       $dbupdate = "update " .
                   "users " .
                   "set " .
@@ -101,9 +104,9 @@
     else
       $clientid = 0;
   }
-  else if (isset($_POST['fldUid']))
+  if (isset($_POST['fldUid']))
   {
-    //error_log("I AM IN");
+    error_log("I AM IN create");
     $flduid = SharedCleanString($_POST['fldUid'], AT_MAXNAME);
     $fldname = SharedCleanString($_POST['fldUid'], AT_MAXNAME);
     $fldpwd = SharedCleanString($_POST['fldPwd'], AT_MAXPWD);
@@ -189,12 +192,13 @@
     else
     {
       $notification = 2;
-      $usermsg = "Unable to add " . $fldname . ". Numbers of users exceded. Click  <a  href='profile.php#myplan' class='myButton'>here</a> to upgrade users";
+      $usermsg = "Unable to add " . $fldname . ". Numbers of users exceded."; //Click  <a  href='profile.php#myplan' class='myButton'>here</a> to upgrade users
       error_log("numbers of users exceded");
     }
   }
   else if (isset($_POST['fldModName']))
   {
+    error_log('fldModName');
     // Hidden field so we know who we're modifying...
     $userid = intval(SharedCleanString($_POST['fldModUserId'], AT_MAXNAME));
     $flduid = SharedCleanString($_POST['fldModUid'], AT_MAXNAME);
@@ -236,6 +240,7 @@
   else if (isset($_POST['fldPwd']))
   {
     // Hidden field so we know who we're modifying...
+    error_log("modifyng password");
     $userid = intval(SharedCleanString($_POST['fldPwdUserId'], AT_MAXNAME));
     $flduid = SharedCleanString($_POST['fldPwdUid'], AT_MAXNAME);
     $fldname = SharedCleanString($_POST['fldPwdName'], AT_MAXNAME);
@@ -379,7 +384,7 @@
       <div class="container" style="width:70%">
         <div class="existingUsersDIV">
           <label>
-            <?php if ($clientmsg != "") echo $clientmsg; else echo date("l, F j, Y"); ?>
+            <?php echo date("l, F j, Y"); ?>
           </label>
           <h2 class="clientTitle mb-2">Existing Users</h2>
           <label>Move mouse over links for tips. Click on table header to sort by that column.</label>

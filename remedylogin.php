@@ -29,7 +29,9 @@
                   "from " .
                   "users u1 left join cust c1 on (u1.cust_id=c1.id) " .
                   "where " .
-                  "uid='$loginuid'";
+                  "uid='$loginuid' ".
+                  "and ".
+                  "u1.dateexpired is null";
       if ($dbresult = SharedQuery($dbselect, $dblink))
       {
         if ($numrows = SharedNumRows($dbresult))

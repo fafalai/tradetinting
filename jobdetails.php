@@ -88,6 +88,7 @@ if ($dbresult = SharedQuery($dbselect, $dblink)) {
                 height: auto;
                 /* page-break-after: avoid; */
             }
+
             label {
                 margin-bottom: 5px;
             }
@@ -103,133 +104,129 @@ if ($dbresult = SharedQuery($dbselect, $dblink)) {
     <body>
         <?php include "top.php";?>
         <!-- <div style="clear: both;">&nbsp;</div> -->
-        <div>
-            <div>
-                <div>
-                    <div>
-                        <div class="existingJobDetailsDIV">
-                            <label>
-                                <?php echo date("l, F j, Y"); ?>
-                            </label>
-                            <!-- <table> -->
-                            <!-- <th style="width:20%"> -->
-                            <h2 class="clientTitle">QUOTE
-                                <?php echo $jobid; ?>
-                            </h2>
-                            <br>
 
-                            <div id="div_Back" class="row">
-                                <div class="col-11">
-                                    <a id="link_Back" href="#" onClick="javascript:history.back(-1);">&#60; BACK TO JOBS</a>
-                                </div>
-                                <div class="col-*">
-                                    <a href="#" onClick="window.print();return false;">
-                                        <img id="img_Print" src="images/print.png" width="30" heigth="30">
-                                    </a>
-                                    <!-- <form action="" method="post">
+        <div class="existingJobDetailsDIV">
+            <label>
+                <?php echo date("l, F j, Y"); ?>
+            </label>
+            <!-- <table> -->
+            <!-- <th style="width:20%"> -->
+            <h2 class="clientTitle">QUOTE
+                <?php echo $jobid; ?>
+            </h2>
+            <br>
+
+            <div id="div_Back" class="row">
+                <div class="col-11">
+                    <a id="link_Back" href="#" onClick="javascript:history.back(-1);">&#60; BACK TO JOBS</a>
+                </div>
+                <div class="col-*">
+                    <a href="#" onClick="window.print();return false;">
+                        <img id="img_Print" src="images/print.png" width="30" heigth="30">
+                    </a>
+                    <!-- <form action="" method="post">
                                         <input type="image" name="print" value="print" formtarget="_blank" src="images/print.png"  width="30" heigth="30"/>
                                     </form> -->
-                                </div>
-                            </div>
-                            <!-- </th> -->
-                            <!-- <th style="width:20%"> -->
-                            <div id="info_Client" style="background-color:#d8dad8" class="py-3 text-dark col-4">
-                                <b>
-                                    Client name:
-                                    <?php echo ucwords(strtolower($clientName)); ?>
-                                    </p>
-                                    <p>Phone:
-                                        <?php echo $mobile; ?>
-                                    </p>
-                                    <label>Address:
-                                        <?php echo $address . " " . $city . " " . $state ." ". $postcode ?>
-                                    </label>
-                                </b>
-                            </div>
-                            <!-- </th> -->
-                            <!-- </table> -->
-                            <div class="entry">
-                                <div class="button-group bg-white">
-                                    <div id="div_Hide">
-                                        <button type="button" class="btn btn-default btn-sm dropdown-toggle bg-white mx-1" data-toggle="dropdown">Hide
-                                            <span class="caret"></span>
-
-                                        </button>
-                                        <span>(Hide specific fields for Cutting List)</span>
-                                    </div>
-                                    <ul id="ul_dropdownlist" class="dropdown-menu px-2">
-                                        <li>
-                                            <a href="#" class="small" data-value="0" tabIndex="-1">
-                                                <input type="checkbox" />&nbsp;Select All</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="small" data-value="1" tabIndex="-1">
-                                                <input type="checkbox" />&nbsp;Room</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="small" data-value="2" tabIndex="-1">
-                                                <input type="checkbox" />&nbsp;Window</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="small" data-value="3" tabIndex="-1">
-                                                <input type="checkbox" />&nbsp;Width</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="small" data-value="4" tabIndex="-1">
-                                                <input type="checkbox" />&nbsp;Height</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="small" data-value="5" tabIndex="-1">
-                                                <input type="checkbox" />&nbsp;Direction</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="small" data-value="6" tabIndex="-1">
-                                                <input type="checkbox" />&nbsp;Frame</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="small" data-value="7" tabIndex="-1">
-                                                <input type="checkbox" />&nbsp;Glass</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="small" data-value="8" tabIndex="-1">
-                                                <input type="checkbox" />&nbsp;Film</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="small" data-value="9" tabIndex="-1">
-                                                <input type="checkbox" />&nbsp;Area</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="small" data-value="10" tabIndex="-1">
-                                                <input type="checkbox" />&nbsp;Rate</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="small" data-value="11" tabIndex="-1">
-                                                <input type="checkbox" />&nbsp;Price</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="small" data-value="12" tabIndex="-1">
-                                                <input type="checkbox" />&nbsp;Created</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="table-responsive">
-                                    <table align="left" id="tblJobs" rules="cols" frame="box" class="sortable table table-bordered">
-                                        <tr>
-                                            <th align="left">Room</th>
-                                            <th align="left">Window</th>
-                                            <th align="right">Width(mm)</th>
-                                            <th align="right">Height(mm)</th>
-                                            <th align="left">Direction</th>
-                                            <th align="left">Frame</th>
-                                            <th align="left">Glass</th>
-                                            <th align="left">Film</th>
-                                            <th align="right">Area(m
-                                                <sup>2</sup>)</th>
-                                            <th align="right">Rate</th>
-                                            <th align="right">Price</th>
-                                            <th align="right">Created</th>
-                                        </tr>
-                                        <?php
+                </div>
+            </div>
+            <!-- </th> -->
+            <!-- <th style="width:20%"> -->
+            <div id="info_Client" style="background-color:#d8dad8" class="py-3 text-dark col-4">
+                <b>
+                    Client name:
+                    <?php echo ucwords(strtolower($clientName)); ?>
+                    </p>
+                    <p>Phone:
+                        <?php echo $mobile; ?>
+                    </p>
+                    <label>Address:
+                        <?php echo $address . " " . $city . " " . $state ." ". $postcode ?>
+                    </label>
+                </b>
+            </div>
+            <!-- </th> -->
+            <!-- </table> -->
+            <div class="entry">
+                <div id="div_Hide" style="margin:10px 0 10px 0;" class="button-group bg-white">
+                    <!-- <div id="div_Hide" style="margin:10px 0 10px 0;"> -->
+                        <button type="button" class="btn btn-default btn-sm dropdown-toggle bg-white mx-1" data-toggle="dropdown">Hide
+                            <span class="caret"></span>
+                        </button>
+                        <span>(Hide specific fields for Cutting List)</span>
+                    <!-- </div> -->
+                    <ul id="ul_dropdownlist" class="dropdown-menu px-2">
+                        <li>
+                            <a href="#" class="small" data-value="0" tabIndex="-1">
+                                <input type="checkbox" />&nbsp;Select All</a>
+                        </li>
+                        <li>
+                            <a href="#" class="small" data-value="1" tabIndex="-1">
+                                <input type="checkbox" />&nbsp;Room</a>
+                        </li>
+                        <li>
+                            <a href="#" class="small" data-value="2" tabIndex="-1">
+                                <input type="checkbox" />&nbsp;Window</a>
+                        </li>
+                        <li>
+                            <a href="#" class="small" data-value="3" tabIndex="-1">
+                                <input type="checkbox" />&nbsp;Width</a>
+                        </li>
+                        <li>
+                            <a href="#" class="small" data-value="4" tabIndex="-1">
+                                <input type="checkbox" />&nbsp;Height</a>
+                        </li>
+                        <li>
+                            <a href="#" class="small" data-value="5" tabIndex="-1">
+                                <input type="checkbox" />&nbsp;Direction</a>
+                        </li>
+                        <li>
+                            <a href="#" class="small" data-value="6" tabIndex="-1">
+                                <input type="checkbox" />&nbsp;Frame</a>
+                        </li>
+                        <li>
+                            <a href="#" class="small" data-value="7" tabIndex="-1">
+                                <input type="checkbox" />&nbsp;Glass</a>
+                        </li>
+                        <li>
+                            <a href="#" class="small" data-value="8" tabIndex="-1">
+                                <input type="checkbox" />&nbsp;Film</a>
+                        </li>
+                        <li>
+                            <a href="#" class="small" data-value="9" tabIndex="-1">
+                                <input type="checkbox" />&nbsp;Area</a>
+                        </li>
+                        <li>
+                            <a href="#" class="small" data-value="10" tabIndex="-1">
+                                <input type="checkbox" />&nbsp;Rate</a>
+                        </li>
+                        <li>
+                            <a href="#" class="small" data-value="11" tabIndex="-1">
+                                <input type="checkbox" />&nbsp;Price</a>
+                        </li>
+                        <li>
+                            <a href="#" class="small" data-value="12" tabIndex="-1">
+                                <input type="checkbox" />&nbsp;Created</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="table-responsive">
+                    <table align="left" id="tblJobs" rules="cols" frame="box" class="sortable table table-bordered">
+                        <tr>
+                            <th align="left">Room</th>
+                            <th align="left">Window</th>
+                            <th align="right">Width(mm)</th>
+                            <th align="right">Height(mm)</th>
+                            <th align="left">Direction</th>
+                            <th align="left">Frame</th>
+                            <th align="left">Glass</th>
+                            <th align="left">Film</th>
+                            <th align="right">Area(m
+                                <sup>2</sup>)</th>
+                            <th align="right">Rate</th>
+                            <th align="right">Price</th>
+                            <th align="right">Created</th>
+                        </tr>
+                        <?php
                                                 $dbselect = "select " .
                                                     "jd1.id jobdetailid," .
                                                     "jd1.name room," .
@@ -259,60 +256,58 @@ if ($dbresult = SharedQuery($dbselect, $dblink)) {
                                                         while ($dbrow = SharedFetchArray($dbresult)) {
                                                             $notestip = SharedPrepareToolTip($dbrow['notes']);
                                         ?>
-                                            <tr>
-                                                <td align="left">
-                                                    <span class="title_room">
-                                                        <?php echo $dbrow['room']; ?>
-                                                    </span>
-                                                </td>
-                                                <td align="left">
-                                                    <?php echo $dbrow['window']; ?>
-                                                </td>
-                                                <td align="right">
-                                                    <?php echo number_format($dbrow['width']); ?>
-                                                    <!-- remove the 2 decimal places, no needed -->
-                                                </td>
-                                                <td align="right">
-                                                    <?php echo number_format($dbrow['height']); ?>
-                                                    <!-- remove the 2 decimal places, no needed -->
-                                                </td>
-                                                <td align="right">
-                                                    <?php echo $dbrow['direction']; ?>
-                                                </td>
-                                                <td align="left">
-                                                    <?php echo $dbrow['frametype']; ?>
-                                                </td>
-                                                <td align="left">
-                                                    <?php echo $dbrow['glasstype']; ?>
-                                                </td>
-                                                <td align="left">
-                                                    <?php echo $dbrow['filmtype']; ?>
-                                                </td>
-                                                <td align="right">
-                                                    <?php echo number_format($dbrow['totalarea'],3); ?>
-                                                </td>
-                                                <td align="right">
-                                                    <?php echo number_format($dbrow['salerate'],2); ?>
-                                                </td>
-                                                <td align="right">
-                                                    $
-                                                    <?php echo number_format($dbrow['totalprice'],2); ?>
-                                                </td>
-                                                <td align="left">
-                                                    <?php echo $dbrow['datecreated']; ?>
-                                                </td>
-                                            </tr>
-                                            <?php
+                            <tr>
+                                <td align="left">
+                                    <span class="title_room">
+                                        <?php echo $dbrow['room']; ?>
+                                    </span>
+                                </td>
+                                <td align="left">
+                                    <?php echo $dbrow['window']; ?>
+                                </td>
+                                <td align="right">
+                                    <?php echo number_format($dbrow['width']); ?>
+                                    <!-- remove the 2 decimal places, no needed -->
+                                </td>
+                                <td align="right">
+                                    <?php echo number_format($dbrow['height']); ?>
+                                    <!-- remove the 2 decimal places, no needed -->
+                                </td>
+                                <td align="right">
+                                    <?php echo $dbrow['direction']; ?>
+                                </td>
+                                <td align="left">
+                                    <?php echo $dbrow['frametype']; ?>
+                                </td>
+                                <td align="left">
+                                    <?php echo $dbrow['glasstype']; ?>
+                                </td>
+                                <td align="left">
+                                    <?php echo $dbrow['filmtype']; ?>
+                                </td>
+                                <td align="right">
+                                    <?php echo number_format($dbrow['totalarea'],3); ?>
+                                </td>
+                                <td align="right">
+                                    <?php echo number_format($dbrow['salerate'],2); ?>
+                                </td>
+                                <td align="right">
+                                    $
+                                    <?php echo number_format($dbrow['totalprice'],2); ?>
+                                </td>
+                                <td align="left">
+                                    <?php echo $dbrow['datecreated']; ?>
+                                </td>
+                            </tr>
+                            <?php
 }
     }
 }
 ?>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div style="clear: both;">&nbsp;</div>
-                    </div>
+                    </table>
+
+                    <div style="clear: both;">&nbsp;</div>
+
                 </div>
             </div>
 

@@ -60,6 +60,43 @@ if ($dbresult = SharedQuery($dbselect, $dblink)) {
             @page {
                 size: A4 landscape;
             }
+
+            @media print {
+                body {
+                    color: #000;
+                    background: #fff;
+                }
+            }
+
+            #DIV_topMenu,
+            #div_Hide,
+            #div_Back,
+            #DIV_showUser {
+                display: none;
+            }
+
+            #info_Client {
+                border: solid 1px;
+            }
+
+            body,
+            tblJobs,
+            .existingJobDetailsDIV,
+            #DIV_headerContainer {
+                width: 100%;
+                margin: 0;
+                height: auto;
+                /* page-break-after: avoid; */
+            }
+            label {
+                margin-bottom: 5px;
+            }
+
+            #info_Client {
+                margin-top: 0px;
+                margin-bottom: 20px;
+                /* padding: 0px; */
+            }
         </style>
     </head>
 
@@ -81,13 +118,13 @@ if ($dbresult = SharedQuery($dbselect, $dblink)) {
                             </h2>
                             <br>
 
-                            <div class="row">
+                            <div id="div_Back" class="row">
                                 <div class="col-11">
-                                    <a href="#" onClick="javascript:history.back(-1);">&#60;BACK TO JOBS</a>
+                                    <a id="link_Back" href="#" onClick="javascript:history.back(-1);">&#60; BACK TO JOBS</a>
                                 </div>
                                 <div class="col-*">
                                     <a href="#" onClick="window.print();return false;">
-                                        <img src="images/print.png" width="30" heigth="30">
+                                        <img id="img_Print" src="images/print.png" width="30" heigth="30">
                                     </a>
                                     <!-- <form action="" method="post">
                                         <input type="image" name="print" value="print" formtarget="_blank" src="images/print.png"  width="30" heigth="30"/>
@@ -96,7 +133,7 @@ if ($dbresult = SharedQuery($dbselect, $dblink)) {
                             </div>
                             <!-- </th> -->
                             <!-- <th style="width:20%"> -->
-                            <div style="background-color:#d8dad8" class="my-2 py-3 text-dark col-4">
+                            <div id="info_Client" style="background-color:#d8dad8" class="py-3 text-dark col-4">
                                 <b>
                                     Client name:
                                     <?php echo ucwords(strtolower($clientName)); ?>
@@ -113,12 +150,13 @@ if ($dbresult = SharedQuery($dbselect, $dblink)) {
                             <!-- </table> -->
                             <div class="entry">
                                 <div class="button-group bg-white">
-                                    <button type="button" class="btn btn-default btn-sm dropdown-toggle bg-white mx-1" data-toggle="dropdown">Hide
-                                        <span class="caret"></span>
-                                       
-                                    </button>
-                                    <span>(Hide specific fields for Cutting List)</span>
-                                    
+                                    <div id="div_Hide">
+                                        <button type="button" class="btn btn-default btn-sm dropdown-toggle bg-white mx-1" data-toggle="dropdown">Hide
+                                            <span class="caret"></span>
+
+                                        </button>
+                                        <span>(Hide specific fields for Cutting List)</span>
+                                    </div>
                                     <ul id="ul_dropdownlist" class="dropdown-menu px-2">
                                         <li>
                                             <a href="#" class="small" data-value="0" tabIndex="-1">
@@ -185,7 +223,8 @@ if ($dbresult = SharedQuery($dbselect, $dblink)) {
                                             <th align="left">Frame</th>
                                             <th align="left">Glass</th>
                                             <th align="left">Film</th>
-                                            <th align="right">Area(m<sup>2</sup>)</th>
+                                            <th align="right">Area(m
+                                                <sup>2</sup>)</th>
                                             <th align="right">Rate</th>
                                             <th align="right">Price</th>
                                             <th align="right">Created</th>
@@ -230,7 +269,7 @@ if ($dbresult = SharedQuery($dbselect, $dblink)) {
                                                     <?php echo $dbrow['window']; ?>
                                                 </td>
                                                 <td align="right">
-                                                    <?php echo number_format($dbrow['width']); ?> 
+                                                    <?php echo number_format($dbrow['width']); ?>
                                                     <!-- remove the 2 decimal places, no needed -->
                                                 </td>
                                                 <td align="right">

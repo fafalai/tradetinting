@@ -1,5 +1,6 @@
 <?php
 include "logincheck.php";
+
 if (!isset($_SERVER['HTTPS'])) {
     //header('location: https://www.adtalk.services/testtag/jobs.php');
     //exit;
@@ -45,6 +46,7 @@ if ($dbresult = SharedQuery($dbselect, $dblink)) {
 }
 
 ?>
+
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
     <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -87,6 +89,9 @@ if ($dbresult = SharedQuery($dbselect, $dblink)) {
                                     <a href="#" onClick="window.print();return false;">
                                         <img src="images/print.png" width="30" heigth="30">
                                     </a>
+                                    <!-- <form action="" method="post">
+                                        <input type="image" name="print" value="print" formtarget="_blank" src="images/print.png"  width="30" heigth="30"/>
+                                    </form> -->
                                 </div>
                             </div>
                             <!-- </th> -->

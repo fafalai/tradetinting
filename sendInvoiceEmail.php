@@ -76,6 +76,7 @@
                 $custname = $resultsetCust['contact'];
                 $custabn = $resultsetCust['identificationno'];
                 $custurl = $resultsetCust['url'];
+                $mobile = $resultsetCust['mobile'];
                 // error_log("the customer name is ");
                 // error_log($resultsetCust['email']);
 
@@ -436,7 +437,7 @@
                 $emailtemplate = str_replace("XXX_CUSTCITY",$resultsetCust['city'],$emailtemplate);
                 $emailtemplate = str_replace("XXX_CUSTSTATE",$resultsetCust['state'],$emailtemplate);
                 $emailtemplate = str_replace("XXX_CUSTPOSTCODE",$resultsetCust['postcode'],$emailtemplate);
-                $emailtemplate = str_replace("XXX_CUSTPHONE",$resultsetCust['phone'],$emailtemplate);
+                $emailtemplate = str_replace("XXX_CUSTPHONE",$resultsetCust['mobile'],$emailtemplate);
                 $emailtemplate = str_replace("XXX_CUSTEMAIL",$resultsetCust['email'],$emailtemplate);
                 $emailtemplate = str_replace("XXX_TOTALPRICE","$".$totalPrice,$emailtemplate);
                 $emailtemplate = str_replace("XXX_WindowNumber",$jobTotal['totalWindowNumber'],$emailtemplate);
@@ -477,7 +478,7 @@
                 $emailbodytemplate = file_get_contents("./quoteEmailTemplate/emailBodyTemplate.html");
                 $emailbodytemplate = str_replace("XXX_CLIENTFIRSTNAME",$client['name'],$emailbodytemplate);
                 $emailbodytemplate = str_replace("XXX_BUSINESSNAME",$businessName,$emailbodytemplate);
-                $emailbodytemplate = str_replace("XXX_CUSTPHONE",$resultsetCust['phone'],$emailbodytemplate);
+                $emailbodytemplate = str_replace("XXX_CUSTPHONE",$resultsetCust['mobile'],$emailbodytemplate);
                 $emailbodytemplate = str_replace("XXX_WEBSITE",$custurl,$emailbodytemplate);
                 $emailbodytemplate = str_replace("XXX_CUSTEMAIL",$resultsetCust['email'],$emailbodytemplate);
                 $emailbodytemplate = str_replace("XXX_CUSTNAME",$resultsetCust['contact'],$emailbodytemplate);

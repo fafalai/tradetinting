@@ -24,11 +24,11 @@
                     searchIndex = 0;
                     console.log()
                     if (document.getElementById("searchName").checked) {
-                        searchIndex = 2;
+                        searchIndex = 1;
                     } else if (document.getElementById("searchMobile").checked) {
-                        searchIndex = 4;
+                        searchIndex = 2;
                     } else if (document.getElementById("searchCreatedDate").checked) {
-                        searchIndex = 0;
+                        searchIndex = 4;
                     }
                     for (i = 0; i < tr.length; i++) {
                         td = tr[i].getElementsByTagName("td")[searchIndex];
@@ -49,14 +49,14 @@
 
     <body>
         <?php
-    include ("top.php");
-  ?>
+            include ("top.php");
+        ?>
 
 
-            <div class="existingJobsDIV">
+        <div class="existingJobsDIV">
                 <div class="container">
                     <label>
-                        <?php if ($clientmsg != "") echo $clientmsg; else echo date("l, F j, Y"); ?>
+                        <?php echo date("l, F j, Y"); ?>
                     </label>
                     <h2 class="clientTitle">Jobs</h2>
                 </div>
@@ -165,6 +165,7 @@
                               "order by " .
                               "j1.datecreated desc " .
                               "limit 200";
+                              error_log($dbselect);
                   if ($dbresult = SharedQuery($dbselect, $dblink))
                   {
                     if ($numrows = SharedNumRows($dbresult))
@@ -273,9 +274,9 @@
 
                 <div style="clear: both;">&nbsp;</div>
 
-                <?php
-      include("bottom.php");
-    ?>
+        <?php
+            include("bottom.php");
+        ?>
 
             </div>
     </body>

@@ -9,14 +9,14 @@
             </div>
             <div>
                 <ul>
-                    <li><a href="#">iPhone&reg; / iPad&reg; App</a></li>
-                    <li><a href="#">Easy to setup and use</a></li>
-                    <li><a href="#">Auto populated fields</a></li>
+                    <li><a href="#">IPhone/IPad App</a></li>
+                    <li><a href="#">Fast to set up</a></li>
+                    <li><a href="#">Easy to use</a></li>
 <!--                    <li><a href="#">Barcode & QR scanning options</a></li>-->
-                    <li><a href="#">Camera capabilities</a></li>
-                    <li><a href="#">Automatic reporting</a></li>
-                    <li><a href="#">Location maps</a></li>
-                    <li><a href="#">Job tracking</a></li>
+                    <li><a href="#">Printer enabled</a></li>
+                    <li><a href="#">Up to 5 users</a></li>
+                    <li><a href="#">Location Maps</a></li>
+                    <li><a href="#">Automatically syncs with your Portal</a></li>
                 </ul>
             </div>
         </div>
@@ -26,12 +26,11 @@
             </div>
             <div>
                 <ul>
-                    <li><a href="#">Save time</a></li>
-                    <li><a href="#">Single entry</a></li>
-                    <li><a href="#">Centralised reporting</a></li>
-                    <li><a href="#">Improves close rate</a></li>
-                    <li><a href="#">Quotes automatically timestamped</a></li>
-                    <li><a href="#">Quotes are location aware</a></li>
+                    <li><a href="#">Improves Sales</a></li>
+                    <li><a href="#">Saves Time</a></li>
+                    <li><a href="#">Reduces  Errors</a></li>
+                    <li><a href="#">Professional Image</a></li>
+                    <li><a href="#">Improves Productivity</a></li>
                 </ul>
             </div>
         </div>

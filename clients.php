@@ -475,7 +475,12 @@ else if (isset($_POST['fldName']))
                                         "where " .
                                         "cl1.cust_id=" . $_SESSION['custid'] . " " .
                                         "and " .
-                                        "cl1.dateexpired is null";
+                                        "cl1.dateexpired is null ".
+                                        // "and " .
+                                        // $where . " " .
+                                        "order by " .
+                                        "cl1.datecreated desc ";
+                                        error_log($dbselect);
                     if ($dbresult = SharedQuery($dbselect, $dblink))
                     {
                         if ($numrows = SharedNumRows($dbresult))

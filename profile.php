@@ -306,7 +306,7 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
                 <tr>
                     <!-- <td align="left" valign="top">Company Name:</td> -->
                     <td align="left" valign="top" colspan="4">
-                        <input id="fldName" name="fldName" type="text" size="20" placeholder="COMPANY NAME" maxlength="<?php echo AT_MAXNAME; ?>" value="<?php echo SharedPrepareDisplayString($fldname); ?>" class="form-control" />
+                        <input id="fldName" name="fldName" type="text" size="20" placeholder="BUSINESS NAME" maxlength="<?php echo AT_MAXNAME; ?>" value="<?php echo SharedPrepareDisplayString($fldname); ?>" class="form-control" />
                     </td>
                 </tr>
                <!-- <tr> -->

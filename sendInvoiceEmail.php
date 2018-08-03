@@ -310,6 +310,7 @@
                 //error_log($row);
                 $tableReplace = $tableReplace.$row;
                 }
+                error_log($tableReplace);
 
                 $glassType = "";
                 error_log(count($jobGlassType));
@@ -466,6 +467,7 @@
                 //Output the pdf
                 $emailPDF = $dompdf -> output();
                 file_put_contents("quotes/$clientid.pdf",$emailPDF);
+                file_put_contents("quotes/$clientid.html",$emailtemplate);
                 $attachmentPath = "quotes/$clientid.pdf";
                 error_log($attachmentPath);
 
@@ -479,6 +481,10 @@
                 $emailbodytemplate = str_replace("XXX_CUSTCITY",$resultsetCust['city'],$emailbodytemplate);
                 $emailbodytemplate = str_replace("XXX_CUSTSTATE",$resultsetCust['state'],$emailbodytemplate);
                 $emailbodytemplate = str_replace("XXX_CUSTPOSTCODE",$resultsetCust['postcode'],$emailbodytemplate);
+                $emailbodytemplate = str_replace("XXX_WEBSITE",$custurl,$emailbodytemplate);
+                $emailbodytemplate = str_replace("XXX_CUSTEMAIL",$resultsetCust['email'],$emailbodytemplate);
+                $emailbodytemplate = str_replace("XXX_CUSTNAME",$resultsetCust['contact'],$emailbodytemplate);
+
 
 
                 SharedSendHtmlMail($resultsetCust['email'], $businessName, $client['email'],$client['name'], "Quote Confirmation", $emailbodytemplate,"","",$attachmentPath);

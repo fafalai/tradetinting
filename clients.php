@@ -479,7 +479,8 @@ else if (isset($_POST['fldName']))
                                         // "and " .
                                         // $where . " " .
                                         "order by " .
-                                        "cl1.datecreated desc ";
+                                        "cl1.datecreated desc, ".
+                                        "cl1.datemodified desc ";
                                         error_log($dbselect);
                     if ($dbresult = SharedQuery($dbselect, $dblink))
                     {

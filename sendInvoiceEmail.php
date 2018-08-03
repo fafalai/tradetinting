@@ -310,7 +310,7 @@
                 //error_log($row);
                 $tableReplace = $tableReplace.$row;
                 }
-                error_log($tableReplace);
+                // error_log($tableReplace);
 
                 $glassType = "";
                 error_log(count($jobGlassType));
@@ -467,7 +467,7 @@
                 //Output the pdf
                 $emailPDF = $dompdf -> output();
                 file_put_contents("quotes/$clientid.pdf",$emailPDF);
-                file_put_contents("quotes/$clientid.html",$emailtemplate);
+                // file_put_contents("quotes/$clientid.html",$emailtemplate);
                 $attachmentPath = "quotes/$clientid.pdf";
                 error_log($attachmentPath);
 

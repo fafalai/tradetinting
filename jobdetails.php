@@ -70,11 +70,7 @@ if ($dbresult = SharedQuery($dbselect, $dblink)) {
                     <div>
                         <div class="existingJobDetailsDIV">
                             <label>
-                                <?php if ($clientmsg != "") {
-                                    echo $clientmsg;
-                                } else {
-                                    echo date("l, F j, Y");
-                                }?>
+                                <?php echo date("l, F j, Y"); ?>
                             </label>
                             <!-- <table> -->
                             <!-- <th style="width:20%"> -->
@@ -229,10 +225,12 @@ if ($dbresult = SharedQuery($dbselect, $dblink)) {
                                                     <?php echo $dbrow['window']; ?>
                                                 </td>
                                                 <td align="right">
-                                                    <?php echo number_format($dbrow['width'],2); ?>
+                                                    <?php echo number_format($dbrow['width']); ?> 
+                                                    <!-- remove the 2 decimal places, no needed -->
                                                 </td>
                                                 <td align="right">
-                                                    <?php echo number_format($dbrow['height'],2); ?>
+                                                    <?php echo number_format($dbrow['height']); ?>
+                                                    <!-- remove the 2 decimal places, no needed -->
                                                 </td>
                                                 <td align="right">
                                                     <?php echo $dbrow['direction']; ?>

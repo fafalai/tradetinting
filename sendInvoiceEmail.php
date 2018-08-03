@@ -49,6 +49,7 @@
           $dbselect = "select " .
                       "c1.name name, " .
                       "c1.desc, " .
+                      "c1.identificationno," .
                       "c1.contact contact, " .
                       "c1.phone phone, " .
                       "c1.mobile mobile, " .
@@ -73,6 +74,8 @@
                 $resultsetCust = $dbrow;
                 $businessName = $resultsetCust['name'];
                 $custname = $resultsetCust['contact'];
+                $custabn = $resultsetCust['identificationno'];
+                $custurl = $resultsetCust['url'];
                 // error_log("the customer name is ");
                 // error_log($resultsetCust['email']);
 
@@ -80,6 +83,7 @@
               {
                 $clientid = $data["clientID"];
                 $jobid = $data["jobID"];
+                
                 $clientselect = "select " .
                                 "c1.email1 email, " .
                                 "c1.name name, ".
@@ -306,6 +310,7 @@
                 //error_log($row);
                 $tableReplace = $tableReplace.$row;
                 }
+                error_log($tableReplace);
 
                 $glassType = "";
                 error_log(count($jobGlassType));
@@ -416,6 +421,7 @@
 
                 //error_log("Prints the day, date, month, year, time, AM or PM");
                 //error_log(date("l j \of F Y h:i:s A"));
+                $emailtemplate = str_replace("XXX_ABN",$custabn,$emailtemplate);
                 $emailtemplate = str_replace("xxx_quote",$jobid,$emailtemplate);
                 $emailtemplate = str_replace("XXX_Date",date("l"),$emailtemplate);
                 $emailtemplate = str_replace("XXX_Month",date("F"),$emailtemplate);
@@ -444,6 +450,8 @@
                 $emailtemplate = str_replace("XXX_GLASSTYPE",$glassType,$emailtemplate);
                 $emailtemplate = str_replace("XXX_FRAMETYPE",$frameType,$emailtemplate);
                 $emailtemplate = str_replace("XXX_FILMTYPE",$filmType,$emailtemplate);
+                
+                $emailtemplate = str_replace("XXX_WEBSITE",$custurl,$emailtemplate);
                 //SharedSendHtmlMail($resultsetCust['email'], $businessName, $client['email'],$client['name'], "Quote Confirmation", $emailtemplate);
 
 
@@ -459,6 +467,7 @@
                 //Output the pdf
                 $emailPDF = $dompdf -> output();
                 file_put_contents("quotes/$clientid.pdf",$emailPDF);
+                file_put_contents("quotes/$clientid.html",$emailtemplate);
                 $attachmentPath = "quotes/$clientid.pdf";
                 error_log($attachmentPath);
 
@@ -468,6 +477,14 @@
                 $emailbodytemplate = file_get_contents("./quoteEmailTemplate/emailBodyTemplate.html");
                 $emailbodytemplate = str_replace("XXX_CLIENTFIRSTNAME",$client['name'],$emailbodytemplate);
                 $emailbodytemplate = str_replace("XXX_BUSINESSNAME",$businessName,$emailbodytemplate);
+                $emailbodytemplate = str_replace("XXX_CUSTADDRESS",$resultsetCust['address'],$emailbodytemplate);
+                $emailbodytemplate = str_replace("XXX_CUSTCITY",$resultsetCust['city'],$emailbodytemplate);
+                $emailbodytemplate = str_replace("XXX_CUSTSTATE",$resultsetCust['state'],$emailbodytemplate);
+                $emailbodytemplate = str_replace("XXX_CUSTPOSTCODE",$resultsetCust['postcode'],$emailbodytemplate);
+                $emailbodytemplate = str_replace("XXX_WEBSITE",$custurl,$emailbodytemplate);
+                $emailbodytemplate = str_replace("XXX_CUSTEMAIL",$resultsetCust['email'],$emailbodytemplate);
+                $emailbodytemplate = str_replace("XXX_CUSTNAME",$resultsetCust['contact'],$emailbodytemplate);
+
 
 
                 SharedSendHtmlMail($resultsetCust['email'], $businessName, $client['email'],$client['name'], "Quote Confirmation", $emailbodytemplate,"","",$attachmentPath);

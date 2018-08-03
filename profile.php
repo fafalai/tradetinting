@@ -23,7 +23,7 @@ define('AT_MAXCURRENCY', 10);
 if (isset($_POST['fldName']) || isset($_POST['fldContact']) || isset($_POST['fldMobile']))
 {
     $fldname = SharedCleanString($_POST['fldName'], AT_MAXNAME);
-    $flddesc = SharedCleanString($_POST['fldDesc'], AT_MAXNOTE);
+    // $flddesc = SharedCleanString($_POST['fldDesc'], AT_MAXNOTE);
     $fldidentificationno = SharedCleanString($_POST['fldidentificationno'], AT_MAXIDENTIFICATIONNO);
     $fldcontact = SharedCleanString($_POST['fldContact'], AT_MAXNAME);
     $fldphone = SharedCleanString($_POST['fldPhone'], AT_MAXPHONE);
@@ -43,7 +43,7 @@ if (isset($_POST['fldName']) || isset($_POST['fldContact']) || isset($_POST['fld
         "cust " .
         "set " .
         "cust.name=" .SharedNullOrQuoted($fldname,50, $dblink) . "," .
-        "cust.desc=" .SharedNullOrQuoted($flddesc,1000, $dblink) . "," .
+        // "cust.desc=" .SharedNullOrQuoted($flddesc,1000, $dblink) . "," .
         "cust.identificationno=" .SharedNullOrQuoted($fldidentificationno,50, $dblink) . "," .
         "contact=" .SharedNullOrQuoted($fldcontact,50, $dblink) . "," .
         "phone=" .SharedNullOrQuoted($fldphone,50, $dblink) . "," .
@@ -147,7 +147,7 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
         while ($dbrow = SharedFetchArray($dbresult))
         {
             $fldname = $dbrow['name'];
-            $flddesc = $dbrow['desc'];
+            // $flddesc = $dbrow['desc'];
             $fldidentificationno = $dbrow['identificationno'];
             $fldcontact = $dbrow['contact'];
             $fldphone = $dbrow['phone'];
@@ -298,7 +298,7 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
     <hr />
 
     <div class="profileDIV container">
-        <label><?php if ($clientmsg != "") echo $clientmsg; else echo date("l, F j, Y"); ?></label>
+        <label><?php echo date("l, F j, Y"); ?></label>
         <h2 class="clientTitle mb-2">BUSINESS DETAILS</h2>
         <!--                                <div>-->
         <form action="profile.php" method="post" id="frmDetails">
@@ -306,15 +306,15 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
                 <tr>
                     <!-- <td align="left" valign="top">Company Name:</td> -->
                     <td align="left" valign="top" colspan="4">
-                        <input id="fldName" name="fldName" type="text" size="20" placeholder="COMPANY NAME" maxlength="<?php echo AT_MAXNAME; ?>" value="<?php echo SharedPrepareDisplayString($fldname); ?>" class="form-control" />
+                        <input id="fldName" name="fldName" type="text" size="20" placeholder="BUSINESS NAME" maxlength="<?php echo AT_MAXNAME; ?>" value="<?php echo SharedPrepareDisplayString($fldname); ?>" class="form-control" />
                     </td>
                 </tr>
-                <tr>
+               <!-- <tr> -->
                     <!-- <td align="left" valign="top">Trading Name:</td> -->
-                    <td align="left" valign="top" colspan="4">
+                    <!-- <td align="left" valign="top" colspan="4">
                         <input id="fldDesc" name="fldDesc" type="text" size="40" placeholder="TRADING NAME" maxlength="<?php echo AT_MAXNOTE; ?>" value="<?php echo SharedPrepareDisplayString($flddesc); ?>" class="form-control" />
-                    </td>
-                </tr>
+                    </td> -->
+                <!-- </tr> -->
                 <tr>
                     <!-- <td align="left" valign="top">Business Identification Number:</td> -->
                     <td align="left" valign="top" colspan="2" style="width: 50%">

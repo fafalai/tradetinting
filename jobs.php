@@ -72,7 +72,7 @@
                         <input type="radio" name="search" value="Mobile" id="searchMobile"> Phone
                     </div>
                     <div class="radio">
-                        <input type="radio" name="search" value="CreatedDate" id="searchCreatedDate"> Created Date (DD-MM-YYYY)
+                        <input type="radio" name="search" value="CreatedDate" id="searchCreatedDate"> Date (DD-MM-YYYY)
                     </div>
                 </div>
                 <div class="entry container">

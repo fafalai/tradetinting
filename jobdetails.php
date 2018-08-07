@@ -61,12 +61,12 @@ if ($dbresult = SharedQuery($dbselect, $dblink)) {
                 size: A4 landscape;
             }
 
-            @media print {
+            /* @media print {
                 body {
                     color: #000;
                     background: #fff;
                 }
-            }
+            } */
 
             #DIV_topMenu,
             #div_Hide,

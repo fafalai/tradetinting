@@ -466,8 +466,8 @@ else if (isset($_POST['fldName']))
                                         "cl1.address," .
                                         "cl1.city," .
                                         "cl1.state," .
-                                        "DATE_FORMAT(cl1.datecreated,\"%Y-%m-%d %H:%i\") datecreated," .
-                                        "DATE_FORMAT(cl1.datemodified,\"%Y-%m-%d %H:%i\") datemodified," .
+                                        "DATE_FORMAT(cl1.datecreated,\"%d-%m-%Y %H:%i\") datecreated," .
+                                        "DATE_FORMAT(cl1.datemodified,\"%d-%m-%Y %H:%i\") datemodified," .
                                         "cl1.gpslat," .
                                         "cl1.gpslon " .
                                         "from " .

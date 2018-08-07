@@ -72,7 +72,7 @@
                         <input type="radio" name="search" value="Mobile" id="searchMobile"> Phone
                     </div>
                     <div class="radio">
-                        <input type="radio" name="search" value="CreatedDate" id="searchCreatedDate"> Created Date (YYYY-MM-DD)
+                        <input type="radio" name="search" value="CreatedDate" id="searchCreatedDate"> Created Date (DD-MM-YYYY)
                     </div>
                 </div>
                 <div class="entry container">
@@ -132,8 +132,8 @@
                               "j1.gpslat," .
                               "j1.gpslon," .
                               "j1.notes as 'desc'," .
-                              "DATE_FORMAT(j1.datecreated,\"%Y-%m-%d %H:%i\") datecreated," .
-                              "DATE_FORMAT(j1.datejob,\"%Y-%m-%d %H:%i\") jobdate," .
+                              "DATE_FORMAT(j1.datecreated,\"%d-%m-%Y %H:%i\") datecreated," .
+                              "DATE_FORMAT(j1.datejob,\"%d-%m-%Y %H:%i\") jobdate," .
                               "j1.contact contact," .
                               "j1.city city," .
                               "j1.mobile mobile," .

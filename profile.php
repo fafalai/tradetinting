@@ -426,14 +426,18 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
             // frmvalidator.addValidation("fldMobile", "regexp=^[0-9]{10}$|^\(0[1-9]{1}\)[0-9]{8}$|^[0-9]{8}$|^[0-9]{4}[ ][0-9]{3}[ ][0-9]{3}$|^\(0[1-9]{1}\)[ ][0-9]{4}[ ][0-9]{4}$|^[0-9]{4}[ ][0-9]{4}$", "Must be in 04xxyyyzzz or xxxxyyyy format");
             frmvalidator.addValidation("fldMobile", "regex=^(?=\d)\S{6,}", "Invalid Phone number"); //numbers only, at least six digits
         </script>
--->
-        <p>
-            Please edit your quotation template. 
+--> 
+        <p style="font-size:12pt">
+            <u style="font-weight:bold;color:red">Caution:</u> <span style="color:red">DO NOT  tamper with Text with XXX in the content.  These fields are auto complete and will not work correctly if tampered with. </span>
             <br/>
-            You could add, delete, edit, or relocate all the contents.
-            <br/> 
-            <strong style="color:red">Except</strong> <span style="color:red">the words start with 'XXX_'. you could only delete or relocate them. These words will be replaced by the actual quotation data when the email sent.</span>
+            <span style="color:red;margin-left:45pt">You may Bold or change font or size and Delete Fields, only if NOT required.</span>
+            <br/>
+            <span style="color:#747474">You can edit the quotation template below to suit your specific needs by adding, deleting or relocating the text.</span>
+            <br/>
+            <span style="color:#747474">You can also add your company Logo to the right hand side.</span>
         </p>
+       
+
         <form action="#" method="post">
             <textarea class="ckeditor" name="editor" id="editor">
                 <?php
@@ -449,7 +453,7 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
                 }
                 ?>
             </textarea>
-            <input type="submit" value="save Template" name="saveTemplate">
+            <input type="submit" value="Save Template" name="saveTemplate">
         </form>
     </div>
     <!-- <script language="javascript">

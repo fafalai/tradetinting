@@ -20,8 +20,8 @@ $dbselect = "select " .
     "cl1.city," .
     "cl1.state," .
     "cl1.postcode," .
-    "DATE_FORMAT(cl1.datecreated,\"%Y-%m-%d %H:%i\") datecreated," .
-    "DATE_FORMAT(cl1.datemodified,\"%Y-%m-%d %H:%i\") datemodified," .
+    "DATE_FORMAT(cl1.datecreated,\"%d-%m-%Y %H:%i\") datecreated," .
+    "DATE_FORMAT(cl1.datemodified,\"%d-%m-%Y %H:%i\") datemodified," .
     "cl1.gpslat," .
     "cl1.gpslon " .
     "from " .
@@ -241,7 +241,7 @@ if ($dbresult = SharedQuery($dbselect, $dblink)) {
                                                     "jd1.salerate," .
                                                     "jd1.totalarea," .
                                                     "jd1.totalprice," .
-                                                    "DATE_FORMAT(jd1.datecreated,\"%Y-%m-%d %H:%i\") datecreated " .
+                                                    "DATE_FORMAT(jd1.datecreated,\"%d-%m-%Y %H:%i\") datecreated " .
                                                     "from " .
                                                     "jobdetails jd1 " .
                                                     "where " .

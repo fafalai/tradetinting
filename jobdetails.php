@@ -8,6 +8,7 @@ if (!isset($_SERVER['HTTPS'])) {
 $dblink = SharedConnect();
 $jobid = isset($_GET['jid']) ? $_GET['jid'] : '';
 $clientid = isset($_GET['clientid']) ? $_GET['clientid'] : '';
+$unit = "";
 
 $dbselect = "select " .
     "cl1.id," .
@@ -41,6 +42,37 @@ if ($dbresult = SharedQuery($dbselect, $dblink)) {
             $city = $dbrow['city'];
             $state = $dbrow['state'];
             $postcode = $dbrow['postcode'];
+        }
+    }
+}
+$dbselect = "select " .
+    "c1.name," .
+    "c1.desc," .
+    "c1.identificationno," .
+    "DATE_FORMAT(c1.datecreated,\"%Y-%m-%d %H:%i\") datecreated," .
+    "DATE_FORMAT(c1.datemodified,\"%Y-%m-%d %H:%i\") datemodified," .
+    "c1.contact," .
+    "c1.phone," .
+    "c1.mobile," .
+    "c1.email," .
+    "c1.address," .
+    "c1.city," .
+    "c1.state," .
+    "c1.postcode," .
+    "c1.country," .
+    "c1.currency," .
+    "c1.units " .
+    "from " .
+    "cust c1 " .
+    "where " .
+    "c1.id=" . $_SESSION['custid'];
+if ($dbresult = SharedQuery($dbselect, $dblink))
+{
+    if ($numrows = SharedNumRows($dbresult))
+    {
+        while ($dbrow = SharedFetchArray($dbresult))
+        {
+           $unit = $dbrow['units'];
         }
     }
 }
@@ -214,14 +246,47 @@ if ($dbresult = SharedQuery($dbselect, $dblink)) {
                         <tr>
                             <th align="left">Room</th>
                             <th align="left">Window</th>
-                            <th align="right">Width(mm)</th>
-                            <th align="right">Height(mm)</th>
+                            <th align="right">
+                            <?php
+                                if ($unit == "mm")
+                                {
+                                    echo "Width (mm)";
+                                }
+                                else
+                                {
+                                    echo "Width (in)";
+                                }
+                            ?>
+                            </th>
+                            <th align="right">
+                            <?php
+                                if ($unit == "mm")
+                                {
+                                    echo "Height (mm)";
+                                }
+                                else
+                                {
+                                    echo "Height (in)";
+                                }
+                            ?>
+                            
+                            </th>
                             <th align="left">Direction</th>
                             <th align="left">Frame</th>
                             <th align="left">Glass</th>
                             <th align="left">Film</th>
-                            <th align="right">Area(m
-                                <sup>2</sup>)</th>
+                            <th align="right">
+                                <?php
+                                    if ($unit == "mm")
+                                    {
+                                        echo "Area (m2)";
+                                    }
+                                    else
+                                    {
+                                        echo "Area (ft2)";
+                                    }
+                                ?>
+                            </th>
                             <th align="right">Rate</th>
                             <th align="right">Price</th>
                             <th align="right">Created</th>

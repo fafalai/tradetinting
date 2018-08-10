@@ -431,14 +431,14 @@
                 $emailtemplate = str_replace("XXX_CLIENTFIRSTNAME",$client['name'],$emailtemplate);
                 $emailtemplate = str_replace("XXX_CLIENTSTREET",$client['address'],$emailtemplate);
                 $emailtemplate = str_replace("XXX_CLIENTCITY",$client['city'],$emailtemplate);
-                $emailtemplate = str_replace("XXX_CUSTNAME",$resultsetCust['contact'],$emailtemplate);
+                $emailtemplate = str_replace("XXX_NAME",$resultsetCust['contact'],$emailtemplate);
                 $emailtemplate = str_replace("XXX_BUSINESSNAME",$businessName,$emailtemplate);
-                $emailtemplate = str_replace("XXX_CUSTADDRESS",$resultsetCust['address'],$emailtemplate);
-                $emailtemplate = str_replace("XXX_CUSTCITY",$resultsetCust['city'],$emailtemplate);
-                $emailtemplate = str_replace("XXX_CUSTSTATE",$resultsetCust['state'],$emailtemplate);
-                $emailtemplate = str_replace("XXX_CUSTPOSTCODE",$resultsetCust['postcode'],$emailtemplate);
-                $emailtemplate = str_replace("XXX_CUSTPHONE",$resultsetCust['mobile'],$emailtemplate);
-                $emailtemplate = str_replace("XXX_CUSTEMAIL",$resultsetCust['email'],$emailtemplate);
+                $emailtemplate = str_replace("XXX_BUSTADDRESS",$resultsetCust['address'],$emailtemplate);
+                $emailtemplate = str_replace("XXX_BUSCITY",$resultsetCust['city'],$emailtemplate);
+                $emailtemplate = str_replace("XXX_BUSSTATE",$resultsetCust['state'],$emailtemplate);
+                $emailtemplate = str_replace("XXX_BUSPOSTCODE",$resultsetCust['postcode'],$emailtemplate);
+                $emailtemplate = str_replace("XXX_BUSPHONE",$resultsetCust['mobile'],$emailtemplate);
+                $emailtemplate = str_replace("XXX_BUSEMAIL",$resultsetCust['email'],$emailtemplate);
                 $emailtemplate = str_replace("XXX_TOTALPRICE","$".$totalPrice,$emailtemplate);
                 $emailtemplate = str_replace("XXX_WindowNumber",$jobTotal['totalWindowNumber'],$emailtemplate);
                 //$emailtemplate = str_replace("XXX_DISCOUNT","$".$discount,$emailtemplate);
@@ -452,7 +452,7 @@
                 $emailtemplate = str_replace("XXX_FRAMETYPE",$frameType,$emailtemplate);
                 $emailtemplate = str_replace("XXX_FILMTYPE",$filmType,$emailtemplate);
                 
-                $emailtemplate = str_replace("XXX_WEBSITE",$custurl,$emailtemplate);
+                $emailtemplate = str_replace("XXX_BUSWEB",$custurl,$emailtemplate);
                 //SharedSendHtmlMail($resultsetCust['email'], $businessName, $client['email'],$client['name'], "Quote Confirmation", $emailtemplate);
 
 
@@ -478,10 +478,10 @@
                 $emailbodytemplate = file_get_contents("./quoteEmailTemplate/emailBodyTemplate.html");
                 $emailbodytemplate = str_replace("XXX_CLIENTFIRSTNAME",$client['name'],$emailbodytemplate);
                 $emailbodytemplate = str_replace("XXX_BUSINESSNAME",$businessName,$emailbodytemplate);
-                $emailbodytemplate = str_replace("XXX_CUSTPHONE",$resultsetCust['mobile'],$emailbodytemplate);
-                $emailbodytemplate = str_replace("XXX_WEBSITE",$custurl,$emailbodytemplate);
-                $emailbodytemplate = str_replace("XXX_CUSTEMAIL",$resultsetCust['email'],$emailbodytemplate);
-                $emailbodytemplate = str_replace("XXX_CUSTNAME",$resultsetCust['contact'],$emailbodytemplate);
+                $emailbodytemplate = str_replace("XXX_BUSPHONE",$resultsetCust['mobile'],$emailbodytemplate);
+                $emailbodytemplate = str_replace("XXX_BUSWEB",$custurl,$emailbodytemplate);
+                $emailbodytemplate = str_replace("XXX_BUSEMAIL",$resultsetCust['email'],$emailbodytemplate);
+                $emailbodytemplate = str_replace("XXX_NAME",$resultsetCust['contact'],$emailbodytemplate);
 
 
 

@@ -17,6 +17,7 @@ $notification = 0;
 define('AT_MAXIDENTIFICATIONNO', 50);
 define('AT_MAXCOUNTRY', 50);
 define('AT_MAXCURRENCY', 10);
+define('AT_MAXURL', 2000);
 //in remedyshared.php, it defines the AT_MAXSTATE is 3, but we don't only have Australian states, it will exceeds 3 words limit, so use AT_MAXCOUNTRY instead.
 
 //
@@ -29,6 +30,7 @@ if (isset($_POST['fldName']) || isset($_POST['fldContact']) || isset($_POST['fld
     $fldphone = SharedCleanString($_POST['fldPhone'], AT_MAXPHONE);
     $fldmobile = SharedCleanString($_POST['fldMobile'], AT_MAXPHONE);
     $fldemail = SharedCleanString($_POST['fldEmail'], AT_MAXEMAIL);
+    $fldurl = SharedCleanString($_POST['fldUrl'], AT_MAXURL);
     $fldcountry = SharedCleanString($_POST['fldCountry'], AT_MAXCOUNTRY);
     //error_log($fldcountry);
     $fldaddress = SharedCleanString($_POST['fldAddress'], AT_MAXADDRESS);
@@ -49,6 +51,7 @@ if (isset($_POST['fldName']) || isset($_POST['fldContact']) || isset($_POST['fld
         "phone=" .SharedNullOrQuoted($fldphone,50, $dblink) . "," .
         "mobile=" .SharedNullOrQuoted($fldmobile, 50,$dblink) . "," .
         "email=" .SharedNullOrQuoted($fldemail,50, $dblink) . "," .
+        "url=" .SharedNullOrQuoted($fldurl,50, $dblink) . "," .
         "address=" .SharedNullOrQuoted($fldaddress,50, $dblink) . "," .
         "city=" .SharedNullOrQuoted($fldcity,50, $dblink) . "," .
         "state=" .SharedNullOrQuoted($fldstate,50, $dblink) . "," .
@@ -129,6 +132,7 @@ $dbselect = "select " .
     "c1.phone," .
     "c1.mobile," .
     "c1.email," .
+    "c1.url, " .
     "c1.address," .
     "c1.city," .
     "c1.state," .
@@ -153,6 +157,7 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
             $fldphone = $dbrow['phone'];
             $fldmobile = $dbrow['mobile'];
             $fldemail = $dbrow['email'];
+            $fldurl = $dbrow['url'];
             $fldaddress = $dbrow['address'];
             $fldcity = $dbrow['city'];
             $fldstate = $dbrow['state'];
@@ -337,9 +342,13 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
                 </tr>
                 <tr>
                     <!-- <td align="left" valign="top">Email:</td> -->
-                    <td align="left" valign="top" style="width: 25%">
+                    <td align="left" valign="top" colspan="2">
                         <input id="fldEmail" name="fldEmail" type="text" size="20" placeholder="EMAIL" maxlength="<?php echo AT_MAXEMAIL; ?>" value="<?php echo SharedPrepareDisplayString($fldemail); ?>" class="form-control" required pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" title="Invalid Email address" />
                         <div id="frmDetails_fldEmail_errorloc" class="error_strings"></div>
+                    </td>
+                    <td align="left" valign="top" colspan="2">
+                        <input id="fldUrl" name="fldUrl" type="text" size="20" placeholder="WEBSITE" maxlength="<?php echo AT_MAXURL; ?>" value="<?php echo SharedPrepareDisplayString($fldurl); ?>" class="form-control" />
+                        <!-- <div id="frmDetails_fldEmail_errorloc" class="error_strings"></div> -->
                     </td>
                 </tr>
                 <!-- <tr>

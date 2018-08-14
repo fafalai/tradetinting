@@ -256,7 +256,7 @@
                 $discountrow = "";
                 if ($discount != 0.00 )
                 {
-                  $discountrow = "<tr style='text-align: center'> 
+                  $discountrow = "<tr style='text-align: center;'> 
                                   <td>
                                     Discount
                                   </td>
@@ -294,7 +294,7 @@
                   //error_log($jobDetail['roomName']);
                   //error_log($jobDetail['totalPrice']);
                   //error_log($jobDetail['numOfWindows']);
-                  $row = "<tr style='text-align: center'>".
+                  $row = "<tr style='text-align: center;'>".
                           "<td>" . 
                           $jobDetail['roomName']. 
                           "</td>

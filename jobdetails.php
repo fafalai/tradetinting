@@ -315,7 +315,8 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
                                                     "jd1.jobs_id=$jobid " .
                                                     "order by " .
                                                     "jd1.datecreated desc, " .
-                                                    "jd1.name " .
+                                                    "jd1.name, " .
+                                                    "jd1.altname " .
                                                     "limit 200";
                                                 if ($dbresult = SharedQuery($dbselect, $dblink)) {
                                                     if ($numrows = SharedNumRows($dbresult)) {

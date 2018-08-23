@@ -17,7 +17,11 @@ $notification = 0;
 define('AT_MAXIDENTIFICATIONNO', 50);
 define('AT_MAXCOUNTRY', 50);
 define('AT_MAXCURRENCY', 10);
-define('AT_MAXURL', 2000);
+// define('AT_MAXURL', 2000);
+
+if(!defined('AT_MAXURL')) {
+    define('AT_MAXURL', 500);
+}
 //in remedyshared.php, it defines the AT_MAXSTATE is 3, but we don't only have Australian states, it will exceeds 3 words limit, so use AT_MAXCOUNTRY instead.
 
 //
@@ -76,33 +80,34 @@ if (isset($_POST['fldName']) || isset($_POST['fldContact']) || isset($_POST['fld
     }
         
 }
-if($_POST['saveTemplate'])
-{
-    if(isset($_POST[editor]))
+if(isset($_POST['saveTemplate']) && !empty($_POST["editor"]))
+{  
+    $text = $_POST['editor'];
+    $custid = $_SESSION['custid'];
+    //echo "$text";
+    // if (file_exists("quoteEmailTemplate/$custid.html") == true)
+    // {
+    //     echo "quoteEmailTemplate/$custid.html exits";
+    // }
+    $myfile = fopen("quoteEmailTemplate/$custid.html", "w") or die("Unable to open file!");
+    $result = fwrite($myfile, $text);
+    if ($result == 0)
     {
-        $text = $_POST['editor'];
-        $custid = $_SESSION['custid'];
-        //echo "$text";
-        // if (file_exists("quoteEmailTemplate/$custid.html") == true)
-        // {
-        //     echo "quoteEmailTemplate/$custid.html exits";
-        // }
-        $myfile = fopen("quoteEmailTemplate/$custid.html", "w") or die("Unable to open file!");
-        $result = fwrite($myfile, $text);
-        if ($result == 0)
-        {
-            $notification = 2;
-            $detailmsg = "Unable to update your template. Please try again or contact support.";
-        }
-        else
-        {
-            $notification = 1;
-            $detailmsg = "Your template has been saved";
-        }
-        // $txt = "Jane Doe\n";
-        // fwrite($myfile, $txt);
-        fclose($myfile);
+        $notification = 2;
+        $detailmsg = "Unable to update your template. Please try again or contact support.";
     }
+    else
+    {
+        $notification = 1;
+        $detailmsg = "Your template has been saved";
+    }
+    // $txt = "Jane Doe\n";
+    // fwrite($myfile, $txt);
+    fclose($myfile);  
+    // if(isset($_POST['editor']))
+    // {
+        
+    // }
 }
 //
 $fldname = "";
@@ -192,10 +197,22 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
                 if (notification == 1)
                 {
                     noty({text: message, type: 'success', timeout: 3000});
+                    message = "";
+                    notification = "";
+                    <?php
+                        $detailmsg = "";
+                        $notification = 0;
+                    ?>
                 }
                 else if (notification == 2)
                 {
                     noty({text: message, type: 'error', timeout: 3000});
+                    message = "";
+                    notification = "";
+                    <?php
+                        $detailmsg = "";
+                        $notification = 0;
+                    ?>
                 }
                 // else if (notification == 7)
                 // {
@@ -447,7 +464,7 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
         </p>
        
 
-        <form action="#" method="post">
+        <form action="profile.php" method="post">
             <textarea class="ckeditor" name="editor" id="editor">
                 <?php
                 //echo file_get_contents("default.html");
@@ -465,14 +482,6 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
             <input type="submit" value="Save Template" name="saveTemplate">
         </form>
     </div>
-    <!-- <script language="javascript">
-        $country = "<?php echo SharedPrepareDisplayString($fldcountry); ?>"
-        $state = "<?php echo SharedPrepareDisplayString($fldstate); ?>"
-        //  console.log($country);
-        //  console.log($state);
-        populateCountries("fldCountry", "fldState", $country, $state);
-
-    </script> -->
     <!-- end #content -->
     <?php
     include("left.php");

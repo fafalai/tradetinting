@@ -292,85 +292,109 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
                             <th align="right">Created</th>
                         </tr>
                         <?php
-                                                $dbselect = "select " .
-                                                    "jd1.id jobdetailid," .
-                                                    "jd1.name room," .
-                                                    "jd1.altname window," .
-                                                    "jd1.width," .
-                                                    "jd1.height," .
-                                                    "jd1.notes," .
-                                                    "jd1.glasstype," .
-                                                    "jd1.frametype," .
-                                                    "jd1.filmtype," .
-                                                    "jd1.direction," .
-                                                    "jd1.salerate," .
-                                                    "jd1.totalarea," .
-                                                    "jd1.totalprice," .
-                                                    "DATE_FORMAT(jd1.datecreated,\"%d-%m-%Y %H:%i\") datecreated " .
-                                                    "from " .
-                                                    "jobdetails jd1 " .
-                                                    "where " .
-                                                    "jd1.dateexpired is null " .
-                                                    "and  " .
-                                                    "jd1.jobs_id=$jobid " .
-                                                    "order by " .
-                                                    "jd1.datecreated desc, " .
-                                                    "jd1.name, " .
-                                                    "jd1.altname " .
-                                                    "limit 200";
-                                                if ($dbresult = SharedQuery($dbselect, $dblink)) {
-                                                    if ($numrows = SharedNumRows($dbresult)) {
-                                                        while ($dbrow = SharedFetchArray($dbresult)) {
-                                                            $notestip = SharedPrepareToolTip($dbrow['notes']);
-                                        ?>
-                            <tr>
-                                <td align="left">
-                                    <span class="title_room">
-                                        <?php echo $dbrow['room']; ?>
-                                    </span>
-                                </td>
-                                <td align="left">
-                                    <?php echo $dbrow['window']; ?>
-                                </td>
-                                <td align="right">
-                                    <?php echo number_format($dbrow['width']); ?>
-                                    <!-- remove the 2 decimal places, no needed -->
-                                </td>
-                                <td align="right">
-                                    <?php echo number_format($dbrow['height']); ?>
-                                    <!-- remove the 2 decimal places, no needed -->
-                                </td>
-                                <td align="right">
-                                    <?php echo $dbrow['direction']; ?>
-                                </td>
-                                <td align="left">
-                                    <?php echo $dbrow['frametype']; ?>
-                                </td>
-                                <td align="left">
-                                    <?php echo $dbrow['glasstype']; ?>
-                                </td>
-                                <td align="left">
-                                    <?php echo $dbrow['filmtype']; ?>
-                                </td>
-                                <td align="right">
-                                    <?php echo number_format($dbrow['totalarea'],3); ?>
-                                </td>
-                                <td align="right">
-                                    <?php echo number_format($dbrow['salerate'],2); ?>
-                                </td>
-                                <td align="right">
-                                    $
-                                    <?php echo number_format($dbrow['totalprice'],2); ?>
-                                </td>
-                                <td align="left">
-                                    <?php echo $dbrow['datecreated']; ?>
-                                </td>
-                            </tr>
-                            <?php
-}
-    }
-}
-?>
+                            $dbselect = "select " .
+                                "jd1.id jobdetailid," .
+                                "jd1.name room," .
+                                "jd1.altname window," .
+                                "jd1.width," .
+                                "jd1.height," .
+                                "jd1.notes," .
+                                "jd1.glasstype," .
+                                "jd1.frametype," .
+                                "jd1.filmtype," .
+                                "jd1.direction," .
+                                "jd1.salerate," .
+                                "jd1.totalarea," .
+                                "jd1.totalprice," .
+                                "DATE_FORMAT(jd1.datecreated,\"%d-%m-%Y %H:%i\") datecreated " .
+                                "from " .
+                                "jobdetails jd1 " .
+                                "where " .
+                                "jd1.dateexpired is null " .
+                                "and  " .
+                                "jd1.jobs_id=$jobid " .
+                                "order by " .
+                                "jd1.name, " .
+                                "jd1.altname, " .
+                                "datecreated desc " .
+                                "limit 200";
+
+                            error_log("select job details:");
+                            error_log($dbselect);
+                            if ($dbresult = SharedQuery($dbselect, $dblink)) {
+                                if ($numrows = SharedNumRows($dbresult)) {
+                                    $sum = 0;
+                                    while ($dbrow = SharedFetchArray($dbresult)) {
+                                        $notestip = SharedPrepareToolTip($dbrow['notes']);
+                                        $sum += $dbrow['totalarea'];
+
+                        ?>
+                        <tr>
+                            <td align="left">
+                                <span class="title_room">
+                                    <?php echo $dbrow['room']; ?>
+                                </span>
+                            </td>
+                            <td align="left">
+                                <?php echo $dbrow['window']; ?>
+                            </td>
+                            <td align="right">
+                                <?php echo number_format($dbrow['width']); ?>
+                                <!-- remove the 2 decimal places, no needed -->
+                            </td>
+                            <td align="right">
+                                <?php echo number_format($dbrow['height']); ?>
+                                <!-- remove the 2 decimal places, no needed -->
+                            </td>
+                            <td align="right">
+                                <?php echo $dbrow['direction']; ?>
+                            </td>
+                            <td align="left">
+                                <?php echo $dbrow['frametype']; ?>
+                            </td>
+                            <td align="left">
+                                <?php echo $dbrow['glasstype']; ?>
+                            </td>
+                            <td align="left">
+                                <?php echo $dbrow['filmtype']; ?>
+                            </td>
+                            <td align="right">
+                                <?php echo number_format($dbrow['totalarea'],3); ?>
+                            </td>
+                            <td align="right">
+                                <?php echo number_format($dbrow['salerate'],2); ?>
+                            </td>
+                            <td align="right">
+                                $
+                                <?php echo number_format($dbrow['totalprice'],2); ?>
+                            </td>
+                            <td align="left">
+                                <?php echo $dbrow['datecreated']; ?>
+                            </td>
+                        </tr>
+                        <?php
+                            }
+                                }
+                            }
+                        ?>
+
+                    <th align="left"></th>
+                        <th align="left"></th>
+                        <th align="right">
+                        </th>
+                        <th align="right">
+                        </th>
+                        <th align="left"></th>
+                        <th align="left"></th>
+                        <th align="left"></th>
+                        <th align="left">Total: </th>
+                        <th align="right">
+                            <?php  echo number_format($sum,3); ?>
+                        </th>
+                        <th align="right"></th>
+                        <th align="right"></th>
+                        <th align="right"></th>
+                    </tr>
                     </table>
 
                     <div style="clear: both;">&nbsp;</div>

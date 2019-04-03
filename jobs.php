@@ -89,6 +89,8 @@
                                 <th>#Rooms</th>
                                 <th>Rate</th>
                                 <th>Discount</th>
+                                <th>Net Rate</th>
+                                <th>Tax</th>
                                 <th>Final Price</th>
                                 <!-- <th>Job Date</th> -->
                                 <th>P1</th>
@@ -141,6 +143,7 @@
                               "j1.mobile mobile," .
                               "j1.totalprice," .
                               "j1.discount," .
+                              "j1.tax," .
                               "j1.photo1," .
                               "j1.photo2," .
                               "j1.photo3," .
@@ -181,7 +184,8 @@
                         $clientcity = ($dbrow['clientcity'] == '') ? $dbrow['city'] : $dbrow['clientcity'];
                         $clientmobile = ($dbrow['clientmobile'] == '') ? $dbrow['mobile'] : $dbrow['clientmobile'];
                         $url_jobdetails = "jobdetails.php?jid=" . $dbrow['jobid']."&clientid=".$dbrow['clientid'];
-                        $finalprice = ($dbrow['totalprice']) - ($dbrow['discount']); 
+                        $netrate = ($dbrow['totalprice']) - ($dbrow['discount']); 
+                        $finalprice = $netrate * (1+$dbrow['tax']*0.01);
                         $p1 = ($dbrow["photo1"] == "") ? '&nbsp;' : '<a href="photos/' . $dbrow["photo1"] . '" target="_blank"><img src="images/camera.png" /></a>';
                         $p2 = ($dbrow["photo2"] == "") ? '&nbsp;' : '<a href="photos/' . $dbrow["photo2"] . '" target="_blank"><img src="images/camera.png" /></a>';
                         $p3 = ($dbrow["photo3"] == "") ? '&nbsp;' : '<a href="photos/' . $dbrow["photo3"] . '" target="_blank"><img src="images/camera.png" /></a>';
@@ -224,6 +228,13 @@
                                     <td align="right">
                                         $
                                         <?php echo round($dbrow['discount'],2); ?>
+                                    </td>
+                                    <td align="right">
+                                        $
+                                        <?php echo $netrate; ?>
+                                    </td>
+                                    <td align="right">
+                                        <?php echo round($dbrow['tax'],0);  ?>%
                                     </td>
                                     <td align="right">
                                         $

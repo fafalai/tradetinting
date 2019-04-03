@@ -117,7 +117,8 @@ else if (isset($_POST['fldName']))
 {
     // Hidden field - are we creating or modifying?
     $clientid = strtoupper(SharedCleanString($_POST['fldClientId'], AT_MAXBIGINT));
-    //
+    error_log("the client id is");
+    error_log($clientid);
     // $fldcode = strtoupper(SharedCleanString($_POST['fldCode'], AT_MAXCODE));
     $fldname = SharedCleanString($_POST['fldName'], AT_MAXNAME);
     $flddesc = SharedCleanString($_POST['fldDesc'], AT_MAXNOTE);
@@ -217,6 +218,7 @@ else if (isset($_POST['fldName']))
                 $fldstate = "";
                 $fldpostcode = "";
                 $fldcountry = "";
+                $clientid = 0;
                 $clientmsg = "Client " . $fldname . " has been added.";
             }
            
@@ -255,16 +257,47 @@ else if (isset($_POST['fldName']))
         error_log($dbupdate);
         if (SharedQuery($dbupdate, $dblink))
         {
-            $notification = 1;
-            $clientmsg = "Client " . $fldname . " has been updated.";
 
+            $dbjobupdate = "update ".
+                            "jobs ".
+                            "set ".
+                            "jobname =". SharedNullOrQuoted($fldname,50,  $dblink) . "," .
+                            "datemodified=CURRENT_TIMESTAMP," .
+                            "usersmodified_id=" . $_SESSION['loggedin'] . " " .
+                            "where " .
+                            "clients_id=". $clientid . " " .
+                            "and " .
+                            "cust_id=" . $_SESSION['custid'];
+            error_log("This is for job update");
+            error_log($dbjobupdate);
+            
+            if(SharedQuery($dbjobupdate,$dblink))
+            {
+                $notification = 1;
+                $fldcode = "";
+                $fldname = "";
+                $flddesc = "";
+                $fldcontact = "";
+                $fldemail1 = "";
+                $fldmobile = "";
+                $fldaddress = "";
+                $fldcity = "";
+                $fldstate = "";
+                $fldpostcode = "";
+                $fldcountry = "";
+                $clientid = 0;
+                $clientmsg = "Client " . $fldname . " has been updated.";
+            }
+            else
+            {
+                $notification = 2;
+                $clientmsg = "Unable to save " . $fldname . ". Please try again or contact support.";
+            }
         }
         else
         {            
             $notification = 2;
             $clientmsg = "Unable to save " . $fldname . ". Please try again or contact support.";
-
-
         }
     }
 }
@@ -304,22 +337,23 @@ else if (isset($_POST['fldName']))
                         });
                     }
 
-                    getGeoLocation();
-                    // resetForm()
+                    //getGeoLocation();
+                    //resetForm()
                 });
 
                 function resetForm()
                 {
-                    document.getElementById('fldName').value = ""
-                    document.getElementById('fldDesc').value = ""
-                    document.getElementById('fldAddress').value = ""
+                    document.getElementById('fldName').value = "";
+                    document.getElementById('fldDesc').value = "";
+                    document.getElementById('fldAddress').value = "";
                     document.getElementById('fldCity').value = "";
                     document.getElementById('fldState').value = "";
                     document.getElementById('fldCountry').value = "";
                     document.getElementById('fldPostcode').value = "";
-                    document.getElementById('fldEmail1').value = ""
-                    document.getElementById('fldContact').value = ""
-                    document.getElementById('fldMobile').value = ""
+                    document.getElementById('fldEmail1').value = "";
+                    document.getElementById('fldContact').value = "";
+                    document.getElementById('fldMobile').value = "";
+                    document.getElementById('fldClientId').value = "";
 
                 }
 
@@ -396,6 +430,12 @@ else if (isset($_POST['fldName']))
                                 radius: position.coords.accuracy
                             });
                             autocomplete.setBounds(circle.getBounds());
+                            $gpslat = position.coords.latitude;
+                            $gpslong = position.coords.longitude
+                            console.log($gpslat);
+                            console.log($gpslong);
+                            document.getElementById('fldGpsLat').value = $gpslat;
+                            document.getElementById('fldGpsLong').value = $gpslong;
                         });
                     }
                 }
@@ -704,7 +744,7 @@ else if (isset($_POST['fldName']))
                                         </td>
                                     </tr>
                                 </table>
-                                <input name="fldClientId" type="hidden" value="<?php echo $clientid; ?>" />
+                                <input type="hidden" id="fldClientId" name="fldClientId" value="<?php echo SharedPrepareDisplayString($clientid); ?>" />
                             </form>
                             <!--
                     <script type="text/javascript">

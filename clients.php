@@ -29,12 +29,13 @@ $fldcity = "";
 $fldstate = "";
 $fldpostcode = "";
 $fldcountry = "";
+$fldgpslat = "";
+$fldgpslong = "";
 //
 if (isset($_GET['cmd']))
 {
     $cmd = intval(SharedCleanString($_GET['cmd'], AT_MAXBIGINT));
     $clientid = intval(SharedCleanString(isset($_GET['id']) ? $_GET['id'] : 0, AT_MAXBIGINT));
-
     if ($cmd == AT_CMDMODIFY)
     {
         // Double check dateexpired is null and this belongs to this customer...
@@ -116,7 +117,8 @@ else if (isset($_POST['fldName']))
 {
     // Hidden field - are we creating or modifying?
     $clientid = strtoupper(SharedCleanString($_POST['fldClientId'], AT_MAXBIGINT));
-    //
+    error_log("the client id is");
+    error_log($clientid);
     // $fldcode = strtoupper(SharedCleanString($_POST['fldCode'], AT_MAXCODE));
     $fldname = SharedCleanString($_POST['fldName'], AT_MAXNAME);
     $flddesc = SharedCleanString($_POST['fldDesc'], AT_MAXNOTE);
@@ -129,6 +131,8 @@ else if (isset($_POST['fldName']))
     $fldstate = strtoupper(SharedCleanString($_POST['fldState'], AT_MAXSTATE));
     $fldpostcode = SharedCleanString($_POST['fldPostcode'], AT_MAXPOSTCODE);
     $fldcountry = SharedCleanString($_POST['fldCountry'], 50);
+    $fldgpslat = $_POST['fldGpsLat'];
+    $fldgpslong = $_POST['fldGpsLong'];
     //
     if ($clientid == 0)
     {
@@ -169,20 +173,55 @@ else if (isset($_POST['fldName']))
         error_log($dbinsert);
         if (SharedQuery($dbinsert, $dblink))
         {
-            $notification = 1;
-            $clientmsg = "Client " . $fldname . " has been added.";
-            // Successful save, clear form...
-            $fldcode = "";
-            $fldname = "";
-            $flddesc = "";
-            $fldcontact = "";
-            $fldemail1 = "";
-            $fldmobile = "";
-            $fldaddress = "";
-            $fldcity = "";
-            $fldstate = "";
-            $fldpostcode = "";
-            $fldcountry = "";
+            $clientid = SharedGetInsertId($dblink);
+           //new client, new job. for create job detail 
+            error_log($fldgpslat);
+            error_log($fldgpslat);
+            $dbinsert = "insert into " .
+            "jobs " .
+            "(cust_id,clients_id,jobname,contact,address,city,state,postcode,mobile,gpslat,gpslon,totalprice,discount,tax,userscreated_id) " .
+            "values " .
+            "(" .
+            $_SESSION['custid'] . "," .
+            $clientid . "," .
+            SharedNullOrQuoted($fldname,50, $dblink) . "," .
+            SharedNullOrQuoted($fldcontact,50, $dblink) . "," .
+            SharedNullOrQuoted($fldaddress,50,  $dblink) . "," .
+            SharedNullOrQuoted($fldcity,50,  $dblink) . "," .
+            SharedNullOrQuoted($fldstate,50,  $dblink) . "," .
+            SharedNullOrQuoted($fldpostcode, 50, $dblink) . "," .
+            SharedNullOrQuoted($fldmobile,50,  $dblink) . "," .
+            $fldgpslat . ",".
+            $fldgpslat . ",".
+             "0," .
+            "0," .
+            "0," .
+            $_SESSION['loggedin'] .
+            ")";
+            error_log("inserting to jobs table");
+            error_log($dbinsert);
+            if (SharedQuery($dbinsert, $dblink))
+            {
+                $jobid = SharedGetInsertId($dblink);
+                error_log($jobid);
+                $notification = 1;
+               
+                // Successful save, clear form...
+                $fldcode = "";
+                $fldname = "";
+                $flddesc = "";
+                $fldcontact = "";
+                $fldemail1 = "";
+                $fldmobile = "";
+                $fldaddress = "";
+                $fldcity = "";
+                $fldstate = "";
+                $fldpostcode = "";
+                $fldcountry = "";
+                $clientid = 0;
+                $clientmsg = "Client " . $fldname . " has been added.";
+            }
+           
         }
         else
         {
@@ -218,16 +257,47 @@ else if (isset($_POST['fldName']))
         error_log($dbupdate);
         if (SharedQuery($dbupdate, $dblink))
         {
-            $notification = 1;
-            $clientmsg = "Client " . $fldname . " has been updated.";
 
+            $dbjobupdate = "update ".
+                            "jobs ".
+                            "set ".
+                            "jobname =". SharedNullOrQuoted($fldname,50,  $dblink) . "," .
+                            "datemodified=CURRENT_TIMESTAMP," .
+                            "usersmodified_id=" . $_SESSION['loggedin'] . " " .
+                            "where " .
+                            "clients_id=". $clientid . " " .
+                            "and " .
+                            "cust_id=" . $_SESSION['custid'];
+            error_log("This is for job update");
+            error_log($dbjobupdate);
+            
+            if(SharedQuery($dbjobupdate,$dblink))
+            {
+                $notification = 1;
+                $fldcode = "";
+                $fldname = "";
+                $flddesc = "";
+                $fldcontact = "";
+                $fldemail1 = "";
+                $fldmobile = "";
+                $fldaddress = "";
+                $fldcity = "";
+                $fldstate = "";
+                $fldpostcode = "";
+                $fldcountry = "";
+                $clientid = 0;
+                $clientmsg = "Client " . $fldname . " has been updated.";
+            }
+            else
+            {
+                $notification = 2;
+                $clientmsg = "Unable to save " . $fldname . ". Please try again or contact support.";
+            }
         }
         else
         {            
             $notification = 2;
             $clientmsg = "Unable to save " . $fldname . ". Please try again or contact support.";
-
-
         }
     }
 }
@@ -266,23 +336,26 @@ else if (isset($_POST['fldName']))
                             timeout: 3000
                         });
                     }
-                    // else if (notification == 3)
-                    // {
-                    //     noty({text: message, type: 'success', timeout: 3000});
-                    // }
-                    // else if (notification == 4)
-                    // {
-                    //     noty({text: message, type: 'error', timeout: 3000});
-                    // }
-                    // else if (notification == 5)
-                    // {
-                    //     noty({text: message, type: 'success', timeout: 3000});
-                    // }
-                    // else if (notification == 6)
-                    // {
-                    //     noty({text: message, type: 'error', timeout: 3000});
-                    // }
+
+                    //getGeoLocation();
+                    //resetForm()
                 });
+
+                function resetForm()
+                {
+                    document.getElementById('fldName').value = "";
+                    document.getElementById('fldDesc').value = "";
+                    document.getElementById('fldAddress').value = "";
+                    document.getElementById('fldCity').value = "";
+                    document.getElementById('fldState').value = "";
+                    document.getElementById('fldCountry').value = "";
+                    document.getElementById('fldPostcode').value = "";
+                    document.getElementById('fldEmail1').value = "";
+                    document.getElementById('fldContact').value = "";
+                    document.getElementById('fldMobile').value = "";
+                    document.getElementById('fldClientId').value = "";
+
+                }
 
                 function initAutocomplete() {
                     // Create the autocomplete object, restricting the search to geographical
@@ -357,6 +430,27 @@ else if (isset($_POST['fldName']))
                                 radius: position.coords.accuracy
                             });
                             autocomplete.setBounds(circle.getBounds());
+                            $gpslat = position.coords.latitude;
+                            $gpslong = position.coords.longitude
+                            console.log($gpslat);
+                            console.log($gpslong);
+                            document.getElementById('fldGpsLat').value = $gpslat;
+                            document.getElementById('fldGpsLong').value = $gpslong;
+                        });
+                    }
+                }
+
+                function getGeoLocation()
+                {
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(function (position) {
+                            $gpslat = position.coords.latitude;
+                            $gpslong = position.coords.longitude
+                            console.log($gpslat);
+                            console.log($gpslong);
+                            document.getElementById('fldGpsLat').value = $gpslat;
+                            document.getElementById('fldGpsLong').value = $gpslong;
+
                         });
                     }
                 }
@@ -635,13 +729,22 @@ else if (isset($_POST['fldName']))
                                         </td>
                                     </tr>
                                     <tr>
+                                        <!-- <td align="left" valign="top">Contact:</td> -->
+                                        <td align="left" valign="top" colspan="2" style="width: 50%">
+                                            <input type="hidden" style="width: 0%" id="fldGpsLat" name="fldGpsLat" type="text" placeholder="CONTACT" size="20"/>
+                                        </td>
+                                        <td align="left" valign="top" colspan="2" style="width: 50%">
+                                            <input type="hidden" style="width: 0%" id="fldGpsLong" name="fldGpsLong" type="text" placeholder="CONTACT" size="20"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <!-- <td align="left" valign="top">&nbsp;</td> -->
                                         <td align="left" valign="top">
                                             <input id="btnSave" type="submit" value="Save" style="width:50%" />
                                         </td>
                                     </tr>
                                 </table>
-                                <input name="fldClientId" type="hidden" value="<?php echo $clientid; ?>" />
+                                <input type="hidden" id="fldClientId" name="fldClientId" value="<?php echo SharedPrepareDisplayString($clientid); ?>" />
                             </form>
                             <!--
                     <script type="text/javascript">

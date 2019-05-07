@@ -141,7 +141,8 @@
                               "j1.contact contact," .
                               "j1.city city," .
                               "j1.mobile mobile," .
-                              "j1.totalprice," .
+                            //   
+                              "totalrateinjob(j1.id) totalprice,".
                               "j1.discount," .
                               "j1.tax," .
                               "j1.photo1," .
@@ -184,7 +185,15 @@
                         $clientcity = ($dbrow['clientcity'] == '') ? $dbrow['city'] : $dbrow['clientcity'];
                         $clientmobile = ($dbrow['clientmobile'] == '') ? $dbrow['mobile'] : $dbrow['clientmobile'];
                         $url_jobdetails = "jobdetails.php?jid=" . $dbrow['jobid']."&clientid=".$dbrow['clientid'];
-                        $netrate = ($dbrow['totalprice']) - ($dbrow['discount']); 
+                        if($dbrow['totalprice'] == null)
+                        {
+                            $totalprice = 0.0000;
+                        }
+                        else
+                        {
+                            $totalprice = $dbrow['totalprice'];
+                        }
+                        $netrate = ($totalprice) - ($dbrow['discount']); 
                         $finalprice = $netrate * (1+$dbrow['tax']*0.01);
                         $p1 = ($dbrow["photo1"] == "") ? '&nbsp;' : '<a href="photos/' . $dbrow["photo1"] . '" target="_blank"><img src="images/camera.png" /></a>';
                         $p2 = ($dbrow["photo2"] == "") ? '&nbsp;' : '<a href="photos/' . $dbrow["photo2"] . '" target="_blank"><img src="images/camera.png" /></a>';
@@ -223,22 +232,22 @@
                                     </td>
                                     <td align="right">
                                         $
-                                        <?php echo round($dbrow['totalprice'],2); ?>
+                                        <?php echo number_format($totalprice,2); ?>
                                     </td>
                                     <td align="right">
                                         $
-                                        <?php echo round($dbrow['discount'],2); ?>
+                                        <?php echo number_format($dbrow['discount'],2); ?>
                                     </td>
                                     <td align="right">
                                         $
-                                        <?php echo $netrate; ?>
+                                        <?php echo number_format($netrate,2); ?>
                                     </td>
                                     <td align="right">
-                                        <?php echo round($dbrow['tax'],0);  ?>%
+                                        <?php echo number_format($dbrow['tax'],2); ?>%
                                     </td>
                                     <td align="right">
                                         $
-                                        <?php echo $finalprice; ?>
+                                        <?php echo number_format($finalprice,2); ?>
                                     </td>
                                     <!-- <td align="left">
                                    

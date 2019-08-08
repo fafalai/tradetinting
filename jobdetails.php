@@ -138,6 +138,8 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
         <!-- <div style="clear: both;">&nbsp;</div> -->
 
         <div class="existingJobDetailsDIV">
+            
+            <h1 style="text-transform:capitalize;font-size:30pt;font-weight:bold">Installation Details</h1>
             <label>
                 <?php echo date("l, F j, Y"); ?>
             </label>
@@ -227,21 +229,21 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
                             <a href="#" class="small" data-value="9" tabIndex="-1">
                                 <input type="checkbox" />&nbsp;Area</a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="#" class="small" data-value="10" tabIndex="-1">
                                 <input type="checkbox" />&nbsp;Rate</a>
                         </li>
                         <li>
                             <a href="#" class="small" data-value="11" tabIndex="-1">
                                 <input type="checkbox" />&nbsp;Price</a>
-                        </li>
+                        </li> -->
                         <li>
                             <a href="#" class="small" data-value="12" tabIndex="-1">
                                 <input type="checkbox" />&nbsp;Created</a>
                         </li>
                     </ul>
                 </div>
-                <div class="table-responsive">
+                <div class="table-responsive" style="width:auto">
                     <table align="left" id="tblJobs" rules="cols" frame="box" class="sortable table table-bordered">
                         <tr>
                             <th align="left">Room</th>
@@ -287,8 +289,8 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
                                     }
                                 ?>
                             </th>
-                            <th align="right">Rate</th>
-                            <th align="right">Price</th>
+                            <!-- <th align="right">Rate</th>
+                            <th align="right">Price</th> -->
                             <th align="right">Created</th>
                         </tr>
                         <?php
@@ -361,13 +363,13 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
                             <td align="right">
                                 <?php echo number_format($dbrow['totalarea'],3); ?>
                             </td>
-                            <td align="right">
+                            <!-- <td align="right">
                                 <?php echo number_format($dbrow['salerate'],2); ?>
                             </td>
                             <td align="right">
                                 $
                                 <?php echo number_format($dbrow['totalprice'],2); ?>
-                            </td>
+                            </td> -->
                             <td align="left">
                                 <?php echo $dbrow['datecreated']; ?>
                             </td>
@@ -391,8 +393,8 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
                         <th align="right">
                             <?php  echo number_format($sum,3); ?>
                         </th>
-                        <th align="right"></th>
-                        <th align="right"></th>
+                        <!-- <th align="right"></th>
+                        <th align="right"></th> -->
                         <th align="right"></th>
                     </tr>
                     </table>

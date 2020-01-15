@@ -104,12 +104,12 @@
     else
       $clientid = 0;
   }
-  if (isset($_POST['fldUid']))
+  if (isset($_POST['userfldUid']))
   {
     error_log("I AM IN create");
-    $flduid = SharedCleanString($_POST['fldUid'], AT_MAXNAME);
-    $fldname = SharedCleanString($_POST['fldUid'], AT_MAXNAME);
-    $fldpwd = SharedCleanString($_POST['fldPwd'], AT_MAXPWD);
+    $flduid = SharedCleanString($_POST['userfldUid'], AT_MAXNAME);
+    $fldname = SharedCleanString($_POST['userfldUid'], AT_MAXNAME);
+    $fldpwd = SharedCleanString($_POST['userfldPwd'], AT_MAXPWD);
     $fldemail = SharedCleanString(isset($_POST['fldEmail']) ? $_POST['fldEmail'] : "", AT_MAXEMAIL);
     $fldmobile = SharedCleanString(isset($_POST['fldMobile']) ? $_POST['fldMobile'] : "", AT_MAXPHONE);
     $active = 1;
@@ -119,6 +119,7 @@
     $dt_expired = date ('Y-m-d H:i:s', strtotime ( '+1 year' ));
     $numberUsers = $_SESSION['numberUsers'];
     $monthValue = 1;
+    $period = 0;
     //
 
     $dateday = date("Y-m-d H:i:s");
@@ -152,7 +153,8 @@
                   "userscreated_id," .
                   "licexpired," .
                   "numberUsers," .
-                  "monthValue" .
+                  "monthValue," .
+                  "period".
                   ") " .
                   "VALUES " .
                   "(" .
@@ -168,7 +170,8 @@
                   "'$usr_id'," .
                   "'$dt_expired'," .
                   "'$numberUsers',".
-                  "'$monthValue'" .
+                  "'$monthValue'," .
+                  "'$period'".
                   ")";
       error_log($dbinsert);
 
@@ -237,7 +240,7 @@
     // Stay in modify mode...
     $cmd = AT_CMDMODIFY;
   }
-  else if (isset($_POST['fldPwd']))
+  else if (isset($_POST['userfldPwd']))
   {
     // Hidden field so we know who we're modifying...
     error_log("modifyng password");
@@ -245,7 +248,7 @@
     $flduid = SharedCleanString($_POST['fldPwdUid'], AT_MAXNAME);
     $fldname = SharedCleanString($_POST['fldPwdName'], AT_MAXNAME);
     //
-    $fldpwd = SharedCleanString($_POST['fldPwd'], AT_MAXPWD);
+    $fldpwd = SharedCleanString($_POST['userfldPwd'], AT_MAXPWD);
     //
     $dbupdate = "update " .
                 "users " .
@@ -269,6 +272,7 @@
     }
     // Stay in modify mode...
     $cmd = AT_CMDMODIFY;
+    error_log($flduid);
   }
 ?>
   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -276,8 +280,8 @@
 
   <head>
     <?php
-    include ("meta.php");
-  ?>
+      include ("meta.php");
+    ?>
       <script type="text/javascript">
         $(document).ready(function () {
           var message = "";
@@ -301,39 +305,24 @@
               timeout: 3000
             });
           }
-          // else if (notification == 3)
-          // {
-          //     noty({text: message, type: 'success', timeout: 3000});
-          // }
-          // else if (notification == 4)
-          // {
-          //     noty({text: message, type: 'error', timeout: 3000});
-          // }
-          // else if (notification == 5)
-          // {
-          //     noty({text: message, type: 'success', timeout: 3000});
-          // }
-          // else if (notification == 6)
-          // {
-          //     noty({text: message, type: 'error', timeout: 3000});
-          // }
         });
 
-        function OnFormLoad() {
-          <?php
-        if ($cmd == AT_CMDCREATE)
+        function OnFormLoad() 
         {
-      ?>
-          $('#fldName').focus();
           <?php
-        }
-        else
-        {
-      ?>
-          $('#fldModName').focus();
+            if ($cmd == AT_CMDCREATE)
+            {
+            ?>
+              $('#fldName').focus();
           <?php
-        }
-      ?>
+            }
+            else
+            {
+            ?>
+              $('#fldModName').focus();
+          <?php
+            }
+          ?>
         }
 
         function DeleteUser(id, itemname) {
@@ -343,7 +332,7 @@
         }
 
         function CheckUserId() {
-          var uid = $('#fldUid').val();
+          var uid = $('#userfldUid').val();
           var data = {
             uid: uid
           };
@@ -364,8 +353,8 @@
                       type: 'error',
                       timeout: 2000
                   });
-                  $('#fldUid').val('');
-                  $('#fldUid').focus();
+                  $('#userfldUid').val('');
+                  $('#userfldUid').focus();
                 }
               }
             }
@@ -379,27 +368,25 @@
 
   <body>
     <?php
-    include("top.php");
-  ?>
+      include("top.php");
+    ?>
       <div class="container" style="width:70%">
         <div class="existingUsersDIV">
-          <label>
-            <?php echo date("l, F j, Y"); ?>
-          </label>
+          <label><?php echo date("l, F j, Y"); ?></label>
           <h2 class="clientTitle mb-2">Existing Users</h2>
           <label>Move mouse over links for tips. Click on table header to sort by that column.</label>
-          <div style="margin-bottom: 30px">
-            <div class="table-responsive">
-              <table id="tblUsers" rules="cols" frame="box" class="sortable table table-bordered">
+          <!-- <div class="container" style="margin-bottom: 30px"> -->
+            <div class="container" style="padding:0px">
+              <table id="tblUsers" rules="cols" frame="box" class="sortable table table-bordered" style="width:100%">
                 <tr>
-                  <th align="left">User ID</th>
-                  <th align="left">Name</th>
-                  <th align="right">Date Modified</th>
+                  <th style="width:30%" align="left">User ID</th>
+                  <th style="width:30%" align="left">Name</th>
+                  <th style="width:30%" align="right">Date Modified</th>
                   <?php
                     if ($_SESSION['admin'] == 1)
                     {
                   ?>
-                    <th align="center" class="unsortable">Action</th>
+                    <th align="center" class="unsortable"style="width:10%">Action</th>
                     <?php
                     }
                   ?>
@@ -435,7 +422,7 @@
                         $admin= $dbrow['admin'];
                         if (($email != "") || ($mobile != ""))
                           $emailtip = SharedPrepareToolTip("<ul><li>Email: $email</li><li>Mobile: $mobile</li></ul>");
-                        $deletetip = SharedPrepareToolTip("Delete user: <strong>" . $dbrow['name'] . "</strong>");
+                          $deletetip = SharedPrepareToolTip("Delete user: <strong>" . $dbrow['name'] . "</strong>");
                 ?>
                   <tr>
                     <td align="left">
@@ -475,15 +462,16 @@
                   ?>
               </table>
             </div>
-          </div>
+          <!-- </div> -->
         </div>
         <div class="usersDIV">
-          <h2 class="clientTitle">Add/Modify Users</h2>
-          <div class="entry">
+          
+          <div class="entry" style="width:100%">
             <?php
                 if ($cmd == AT_CMDCREATE)
                 {
               ?>
+              <h2 class="clientTitle">Add Users</h2>
               <form action="users.php?cmd=<?php echo AT_CMDCREATE; ?>&id=0" method="post" id="frmUsers">
                 <table style="width: 100%">
                   <tr>
@@ -501,8 +489,8 @@
                   <tr>
                     <!-- <td align="left" valign="top">User ID:</td> -->
                     <td align="left" valign="top">
-                      <input required id="fldUid" name="fldUid" type="text" size="20" placeholder="User ID" maxlength="<?php echo AT_MAXNAME; ?>"
-                        value="<?php echo SharedPrepareDisplayString($flduid); ?>" onchange="CheckUserId();" />
+                      <input required id="userfldUid" name="userfldUid" type="text" size="20" placeholder="User ID" maxlength="<?php echo AT_MAXNAME; ?>"
+                        value="<?php echo SharedPrepareDisplayString($flduid); ?>"/>
                       <div id="frmUsers_fldUid_errorloc" class="error_strings"></div>
                     </td>
                   </tr>
@@ -517,7 +505,7 @@
                     </tr>
                     <!-- <td align="left" valign="top">Password:</td> -->
                     <td align="left" valign="top">
-                      <input required pattern="^(\w|\W){5,}$" id="fldPwd" name="fldPwd" type="password" size="20" placeholder="Password (Must be at least 5 characters and not too simple)"
+                      <input required pattern="^(\w|\W){5,}$" id="userfldPwd" name="userfldPwd" type="password" size="20" placeholder="Password (Must be at least 5 characters and not too simple)"
                         maxlength="<?php echo AT_MAXPWD; ?>" />
                       <div id="frmUsers_fldPwd_errorloc" class="error_strings"></div>
                     </td>
@@ -551,7 +539,7 @@
                   <tr>
                     <!-- <td align="left" valign="top">&nbsp;</td> -->
                     <td align="left" valign="top">
-                      <input id="btnSave" type="submit" value="Save" />
+                      <input id="btnSave" type="submit" value="Add" />
                       <br>
                       <span id="error_message" class="text-danger col" style="display:none">* Two passwords are different</span>
                     </td>
@@ -564,18 +552,18 @@
                 // frmvalidator.addValidation("fldName", "req", "Please enter your real Name");
                 // frmvalidator.addValidation("fldName", "maxlen=<?php echo AT_MAXNAME; ?>",
                 //   "Max length is <?php echo AT_MAXNAME; ?>");
-                frmvalidator.addValidation("fldUid", "req", "Please enter your preferred User ID");
-                frmvalidator.addValidation("fldUid", "maxlen=<?php echo AT_MAXNAME; ?>",
+                frmvalidator.addValidation("userfldUid", "req", "Please enter your preferred User ID");
+                frmvalidator.addValidation("userfldUid", "maxlen=<?php echo AT_MAXNAME; ?>",
                   "Max length is <?php echo AT_MAXNAME; ?>");
-                frmvalidator.addValidation("fldPwd", "req", "Please enter your password");
-                frmvalidator.addValidation("fldPwd", "maxlen=<?php echo AT_MAXPWD; ?>",
+                frmvalidator.addValidation("userfldPwd", "req", "Please enter your password");
+                frmvalidator.addValidation("userfldPwd", "maxlen=<?php echo AT_MAXPWD; ?>",
                   "Max length is <?php echo AT_MAXPWD; ?>");
-                frmvalidator.addValidation("fldPwd", "minlen=5",
+                frmvalidator.addValidation("userfldPwd", "minlen=5",
                   "Must be at least 5 characters and not too simple");
                 frmvalidator.addValidation("fldConfirmPwd", "req", "Please re-enter your password");
                 frmvalidator.addValidation("fldConfirmPwd", "maxlen=<?php echo AT_MAXPWD; ?>",
                   "Max length is <?php echo AT_MAXPWD; ?>");
-                frmvalidator.addValidation("fldConfirmPwd", "eqelmnt=fldPwd",
+                frmvalidator.addValidation("fldConfirmPwd", "eqelmnt=userfldPwd",
                   "Passwords don't match, please try again");
                 frmvalidator.addValidation("fldEmail", "maxlen=<?php echo AT_MAXEMAIL; ?>",
                   "Max length is <?php echo AT_MAXEMAIL; ?>");
@@ -592,6 +580,7 @@
                 else if ($cmd == AT_CMDMODIFY)
                 {
               ?>
+                <h2 class="clientTitle">Modify Users</h2>
                 <form action="users.php?cmd=<?php echo AT_CMDCREATE; ?>&id=0" method="post" id="frmUsers">
                   <table style="width: 100%">
                     <tr>
@@ -606,7 +595,7 @@
                     <tr>
                       <!-- <td align="left" valign="top">User ID:</td> -->
                       <td align="left" valign="top">
-                        <?php echo SharedPrepareDisplayString($flduid); ?>
+                        <label style="margin-top:10px;color:black;font-weight:bold;font-size:13pt">User ID: <?php echo SharedPrepareDisplayString($flduid); ?> </label> 
                       </td>
                     </tr>
                     <tr>
@@ -671,7 +660,7 @@
                     <tr>
                       <!-- <td align="left" valign="top">Password:</td> -->
                       <td align="left" valign="top">
-                        <input id="fldPwd" pattern="^(\w|\W){5,}$" name="fldPwd" type="password" size="20" placeholder="Password (Must be at least 5 characters and not too simple)"
+                        <input id="userfldPwd" pattern="^(\w|\W){5,}$" name="userfldPwd" type="password" size="20" placeholder="Password (Must be at least 5 characters and not too simple)"
                           maxlength="50" class="required validate-password" />
                       </td>
                     </tr>
@@ -702,14 +691,14 @@
           <!-- end #content -->
 
           <?php
-      include("left.php");
-    ?>
+            include("left.php");
+          ?>
 
-            <div style="clear: both;">&nbsp;</div>
+          <div style="clear: both;">&nbsp;</div>
 
-            <?php
-      include("bottom.php");
-    ?>
+          <?php
+            include("bottom.php");
+          ?>
               <!-- end #footer -->
         </div>
         <script src="js/users.js"></script>

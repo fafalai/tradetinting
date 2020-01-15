@@ -42,11 +42,11 @@
                 }
             }
             $(function(){
-                $(".topscroll").scroll(function(){
-                    $(".table-responsive").scrollLeft($(".topscroll").scrollLeft());
+                $("#topscroll").scroll(function(){
+                    $("#divJobs").scrollLeft($("#topscroll").scrollLeft());
                 });
-                $(".table-responsive").scroll(function(){
-                    $(".topscroll").scrollLeft($(".table-responsive").scrollLeft());
+                $("#divJobs").scroll(function(){
+                    $("#topscroll").scrollLeft($("#divJobs").scrollLeft());
                 });
             });
         </script>
@@ -66,7 +66,7 @@
                 <label>
                     <?php echo date("l, F j, Y"); ?>
                 </label>
-                <h2 class="clientTitle">Jobs</h2>
+                <h2 class="clientTitle">Quotes</h2>
             </div>
 
 
@@ -83,13 +83,19 @@
                     <input type="radio" name="search" value="CreatedDate" id="searchCreatedDate"> Date (DD-MM-YYYY)
                 </div>
             </div>
-            <div class="entry container">
-                <label style="margin-top:30px">Select a Quote to see job details.</label>
-                <div class="topscroll">
-                    <table class="topscroll-div"></table>
-                </div>
-                <div class="table-responsive">
-                    <table id="tblJobs" rules="cols" frame="box" class="table table-bordered sortable">
+
+            <div class="container">
+                <label style="margin-top:30px;font-size: 15px;">Select a Quote to see job details.</label>
+            </div>
+
+          
+            
+            <div class="container" style="margin-top:20px">
+                <div class="topscroll" id="topscroll">
+                    <table class="topscroll-div" id="topscrolldiv"></table>
+                </div> 
+                <div style="overflow-x:auto;table-layout:auto;width:100%;margin-top:20px" id="divJobs">
+                    <table id="tblJobs" rules="cols" frame="box">
                         <tr>
                             <th>Quote</th>
                             <th>Name</th>
@@ -197,7 +203,7 @@
                                     $contacttip = "<strong>Name: </strong>" . $dbrow['clientname'] . "<br />" .
                                                 "<strong>Phone: </strong>" . $dbrow['clientmobile'] . "<br />" .
                                                 "<strong>Address: </strong>" . $dbrow['clientaddress'] . "<br />" .
-                                                "<strong>City: </strong>" . $dbrow['clientcity'] .", " . $dbrow['state'] . "<br />";
+                                                "<strong>City: </strong>" . $dbrow['clientcity'] .", " . $dbrow['clientstate'] . "<br />";
                                     $clientname = ($dbrow['clientname'] == '') ? $dbrow['contact'] : $dbrow['clientname'];
                                     $clientcity = ($dbrow['clientcity'] == '') ? $dbrow['city'] : $dbrow['clientcity'];
                                     $clientmobile = ($dbrow['clientmobile'] == '') ? $dbrow['mobile'] : $dbrow['clientmobile'];
@@ -317,12 +323,9 @@
                     </table>
                 </div>
 
-
-                <div style="clear: both;">&nbsp;</div>
-
-
             </div>
 
+            <div style="clear: both;">&nbsp;</div>
             <div style="clear: both;">&nbsp;</div>
         <?php
             include("bottom.php");

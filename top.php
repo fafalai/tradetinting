@@ -90,7 +90,7 @@
                                     <div class="dropdown-content">
                                         <a href="profile.php">BUSINESS DETAILS</a>
                                         <a href="users.php" style="width:90%">USERS</a>
-                                        <!-- <a href="subscription.php" style="width:90%">SUBSCRIPTION</a> -->
+                                        <a href="subscription.php" style="width:90%">SUBSCRIPTION</a>
                                         <!--                                        <a href="logout.php">LOGOUT</a>-->
                                     </div>
                                 </div>

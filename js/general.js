@@ -26,11 +26,20 @@ function changeMenuColor() {
         case "resource.php":
             link.eq(3).addClass("current_page_item");
             break;
-        case "contact.php":
+        case "faq.php":
             link.eq(4).addClass("current_page_item");
             break;
-        default:
+        case "contact.php":
             link.eq(5).addClass("current_page_item");
+            break;
+        case "profile.php":
+            link.eq(6).addClass("current_page_item");
+            break;
+        case "users.php":
+            link.eq(6).addClass("current_page_item");
+            break;
+        default:
+            link.eq(0).addClass("current_page_item");
             break;
     }
     return currentPage;

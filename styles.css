@@ -737,25 +737,6 @@ textarea.validation-passed {
     background-color: #3e8e41;
 }
 
-.topscroll{
-    overflow-x: scroll;
-    overflow-y: hidden;
-    width: 1000px; 
-}
-
-.topscroll-div { 
-    width: 1380px; 
-    height: 20px;
-    overflow-x: scroll;
-    overflow-y: hidden;
-}
-
-.table-responsive{
-    overflow-x: scroll;
-    overflow-y: hidden;
-    width: 1000px; 
-}
-
 
 /*<----------Eric */
 
@@ -904,6 +885,7 @@ div {
 
 #DIV_SearchJobs {
     text-align: left;
+    font-size: 16px;
     /* margin: 0; */
     /* width: 70%; */
 }
@@ -1083,7 +1065,6 @@ input[type=submit]:hover {
     margin: auto;
     /* height: 450px; */
     min-height: 200px;
-    overflow: hidden;
 }
 
 .contactsDIV {
@@ -1121,7 +1102,6 @@ input[type=submit]:hover {
     margin: auto;
     /* height: 450px; */
     min-height: 200px;
-    overflow: hidden;
 }
 
 /*Business Details Page*/
@@ -1248,3 +1228,120 @@ input[type="submit"] {
     background-color: gray;
     border-color: grey;
 }
+
+
+table#tblJobs{
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    overflow: auto;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #838383;
+    max-width: 100%;
+    margin-bottom: 1.5rem;
+    background-color: transparent;
+}
+
+table#tblJobs a {
+    color: #666666;
+    text-decoration: underline;
+}
+
+table#tblJobs a:hover {
+    color: #666666;
+    text-decoration: none;
+}
+
+table#tblJobs tr:nth-child(odd)  {
+    background-color: #fff;
+}
+
+table#tblJobs tr:nth-child(even) {
+    background-color: #eee;
+}
+
+table#tblJobs th {
+    background-color: #ddd;
+    padding: .75rem;
+    text-align: center;
+    white-space: nowrap;
+    color: #838383;
+    vertical-align: top;
+    border: 1px solid #dee2e6;
+}
+
+table#tblJobs td {
+    padding: .75rem;
+    vertical-align: top;
+    text-align: center;
+    white-space: nowrap;
+    border: 1px solid #dee2e6;
+}
+
+
+
+.topscroll{
+    overflow-x: scroll;
+    overflow-y: hidden;
+    width: 100%;
+    /* position: fixed;
+    top: 52%;
+    left: 19%;  */
+    position: sticky;
+    top: 0;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.topscroll-div { 
+    width: 400%;
+    height: 20px;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.table-responsive{
+    overflow-x: scroll;
+    overflow-y: hidden;
+    width: 1000px; 
+}
+
+.jobtableDIV{
+    width:100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
+/* Let's get this party started */
+.topscroll-div::-webkit-scrollbar {
+    width: 12px;
+}
+
+/* Track */
+.topscroll-div::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 10px;
+}
+
+/* Handle */
+.topscroll-div::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgba(255,0,0,0.8); 
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+
+
+div.sticky {
+    position: -webkit-sticky;/* Safari */  
+    position: sticky;
+    top: 0;
+    padding: 5px;
+    background-color: #cae8ca;
+    border: 2px solid #4CAF50;
+  }
+ 

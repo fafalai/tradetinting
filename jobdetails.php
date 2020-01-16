@@ -42,6 +42,7 @@ if ($dbresult = SharedQuery($dbselect, $dblink)) {
             $city = $dbrow['city'];
             $state = $dbrow['state'];
             $postcode = $dbrow['postcode'];
+            $notes = $dbrow['desc'];
         }
     }
 }
@@ -93,12 +94,11 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
                 size: A4 landscape;
             }
 
-            /* @media print {
-                body {
-                    color: #000;
-                    background: #fff;
+            @media print {
+                table th{
+                    width:130px
                 }
-            } */
+            }
 
             #DIV_topMenu,
             #div_Hide,
@@ -112,7 +112,10 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
             }
 
             body,
-            tblJobs,
+            #tblJobs{
+                table-layout:auto;
+                width:100%;
+            }
             .existingJobDetailsDIV,
             #DIV_headerContainer {
                 width: 100%;
@@ -128,9 +131,21 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
             #info_Client {
                 margin-top: 0px;
                 margin-bottom: 20px;
+                backgroundcolor:red;
                 /* padding: 0px; */
             }
         </style>
+        <script>
+             $(function(){
+                $("#topscroll").scroll(function(){
+                    $("#divJobDetails").scrollLeft($("#topscroll").scrollLeft());
+                });
+                $("#divJobDetails").scroll(function(){
+                    $("#topscroll").scrollLeft($("#divJobDetails").scrollLeft());
+                });
+            });
+        </script>
+
     </head>
 
     <body>
@@ -176,18 +191,20 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
                     <label>Address:
                         <?php echo $address . " " . $city . " " . $state ." ". $postcode ?>
                     </label>
+                    <br/>
+                    <label>Notes:
+                        <?php echo $notes ?>
+                    </label>
                 </b>
             </div>
             <!-- </th> -->
             <!-- </table> -->
             <div class="entry">
-                <div id="div_Hide" style="margin:10px 0 10px 0;" class="button-group bg-white">
-                    <!-- <div id="div_Hide" style="margin:10px 0 10px 0;"> -->
+                <div id="div_Hide" style="margin:10px 0 10px 0;font-size: 14px;" class="button-group bg-white">
                         <button type="button" class="btn btn-default btn-sm dropdown-toggle bg-white mx-1" data-toggle="dropdown">Hide
                             <span class="caret"></span>
                         </button>
                         <span>(Hide specific fields for Cutting List)</span>
-                    <!-- </div> -->
                     <ul id="ul_dropdownlist" class="dropdown-menu px-2">
                         <li>
                             <a href="#" class="small" data-value="0" tabIndex="-1">
@@ -238,13 +255,16 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
                                 <input type="checkbox" />&nbsp;Price</a>
                         </li> -->
                         <li>
-                            <a href="#" class="small" data-value="12" tabIndex="-1">
+                            <a href="#" class="small" data-value="10" tabIndex="-1">
                                 <input type="checkbox" />&nbsp;Created</a>
                         </li>
                     </ul>
                 </div>
-                <div class="table-responsive" style="width:auto">
-                    <table align="left" id="tblJobs" rules="cols" frame="box" class="sortable table table-bordered">
+                <div class="topscroll" id="topscroll">
+                    <table class="topscroll-div" id="topscrolldiv"></table>
+                </div> 
+                <div style="overflow-x:auto;table-layout:auto;width:100%;margin-top:20px" id="divJobDetails">
+                    <table id="tblJobs" rules="cols" frame="box">
                         <tr>
                             <th align="left">Room</th>
                             <th align="left">Window</th>

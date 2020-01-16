@@ -32,7 +32,9 @@
             {
         ?>
             <div id="DIV_topLoginSignUp">
-                <button id="login" onclick="redirect('login.php')" style="background-image: url('images/login_btn.png');width: 125px;height: 39px;cursor: pointer;font-size: 12pt;color: white;font-weight: bold;">Log in</button>
+                <button id="signup" onclick="redirect('index.php')" style="background-image: url('images/login_btn.png');width: 132px;height: 39px;cursor: pointer;font-size: 12pt;color: white;font-weight: bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Home</button>
+                <button id="signup" onclick="redirect('contact.php')" style="background-image: url('images/signup_btn.png');width: 132px;height: 39px;cursor: pointer;font-size: 12pt;color: white;font-weight: bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Contact Us</button>
+                <button id="login" onclick="redirect('login.php')" style="background-image: url('images/login_btn.png');width: 125px;height: 39px;cursor: pointer;font-size: 12pt;color: white;font-weight: bold;">&nbsp;&nbsp;Log in</button>
                 <button id="signup" onclick="redirect('signup.php')" style="background-image: url('images/signup_btn.png');width: 125px;height: 39px;cursor: pointer;font-size: 12pt;color: white;font-weight: bold">&nbsp;&nbsp;&nbsp;Sign up</button>
             </div>
             <?php
@@ -75,16 +77,20 @@
                                     <a href="resource.php">RESOURCES</a>
                                 </li>
                                 <li>
+                                    <a href="faq.php">FAQ</a>
+                                </li>
+                                <li>
                                     <a href="contact.php">CONTACT</a>
                                 </li>
                                 <div class="dropdown">
                                     <!-- <li> -->
-                                    <a href="#">ACCOUNT</a>
+                                    <a href="#">PROFILE</a>
                                     <!-- </li> -->
                                     <!-- <li><button style="border:none"></button>Account</button></li> -->
                                     <div class="dropdown-content">
                                         <a href="profile.php">BUSINESS DETAILS</a>
                                         <a href="users.php" style="width:90%">USERS</a>
+                                        <a href="subscription.php" style="width:90%">SUBSCRIPTION</a>
                                         <!--                                        <a href="logout.php">LOGOUT</a>-->
                                     </div>
                                 </div>

@@ -20,7 +20,33 @@
 //                echo "&nbsp;";
 //              }
             ?>
+<?php 
 
+  $c_id=$_SESSION['custid'];
+  $dbselect = "select " .
+  "u1.licexpired, " .
+  "u1.period " .
+  "from " .
+  "users u1 " .
+  "where " .
+  "u1.cust_id='$c_id'";
+if ($dbresult = SharedQuery($dbselect, $dblink)){
+
+	if ($numrows = SharedNumRows($dbresult)){
+		while ($dbrow = SharedFetchArray($dbresult))
+		{
+			$licexpired = $dbrow['licexpired'];
+			$period = $dbrow['period'];
+		}
+	}
+}
+if (($period==0) && (strtotime($licexpired."-7 day")<=strtotime("now"))){
+	$expiresoon=true;
+	
+}elseif(strtotime($licexpired."-14 day")<=strtotime("now")){
+	$expiresoon=true;
+}
+?>
     <div id="DIV_headerContainer">
         <div id="DIV_topImage">
             <a href="index.php">
@@ -50,7 +76,10 @@
                         {
                       ?>
                     <div id="DIV_showUser" class="pull-right">Welcome,
-                        <?php echo $_SESSION['username'];?>
+
+					
+						<?php echo $_SESSION['username'];?>
+						
                         <a href="logout.php">Logout</a>
                     </div>
                     <!-- <div class="float-none"></div> -->
@@ -78,10 +107,8 @@
                                 </li>
                                 <li>
                                     <a href="faq.php">FAQ</a>
-                                </li>
-                                <li>
-                                    <a href="contact.php">CONTACT</a>
-                                </li>
+								</li>
+								<Li>
                                 <div class="dropdown">
                                     <!-- <li> -->
                                     <a href="#">PROFILE</a>
@@ -93,7 +120,11 @@
                                         <a href="subscription.php" style="width:90%">SUBSCRIPTION</a>
                                         <!--                                        <a href="logout.php">LOGOUT</a>-->
                                     </div>
-                                </div>
+								</div>
+						</li>
+                                <li>
+                                    <a href="contact.php">HELP</a>
+                                </li>
                                 <?php
                           }
 
@@ -104,6 +135,39 @@
                       }
                         ?>
                         </ul>
-                    </div>
-    </div>
-    <div class="clearfix"></div>
+					</div>
+	</div>
+	<?php if($expiresoon){ ?>
+							<!-- , <span style="background-color:red; font-size:1.5em">You subscription is Expiring on ; </span> -->
+
+	<div class="alert-box">
+    <span class="badge">Warning </span> Your Subscription is Expiring on  <?= date('Y-m-d', strtotime($licexpired))?>
+  </div>  
+						<?php }?>
+	<div class="clearfix"></div>
+	
+	<style>.alert-box {
+	background-color: #fffbcc;
+	color: #777;
+	font-size: 14px;
+	line-height: 23px;
+	padding: 13px 16px;
+	text-align:center;
+	font-family:Arial, Helvetica, sans-serif;
+
+	margin-bottom:15px;
+}
+.alert-box .badge {
+	background-color: #f58f2a;
+	border-radius: 3px;
+	color: #fff;
+	margin-left: 4px;
+	margin-right: 4px;
+	padding: 3px 5px 3px 4px;
+	font-weight:bold;
+	text-transform: uppercase;
+}
+#DIV_headerContainer{
+	height:156px;
+}
+</style>

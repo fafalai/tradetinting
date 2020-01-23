@@ -20,7 +20,7 @@
 //                echo "&nbsp;";
 //              }
             ?>
-<?php 
+<?php
 
   $c_id=$_SESSION['custid'];
   $dbselect = "select " .
@@ -40,10 +40,12 @@ if ($dbresult = SharedQuery($dbselect, $dblink)){
 		}
 	}
 }
-if (($period==0) && (strtotime($licexpired."-7 day")<=strtotime("now"))){
+if (($period==0) && (strtotime($licexpired."-7 day")<=strtotime("now")) && ((strtotime($licexpired)>strtotime("now")))){
+  error_log("period ".strtotime($licexpired)." ".strtotime("now"));
 	$expiresoon=true;
-	
-}elseif(strtotime($licexpired."-14 day")<=strtotime("now")){
+
+}elseif(($period!=0) && (strtotime($licexpired."-14 day")<=strtotime("now"))&& ((strtotime($licexpired)>strtotime("now")))){
+    error_log(strtotime($licexpired)." ".strtotime("now"));
 	$expiresoon=true;
 }
 ?>
@@ -77,9 +79,9 @@ if (($period==0) && (strtotime($licexpired."-7 day")<=strtotime("now"))){
                       ?>
                     <div id="DIV_showUser" class="pull-right">Welcome,
 
-					
+
 						<?php echo $_SESSION['username'];?>
-						
+
                         <a href="logout.php">Logout</a>
                     </div>
                     <!-- <div class="float-none"></div> -->
@@ -142,10 +144,11 @@ if (($period==0) && (strtotime($licexpired."-7 day")<=strtotime("now"))){
 
 	<div class="alert-box">
     <span class="badge">Warning </span> Your Subscription is Expiring on  <?= date('Y-m-d', strtotime($licexpired))?>
-  </div>  
+  </div>
 						<?php }?>
 	<div class="clearfix"></div>
-	
+
+  <?php if($expiresoon){ ?>
 	<style>.alert-box {
 	background-color: #fffbcc;
 	color: #777;
@@ -171,3 +174,5 @@ if (($period==0) && (strtotime($licexpired."-7 day")<=strtotime("now"))){
 	height:156px;
 }
 </style>
+
+          <?php }?>

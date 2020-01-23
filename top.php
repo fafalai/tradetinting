@@ -41,11 +41,9 @@ if ($dbresult = SharedQuery($dbselect, $dblink)){
 	}
 }
 if (($period==0) && (strtotime($licexpired."-7 day")<=strtotime("now")) && ((strtotime($licexpired)>strtotime("now")))){
-  error_log("period ".strtotime($licexpired)." ".strtotime("now"));
 	$expiresoon=true;
 
 }elseif(($period!=0) && (strtotime($licexpired."-14 day")<=strtotime("now"))&& ((strtotime($licexpired)>strtotime("now")))){
-    error_log(strtotime($licexpired)." ".strtotime("now"));
 	$expiresoon=true;
 }
 ?>

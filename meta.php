@@ -17,7 +17,6 @@
 <script type="text/javascript" src="js/underscore.js"></script>
 <script type="text/javascript" src="js/underscore.string.js"></script>
 <script type="text/javascript" src="js/easyui/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="js/ckeditor/ckeditor.js"></script>
 <script src="https://checkout.stripe.com/checkout.js"></script>
 <script src="https://js.stripe.com/v3/"></script>
 

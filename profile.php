@@ -1,7 +1,7 @@
-<!-- 
+<!--
      1 ===  Successfull
-     2 ===  Fail 
-    
+     2 ===  Fail
+
 -->
 <?php
 include("logincheck.php");
@@ -72,19 +72,19 @@ if (isset($_POST['fldName']) || isset($_POST['fldContact']) || isset($_POST['fld
         $detailmsg = "Your business details have been updated.";
         $notification = 1;
     }
-       
+
     else
     {
         $notification = 2;
         $detailmsg = "Unable to save your details. Please try again or contact support.";
     }
-        
+
 }
 if(isset($_POST['saveTemplate']) && !empty($_POST["editor"]))
-{  
+{
     $text = $_POST['editor'];
-    $custid = $_SESSION['custid'];
-    //echo "$text";
+	$custid = $_SESSION['custid'];
+	//echo "$text";
     // if (file_exists("quoteEmailTemplate/$custid.html") == true)
     // {
     //     echo "quoteEmailTemplate/$custid.html exits";
@@ -103,10 +103,10 @@ if(isset($_POST['saveTemplate']) && !empty($_POST["editor"]))
     }
     // $txt = "Jane Doe\n";
     // fwrite($myfile, $txt);
-    fclose($myfile);  
+    fclose($myfile);
     // if(isset($_POST['editor']))
     // {
-        
+
     // }
 }
 //
@@ -182,7 +182,10 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
 <head>
     <?php
         include ("meta.php");
-    ?>
+	?>
+	
+<link href='https://cdn.jsdelivr.net/npm/froala-editor@3.1.0/css/froala_editor.pkgd.min.css' rel='stylesheet' type='text/css' />
+<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@3.1.0/js/froala_editor.pkgd.min.js'></script>
     <!-- <link rel="stylesheet" type="text/css" href="styles.css"> -->
     <!-- <script src="countries.js"></script> -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqCHDj475c_6YSc9yqwBH3eN1bYovqtUE&libraries=places&callback=initAutocomplete" async defer></script>
@@ -216,17 +219,17 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
                 }
                 // else if (notification == 7)
                 // {
-                    
+
                 //     noty({text: message, type: 'success', timeout: 3000});
                 // }
                 // else if (notification == 8)
                 // {
-                    
+
                 //     noty({text: message, type: 'error', timeout: 3000});
                 // }
             });
-        
-        function initAutocomplete() 
+
+        function initAutocomplete()
         {
             // Create the autocomplete object, restricting the search to geographical
             // location types.
@@ -257,7 +260,7 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
                             document.getElementById('fldState').value = place.address_components[5].short_name;
                             // $('#fldState').combobox('setValue', place.address_components[5].short_name);
                             document.getElementById('fldCountry').value = place.address_components[6].long_name;
-                            document.getElementById('fldPostcode').value = place.address_components[7].short_name;  
+                            document.getElementById('fldPostcode').value = place.address_components[7].short_name;
                         }
                         else if (place.address_components.length == 9)
                         {
@@ -293,9 +296,9 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
 
         // Bias the autocomplete object to the user's geographical location,
         // as supplied by the browser's 'navigator.geolocation' object.
-        function geolocate() 
+        function geolocate()
         {
-            if (navigator.geolocation) 
+            if (navigator.geolocation)
             {
                 navigator.geolocation.getCurrentPosition(function(position) {
                 var geolocation = {
@@ -309,7 +312,7 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
                 autocomplete.setBounds(circle.getBounds());
                 });
             }
-        }   
+        }
     </script>
     <title>Remedy Test & Tag - Company</title>
 </head>
@@ -452,7 +455,7 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
             // frmvalidator.addValidation("fldMobile", "regexp=^[0-9]{10}$|^\(0[1-9]{1}\)[0-9]{8}$|^[0-9]{8}$|^[0-9]{4}[ ][0-9]{3}[ ][0-9]{3}$|^\(0[1-9]{1}\)[ ][0-9]{4}[ ][0-9]{4}$|^[0-9]{4}[ ][0-9]{4}$", "Must be in 04xxyyyzzz or xxxxyyyy format");
             frmvalidator.addValidation("fldMobile", "regex=^(?=\d)\S{6,}", "Invalid Phone number"); //numbers only, at least six digits
         </script>
---> 
+-->
         <p style="font-size:12pt">
             <u style="font-weight:bold;color:red">Caution:</u> <span style="color:red">DO NOT  tamper with Text with XXX in the content.  These fields are auto complete and will not work correctly if tampered with. </span>
             <br/>
@@ -462,26 +465,25 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
             <br/>
             <span style="color:#747474">You can also add your company Logo to the right hand side.</span>
         </p>
-       
 
         <form action="profile.php" method="post">
-            <textarea class="ckeditor" name="editor" id="editor">
-                <?php
-                //echo file_get_contents("default.html");
-                $custid = $_SESSION['custid'];
-                if (file_exists("quoteEmailTemplate/$custid.html") == true)
-                {
-                    echo file_get_contents("quoteEmailTemplate/$custid.html");
-                }
-                else
-                {
-                    echo file_get_contents("quoteEmailTemplate/generalTemplate.html");
-                }
-                ?>
-            </textarea>
-            <input type="submit" value="Save Template" name="saveTemplate">
-        </form>
-    </div>
+			<textarea name="editor" id="editor">
+			<?php
+					//echo file_get_contents("default.html");
+					$custid = $_SESSION['custid'];
+					if (file_exists("quoteEmailTemplate/$custid.html") == true)
+					{
+						echo file_get_contents("quoteEmailTemplate/$custid.html");
+					}
+					else
+					{
+						echo file_get_contents("quoteEmailTemplate/generalTemplate.html");
+					}
+					?>
+			</textarea>
+			<input type="submit" value="Save Template" name="saveTemplate">
+			</form>
+		</div>
     <!-- end #content -->
     <?php
     include("left.php");
@@ -492,5 +494,52 @@ if ($dbresult = SharedQuery($dbselect, $dblink))
     include("bottom.php");
     ?>
 <script src="js/profile.js"></script>
+
+<script>
+  $(function() {
+    $('textarea#editor').froalaEditor()
+  });
+</script>
+
+<script>
+  FroalaEditor.DefineIcon('imageInfo', {NAME: 'info', SVG_KEY: 'help'});
+  FroalaEditor.RegisterCommand('imageInfo', {
+    title: 'Info',
+    focus: false,
+    undo: false,
+    refreshAfterCallback: false,
+    callback: function () {
+      var $img = this.image.get();
+      alert($img.attr('src'));
+    }
+  });
+
+  new FroalaEditor('textarea#editor', {
+    // Set image buttons, including the name
+    // of the buttons defined in customImageButtons.
+    imageEditButtons: ['imageDisplay', 'imageAlign', 'imageInfo', 'imageRemove'],
+	events: {
+     "image.beforeUpload": function(files) {
+     var editor = this;
+      if (files.length) {
+        // Create a File Reader.
+        var reader = new FileReader();
+        // Set the reader to insert images when they are loaded.
+        reader.onload = function(e) {
+          var result = e.target.result;
+          editor.image.insert(result, null, null, editor.image.get());
+        };
+        // Read image as base64.
+        reader.readAsDataURL(files[0]);
+      }
+      editor.popups.hideAll();
+      // Stop default upload chain.
+      return false;
+     }
+   }
+  })
+</script>
 </body>
 </html>
+
+

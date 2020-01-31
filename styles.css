@@ -819,7 +819,7 @@ div {
 #DIV_headerContainer {
     width: 70%;
     margin: 20px 20% 0px 15%;
-    height: 220px;
+    height: 40px;
     /*    overflow: hidden;*/
 }
 
@@ -847,6 +847,8 @@ div {
 }
 
 #DIV_topMenu {
+	justify-content: center;
+	display:flex
     /* float: right; */
     /* margin-top: 0.5em; */
 }

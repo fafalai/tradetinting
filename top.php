@@ -54,46 +54,31 @@ if (($period==0) && (strtotime($licexpired."-7 day")<=strtotime("now")) && ((str
 	$expiresoon=true;
 }
 ?>
-    <div id="DIV_headerContainer">
-        <div id="DIV_topImage">
-            <a href="index.php">
-                <img src="images/tint-app-logo.png" alt="Tinting Logo" longdesc="http://www.remedyappserver.com">
-            </a>
-        </div>
-        <?php
-            if (!SharedIsLoggedIn())
-            {
-        ?>
-            <div id="DIV_topLoginSignUp">
-                <button id="signup" onclick="redirect('index.php')" style="background-image: url('images/login_btn.png');width: 132px;height: 39px;cursor: pointer;font-size: 12pt;color: white;font-weight: bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Home</button>
-                <button id="signup" onclick="redirect('contact.php')" style="background-image: url('images/signup_btn.png');width: 132px;height: 39px;cursor: pointer;font-size: 12pt;color: white;font-weight: bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Contact Us</button>
-                <button id="login" onclick="redirect('login.php')" style="background-image: url('images/login_btn.png');width: 125px;height: 39px;cursor: pointer;font-size: 12pt;color: white;font-weight: bold;">&nbsp;&nbsp;Log in</button>
-                <button id="signup" onclick="redirect('signup.php')" style="background-image: url('images/signup_btn.png');width: 125px;height: 39px;cursor: pointer;font-size: 12pt;color: white;font-weight: bold">&nbsp;&nbsp;&nbsp;Sign up</button>
-            </div>
-            <?php
-            }
-            else
-            {
-              echo "&nbsp;";
-            }
-            ?>
-
-                <?php
-                        if (SharedIsLoggedIn())
-                        {
-                      ?>
-                    <div id="DIV_showUser" class="pull-right">Welcome,
 
 
-						<?php echo $_SESSION['username'];?>
+<div id="DIV_headerContainer">
+	<?php
+	if (!SharedIsLoggedIn()){
+	?> 
+		<div class="topmenu" id="DIV_topMenu">
+			<ul>
+				<li>
+					<a href="index.php">HOME</a>
+				</li>
+				<li>
+					<a href="contact.php">Contact Us</a>
+				</li>
+				<li>
+					<a href="login.php">Log in</a>
+				</li>
+				<li>
+					<a href="signup.php">Sign up</a>
+				</li>
+			</ul>
+		</div>
+	<?php }elseif(SharedIsLoggedIn()){ ?>
 
-                        <a href="logout.php">Logout</a>
-                    </div>
-                    <!-- <div class="float-none"></div> -->
-                    <br>
-                    <br>
-                    <br>
-                    <div class="topmenu pull-right" id="DIV_topMenu">
+	<div class="topmenu " id="DIV_topMenu">
                         <ul>
                             <li>
                                 <a href="index.php">HOME</a>
@@ -105,7 +90,6 @@ if (($period==0) && (strtotime($licexpired."-7 day")<=strtotime("now")) && ((str
                         if ($_SESSION['admin'] != 0)
                         {
                       ?>
-                                <!-- <li><a href="tagreps.php">Reports</a></li> -->
                                 <li>
                                     <a href="clients.php">CLIENTS</a>
                                 </li>
@@ -117,15 +101,11 @@ if (($period==0) && (strtotime($licexpired."-7 day")<=strtotime("now")) && ((str
 								</li>
 								<Li>
                                 <div class="dropdown">
-                                    <!-- <li> -->
                                     <a href="#">PROFILE</a>
-                                    <!-- </li> -->
-                                    <!-- <li><button style="border:none"></button>Account</button></li> -->
                                     <div class="dropdown-content">
                                         <a href="profile.php">BUSINESS DETAILS</a>
                                         <a href="users.php" style="width:90%">USERS</a>
                                         <a href="subscription.php" style="width:90%">SUBSCRIPTION</a>
-                                        <!--                                        <a href="logout.php">LOGOUT</a>-->
                                     </div>
 								</div>
 						</li>
@@ -138,19 +118,19 @@ if (($period==0) && (strtotime($licexpired."-7 day")<=strtotime("now")) && ((str
                         else
                         {
                           echo "&nbsp;";
-                        }
+                        }?>
+
+						<a href="logout.php">Logout</a>
+						<?php
                       }
                         ?>
+						<li>
+
+						</li>
                         </ul>
 					</div>
-	</div>
-	<?php if($expiresoon){ ?>
-							<!-- , <span style="background-color:red; font-size:1.5em">You subscription is Expiring on ; </span> -->
-
-	<div class="alert-box">
-    <span class="badge">Warning </span> Your Subscription is Expiring on  <?= date('Y-m-d', strtotime($licexpired))?>
-  </div>
-						<?php }?>
+</div>
+		
 	<div class="clearfix"></div>
 
   <?php if($expiresoon){ ?>
@@ -176,6 +156,7 @@ if (($period==0) && (strtotime($licexpired."-7 day")<=strtotime("now")) && ((str
 	text-transform: uppercase;
 }
 #DIV_headerContainer{
+  display: none !important;
 	height:156px;
 }
 </style>

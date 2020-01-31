@@ -817,8 +817,8 @@ div {
 /*top.php*/
 
 #DIV_headerContainer {
-    width: 70%;
-    margin: 20px 20% 0px 15%;
+    /* width: 70%; */
+    /* margin: 0px 20% 0px 15%; */
     height: 40px;
     /*    overflow: hidden;*/
 }

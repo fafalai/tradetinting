@@ -57,9 +57,15 @@ if (($period==0) && (strtotime($licexpired."-7 day")<=strtotime("now")) && ((str
 
 
 <div id="DIV_headerContainer">
+
+<?php if($expiresoon){ ?>
+	<div class="alert-box">
+    <span class="badge">Warning </span> Your Subscription is Expiring on  <?= date('Y-m-d', strtotime($licexpired))?>
+  </div>  
+		<?php }?>
 	<?php
 	if (!SharedIsLoggedIn()){
-	?> 
+	?>
 		<div class="topmenu" id="DIV_topMenu">
 			<ul>
 				<li>
@@ -68,12 +74,7 @@ if (($period==0) && (strtotime($licexpired."-7 day")<=strtotime("now")) && ((str
 				<li>
 					<a href="contact.php">Contact Us</a>
 				</li>
-				<li>
 					<a href="login.php">Log in</a>
-				</li>
-				<li>
-					<a href="signup.php">Sign up</a>
-				</li>
 			</ul>
 		</div>
 	<?php }elseif(SharedIsLoggedIn()){ ?>
@@ -108,7 +109,7 @@ if (($period==0) && (strtotime($licexpired."-7 day")<=strtotime("now")) && ((str
                                         <a href="subscription.php" style="width:90%">SUBSCRIPTION</a>
                                     </div>
 								</div>
-						</li>
+								</li>
                                 <li>
                                     <a href="contact.php">HELP</a>
                                 </li>
@@ -130,7 +131,7 @@ if (($period==0) && (strtotime($licexpired."-7 day")<=strtotime("now")) && ((str
                         </ul>
 					</div>
 </div>
-		
+
 	<div class="clearfix"></div>
 
   <?php if($expiresoon){ ?>
@@ -139,11 +140,9 @@ if (($period==0) && (strtotime($licexpired."-7 day")<=strtotime("now")) && ((str
 	color: #777;
 	font-size: 14px;
 	line-height: 23px;
-	padding: 13px 16px;
+	padding: 3px 5px;
 	text-align:center;
 	font-family:Arial, Helvetica, sans-serif;
-
-	margin-bottom:15px;
 }
 .alert-box .badge {
 	background-color: #f58f2a;
@@ -156,8 +155,10 @@ if (($period==0) && (strtotime($licexpired."-7 day")<=strtotime("now")) && ((str
 	text-transform: uppercase;
 }
 #DIV_headerContainer{
-  display: none !important;
-	height:156px;
+
+	<?php if($expiresoon){ ?>
+	height:73px;
+<?php }?>
 }
 </style>
 

@@ -59,6 +59,116 @@
                 }
             });
 
+            //Validate The Sign Up Form
+            function validateForm() 
+            {
+                var id = document.forms["signupForm"]["sign_id"];
+                var name = document.forms["signupForm"]["sign_name"];
+                var phone = document.forms["signupForm"]["sign_phone"];
+                var email = document.forms["signupForm"]["sign_email"];
+                var password = document.forms["signupForm"]["sign_password"];
+                var phoneReg = /^[0-9]{5,}$/g;
+                var emailReg = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/g;
+                var pwReg = /^(\w|\W){5,}$/g;
+                if (id.value == "") {
+                    //alert("User id cannot be empty");
+                    noty
+                        ({
+                            text: "User id cannot be empty",
+                            type: 'error',
+                            timeout: 1300
+                        });
+                    id.focus();
+                    //console.log("User id cannot be empty");
+                    return false;
+                }
+                if (name.value == "") {
+                    // alert("User name cannot be empty");
+                    // console.log("User name cannot be empty");
+                    noty
+                        ({
+                            text: "User name cannot be empty",
+                            type: 'error',
+                            timeout: 1300
+                        });
+                    name.focus();
+                    return false;
+                }
+                if (phone.value == "") {
+                    // alert("Please enter your phone");
+                    // console.log("Phone cannot be empty");
+                    noty
+                        ({
+                            text: "Please enter your phone",
+                            type: 'error',
+                            timeout: 1300
+                        });
+                    phone.focus();
+                    return false;
+                }
+                if (phoneReg.test(phone.value) == false) {
+                    // alert("Invalid Phone number,please check");
+                    // console.log("Phone number cannot be less than 5 digits");
+                    noty
+                        ({
+                            text: "Invalid Phone number,please check",
+                            type: 'error',
+                            timeout: 1300
+                        });
+                    phone.focus();
+                    return false;
+                }
+                if (email.value == "") {
+                    // alert("Please enter your email");
+                    // console.log("Phone cannot be empty");
+                    noty
+                        ({
+                            text: "Please enter your email",
+                            type: 'error',
+                            timeout: 1300
+                        });
+                    email.focus();
+                    return false;
+                }
+                if (emailReg.test(email.value) == false) {
+                    // alert("Invalid email address, please check");
+                    // console.log("invalid email");
+                    noty
+                        ({
+                            text: "Invalid email address, please check",
+                            type: 'error',
+                            timeout: 1300
+                        });
+                    email.focus();
+                    return false;
+                }
+                if (password.value == "") {
+                    // alert("Password cannot be empty");
+                    // console.log("password cannot be empty");
+                    noty
+                        ({
+                            text: "Password cannot be empty",
+                            type: 'error',
+                            timeout: 1300
+                        });
+                    password.focus();
+                    return false;
+                }
+                if(pwReg.test(password.value) == false)
+                {
+                    noty
+                        ({
+                            text: "Password Must be at least 5 characters",
+                            type: 'error',
+                            timeout: 1300
+                        });
+                    password.focus();
+                    return false;
+                }
+
+                return true;
+            }
+
             function initAutocomplete() {
                 // Create the autocomplete object, restricting the search to geographical
                 // location types.
@@ -136,7 +246,8 @@
                 }
             }
 
-            function CheckUserId() {
+            function CheckUserId() 
+            {
                 var uid = $('#sign_id').val();
                 var data = {
                     uid: uid
@@ -157,12 +268,26 @@
                                         type: 'error',
                                         timeout: 2000
                                     });
-                                $('#sign_id').val('');
+                                //$('#sign_id').val('');
                                 $('#sign_id').focus();
                             }
                         }
                     }
                 });
+            }
+
+            function doSignUpFree()
+            {
+                console.log("click");
+                var valid = validateForm();
+                if(validateForm() == true)
+                {
+
+                }
+                else
+                {
+                    console.log("field missing");
+                }
             }
         </script>
         <title>Sign Up</title>
@@ -175,12 +300,21 @@
 
         <div class="container" style="width:70%">
             <h2 class="text-dark mb-2" style="font-family: Arial, Helvetica, sans-serif;font-weight: bold;font-size: 20pt;">Sign Up</h2>
+            <!-- <div class="easyui-panel" data-option="fit:true">
+                <table>
+                    <tr>
+                        <td>First Name:</td>
+                        <td><input id="fldNewMemberFirstName" class="easyui-textbox"  data-options="" style="width: 300px"></td>
+                    </tr>
+                </table>
+            </div> -->
             <form style="background-color:#f0f0f0;" action="payment.php" method="post" id="frmSignup" name="signupForm" class="p-4 form-group">
                 <div class="row">
-                    <input required id="sign_id" name="sign_id" class="form-control" type="text" placeholder="User ID" onchange="CheckUserId();">
+                    <input required id="sign_id" name="sign_id" class="form-control" type="text" placeholder="User ID"  onchange="CheckUserId();">
+                    <!-- <input id="fldNewMemberFirstName" class="easyui-textbox" label="First Name:" labelPosition="left" data-options="" style="width: 300px;height:50px;font-size:15px"> -->
                 </div>
                 <div class="row">
-                    <input required id="sign_name" name="sign_name" class="form-control" type="text" placeholder="User Name">
+                    <input required id="sign_name" name="sign_name" class="form-control" type="text" placeholder="User Name" >
                 </div>
                 <div class="row">
                     <input id="sign_phone" name="sign_phone" class="form-control col-sm-5" type="text" placeholder="Phone (Must be at least 5 digits)"
@@ -234,142 +368,34 @@
                     <label class="ml-5">* in comparison to purchasing a monthly plan</label>
                 </div>
                 <div>
-                    <button id="signup_noplan_button" type="submit" class="btn-danger btn-lg" name="signup_button" style="cursor: pointer;">SIGN UP FOR FREE TRIAL</button>
+                    <button id="signup_noplan_button" class="btn-danger btn-lg" name="signup_button" style="cursor: pointer;" onclick="doSignUpFree()">SIGN UP FOR FREE TRIAL</button>
                     <!-- <input type="submit" value="SIGN UP" name="signup_button" id="signup_button" class="btn-danger btn-lg"> -->
                     <button id="signup_plan_button" type="submit" class="btn-danger btn-lg" name="signup_button" style="display:none;cursor: pointer;"
                         disabled></button>
 
                     <script>
-                        function validateForm() {
-                            var id = document.forms["signupForm"]["sign_id"];
-                            var name = document.forms["signupForm"]["sign_name"];
-                            var phone = document.forms["signupForm"]["sign_phone"];
-                            var email = document.forms["signupForm"]["sign_email"];
-                            var password = document.forms["signupForm"]["sign_password"];
-                            var phoneReg = /^[0-9]{5,}$/g;
-                            var emailReg = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/g;
-                            var pwReg = /^(\w|\W){5,}$/g;
-                            if (id.value == "") {
-                                //alert("User id cannot be empty");
-                                noty
-                                    ({
-                                        text: "User id cannot be empty",
-                                        type: 'error',
-                                        timeout: 1300
-                                    });
-                                id.focus();
-                                //console.log("User id cannot be empty");
-                                return false;
-                            }
-                            if (name.value == "") {
-                                // alert("User name cannot be empty");
-                                // console.log("User name cannot be empty");
-                                noty
-                                    ({
-                                        text: "User name cannot be empty",
-                                        type: 'error',
-                                        timeout: 1300
-                                    });
-                                name.focus();
-                                return false;
-                            }
-                            if (phone.value == "") {
-                                // alert("Please enter your phone");
-                                // console.log("Phone cannot be empty");
-                                noty
-                                    ({
-                                        text: "Please enter your phone",
-                                        type: 'error',
-                                        timeout: 1300
-                                    });
-                                phone.focus();
-                                return false;
-                            }
-                            if (phoneReg.test(phone.value) == false) {
-                                // alert("Invalid Phone number,please check");
-                                // console.log("Phone number cannot be less than 5 digits");
-                                noty
-                                    ({
-                                        text: "Invalid Phone number,please check",
-                                        type: 'error',
-                                        timeout: 1300
-                                    });
-                                phone.focus();
-                                return false;
-                            }
-                            if (email.value == "") {
-                                // alert("Please enter your email");
-                                // console.log("Phone cannot be empty");
-                                noty
-                                    ({
-                                        text: "Please enter your email",
-                                        type: 'error',
-                                        timeout: 1300
-                                    });
-                                email.focus();
-                                return false;
-                            }
-                            if (emailReg.test(email.value) == false) {
-                                // alert("Invalid email address, please check");
-                                // console.log("invalid email");
-                                noty
-                                    ({
-                                        text: "Invalid email address, please check",
-                                        type: 'error',
-                                        timeout: 1300
-                                    });
-                                email.focus();
-                                return false;
-                            }
-                            if (password.value == "") {
-                                // alert("Password cannot be empty");
-                                // console.log("password cannot be empty");
-                                noty
-                                    ({
-                                        text: "Password cannot be empty",
-                                        type: 'error',
-                                        timeout: 1300
-                                    });
-                                password.focus();
-                                return false;
-                            }
-                            if(pwReg.test(password.value) == false)
-                            {
-                                noty
-                                    ({
-                                        text: "Password Must be at least 5 characters",
-                                        type: 'error',
-                                        timeout: 1300
-                                    });
-                                password.focus();
-                                return false;
-                            }
+                        
+                        // document.getElementById("signup_noplan_button").addEventListener("click", function (event) {
+                        //     event.preventDefault()
+                        //     console.log("free trial");
+                        //     if (validateForm() == true) {
+                        //         $("#loading-overlay").show();
+                        //         document.getElementById('signup_noplan_button').disabled = true;
+                        //         var originalText = document.getElementById('signup_noplan_button').innerText;
+                        //         document.getElementById('signup_noplan_button').innerText = "please wait....";
+                        //         // $("#signup_noplan_button").css("background-color", "gray");
+                        //         setTimeout(function () {
+                        //             console.log("Artificial 0.5 second.......");
+                        //             window.onbeforeunload = null;
+                        //             // document.getElementById('loading-overlay').style.display = "block";
+                        //             $("#loading-overlay").show();
+                        //             // document.getElementById('loading-message').style.display = "block";
+                        //             $("#loading-message").show('fade');
+                        //             document.forms["frmSignup"].submit();
+                        //         }, 500);
+                        //     }
 
-                            return true;
-                        }
-
-
-                        document.getElementById("signup_noplan_button").addEventListener("click", function (event) {
-                            event.preventDefault()
-                            console.log("free trial");
-                            if (validateForm() == true) {
-                                $("#loading-overlay").show();
-                                document.getElementById('signup_noplan_button').disabled = true;
-                                var originalText = document.getElementById('signup_noplan_button').innerText;
-                                document.getElementById('signup_noplan_button').innerText = "please wait....";
-                                // $("#signup_noplan_button").css("background-color", "gray");
-                                setTimeout(function () {
-                                    console.log("Artificial 0.5 second.......");
-                                    window.onbeforeunload = null;
-                                    // document.getElementById('loading-overlay').style.display = "block";
-                                    $("#loading-overlay").show();
-                                    // document.getElementById('loading-message').style.display = "block";
-                                    $("#loading-message").show('fade');
-                                    document.forms["frmSignup"].submit();
-                                }, 500);
-                            }
-
-                        });
+                        // });
                         document.getElementById("signup_plan_button").addEventListener("click", function (event) {
                             event.preventDefault()
                             //validateForm();

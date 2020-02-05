@@ -74,7 +74,10 @@ if (($period==0) && (strtotime($licexpired."-7 day")<=strtotime("now")) && ((str
 				<li>
 					<a href="contact.php">Contact Us</a>
 				</li>
-					<a href="login.php">Log in</a>
+				<li>
+					<a href="login.php">Log In</a>
+				</li>
+				<a href="signup.php">Sign Up</a>
 			</ul>
 		</div>
 	<?php }elseif(SharedIsLoggedIn()){ ?>

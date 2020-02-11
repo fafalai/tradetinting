@@ -74,7 +74,7 @@
                     //alert("User id cannot be empty");
                     noty
                         ({
-                            text: "User id cannot be empty",
+                            text: "Username cannot be empty",
                             type: 'error',
                             timeout: 1300
                         });
@@ -87,7 +87,7 @@
                     // console.log("User name cannot be empty");
                     noty
                         ({
-                            text: "User name cannot be empty",
+                            text: "Display name cannot be empty",
                             type: 'error',
                             timeout: 1300
                         });
@@ -264,7 +264,7 @@
                                 //alert('This User ID has been taken, please use another one');
                                 noty
                                     ({
-                                        text: "This User ID has been taken, please use another one",
+                                        text: "This Username has been taken, please use another one",
                                         type: 'error',
                                         timeout: 2000
                                     });
@@ -310,11 +310,11 @@
             </div> -->
             <form style="background-color:#f0f0f0;" action="payment.php" method="post" id="frmSignup" name="signupForm" class="p-4 form-group">
                 <div class="row">
-                    <input required id="sign_id" name="sign_id" class="form-control" type="text" placeholder="User ID"  onchange="CheckUserId();">
+                    <input required id="sign_id" name="sign_id" class="form-control" type="text" placeholder="Username"  onchange="CheckUserId();">
                     <!-- <input id="fldNewMemberFirstName" class="easyui-textbox" label="First Name:" labelPosition="left" data-options="" style="width: 300px;height:50px;font-size:15px"> -->
                 </div>
                 <div class="row">
-                    <input required id="sign_name" name="sign_name" class="form-control" type="text" placeholder="User Name" >
+                    <input required id="sign_name" name="sign_name" class="form-control" type="text" placeholder="Display Name" >
                 </div>
                 <div class="row">
                     <input id="sign_phone" name="sign_phone" class="form-control col-sm-5" type="text" placeholder="Phone (Must be at least 5 digits)"

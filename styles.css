@@ -909,6 +909,12 @@ div {
     font-size: 15px;
 }
 
+/*FAQ*/
+
+#DIV_faq p {
+    font-size: 15px;
+}
+
 /*Profile*/
 
 #fldcurrency {

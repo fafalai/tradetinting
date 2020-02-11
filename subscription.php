@@ -7,8 +7,46 @@
   require_once("remedyshared.php");
   require_once("class.phpmailer.php");
   SharedInit();
+  
+  $dblink = SharedConnect();
+  $c_id=$_SESSION['custid'];
+  $dbselect = "select " .
+	"u1.period, " .
+	"u1.licexpired " .
+	"from " .
+	"users u1 " .
+	"where " .
+	"u1.cust_id='$c_id'";
+  error_log($dbselect);
+  $licexpire = "";
+  $period = "";
+  if ($dbresult = SharedQuery($dbselect, $dblink)){
 
+	if ($numrows = SharedNumRows($dbresult)){
+		while ($dbrow = SharedFetchArray($dbresult))
+		{
+			$period = $dbrow['period'];
+
+			$licexpire = new DateTime($dbrow['licexpired']);
+			
+			$licexpire = $licexpire->format('Y-m-d');
+			if($period == 1){
+				$periodText = "Free Subscription";
+			}elseif($period == 12){
+				$periodText = "Annual Plan";
+			}elseif($period == 36){
+				$periodText = "3 Years Plan";
+			}
+		}
+	}else{
+	error_log("error");
+  }
+}else{
+  error_log("error");
+}
+error_log($licexpire);
 ?>
+
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
     <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -49,8 +87,13 @@
                 <?php echo date("l, F j, Y"); ?>
             </label>
             <h2 class="clientTitle mb-2">SUBSCRIPTION</h2>
+			<p style="font-size:12pt">
+				<span style="color:#747474">Your current subscription is ending on <?= $licexpire ?> </span>
+				<br/>
+				<span style="color:#747474">Your current subscription plan is <?= $periodText?></span>
+			</p>
             <h2 class="text-dark mt-5">
-                <b>PLAN SELECTION</b>
+                <b>PLAN CHANGING SELECTION</b>
             </h2>
             <form  action="exisitingUserPayment.php" method="post" id="frmSignup" name="signupForm" >
 				<div class="form-group text-dark" id="plan_options">

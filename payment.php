@@ -254,17 +254,36 @@
                                                 error_log($dbtransactioninsert);
                                                 if (SharedQuery($dbtransactioninsert, $dblink))
                                                 {
-                                                    error_log("here 1");
-                                                    $notification = 1;
-                                                    $signupmsg =  "You have signed up successfully.Directing you to home page. Don't forget to complete your business details after log in";
-                                                }
-                                                else
-                                                {
-                                                    error_log("here 2");
-                                                    $notification = 2;
-                                                    $signupmsg = "Unable to sign up Please try again or contact support.";
-                                                }
-
+													if($period == 12){
+						
+														$newDate = strtotime('+1 years',$charge->created);
+													}elseif($period == 36){
+														$newDate = strtotime('+3 years',$charge->created);
+													}
+													$licexpired = date("Y-m-d H:i:s", $newDate);
+													$dblicexpiredupdate = "update " .
+														"users " .
+														"set " .
+														"licexpired=" . "'$licexpired'" ." ". 
+														"where " .
+														"cust_id=" . $custid;
+													error_log($dblicexpiredupdate);
+													if(	SharedQuery($dblicexpiredupdate, $dblink)){
+														$notification = 1;
+														$signupmsg =  "You have signed up successfully.Directing you to home page. Don't forget to complete your business details after log in";
+													}
+													else
+													{
+														$notification = 2;
+														$signupmsg = "Unable to sign up Please try again or contact support.";
+													}
+												}
+												else
+												{
+													//could not insert into transations table
+													$notification = 2;
+													$signupmsg = "Unable to sign up Please try again or contact support.";
+												}
                                             }
                                         }
                                         else

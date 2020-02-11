@@ -93,7 +93,7 @@
                 "users " .
                 "set " .
                 "numberUsers=" . $numberUsers .", ". 
-                "period=" . $period . " " .
+				"period=" . $period . " " .
                 "where " .
 				"cust_id=" . $c_id;
 			if(	SharedQuery($dbupdate, $dblink)){
@@ -139,8 +139,32 @@
 					// error_log($dbtransactioninsert);
 					if (SharedQuery($dbtransactioninsert, $dblink))
 					{
-						$notification = 1;
-						$signupmsg =  "You have subscribe successfully. Directing you back to Subscription Page.";
+						// error_log(strtotime($charge->created,'+5 years'));
+						if($period == 12){
+						
+							$newDate = strtotime('+1 years',$charge->created);
+						}elseif($period == 36){
+							$newDate = strtotime('+3 years',$charge->created);
+						}
+						$licexpired = date("Y-m-d H:i:s", $newDate);
+						
+						$dbupdate = "update " .
+							"users " .
+							"set " .
+							"licexpired=" . "'$licexpired'" ." ". 
+							"where " .
+							"cust_id=" . $c_id;
+
+						error_log($dbupdate);
+						if(	SharedQuery($dbupdate, $dblink)){
+							$notification = 1;
+							$signupmsg =  "You have subscribe successfully. Directing you back to Subscription Page.";
+						}
+						else
+						{
+							$notification = 2;
+							$signupmsg = "Unable to subscribe Please try again or contact support.";
+						}
 					}
 					else
 					{

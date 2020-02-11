@@ -140,24 +140,24 @@
 					if (SharedQuery($dbtransactioninsert, $dblink))
 					{
 						$notification = 1;
-						$signupmsg =  "You have signed up successfully.Directing you to home page. Don't forget to complete your business details after log in";
+						$signupmsg =  "You have subscribe successfully. Directing you back to Subscription Page.";
 					}
 					else
 					{
 						$notification = 2;
-						$signupmsg = "Unable to sign up Please try again or contact support.";
+						$signupmsg = "Unable to subscribe Please try again or contact support.";
 					}
 				}
 			}else{
 				$notification = 2;
-				$signupmsg = "Unable to sign up Please try again or contact support.";
+				$signupmsg = "Unable to subscribe Please try again or contact support.";
 			}
 		}
 		else
 		{
 			//could not insert into transations table
 			$notification = 2;
-			$signupmsg = "Unable to sign up Please try again or contact support.";
+			$signupmsg = "Unable to subscribe Please try again or contact support.";
 		}
 	}
  
@@ -183,8 +183,8 @@
                         timeout: 6000
                     });
                     setTimeout(() => {
-                        window.location.replace("/tradetinting/subscription.php");// for local path
-                        // window.location.replace("/login.php"); // for production path
+                        // window.location.replace("/tradetinting/subscription.php");// for local path
+                        window.location.replace("/subscription.php"); // for production path
                     }, 3000);
                 } else if (notification == 2) {
                     noty({
@@ -194,9 +194,8 @@
                     });
                     setTimeout(() => {
 
-                        window.location.replace("/tradetinting/subscription.php");// for local path
-                        // window.location.replace("/tint/signup.php");// for local path
-                        // window.location.replace("/signup.php");// for production path
+                        // window.location.replace("/tradetinting/subscription.php");// for local path
+                        window.location.replace("/subscription.php");// for production path
                     }, 2000);
                 }
             });

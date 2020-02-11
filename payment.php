@@ -6,7 +6,7 @@
     SharedInit();
 
     \Stripe\Stripe::setVerifySslCerts(false);
-    \Stripe\Stripe::setApiKey("sk_test_V0oPAcqML1GLnB6WnRKSwWHV");
+    \Stripe\Stripe::setApiKey("sk_test_IJwQs6mA0FCdhcUVL8RGYo8900wNsILu40");
 
 	// Token is created using Checkout or Elements!
 	// Get the payment token ID submitted by the form:

@@ -52,144 +52,123 @@
             <h2 class="text-dark mt-5">
                 <b>PLAN SELECTION</b>
             </h2>
-            <div class="form-group text-dark" id="plan_options">
-                <div class="radio" style="margin-top:20px">
-                    <h5>
-                        <input type="radio" name="plan_opt" value="99" checked>&nbsp;&nbsp;Annual plan - USD $99 per year
-                        <span class="text-danger">(save 17% *)</span>
-                    </h5>
-                </div>
-                <div class="radio" style="margin-top:30px">
-                    <h5>
-                        <input type="radio" name="plan_opt" value="250">&nbsp;&nbsp;3 Year plan - USD $250
-                        <span class="text-danger">(save 30% *)</span>
-                    </h5>
-                </div>
-            </div>
-            <div style="margin-top:50px">
-                <button id="signup_plan_button" type="submit" class="btn-danger btn-lg" name="signup_button" style="cursor: pointer;"
-                    >SIGN UP FOR ANNUAL PLAN</button>
+            <form  action="exisitingUserPayment.php" method="post" id="frmSignup" name="signupForm" >
+				<div class="form-group text-dark" id="plan_options">
+					<div class="radio" style="margin-top:20px">
+						<h5>
+							<input type="radio" name="plan_opt" value="99" checked>&nbsp;&nbsp;Annual plan - USD $99 per year
+							<span class="text-danger">(save 17% *)</span>
+						</h5>
+					</div>
+					<div class="radio" style="margin-top:30px">
+						<h5>
+							<input type="radio" name="plan_opt" value="250">&nbsp;&nbsp;3 Year plan - USD $250
+							<span class="text-danger">(save 30% *)</span>
+						</h5>
+					</div>
+				</div>
+				<div style="margin-top:50px">
+					<button id="signup_plan_button" type="submit" class="btn-danger btn-lg" name="signup_button" style="cursor: pointer;">
+						SIGN UP FOR ANNUAL PLAN
+					</button>
+                    <script>
+                        document.getElementById("signup_plan_button").addEventListener("click", function (event) {
+                            event.preventDefault()
+							$("#loading-overlay").show();
+							document.getElementById('signup_plan_button').disabled = true;
+							var originalText = document.getElementById('signup_plan_button').innerText;
+							document.getElementById('signup_plan_button').innerText = "please wait....";
+							var radios = document.getElementsByName('plan_opt');
+							var amount = 0;
+							var description = "";
+							for (var i = 0, length = radios.length; i < length; i++) {
+								if (radios[i].checked) {
+									if (i == 1) {
+										description = "Annual Plan";
+									} else if (i == 2) {
+										description = "3 Years Plan";
+									}
+									break;
+								}
+							}
 
-                <script>
-                    
-                    document.getElementById("signup_plan_button").addEventListener("click", function (event) {
-                        $("#loading-overlay").show();
+							var handler = StripeCheckout.configure({
+								key: 'pk_test_W20HElwGRLvWc26WxWczuwFc00mqQ67ey8',
+								image: 'images/icon.png',
+								name: 'Tinting',
+								locale: 'auto',
+								currency: 'usd',
+								token: function (token) {
+									var form = document.getElementById("frmSignup");
+									var inputToken = document.createElement("input");
+									inputToken.setAttribute('type', "hidden");
+									inputToken.setAttribute('name', "stripeToken");
+									// inputDescription.setAttribute('id', "stripeToken");
+									inputToken.setAttribute('value', token.id);
+									// console.log(token.id);
+									form.appendChild(inputToken);
 
-                        event.preventDefault()
-                        console.log("payment plan");
-                        document.getElementById('signup_plan_button').disabled = true;
-                        var originalText = document.getElementById('signup_plan_button').innerText;
-                        document.getElementById('signup_plan_button').innerText = "please wait....";
-                       
-                        var radios = document.getElementsByName('plan_opt');
-                        var amount = 0;
-                        var description = "";
+									// Add the email as a hidden field to the form
+									var inputEmail = document.createElement("input");
+									inputEmail.setAttribute('type', "hidden");
+									inputEmail.setAttribute('name', "stripeEmail");
+									// inputDescription.setAttribute('id', "stripeEmail");
+									inputEmail.setAttribute('value', token.email);
+									form.appendChild(inputEmail);
 
-                        for (var i = 0, length = radios.length; i < length; i++) {
-                            // console.log(i);
-                            if (radios[i].checked) {
-                                // do whatever you want with the checked radio
-                                if (i == 1) {
-                                    description = "Annual Plan";
-                                } else if (i == 2) {
-                                    description = "3 Years Plan";
-                                }
-                                amount = radios[i].value
-                                console.log(amount);
-                                console.log(description);
+									// Add the description as a hidden field to the form
+									var inputDescription = document.createElement("input");
+									inputDescription.setAttribute('type', "hidden");
+									inputDescription.setAttribute('name', "description");
+									// inputDescription.setAttribute('id', "description");
+									inputDescription.setAttribute('value', description);
+									form.appendChild(inputDescription);
 
-                                // only one radio can be logically checked, don't check the rest
-                                break;
-                            }
-                        }
-
-                        var handler = StripeCheckout.configure({
-                            key: 'pk_test_iGsAvPJtLoZmJPd1cwFZ2wES',
-                            image: 'images/icon.png',
-                            name: 'Tinting',
-                            locale: 'auto',
-                            currency: 'usd',
-                            token: function (token) {
-                                // You can access the token ID with `token.id`.
-                                // Get the token ID to your server-side code for use.
-                                // window.onbeforeunload = function () {
-                                //     return "";
-                                // }
-
-                                // Dynamically create a form element to submit the results
-                                // to your backend server
+									//Artificial 0.5 second delay for testing
+									setTimeout(function () {
+										console.log("Artificial 0.5 second.......");
+										window.onbeforeunload = null;
+										
+										// document.getElementById('loading-overlay').style.display = "block";
+										$("#loading-overlay").show();
+										// document.getElementById('loading-message').style.display = "block";
+										$("#loading-message").show('fade');
+										document.forms["frmSignup"].submit();
+									}, 500);
+								}
+							});
 
 
-                                // Add the token ID as a hidden field to the form payment-form
-                                var inputToken = document.createElement("input");
-                                inputToken.setAttribute('type', "hidden");
-                                inputToken.setAttribute('name', "stripeToken");
-                                // inputDescription.setAttribute('id', "stripeToken");
-                                inputToken.setAttribute('value', token.id);
-                                // console.log(token.id);
-                                //form.appendChild(inputToken);
+							handler.open({
+								//name: 'Tinting',
+								description: description,
+								amount: amount * 100,
+								//email:document.getElementById('sign_email').value,
+								// locale: 'auto',
+								//zipCode:true,
+								//billingAddress:true
 
-                                // Add the email as a hidden field to the form
-                                var inputEmail = document.createElement("input");
-                                inputEmail.setAttribute('type', "hidden");
-                                inputEmail.setAttribute('name', "stripeEmail");
-                                // inputDescription.setAttribute('id', "stripeEmail");
-                                inputEmail.setAttribute('value', token.email);
-                                //form.appendChild(inputEmail);
+								// Close Checkout on page navigation:
+								closed: function () {
+									console.log("close the checkout");
+									$("#loading-overlay").hide('fade');
+									// $("#loading-message").show('fade');
+									document.getElementById('signup_plan_button').disabled =
+										false;
+									document.getElementById('signup_plan_button').innerText =
+										originalText;
+								}
 
-                                // Add the description as a hidden field to the form
-                                var inputDescription = document.createElement("input");
-                                inputDescription.setAttribute('type', "hidden");
-                                inputDescription.setAttribute('name', "description");
-                                // inputDescription.setAttribute('id', "description");
-                                inputDescription.setAttribute('value', description);
-                                //form.appendChild(inputDescription);
-
-                                //Artificial 0.5 second delay for testing
-                                // setTimeout(function () {
-                                //     console.log("Artificial 0.5 second.......");
-                                //     window.onbeforeunload = null;
-                                    
-                                //     // document.getElementById('loading-overlay').style.display = "block";
-                                //     $("#loading-overlay").show();
-                                //     // document.getElementById('loading-message').style.display = "block";
-                                //     $("#loading-message").show('fade');
-                                // }, 500);
-                            }
+							});
                         });
 
 
-                        handler.open({
-                            //name: 'Tinting',
-                            description: description,
-                            amount: amount * 100,
-                            //email:document.getElementById('sign_email').value,
-                            // locale: 'auto',
-                            //zipCode:true,
-                            //billingAddress:true
-
-                            // Close Checkout on page navigation:
-                            closed: function () {
-                                console.log("close the checkout");
-                                $("#loading-overlay").hide('fade');
-                                // $("#loading-message").show('fade');
-                                document.getElementById('signup_plan_button').disabled =
-                                    false;
-                                document.getElementById('signup_plan_button').innerText =
-                                    originalText;
-                            }
-
+                        window.addEventListener('popstate', function () {
+                            handler.close();
                         });
-                         
-
-                    });
-
-
-                    window.addEventListener('popstate', function () {
-                        handler.close();
-                    });
-                </script>
-            </div>
+                    </script>
+                </div>
+            </form>
         </div>
        
     </body>

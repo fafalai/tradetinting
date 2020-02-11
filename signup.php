@@ -434,7 +434,7 @@
                                 }
 
                                 var handler = StripeCheckout.configure({
-                                    key: 'pk_test_iGsAvPJtLoZmJPd1cwFZ2wES',
+                                    key: 'pk_test_W20HElwGRLvWc26WxWczuwFc00mqQ67ey8',
                                     image: 'images/icon.png',
                                     name: 'Tinting',
                                     locale: 'auto',

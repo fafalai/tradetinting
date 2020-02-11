@@ -914,7 +914,10 @@ div {
 #DIV_faq p {
     font-size: 15px;
 }
-
+#DIV_faq ol{
+	line-height: 200%;
+	font-size:13px;
+}
 /*Profile*/
 
 #fldcurrency {

@@ -55,7 +55,7 @@ if (($period==0) && (strtotime($licexpired."-7 day")<=strtotime("now")) && ((str
 }
 ?>
 
-
+<?php if (SharedIsLoggedIn()){?>
 <div id="DIV_headerContainer">
 
 <?php if($expiresoon){ ?>
@@ -71,7 +71,7 @@ if (($period==0) && (strtotime($licexpired."-7 day")<=strtotime("now")) && ((str
 				<li>
 					<a href="index.php">HOME</a>
 				</li>
-				<li>
+				<li>              
 					<a href="contact.php">Contact Us</a>
 				</li>
 				<li>
@@ -134,7 +134,7 @@ if (($period==0) && (strtotime($licexpired."-7 day")<=strtotime("now")) && ((str
                         </ul>
 					</div>
 </div>
-
+					<?php }?>
 	<div class="clearfix"></div>
 
   <?php if($expiresoon){ ?>

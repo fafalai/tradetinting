@@ -22,7 +22,8 @@
     <?php
         if (!SharedIsLoggedIn())
         {
-          include("introducing.php");
+		//   include("introducing.php");
+		include("login.php");
          }
         else
         {

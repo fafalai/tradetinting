@@ -300,6 +300,9 @@
 
         <div class="container" style="width:70%">
             <h2 class="text-dark mb-2" style="font-family: Arial, Helvetica, sans-serif;font-weight: bold;font-size: 20pt;">Sign Up</h2>
+                <p>Already have an account?
+                    <a href="login.php">Click here</a> to Login.
+				</p>
             <!-- <div class="easyui-panel" data-option="fit:true">
                 <table>
                     <tr>
@@ -317,7 +320,7 @@
                     <input required id="sign_name" name="sign_name" class="form-control" type="text" placeholder="Display Name" >
                 </div>
                 <div class="row">
-                    <input id="sign_phone" name="sign_phone" class="form-control col-sm-5" type="text" placeholder="Phone (Must be at least 5 digits)"
+                    <input id="sign_phone" name="sign_phone" class="form-control col-sm-5" type="text" placeholder="Phone (Must be at least 5 digits)" 
                         required pattern="^[0-9]{5,}$" title="Invalid Phone number">
                     <input id="sign_email" name="sign_email" class="form-control col" type="text" placeholder="EMAIL" required pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
                         title="Invalid Email address">
@@ -325,7 +328,7 @@
                 <div class="row">
                 </div>
                 <div class="row">
-                    <input id="sign_address" name="sign_address" class="form-control" type="text" placeholder="ADDRESS" onFocus="geolocate()">
+                    <input id="sign_address" name="sign_address" class="form-control" type="text" placeholder="ADDRESS" onFocus="geolocate()" >
                 </div>
                 <div class="row">
                     <input id="sign_city" name="sign_city" class="form-control col-sm" type="text" placeholder="CITY">

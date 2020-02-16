@@ -157,6 +157,7 @@
       <?php echo date("l, F j, Y"); ?>
     </label>
     <h2 class="contactTitle mb-2">Contact Us</h2>
+	<h8> <a href="login.php">Click Here</a> return to Login</h8>
     <div class="contactsDIV">
       <!-- <label><?php echo date("l, F j, Y"); ?></label>
         <h2 class="clientTitle">Contact Us</h2> -->
@@ -222,20 +223,21 @@
       <!-- end #content -->
 
       <?php
-        include("feature.php");
+        // include("feature.php");
       ?>
       <script>
         document.getElementById('DIV_Message').style.display = 'none';
       </script>
 
-      <div style="clear: both;">&nbsp;</div>
-
-      <?php
-        include("bottom.php");
-      ?>
           <!-- end #footer -->
     </div>
   </div>
+  
+  <div style="clear: both;">&nbsp;</div>
+
+<?php
+  include("bottom.php");
+?>
 </body>
 
 </html>
